@@ -2,6 +2,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import AddComment from './AddComment'
 
 export default function CommentsList({ translationId }) {
   const [comments, setComments] = useState([])
@@ -26,6 +27,10 @@ export default function CommentsList({ translationId }) {
     fetchComments()
   }, [translationId, supabase])
 
+  const handleNewComment = (newComment) => {
+    setComments((prevComments) => [...prevComments, newComment])
+  }
+
   if (loading) {
     return <p>Loading comments...</p>
   }
@@ -42,6 +47,7 @@ export default function CommentsList({ translationId }) {
           </div>
         ))
       )}
+      <AddComment translationId={translationId} onCommentAdded={handleNewComment} />
     </div>
   )
 }
