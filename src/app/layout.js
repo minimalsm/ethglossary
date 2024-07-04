@@ -1,17 +1,8 @@
 // app/layout.js
 import './globals.css'
 import { AuthProvider } from './context/AuthContext'
-import Sidebar from '../components/Sidebar'
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu"
+import Sidebar from '@/components/Sidebar'
+import NavBar from '@/components/Navbar'
 
 export default function RootLayout({ children }) {
   return (
@@ -19,17 +10,7 @@ export default function RootLayout({ children }) {
       <head />
       <body>
         <AuthProvider>
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <NavigationMenuLink>Link</NavigationMenuLink>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-              <NavigationMenuItem>Item One</NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+          <NavBar />
           <div className="flex">
             <Sidebar />
             <div className="flex-1 p-4">
