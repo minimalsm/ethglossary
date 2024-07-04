@@ -52,8 +52,16 @@ export default async function TermPage({ params }) {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Translations for "{term}"</h1>
-      <TranslationsList initialTranslations={initialTranslations} termId={termId} />
+        <div className="flex">
+            <div className='w-full'>
+                <h1 className="text-2xl font-bold mb-4">Translations for "{term}"</h1>
+                <TranslationsList initialTranslations={initialTranslations} termId={termId} />
+            </div>
+            <div className="w-80">
+                Sidebar
+            </div>
+        </div>
     </div>
   )
 }
+

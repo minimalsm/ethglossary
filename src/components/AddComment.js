@@ -2,6 +2,7 @@
 'use client'
 import { useState } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { Button } from "@/components/ui/button"
 
 export default function AddComment({ translationId, onCommentAdded }) {
   const [comment, setComment] = useState('')
@@ -38,9 +39,9 @@ export default function AddComment({ translationId, onCommentAdded }) {
         className="w-full px-4 py-2 border rounded-md text-black bg-white"
         disabled={isSubmitting}
       />
-      <button type="submit" className="w-full px-4 py-2 bg-blue-500 text-white rounded-md" disabled={isSubmitting}>
+      <Button type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Submitting...' : 'Submit Comment'}
-      </button>
+      </Button>
     </form>
   )
 }

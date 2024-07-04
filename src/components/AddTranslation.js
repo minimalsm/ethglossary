@@ -2,6 +2,8 @@
 'use client'
 import { useState } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
 
 export default function AddTranslation({ termId, onTranslationAdded }) {
   const [translation, setTranslation] = useState('')
@@ -30,17 +32,17 @@ export default function AddTranslation({ termId, onTranslationAdded }) {
 
   return (
     <form onSubmit={handleAddTranslation} className="space-y-4">
-      <input
+      <Textarea
         type="text"
         value={translation}
         onChange={(e) => setTranslation(e.target.value)}
         placeholder="Translation"
-        className="w-full px-4 py-2 border rounded-md text-black bg-white"
+        // className="w-full px-4 py-2 border rounded-md text-black bg-white"
         disabled={isSubmitting}
       />
-      <button type="submit" className="w-full px-4 py-2 bg-blue-500 text-white rounded-md" disabled={isSubmitting}>
+      <Button type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Submitting...' : 'Submit Translation'}
-      </button>
+      </Button>
     </form>
   )
 }
