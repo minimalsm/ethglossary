@@ -31,8 +31,8 @@ export default function TranslationsList({ initialTranslations, termId }) {
         <div key={translation.id} className="mb-4 p-4 border rounded-md">
           <p>{translation.translation}</p>
           <VoteButtons translationId={translation.id} initialVotes={translation.votes} userId={user?.id} />
-          <CommentsList translationId={translation.id} />
-          <AddComment translationId={translation.id} onCommentAdded={(newComment) => handleNewComment(translation.id, newComment)} />
+          {/* <CommentsList translationId={translation.id} /> */}
+          {/* <AddComment translationId={translation.id} onCommentAdded={(newComment) => handleNewComment(translation.id, newComment)} /> */}
         </div>
       ))}
     </div>
