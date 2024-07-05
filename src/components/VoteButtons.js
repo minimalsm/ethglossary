@@ -1,4 +1,3 @@
-// components/VoteButtons.js
 'use client'
 import { useState, useEffect } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -30,6 +29,11 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
   const handleVote = async (vote) => {
     if (!userId) {
       alert('You must be logged in to vote.')
+      return
+    }
+
+    if (userVote === vote) {
+      alert('You have already voted this way.')
       return
     }
 
