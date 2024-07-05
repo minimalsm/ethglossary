@@ -101,32 +101,41 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
       <button
         onClick={() => handleVote(1)}
         disabled={userVote === 1 || loading}
-        className={`p-1 text-gray-700 ${userVote === 1 ? 'bg-green-500' : ''}`}
+        className={`p-1 text-gray-700 ${userVote === 1 ? '' : ''}`}
       >
-        <ThumbsUpIcon className="h-4 w-4" fill="green" />
+        <ThumbsUpIcon 
+          className="h-4 w-4"
+          fill={`${userVote === 1 ? 'green' : 'none'}`}
+        />
       </button>
       <span className="mx-2">{votes}</span>
       <button
         onClick={() => handleVote(-1)}
         disabled={userVote === -1 || loading}
-        className={`p-1 text-gray-700 ${userVote === -1 ? 'bg-red-500' : ''}`}
+        className={`p-1 text-gray-700 ${userVote === -1 ? '' : ''}`}
       >
-        <ThumbsDownIcon className="h-4 w-4" />
+        <ThumbsDownIcon 
+          className="h-4 w-4"
+          fill={`${userVote === -1 ? 'red' : 'none'}`}
+          stroke={`${userVote === -1 ? 'currentColor' : 'currentColor'}`}
+        />
       </button>
     </div>
   )
 }
 
 function ThumbsDownIcon(props) {
+    const { fill, stroke, ...rest } = props;
+
     return (
       <svg
-        {...props}
+        {...rest}
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
+        fill={fill}
+        stroke={stroke}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -148,7 +157,7 @@ function ThumbsDownIcon(props) {
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        fill="none"
+        fill={fill}
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"

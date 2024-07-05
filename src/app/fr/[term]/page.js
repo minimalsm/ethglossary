@@ -26,7 +26,7 @@ export default async function TermPage({ params }) {
       
           <TranslationsList initialTranslations={initialTranslations} termId={termId} />
         </div>
-        <div className="w-1/3 p-4">
+        <div className="w-1/3 p-4 pt-0">
           <CommentsSidebar termId={termId} />
         </div>
       </div>
