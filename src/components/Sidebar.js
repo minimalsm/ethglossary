@@ -63,11 +63,15 @@
 //   )
 // }
 
-import Link from 'next/link'
+'use client';
+
 import { cn } from "@/lib/utils"
 import { Button } from "./ui/button"
+import { usePathname } from 'next/navigation'
 
 export default function Sidebar({ terms, className }) {
+  const pathname = usePathname();
+
   return (
     <div className={cn("pb-12", className)}>
       <div className="space-y-4 pt-4">
@@ -76,11 +80,48 @@ export default function Sidebar({ terms, className }) {
             Terms
           </h2>
           <div className="space-y-1">
-            {terms.map((term) => (
-              
-            <Button asChild variant="secondary" className="w-full justify-start" key={term.term}>
-              <a href={`/fr/${term.term}`}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#16a34a" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check mr-2 h-4 w-4"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>{term.term}</a>
-            </Button>
+            {terms.map((term) => {
+              const termPath = `/fr/${term.term}`;
+              const isActive = pathname === termPath;
+
+              return (
+                <Button
+                  asChild
+                  variant={isActive ? "secondary" : "ghost"}
+                  className={cn("w-full justify-start", { 'active-class': isActive })}
+                  key={term.term}
+                >
+                  <a href={termPath}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-circle-check mr-2 h-4 w-4"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="m9 12 2 2 4-4" />
+                    </svg>
+                    {term.term}
+                  </a>
+                </Button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+
 
               // <Button asChild variant="secondary" className="w-full justify-start" key={term.term}>
               //   <Link legacyBehavior href={`/fr/${term.term}`}>
@@ -90,10 +131,3 @@ export default function Sidebar({ terms, className }) {
               //     </a>
               //   </Link>
               // </Button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
