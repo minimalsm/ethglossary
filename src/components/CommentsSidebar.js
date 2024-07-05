@@ -71,12 +71,12 @@ export default function CommentsSidebar({ termId }) {
           placeholder="Leave a comment"
           className="w-full p-2 border rounded-md"
         />
-        <button
+        <Button
           type="submit"
-          className="mt-2 w-full p-2 bg-blue-500 text-white rounded-md"
+          className="mt-2 w-full"
         >
           Comment
-        </button>
+        </Button>
       </form>
     </div>
   )
