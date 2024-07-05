@@ -5,6 +5,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 export default function VoteButtons({ translationId, initialVotes, userId }) {
   const [votes, setVotes] = useState(initialVotes)
   const [userVote, setUserVote] = useState(null)
+  const [loading, setLoading] = useState(false)
   const supabase = createClientComponentClient()
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
           .select('vote')
           .eq('user_id', userId)
           .eq('translation_id', translationId)
-          .single()
+          .maybeSingle() // Use maybeSingle to handle the case when no rows are returned
 
         if (!error && userVoteData) {
           setUserVote(userVoteData.vote)
@@ -32,29 +33,65 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
       return
     }
 
-    if (userVote === vote) {
-      alert('You have already voted this way.')
-      return
-    }
+    setLoading(true)
 
-    const { data, error } = await supabase
-      .from('votes')
-      .upsert({ user_id: userId, translation_id: translationId, vote })
-      .select()
+    try {
+      const { data: existingVote, error: fetchError } = await supabase
+        .from('votes')
+        .select('id, vote')
+        .eq('user_id', userId)
+        .eq('translation_id', translationId)
+        .maybeSingle() // Use maybeSingle to handle the case when no rows are returned
 
-    if (error) {
-      alert(error.message)
-    } else {
+      if (fetchError) {
+        throw fetchError
+      }
+
+      let newVotes = votes
+
+      if (existingVote) {
+        if (existingVote.vote === vote) {
+          alert('You have already voted this way.')
+          setLoading(false)
+          return
+        }
+
+        const { error: updateError } = await supabase
+          .from('votes')
+          .update({ vote })
+          .eq('id', existingVote.id)
+
+        if (updateError) {
+          throw updateError
+        }
+
+        newVotes += vote - existingVote.vote
+      } else {
+        const { error: insertError } = await supabase
+          .from('votes')
+          .insert({ user_id: userId, translation_id: translationId, vote })
+
+        if (insertError) {
+          throw insertError
+        }
+
+        newVotes += vote
+      }
+
       setUserVote(vote)
-      setVotes((prevVotes) => prevVotes + (vote - (userVote || 0)))
+      setVotes(newVotes)
+    } catch (error) {
+      alert(error.message)
     }
+
+    setLoading(false)
   }
 
   return (
     <div className="flex items-center">
       <button
         onClick={() => handleVote(1)}
-        disabled={userVote === 1}
+        disabled={userVote === 1 || loading}
         className={`px-2 py-1 ${userVote === 1 ? 'bg-green-500' : 'bg-gray-300'}`}
       >
         Upvote
@@ -62,7 +99,7 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
       <span className="mx-2">{votes}</span>
       <button
         onClick={() => handleVote(-1)}
-        disabled={userVote === -1}
+        disabled={userVote === -1 || loading}
         className={`px-2 py-1 ${userVote === -1 ? 'bg-red-500' : 'bg-gray-300'}`}
       >
         Downvote

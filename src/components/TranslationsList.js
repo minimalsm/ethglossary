@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import CommentsList from './CommentsList'
 import AddTranslation from './AddTranslation'
 import AddComment from './AddComment'

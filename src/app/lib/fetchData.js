@@ -19,12 +19,8 @@ export async function getData(term, userId) {
     .eq('term', term)
     .single()
 
-  if (termError) {
-    throw new Error(`Error fetching term: ${termError.message}`)
-  }
-
-  if (!termData) {
-    throw new Error(`Term "${term}" not found`)
+  if (termError || !termData) {
+    throw new Error(`Error fetching term: ${termError ? termError.message : 'Term not found'}`)
   }
 
   const termId = termData.id
@@ -43,14 +39,14 @@ export async function getData(term, userId) {
     let userVote = null
 
     if (userId) {
-      const { data: userVoteData, error } = await supabase
+      const { data: userVoteData, error: userVoteError } = await supabase
         .from('votes')
         .select('vote')
         .eq('user_id', userId)
         .eq('translation_id', translation.id)
-        .single()
+        .maybeSingle() // Use maybeSingle to handle the case when no rows are returned
 
-      if (!error && userVoteData) {
+      if (!userVoteError && userVoteData) {
         userVote = userVoteData.vote
       }
     }
