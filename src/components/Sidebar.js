@@ -79,7 +79,7 @@ export default function Sidebar({ terms, className }) {
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
             Terms
           </h2>
-          <div className="space-y-1">
+          <div className="space-y-1 flex flex-col min-w-52">
             {terms.map((term) => {
               const termPath = `/fr/${term.term}`;
               const isActive = pathname === termPath;
