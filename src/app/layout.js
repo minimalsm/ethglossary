@@ -1,10 +1,12 @@
-// app/layout.js
 import './globals.css'
 import { AuthProvider } from './context/AuthContext'
 import Sidebar from '@/components/Sidebar'
 import NavBar from '@/components/Navbar'
+import { fetchTerms } from './lib/fetchTerms'
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const terms = await fetchTerms()
+
   return (
     <html lang="en">
       <head />
@@ -12,7 +14,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <NavBar />
           <div className="flex">
-            <Sidebar />
+            <Sidebar terms={terms} />
             <div className="flex-1 p-4">
               {children}
             </div>
