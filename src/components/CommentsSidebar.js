@@ -85,7 +85,7 @@ export default function CommentsSidebar({ termId }) {
 const Comment = ({ comment }) => {
   return (
     <div className="mb-4 p-4 border rounded bg-gray-50 flex items-start gap-4">
-      <Avatar className="w-12 h-12">
+      <Avatar>
         <AvatarImage src="/placeholder-user.jpg" alt="User Avatar" />
         <AvatarFallback>JD</AvatarFallback>
       </Avatar>
@@ -94,19 +94,19 @@ const Comment = ({ comment }) => {
         <div className="flex items-center justify-between mt-2 text-sm text-gray-600">
           <span className="font-semibold">Joshua</span>
           <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center">
               <Button variant="ghost" size="icon" className="p-2 text-gray-700 hover:bg-gray-100">
-                <ThumbsUpIcon className="h-5 w-5" />
+                <ThumbsUpIcon className="h-4 w-4" />
                 <span className="sr-only">Upvote</span>
               </Button>
-              <span className="text-gray-500">12</span>
+              <span className="text-gray-500 m-0">12</span>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center">
               <Button variant="ghost" size="icon" className="p-2 text-gray-700 hover:bg-gray-100">
-                <ThumbsDownIcon className="h-5 w-5" />
+                <ThumbsDownIcon className="h-4 w-4" />
                 <span className="sr-only">Downvote</span>
               </Button>
-              <span className="text-gray-500">4</span>
+              <span className="text-gray-500 m-0">4</span>
             </div>
           </div>
         </div>

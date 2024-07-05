@@ -14,7 +14,7 @@ export default async function RootLayout({ children }) {
         <AuthProvider>
           <NavBar />
           <div className="flex">
-            <Sidebar terms={terms} />
+            <Sidebar className="p-4" terms={terms} />
             <div className="flex-1 p-4">
               {children}
             </div>
