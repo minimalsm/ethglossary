@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { Button } from './ui/button'
 
 export default function VoteButtons({ translationId, initialVotes, userId }) {
   const [votes, setVotes] = useState(initialVotes)
@@ -98,28 +99,45 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
 
   return (
     <div className="flex items-center">
-      <button
+      <Button
+        variant="ghost" 
+        size="icon"   
         onClick={() => handleVote(1)}
         disabled={userVote === 1 || loading}
-        className={`p-1 text-gray-700 ${userVote === 1 ? '' : ''}`}
+        
+        className={`p-1 text-gray-700 ${userVote === 1 ? 'bg-muted' : ''}`}
       >
         <ThumbsUpIcon 
           className="h-4 w-4"
-          fill={`${userVote === 1 ? 'green' : 'none'}`}
+          // fill={`${userVote === 1 ? 'green' : 'none'}`}
         />
-      </button>
+      </Button>
       <span className="mx-2">{votes}</span>
+
+      <Button
+        variant="ghost" 
+        size="icon" 
+        // className="p-1 text-gray-700 bg-muted"
+        onClick={() => handleVote(-1)}
+        disabled={userVote === -1 || loading}
+        className={`p-1 text-gray-700 ${userVote === -1 ? 'bg-accent text-accent-foreground' : ''}`}
+        >
+            <ThumbsDownIcon className="h-4 w-4" />
+            <span className="sr-only">Downvote</span>
+      </Button>
+{/* 
       <button
         onClick={() => handleVote(-1)}
         disabled={userVote === -1 || loading}
         className={`p-1 text-gray-700 ${userVote === -1 ? '' : ''}`}
       >
+        
         <ThumbsDownIcon 
           className="h-4 w-4"
           fill={`${userVote === -1 ? 'red' : 'none'}`}
           stroke={`${userVote === -1 ? 'currentColor' : 'currentColor'}`}
         />
-      </button>
+      </button> */}
     </div>
   )
 }
@@ -134,8 +152,8 @@ function ThumbsDownIcon(props) {
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        fill={fill}
-        stroke={stroke}
+        fill="none"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -157,7 +175,7 @@ function ThumbsDownIcon(props) {
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        fill={fill}
+        fill="none"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"

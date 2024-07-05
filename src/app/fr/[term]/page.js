@@ -15,7 +15,7 @@ export default async function TermPage({ params }) {
   return (
     <div className="p-4">
       <div className="flex">
-        <div className="w-2/3">
+        <div className="w-full">
       <h1 className="text-2xl font-bold mb-4">Translations for "{term}"</h1>
       <h3 className="mb-2 text-lg font-semibold">Examples</h3>
           <div className="mb-2 p-4 border rounded bg-gray-200">An ethereum transaction requires gas</div>
@@ -26,7 +26,7 @@ export default async function TermPage({ params }) {
       
           <TranslationsList initialTranslations={initialTranslations} termId={termId} />
         </div>
-        <div className="w-1/3 p-4 pt-0">
+        <div className="w-1/2 p-4 pt-0 max-w-sm">
           <CommentsSidebar termId={termId} />
         </div>
       </div>
