@@ -1,11 +1,10 @@
-// components/AddTranslation.js
 'use client'
 import { useState } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 
-export default function AddTranslation({ termId, onTranslationAdded }) {
+export default function AddTranslation({ termId, languageId, onTranslationAdded }) {
   const [translation, setTranslation] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const supabase = createClientComponentClient()
@@ -16,7 +15,7 @@ export default function AddTranslation({ termId, onTranslationAdded }) {
 
     const { data, error } = await supabase
       .from('translations')
-      .insert([{ term_id: termId, translation }])
+      .insert([{ term_id: termId, language_id: languageId, translation }])
       .select()
 
     setIsSubmitting(false)

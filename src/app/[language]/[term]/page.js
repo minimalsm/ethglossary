@@ -55,7 +55,7 @@ export default async function TermPage({ params }) {
       <h1 className="text-2xl font-bold mb-4">Translations for "{term}" in {language}</h1>
       <div className="flex">
         <div className="w-2/3">
-          <TranslationsList translations={translations} termId={termId} />
+          <TranslationsList translations={translations} termId={termId} languageId={languageId} />
         </div>
         <div className="w-1/3">
           {/* <CommentsSidebar comments={comments} termId={termId} /> */}

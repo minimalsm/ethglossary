@@ -4,7 +4,7 @@ import AddTranslation from './AddTranslation'
 import VoteButtons from './VoteButtons'
 import { useAuth } from '../app/context/AuthContext'
 
-export default function TranslationsList({ translations, termId }) {
+export default function TranslationsList({ translations, termId, languageId }) {
   const [translationList, setTranslationList] = useState(translations)
   const { user } = useAuth()
 
@@ -16,7 +16,7 @@ export default function TranslationsList({ translations, termId }) {
 
   return (
     <div>
-      <AddTranslation termId={termId} onTranslationAdded={handleNewTranslation} />
+      <AddTranslation termId={termId} languageId={languageId} onTranslationAdded={handleNewTranslation} />
       {translationList.map((translation) => (
         <div key={translation.id} className="mb-4 p-4 border rounded-md">
           <p>{translation.translation}</p>
@@ -26,6 +26,7 @@ export default function TranslationsList({ translations, termId }) {
     </div>
   )
 }
+
 
 // 'use client'
 // import { useState } from 'react'
