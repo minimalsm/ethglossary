@@ -1,6 +1,5 @@
 import './globals.css'
 import { AuthProvider } from './context/AuthContext'
-import Sidebar from '@/components/Sidebar'
 import NavBar from '@/components/Navbar'
 import { fetchTerms } from './lib/fetchTerms'
 
@@ -13,12 +12,12 @@ export default async function RootLayout({ children }) {
       <body>
         <AuthProvider>
           <NavBar />
-          <div className="flex">
-            <Sidebar className="p-4" terms={terms} />
+          
+            
             <div className="flex-1 p-4">
               {children}
             </div>
-          </div>
+          
         </AuthProvider>
       </body>
     </html>

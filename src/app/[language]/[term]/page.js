@@ -4,6 +4,7 @@ import { fetchTerms } from '../../lib/fetchTerms'
 import { fetchTranslations } from '../../lib/fetchTranslations'
 import { fetchComments } from '../../lib/fetchComments'
 import { fetchLanguages } from '../../lib/fetchLanguages'
+import Sidebar from '@/components/Sidebar'
 
 export async function generateMetadata({ params }) {
   return {
@@ -15,6 +16,7 @@ export default async function TermPage({ params }) {
   const { language, term } = params
 
 //   console.log('term in params', term)
+    console.log('language in params', language)
 
   // Fetch term ID
   const terms = await fetchTerms()
@@ -38,6 +40,7 @@ export default async function TermPage({ params }) {
     }
   }
   const languageId = languageData.id
+  const languageCode = languageData.code
 
 //   console.log('languageId', languageId)
 //   console.log('termId', termId)
@@ -51,16 +54,19 @@ export default async function TermPage({ params }) {
   console.log('translations before render', translations)
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Translations for "{term}" in {language}</h1>
-      <div className="flex">
-        <div className="w-2/3">
-          <TranslationsList translations={translations} termId={termId} languageId={languageId} />
+    <div className='flex'>
+        <Sidebar className="p-4" terms={terms} languageCode={language} />
+        <div className="flex-1 p-4">
+        <h1 className="text-2xl font-bold mb-4">Translations for "{term}" in {language}</h1>
+        <div className="flex">
+            <div className="w-2/3">
+            <TranslationsList translations={translations} termId={termId} languageId={languageId} />
+            </div>
+            <div className="w-1/3">
+            {/* <CommentsSidebar comments={comments} termId={termId} /> */}
+            </div>
         </div>
-        <div className="w-1/3">
-          {/* <CommentsSidebar comments={comments} termId={termId} /> */}
         </div>
-      </div>
     </div>
   )
 }
