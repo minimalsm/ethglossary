@@ -7,6 +7,8 @@ import { Avatar, AvatarImage, AvatarFallback } from "../components/ui/avatar"
 import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
 import { fetchComments, addComment } from '../lib/comments'
+import { voteOnComment, fetchVotes, hasUserVoted } from '../lib/comment_votes'
+
 
 export default function CommentsSidebar({ termId, languageId }) {
   const [comments, setComments] = useState([])
@@ -72,7 +74,7 @@ export default function CommentsSidebar({ termId, languageId }) {
       <h2 className="text-lg font-semibold mb-4">Comments</h2>
       <div className="space-y-4">
         {comments.map((comment) => (
-          <Comment comment={comment} key={comment.id} />
+          <Comment comment={comment} key={comment.id} userId={user?.id} />
         ))}
       </div>
       <form onSubmit={handleCommentSubmit} className="mt-4">
@@ -93,7 +95,43 @@ export default function CommentsSidebar({ termId, languageId }) {
   )
 }
 
-export function Comment({ comment }) {
+const Comment = ({ comment, userId }) => {
+  const [upvotes, setUpvotes] = useState(0)
+  const [downvotes, setDownvotes] = useState(0)
+  const [userVote, setUserVote] = useState(null)
+
+  useEffect(() => {
+    const loadVotes = async () => {
+      const { upvotes, downvotes } = await fetchVotes(comment.id)
+      setUpvotes(upvotes)
+      setDownvotes(downvotes)
+
+      if (userId) {
+        const userVote = await hasUserVoted(userId, comment.id)
+        setUserVote(userVote?.vote || null)
+      }
+    }
+
+    loadVotes()
+  }, [comment.id, userId])
+
+  const handleVote = async (vote) => {
+    if (!userId) {
+      alert('You must be logged in to vote.')
+      return
+    }
+
+    try {
+      const newVote = await voteOnComment(userId, comment.id, vote)
+      setUserVote(newVote.vote)
+      const { upvotes, downvotes } = await fetchVotes(comment.id)
+      setUpvotes(upvotes)
+      setDownvotes(downvotes)
+    } catch (error) {
+      console.error('Error voting on comment:', error)
+    }
+  }
+
   return (
     <Card className="w-full max-w-md p-4 grid gap-6">
       <div className="flex items-start gap-4">
@@ -112,7 +150,10 @@ export function Comment({ comment }) {
           <Button
               variant="ghost"
               size="icon"
-              className="text-muted-foreground hover:bg-muted"
+              disabled={userVote === 1}
+              // className="text-muted-foreground hover:bg-muted"
+              className={`p-2 text-gray-700 hover:bg-gray-100 ${userVote === 1 ? 'text-green-500' : ''}`}
+              onClick={() => handleVote(1)}
               // className={`${
               //   userVote === "downvoted" ? "text-red-500 hover:bg-red-100" : "text-muted-foreground hover:bg-muted"
               // }`}
@@ -121,12 +162,17 @@ export function Comment({ comment }) {
               <ThumbsUpIcon className="w-4 h-4" />
               <span className="sr-only">Like</span>
             </Button>
-            <span className="text-muted-foreground text-sm">10</span>
-            <Button variant="ghost" size="icon" className="text-muted-foreground hover:bg-muted">
+            <span className="text-muted-foreground text-sm">{upvotes}</span>
+            <Button 
+              variant="ghost" size="icon" 
+              //className="text-muted-foreground hover:bg-muted" 
+              disabled={userVote === -1}
+              className={`p-2 text-gray-700 hover:bg-gray-100 ${userVote === -1 ? 'text-red-500' : ''}`}
+              onClick={() => handleVote(-1)}>
               <ThumbsDownIcon className="w-4 h-4" />
               <span className="sr-only">Dislike</span>
             </Button>
-            <span className="text-muted-foreground text-sm">5</span>
+            <span className="text-muted-foreground text-sm">{downvotes}</span>
           </div>
         </div>
       </div>
