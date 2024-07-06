@@ -48,7 +48,7 @@ export default async function TermPage({ params }) {
   // Fetch translations and comments
   const [translations] = await Promise.all([
     fetchTranslations(termId, languageId),
-    fetchComments(termId)
+    fetchComments(termId, languageId)
   ])
 
   console.log('translations before render', translations)
