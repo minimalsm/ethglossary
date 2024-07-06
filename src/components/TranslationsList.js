@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import AddTranslation from './AddTranslation'
 import VoteButtons from './VoteButtons'
-import { useAuth } from '../app/context/AuthContext'
+import { useAuth } from '../context/AuthContext'
 
 export default function TranslationsList({ translations, termId, languageId }) {
   const [translationList, setTranslationList] = useState(translations)

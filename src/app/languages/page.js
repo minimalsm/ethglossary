@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { fetchLanguages } from '../lib/fetchLanguages'
+import { fetchLanguages } from '../../lib/fetchLanguages'
 
 export default async function LanguagesPage() {
   const languages = await fetchLanguages()

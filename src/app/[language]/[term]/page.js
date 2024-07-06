@@ -1,9 +1,9 @@
 import TranslationsList from '../../../components/TranslationsList'
 import CommentsSidebar from '../../../components/CommentsSidebar'
-import { fetchTerms } from '../../lib/fetchTerms'
-import { fetchTranslations } from '../../lib/fetchTranslations'
-import { fetchComments } from '../../lib/fetchComments'
-import { fetchLanguages } from '../../lib/fetchLanguages'
+import { fetchTerms } from '../../../lib/fetchTerms'
+import { fetchTranslations } from '../../../lib/fetchTranslations'
+import { fetchComments } from '../../../lib/fetchComments'
+import { fetchLanguages } from '../../../lib/fetchLanguages'
 import Sidebar from '@/components/Sidebar'
 
 export async function generateMetadata({ params }) {
