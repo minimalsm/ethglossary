@@ -93,17 +93,17 @@ export default function CommentsSidebar({ termId, languageId }) {
   )
 }
 
-export function Comment({ comment}) {
+export function Comment({ comment }) {
   return (
     <Card className="w-full max-w-md p-4 grid gap-6">
       <div className="flex items-start gap-4">
         <Avatar>
-          <AvatarImage src="/placeholder-user.jpg" />
-          <AvatarFallback>JD</AvatarFallback>
+          <AvatarImage src={comment.profiles?.avatar_url} />
+          <AvatarFallback>{comment.profiles?.display_name ? comment.profiles.display_name.charAt(0).toUpperCase() : 'U'}</AvatarFallback>
         </Avatar>
         <div className="space-y-2 flex-1">
           <div className="flex items-center justify-between">
-            <h4 className="text-base font-medium">Joshua</h4>
+            <h4 className="text-base font-medium">{comment.profiles?.display_name || 'Anonymous'}</h4>
           </div>
           <p className="text-muted-foreground">
             {comment.comment}
