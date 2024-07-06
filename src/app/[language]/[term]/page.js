@@ -1,8 +1,8 @@
 import TranslationsList from '../../../components/TranslationsList'
 import CommentsSidebar from '../../../components/CommentsSidebar'
 import { fetchTerms } from '../../../lib/fetchTerms'
-import { fetchTranslations } from '../../../lib/fetchTranslations'
-import { fetchComments } from '../../../lib/fetchComments'
+import { fetchTranslations } from '../../../lib/translations'
+import { fetchComments } from '../../../lib/comments'
 import { fetchLanguages } from '../../../lib/fetchLanguages'
 import Sidebar from '@/components/Sidebar'
 

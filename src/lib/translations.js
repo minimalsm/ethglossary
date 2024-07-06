@@ -25,3 +25,16 @@ export async function fetchTranslations(termId, languageId) {
 
   return translationsWithVotes
 }
+
+export async function addTranslation(termId, languageId, translationText) {
+  const { data, error } = await supabase
+    .from('translations')
+    .insert([{ term_id: termId, language_id: languageId, translation: translationText }])
+    .select()
+
+  if (error) {
+    throw new Error(`Error adding translation: ${error.message}`)
+  }
+
+  return data[0]
+}

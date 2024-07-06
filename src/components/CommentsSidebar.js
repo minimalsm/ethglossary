@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Avatar, AvatarImage, AvatarFallback } from "../components/ui/avatar"
 import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
-import { fetchComments } from '../lib/fetchComments'
+import { fetchComments, addComment } from '../lib/comments'
 
 export default function CommentsSidebar({ termId, languageId }) {
   const [comments, setComments] = useState([])
@@ -34,22 +34,38 @@ export default function CommentsSidebar({ termId, languageId }) {
       return
     }
 
-    const { data, error } = await supabase
-      .from('sidebarcomments')
-      .insert([{ term_id: termId, language_id: languageId, user_id: user.id, comment: newComment }])
-      .select() // Ensure that the inserted data is returned
-
-    if (error) {
+    try {
+      const newCommentData = await addComment(termId, languageId, user.id, newComment)
+      setComments((prevComments) => [...prevComments, newCommentData])
+      setNewComment('')
+    } catch (error) {
       console.error('Error adding comment:', error)
-    } else {
-      if (data && data.length > 0) {
-        setComments((prevComments) => [...prevComments, data[0]])
-        setNewComment('')
-      } else {
-        console.error('No data returned from insert operation')
-      }
     }
   }
+
+  // const handleCommentSubmit = async (e) => {
+  //   e.preventDefault()
+  //   if (!user) {
+  //     alert('You must be logged in to comment.')
+  //     return
+  //   }
+
+  //   const { data, error } = await supabase
+  //     .from('sidebarcomments')
+  //     .insert([{ term_id: termId, language_id: languageId, user_id: user.id, comment: newComment }])
+  //     .select() // Ensure that the inserted data is returned
+
+  //   if (error) {
+  //     console.error('Error adding comment:', error)
+  //   } else {
+  //     if (data && data.length > 0) {
+  //       setComments((prevComments) => [...prevComments, data[0]])
+  //       setNewComment('')
+  //     } else {
+  //       console.error('No data returned from insert operation')
+  //     }
+  //   }
+  // }
 
   return (
     <div className="w-full">
