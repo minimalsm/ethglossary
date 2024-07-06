@@ -9,6 +9,7 @@ export default function AddComment({ translationId, onCommentAdded }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const supabase = createClientComponentClient()
 
+  // todo: add current user name and id when adding to UI
   const handleAddComment = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
