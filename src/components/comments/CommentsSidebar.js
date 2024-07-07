@@ -1,13 +1,17 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 import { Button } from '@/components/ui/button'
-import { Avatar, AvatarImage, AvatarFallback } from '../components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar'
 import { Textarea } from '@/components/ui/textarea'
 import { Card } from '@/components/ui/card'
-import { fetchComments, addComment } from '../lib/comments'
-import { voteOnComment, fetchVotes, hasUserVoted } from '../lib/comment_votes'
+import { fetchComments, addComment } from '../../lib/comments'
+import {
+  voteOnComment,
+  fetchVotes,
+  hasUserVoted,
+} from '../../lib/comment_votes'
 
 export default function CommentsSidebar({ termId, languageId }) {
   const [comments, setComments] = useState([])

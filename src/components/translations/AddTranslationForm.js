@@ -2,9 +2,9 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
-import { addTranslation } from '../lib/translations'
+import { addTranslation } from '../../lib/translations'
 
-export default function AddTranslation({
+export default function AddTranslationForm({
   termId,
   languageId,
   onTranslationAdded,
@@ -16,6 +16,17 @@ export default function AddTranslation({
     e.preventDefault()
     setIsSubmitting(true)
 
+    // Optimistically update the UI
+    const optimisticTranslation = {
+      id: Date.now(), // Temporary ID
+      term_id: termId,
+      language_id: languageId,
+      translation,
+      upvotes: 0,
+      downvotes: 0,
+    }
+    onTranslationAdded(optimisticTranslation)
+
     try {
       const newTranslation = await addTranslation(
         termId,
@@ -23,11 +34,13 @@ export default function AddTranslation({
         translation,
       )
       setTranslation('')
-      if (onTranslationAdded) {
-        onTranslationAdded(newTranslation) // Update the parent component with the actual server response
-      }
+
+      // Replace temporary ID with actual ID from the server
+      onTranslationAdded(newTranslation, optimisticTranslation.id)
     } catch (error) {
       alert(error.message)
+      // Revert optimistic update if there is an error
+      onTranslationAdded(null, optimisticTranslation.id)
     } finally {
       setIsSubmitting(false)
     }

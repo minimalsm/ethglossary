@@ -1,5 +1,5 @@
-import TranslationsList from '../../../components/TranslationsList'
-import CommentsSidebar from '../../../components/CommentsSidebar'
+import TranslationsSection from '../../../components/translations/TranslationsSection'
+import CommentsSidebar from '../../../components/comments/CommentsSidebar'
 import { fetchTerms } from '../../../lib/fetchTerms'
 import { fetchTranslations } from '../../../lib/translations'
 import { fetchComments } from '../../../lib/comments'
@@ -70,8 +70,8 @@ export default async function TermPage({ params }) {
               execute a contract on the Ethereum blockchain platform
             </div>
             <hr className="my-4" />
-            <TranslationsList
-              translations={translations}
+            <TranslationsSection
+              initialTranslations={translations}
               termId={termId}
               languageId={languageId}
             />

@@ -4,8 +4,8 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Button } from './ui/button'
 
 export default function VoteButtons({ translationId, initialVotes, userId }) {
-  const [upvotes, setUpvotes] = useState(initialVotes.upvotes || 0)
-  const [downvotes, setDownvotes] = useState(initialVotes.downvotes || 0)
+  const [upvotes, setUpvotes] = useState(initialVotes?.upvotes || 0)
+  const [downvotes, setDownvotes] = useState(initialVotes?.downvotes || 0)
   const [userVote, setUserVote] = useState(null)
   const [loading, setLoading] = useState(false)
   const supabase = createClientComponentClient()
