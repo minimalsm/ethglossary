@@ -1,5 +1,5 @@
 import TranslationsSection from '@/components/translations/TranslationsSection'
-import CommentsSidebar from '@/components/comments/CommentsSidebar'
+import CommentsPanel from '@/components/comments/CommentsPanel'
 import { fetchTerms } from '@/lib/fetchTerms'
 import { fetchTranslations } from '@/lib/translations'
 import { fetchComments } from '@/lib/comments'
@@ -15,12 +15,8 @@ export async function generateMetadata({ params }) {
 export default async function TermPage({ params }) {
   const { language, term } = params
 
-  //   console.log('term in params', term)
-  console.log('language in params', language)
-
   // Fetch term ID
   const terms = await fetchTerms()
-  //   console.log('terms', terms)
   const termData = terms.find(t => t.term === term)
   if (!termData) {
     console.error('Term not found:', term)
@@ -40,18 +36,14 @@ export default async function TermPage({ params }) {
     }
   }
   const languageId = languageData.id
-  const languageCode = languageData.code
-
-  //   console.log('languageId', languageId)
-  //   console.log('termId', termId)
 
   // Fetch translations and comments
-  const [translations] = await Promise.all([
+  const [translations, comments] = await Promise.all([
     fetchTranslations(termId, languageId),
     fetchComments(termId, languageId),
   ])
 
-  console.log('translations before render', translations)
+  // console.log('translations before render', translations)
 
   return (
     <div className="flex">
@@ -77,8 +69,11 @@ export default async function TermPage({ params }) {
             />
           </div>
           <div className="w-1/3">
-            {/* <CommentsSidebar comments={comments} termId={termId} /> */}
-            <CommentsSidebar termId={termId} languageId={languageId} />
+            <CommentsPanel
+              initialComments={comments}
+              termId={termId}
+              languageId={languageId}
+            />
           </div>
         </div>
       </div>

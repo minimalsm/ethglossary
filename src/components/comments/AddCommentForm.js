@@ -3,16 +3,22 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 
-export default function CommentForm({ onAddComment }) {
+export default function AddCommentForm({ onAddComment }) {
   const [newComment, setNewComment] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleCommentSubmit = async e => {
     e.preventDefault()
     setIsSubmitting(true)
-    await onAddComment(newComment)
-    setNewComment('')
-    setIsSubmitting(false)
+
+    try {
+      await onAddComment(newComment)
+      setNewComment('')
+    } catch (error) {
+      alert(error.message)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (

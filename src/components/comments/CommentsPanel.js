@@ -1,26 +1,13 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
-import { fetchComments, addComment } from '@/lib/comments'
 import AddCommentForm from '@/components/comments/AddCommentForm'
 import CommentCard from '@/components/comments/CommentCard'
+import { addComment } from '@/lib/comments'
 
-export default function CommentsPanel({ termId, languageId }) {
-  const [comments, setComments] = useState([])
+export default function CommentsPanel({ initialComments, termId, languageId }) {
+  const [comments, setComments] = useState(initialComments || [])
   const { user } = useAuth()
-
-  useEffect(() => {
-    const loadComments = async () => {
-      try {
-        const data = await fetchComments(termId, languageId)
-        setComments(data)
-      } catch (error) {
-        console.error('Error fetching comments:', error)
-      }
-    }
-
-    loadComments()
-  }, [termId, languageId])
 
   const handleAddComment = async commentText => {
     if (!user) {
