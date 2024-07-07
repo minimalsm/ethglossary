@@ -1,8 +1,8 @@
 'use client'
 import { useState } from 'react'
-import AddTranslationForm from './AddTranslationForm'
-import VoteButtons from '../VoteButtons'
-import { useAuth } from '../../context/AuthContext'
+import AddTranslationForm from '@/components/translations/AddTranslationForm'
+import VoteButtons from '@/components/common/VoteButtons'
+import { useAuth } from '@/context/AuthContext'
 
 export default function TranslationsSection({
   initialTranslations,

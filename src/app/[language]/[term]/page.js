@@ -1,10 +1,10 @@
-import TranslationsSection from '../../../components/translations/TranslationsSection'
-import CommentsSidebar from '../../../components/comments/CommentsSidebar'
-import { fetchTerms } from '../../../lib/fetchTerms'
-import { fetchTranslations } from '../../../lib/translations'
-import { fetchComments } from '../../../lib/comments'
-import { fetchLanguages } from '../../../lib/fetchLanguages'
-import Sidebar from '@/components/Sidebar'
+import TranslationsSection from '@/components/translations/TranslationsSection'
+import CommentsSidebar from '@/components/comments/CommentsSidebar'
+import { fetchTerms } from '@/lib/fetchTerms'
+import { fetchTranslations } from '@/lib/translations'
+import { fetchComments } from '@/lib/comments'
+import { fetchLanguages } from '@/lib/fetchLanguages'
+import Sidebar from '@/components/navigation/Sidebar'
 
 export async function generateMetadata({ params }) {
   return {

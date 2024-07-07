@@ -1,8 +1,7 @@
 // app/page.js
 'use client'
 import Link from 'next/link'
-import { useAuth } from '../context/AuthContext'
-// import Search from '../components/Search'
+import { useAuth } from '@/context/AuthContext'
 
 export default function HomePage() {
   const { user } = useAuth()

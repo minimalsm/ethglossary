@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
 
 export default function VoteButtons({ translationId, initialVotes, userId }) {
   const [upvotes, setUpvotes] = useState(initialVotes?.upvotes || 0)

@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Card } from '@/components/ui/card'
-import { voteOnComment, hasUserVoted } from '../../lib/comment_votes'
+import { voteOnComment, hasUserVoted } from '@/lib/comment_votes'
 
 export default function CommentCard({ comment, userId }) {
   const [upvotes, setUpvotes] = useState(comment.upvotes || 0)

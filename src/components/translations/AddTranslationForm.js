@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
-import { addTranslation } from '../../lib/translations'
+import { addTranslation } from '@/lib/translations'
 
 export default function AddTranslationForm({
   termId,

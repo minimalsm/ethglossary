@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { useAuth } from '../../context/AuthContext'
-import { fetchComments, addComment } from '../../lib/comments'
-import AddCommentForm from './AddCommentForm'
-import CommentCard from './CommentCard'
+import { useAuth } from '@/context/AuthContext'
+import { fetchComments, addComment } from '@/lib/comments'
+import AddCommentForm from '@/components/comments/AddCommentForm'
+import CommentCard from '@/components/comments/CommentCard'
 
 export default function CommentsPanel({ termId, languageId }) {
   const [comments, setComments] = useState([])

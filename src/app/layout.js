@@ -1,7 +1,7 @@
 import '../styles/globals.css'
-import { AuthProvider } from '../context/AuthContext'
-import NavBar from '@/components/Navbar'
-import { fetchTerms } from '../lib/fetchTerms'
+import { AuthProvider } from '@/context/AuthContext'
+import NavBar from '@/components/navigation/Navbar'
+import { fetchTerms } from '@/lib/fetchTerms'
 
 export default async function RootLayout({ children }) {
   const terms = await fetchTerms()

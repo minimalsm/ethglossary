@@ -1,6 +1,6 @@
 // components/NavBar.js
 'use client'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '@/context/AuthContext'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useEffect, useState } from 'react'
 
