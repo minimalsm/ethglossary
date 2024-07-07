@@ -96,16 +96,12 @@ export default function CommentsSidebar({ termId, languageId }) {
 }
 
 const Comment = ({ comment, userId }) => {
-  const [upvotes, setUpvotes] = useState(0)
-  const [downvotes, setDownvotes] = useState(0)
+  const [upvotes, setUpvotes] = useState(comment.upvotes || 0)
+  const [downvotes, setDownvotes] = useState(comment.downvotes || 0)
   const [userVote, setUserVote] = useState(null)
 
   useEffect(() => {
     const loadVotes = async () => {
-      const { upvotes, downvotes } = await fetchVotes(comment.id)
-      setUpvotes(upvotes)
-      setDownvotes(downvotes)
-
       if (userId) {
         const userVote = await hasUserVoted(userId, comment.id)
         setUserVote(userVote?.vote || null)
@@ -121,14 +117,33 @@ const Comment = ({ comment, userId }) => {
       return
     }
 
+    // Optimistically update the UI
+    const previousUserVote = userVote
+    const previousUpvotes = upvotes
+    const previousDownvotes = downvotes
+
+    if (vote === 1) {
+      setUpvotes((prev) => prev + 1)
+      if (userVote === -1) {
+        setDownvotes((prev) => prev - 1)
+      }
+    } else if (vote === -1) {
+      setDownvotes((prev) => prev + 1)
+      if (userVote === 1) {
+        setUpvotes((prev) => prev - 1)
+      }
+    }
+
+    setUserVote(vote)
+
     try {
-      const newVote = await voteOnComment(userId, comment.id, vote)
-      setUserVote(newVote.vote)
-      const { upvotes, downvotes } = await fetchVotes(comment.id)
-      setUpvotes(upvotes)
-      setDownvotes(downvotes)
+      await voteOnComment(userId, comment.id, vote)
     } catch (error) {
       console.error('Error voting on comment:', error)
+      // Revert the state if the request fails
+      setUserVote(previousUserVote)
+      setUpvotes(previousUpvotes)
+      setDownvotes(previousDownvotes)
     }
   }
 
