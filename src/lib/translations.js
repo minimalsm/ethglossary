@@ -23,7 +23,9 @@ export async function fetchTranslations(termId, languageId) {
       downvotes,
     }
 
-    let x = voteData.length ? voteData.reduce((acc, { vote }) => acc + vote, 0) : 0
+    let x = voteData.length
+      ? voteData.reduce((acc, { vote }) => acc + vote, 0)
+      : 0
 
     return {
       ...translation,
@@ -37,7 +39,13 @@ export async function fetchTranslations(termId, languageId) {
 export async function addTranslation(termId, languageId, translationText) {
   const { data, error } = await supabase
     .from('translations')
-    .insert([{ term_id: termId, language_id: languageId, translation: translationText }])
+    .insert([
+      {
+        term_id: termId,
+        language_id: languageId,
+        translation: translationText,
+      },
+    ])
     .select()
 
   if (error) {

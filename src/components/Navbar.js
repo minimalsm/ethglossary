@@ -17,7 +17,6 @@ export default function NavBar() {
     console.log('User in navbar', user)
   }, [user])
 
-
   const handleSignOut = async () => {
     setIsLoading(true)
     await supabase.auth.signOut()
@@ -41,15 +40,19 @@ export default function NavBar() {
         </a>
         {user ? (
           <>
-            <button 
-              onClick={handleSignOut} 
+            <button
+              onClick={handleSignOut}
               className="text-gray-700"
               disabled={isLoading}
             >
               {isLoading ? 'Signing out...' : 'Sign Out'}
             </button>
             {avatarUrl && (
-              <img src={avatarUrl} alt="User Avatar" className="w-8 h-8 rounded-full" />
+              <img
+                src={avatarUrl}
+                alt="User Avatar"
+                className="w-8 h-8 rounded-full"
+              />
             )}
           </>
         ) : (

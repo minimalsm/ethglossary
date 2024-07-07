@@ -10,23 +10,33 @@ export default function TranslationsList({ translations, termId, languageId }) {
 
   console.log('user', user)
 
-  const handleNewTranslation = (newTranslation) => {
-    setTranslationList((prevTranslations) => [...prevTranslations, newTranslation])
+  const handleNewTranslation = newTranslation => {
+    setTranslationList(prevTranslations => [
+      ...prevTranslations,
+      newTranslation,
+    ])
   }
 
   return (
     <div>
-      <AddTranslation termId={termId} languageId={languageId} onTranslationAdded={handleNewTranslation} />
-      {translationList.map((translation) => (
+      <AddTranslation
+        termId={termId}
+        languageId={languageId}
+        onTranslationAdded={handleNewTranslation}
+      />
+      {translationList.map(translation => (
         <div key={translation.id} className="mb-4 p-4 border rounded-md">
           <p>{translation.translation}</p>
-          <VoteButtons translationId={translation.id} initialVotes={translation.votes} userId={user?.id} />
+          <VoteButtons
+            translationId={translation.id}
+            initialVotes={translation.votes}
+            userId={user?.id}
+          />
         </div>
       ))}
     </div>
   )
 }
-
 
 // 'use client'
 // import { useState } from 'react'

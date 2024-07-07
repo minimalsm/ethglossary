@@ -2,7 +2,7 @@
 'use client'
 import { useState } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button'
 
 export default function AddComment({ translationId, onCommentAdded }) {
   const [comment, setComment] = useState('')
@@ -10,7 +10,7 @@ export default function AddComment({ translationId, onCommentAdded }) {
   const supabase = createClientComponentClient()
 
   // todo: add current user name and id when adding to UI
-  const handleAddComment = async (e) => {
+  const handleAddComment = async e => {
     e.preventDefault()
     setIsSubmitting(true)
 
@@ -35,7 +35,7 @@ export default function AddComment({ translationId, onCommentAdded }) {
       <input
         type="text"
         value={comment}
-        onChange={(e) => setComment(e.target.value)}
+        onChange={e => setComment(e.target.value)}
         placeholder="Comment"
         className="w-full px-4 py-2 border rounded-md text-black bg-white"
         disabled={isSubmitting}

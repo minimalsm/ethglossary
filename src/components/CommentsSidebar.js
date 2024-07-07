@@ -2,13 +2,12 @@
 import { useState, useEffect } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useAuth } from '../context/AuthContext'
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarImage, AvatarFallback } from "../components/ui/avatar"
-import { Textarea } from "@/components/ui/textarea"
-import { Card } from "@/components/ui/card"
+import { Button } from '@/components/ui/button'
+import { Avatar, AvatarImage, AvatarFallback } from '../components/ui/avatar'
+import { Textarea } from '@/components/ui/textarea'
+import { Card } from '@/components/ui/card'
 import { fetchComments, addComment } from '../lib/comments'
 import { voteOnComment, fetchVotes, hasUserVoted } from '../lib/comment_votes'
-
 
 export default function CommentsSidebar({ termId, languageId }) {
   const [comments, setComments] = useState([])
@@ -29,7 +28,7 @@ export default function CommentsSidebar({ termId, languageId }) {
     loadComments()
   }, [termId, languageId])
 
-  const handleCommentSubmit = async (e) => {
+  const handleCommentSubmit = async e => {
     e.preventDefault()
     if (!user) {
       alert('You must be logged in to comment.')
@@ -37,8 +36,13 @@ export default function CommentsSidebar({ termId, languageId }) {
     }
 
     try {
-      const newCommentData = await addComment(termId, languageId, user.id, newComment)
-      setComments((prevComments) => [...prevComments, newCommentData])
+      const newCommentData = await addComment(
+        termId,
+        languageId,
+        user.id,
+        newComment,
+      )
+      setComments(prevComments => [...prevComments, newCommentData])
       setNewComment('')
     } catch (error) {
       console.error('Error adding comment:', error)
@@ -73,21 +77,18 @@ export default function CommentsSidebar({ termId, languageId }) {
     <div className="w-full">
       <h2 className="text-lg font-semibold mb-4">Comments</h2>
       <div className="space-y-4">
-        {comments.map((comment) => (
+        {comments.map(comment => (
           <Comment comment={comment} key={comment.id} userId={user?.id} />
         ))}
       </div>
       <form onSubmit={handleCommentSubmit} className="mt-4">
         <Textarea
           value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
+          onChange={e => setNewComment(e.target.value)}
           placeholder="Leave a comment"
           className="w-full p-2 border rounded-md"
         />
-        <Button
-          type="submit"
-          className="mt-2 w-full"
-        >
+        <Button type="submit" className="mt-2 w-full">
           Comment
         </Button>
       </form>
@@ -111,7 +112,7 @@ const Comment = ({ comment, userId }) => {
     loadVotes()
   }, [comment.id, userId])
 
-  const handleVote = async (vote) => {
+  const handleVote = async vote => {
     if (!userId) {
       alert('You must be logged in to vote.')
       return
@@ -123,14 +124,14 @@ const Comment = ({ comment, userId }) => {
     const previousDownvotes = downvotes
 
     if (vote === 1) {
-      setUpvotes((prev) => prev + 1)
+      setUpvotes(prev => prev + 1)
       if (userVote === -1) {
-        setDownvotes((prev) => prev - 1)
+        setDownvotes(prev => prev - 1)
       }
     } else if (vote === -1) {
-      setDownvotes((prev) => prev + 1)
+      setDownvotes(prev => prev + 1)
       if (userVote === 1) {
-        setUpvotes((prev) => prev - 1)
+        setUpvotes(prev => prev - 1)
       }
     }
 
@@ -152,17 +153,21 @@ const Comment = ({ comment, userId }) => {
       <div className="flex items-start gap-4">
         <Avatar>
           <AvatarImage src={comment.profiles?.avatar_url} />
-          <AvatarFallback>{comment.profiles?.display_name ? comment.profiles.display_name.charAt(0).toUpperCase() : 'U'}</AvatarFallback>
+          <AvatarFallback>
+            {comment.profiles?.display_name
+              ? comment.profiles.display_name.charAt(0).toUpperCase()
+              : 'U'}
+          </AvatarFallback>
         </Avatar>
         <div className="space-y-2 flex-1">
           <div className="flex items-center justify-between">
-            <h4 className="text-base font-medium">{comment.profiles?.display_name || 'Anonymous'}</h4>
+            <h4 className="text-base font-medium">
+              {comment.profiles?.display_name || 'Anonymous'}
+            </h4>
           </div>
-          <p className="text-muted-foreground">
-            {comment.comment}
-          </p>
+          <p className="text-muted-foreground">{comment.comment}</p>
           <div className="flex items-center gap-2 justify-end">
-          <Button
+            <Button
               variant="ghost"
               size="icon"
               disabled={userVote === 1}
@@ -178,12 +183,14 @@ const Comment = ({ comment, userId }) => {
               <span className="sr-only">Like</span>
             </Button>
             <span className="text-muted-foreground text-sm">{upvotes}</span>
-            <Button 
-              variant="ghost" size="icon" 
-              //className="text-muted-foreground hover:bg-muted" 
+            <Button
+              variant="ghost"
+              size="icon"
+              //className="text-muted-foreground hover:bg-muted"
               disabled={userVote === -1}
               className={`p-2 text-gray-700 hover:bg-gray-100 ${userVote === -1 ? 'text-red-500' : ''}`}
-              onClick={() => handleVote(-1)}>
+              onClick={() => handleVote(-1)}
+            >
               <ThumbsDownIcon className="w-4 h-4" />
               <span className="sr-only">Dislike</span>
             </Button>
@@ -214,7 +221,6 @@ function ThumbsDownIcon(props) {
     </svg>
   )
 }
-
 
 function ThumbsUpIcon(props) {
   return (

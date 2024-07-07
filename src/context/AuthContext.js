@@ -57,7 +57,11 @@ export const AuthProvider = ({ children }) => {
           if (!profile && !error) {
             const { error: insertError } = await supabase
               .from('profiles')
-              .insert({ id, display_name: session.user.user_metadata.name, avatar_url: session.user.user_metadata.avatar_url }) // Default username to email for now
+              .insert({
+                id,
+                display_name: session.user.user_metadata.name,
+                avatar_url: session.user.user_metadata.avatar_url,
+              }) // Default username to email for now
             if (insertError) {
               console.error('Error creating profile:', insertError)
             }
@@ -75,7 +79,11 @@ export const AuthProvider = ({ children }) => {
     getUserProfile()
   }, [supabase])
 
-  return <AuthContext.Provider value={{ user, avatarUrl }}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={{ user, avatarUrl }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 export const useAuth = () => {

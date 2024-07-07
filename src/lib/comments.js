@@ -18,15 +18,22 @@ async function fetchCommentVotes(commentId) {
 }
 
 export async function fetchComments(termId, languageId) {
-  console.log('Fetching comments with termId:', termId, 'and languageId:', languageId)
+  console.log(
+    'Fetching comments with termId:',
+    termId,
+    'and languageId:',
+    languageId,
+  )
 
   const { data, error } = await supabase
     .from('sidebarcomments')
-    .select(`
+    .select(
+      `
       *,
       profiles(display_name, avatar_url),
       comment_votes(vote)
-    `)
+    `,
+    )
     .eq('term_id', termId)
     .eq('language_id', languageId)
 
@@ -36,12 +43,14 @@ export async function fetchComments(termId, languageId) {
 
   const commentsWithVotes = data.map(comment => {
     const upvotes = comment.comment_votes.filter(vote => vote.vote === 1).length
-    const downvotes = comment.comment_votes.filter(vote => vote.vote === -1).length
+    const downvotes = comment.comment_votes.filter(
+      vote => vote.vote === -1,
+    ).length
     return {
       ...comment,
       upvotes,
       downvotes,
-      totalVotes: upvotes - downvotes
+      totalVotes: upvotes - downvotes,
     }
   })
 
@@ -59,7 +68,14 @@ export async function fetchComments(termId, languageId) {
 export async function addComment(termId, languageId, userId, commentText) {
   const { data, error } = await supabase
     .from('sidebarcomments')
-    .insert([{ term_id: termId, language_id: languageId, user_id: userId, comment: commentText }])
+    .insert([
+      {
+        term_id: termId,
+        language_id: languageId,
+        user_id: userId,
+        comment: commentText,
+      },
+    ])
     .select()
 
   if (error) {

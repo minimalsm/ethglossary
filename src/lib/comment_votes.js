@@ -3,7 +3,10 @@ import { supabase } from './supabaseClient'
 export async function voteOnComment(userId, commentId, vote) {
   const { data, error } = await supabase
     .from('comment_votes')
-    .upsert({ user_id: userId, comment_id: commentId, vote }, { onConflict: ['user_id', 'comment_id'] })
+    .upsert(
+      { user_id: userId, comment_id: commentId, vote },
+      { onConflict: ['user_id', 'comment_id'] },
+    )
     .select()
 
   if (error) {
@@ -14,20 +17,20 @@ export async function voteOnComment(userId, commentId, vote) {
 }
 
 export async function fetchVotes(commentId) {
-    const { data, error } = await supabase
-      .from('comment_votes')
-      .select('vote')
-      .eq('comment_id', commentId)
-  
-    if (error) {
-      throw new Error(`Error fetching votes: ${error.message}`)
-    }
-  
-    const upvotes = data.filter(({ vote }) => vote === 1).length
-    const downvotes = data.filter(({ vote }) => vote === -1).length
-  
-    return { upvotes, downvotes }
+  const { data, error } = await supabase
+    .from('comment_votes')
+    .select('vote')
+    .eq('comment_id', commentId)
+
+  if (error) {
+    throw new Error(`Error fetching votes: ${error.message}`)
   }
+
+  const upvotes = data.filter(({ vote }) => vote === 1).length
+  const downvotes = data.filter(({ vote }) => vote === -1).length
+
+  return { upvotes, downvotes }
+}
 
 export async function hasUserVoted(userId, commentId) {
   const { data, error } = await supabase

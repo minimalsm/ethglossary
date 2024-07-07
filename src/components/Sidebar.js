@@ -1,31 +1,33 @@
-'use client';
+'use client'
 
-import { cn } from "@/lib/utils"
-import { Button } from "./ui/button"
+import { cn } from '@/lib/utils'
+import { Button } from './ui/button'
 import { usePathname } from 'next/navigation'
 
 export default function Sidebar({ terms, className, languageCode }) {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   console.log(languageCode)
 
   return (
-    <div className={cn("pb-12", className)}>
+    <div className={cn('pb-12', className)}>
       <div className="space-y-4 pt-4">
         <div className="px-3">
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
             Terms
           </h2>
           <div className="space-y-1 flex flex-col min-w-52">
-            {terms.map((term) => {
-              const termPath = `/${languageCode}/${term.term}`;
-              const isActive = pathname === termPath;
+            {terms.map(term => {
+              const termPath = `/${languageCode}/${term.term}`
+              const isActive = pathname === termPath
 
               return (
                 <Button
                   asChild
-                  variant={isActive ? "secondary" : "ghost"}
-                  className={cn("w-full justify-start", { 'active-class': isActive })}
+                  variant={isActive ? 'secondary' : 'ghost'}
+                  className={cn('w-full justify-start', {
+                    'active-class': isActive,
+                  })}
                   key={term.term}
                 >
                   <a href={termPath}>
@@ -47,11 +49,11 @@ export default function Sidebar({ terms, className, languageCode }) {
                     {term.term}
                   </a>
                 </Button>
-              );
+              )
             })}
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }

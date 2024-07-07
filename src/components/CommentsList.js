@@ -27,8 +27,8 @@ export default function CommentsList({ translationId }) {
     fetchComments()
   }, [translationId, supabase])
 
-  const handleNewComment = (newComment) => {
-    setComments((prevComments) => [...prevComments, newComment])
+  const handleNewComment = newComment => {
+    setComments(prevComments => [...prevComments, newComment])
   }
 
   if (loading) {
@@ -41,13 +41,16 @@ export default function CommentsList({ translationId }) {
       {comments.length === 0 ? (
         <p>No comments yet.</p>
       ) : (
-        comments.map((comment) => (
+        comments.map(comment => (
           <div key={comment.id} className="mb-2 p-2 border rounded-md">
             <p>{comment.comment}</p>
           </div>
         ))
       )}
-      <AddComment translationId={translationId} onCommentAdded={handleNewComment} />
+      <AddComment
+        translationId={translationId}
+        onCommentAdded={handleNewComment}
+      />
     </div>
   )
 }
