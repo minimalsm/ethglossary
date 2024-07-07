@@ -11,11 +11,19 @@ export async function fetchTranslations(termId, languageId) {
     throw new Error(`Error fetching translations: ${error.message}`)
   }
 
-  // console.log('translatoins data', data)
-
   const translationsWithVotes = data.map(translation => {
     const voteData = translation.votes
-    let votes = voteData.length ? voteData.reduce((acc, { vote }) => acc + vote, 0) : 0
+    console.log('Votedata', voteData)
+
+    const upvotes = voteData.filter(({ vote }) => vote === 1).length
+    const downvotes = voteData.filter(({ vote }) => vote === -1).length
+
+    let votes = {
+      upvotes,
+      downvotes,
+    }
+
+    let x = voteData.length ? voteData.reduce((acc, { vote }) => acc + vote, 0) : 0
 
     return {
       ...translation,

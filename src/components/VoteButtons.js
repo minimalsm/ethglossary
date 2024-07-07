@@ -4,7 +4,8 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Button } from './ui/button'
 
 export default function VoteButtons({ translationId, initialVotes, userId }) {
-  const [votes, setVotes] = useState(initialVotes)
+  const [upvotes, setUpvotes] = useState(initialVotes.upvotes || 0)
+  const [downvotes, setDownvotes] = useState(initialVotes.downvotes || 0)
   const [userVote, setUserVote] = useState(null)
   const [loading, setLoading] = useState(false)
   const supabase = createClientComponentClient()
@@ -33,9 +34,9 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
       alert('You must be logged in to vote.')
       return
     }
-
+  
     setLoading(true)
-
+  
     try {
       const { data: existingVote, error: fetchError } = await supabase
         .from('votes')
@@ -43,50 +44,62 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
         .eq('user_id', userId)
         .eq('translation_id', translationId)
         .maybeSingle() // Use maybeSingle to handle the case when no rows are returned
-
+  
       if (fetchError) {
         throw fetchError
       }
-
-      let newVotes = votes
-
+  
       if (existingVote) {
         if (existingVote.vote === vote) {
           alert('You have already voted this way.')
           setLoading(false)
           return
         }
-
+  
         const { error: updateError } = await supabase
           .from('votes')
           .update({ vote })
           .eq('id', existingVote.id)
-
+  
         if (updateError) {
           throw updateError
         }
-
-        newVotes += vote - existingVote.vote
+  
+        if (vote === 1) {
+          setUpvotes((prev) => prev + 1)
+          if (existingVote.vote === -1) {
+            setDownvotes((prev) => prev - 1)
+          }
+        } else {
+          setDownvotes((prev) => prev + 1)
+          if (existingVote.vote === 1) {
+            setUpvotes((prev) => prev - 1)
+          }
+        }
       } else {
         const { error: insertError } = await supabase
           .from('votes')
           .insert({ user_id: userId, translation_id: translationId, vote })
-
+  
         if (insertError) {
           throw insertError
         }
-
-        newVotes += vote
+  
+        if (vote === 1) {
+          setUpvotes((prev) => prev + 1)
+        } else {
+          setDownvotes((prev) => prev + 1)
+        }
       }
-
+  
       setUserVote(vote)
-      setVotes(newVotes)
     } catch (error) {
       alert(error.message)
     }
-
+  
     setLoading(false)
   }
+  
 
 //   <div className="flex space-x-2">
 //                 <button className="p-1 text-gray-700">
@@ -97,49 +110,31 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
 //                 </button>
 //               </div>
 
-  return (
-    <div className="flex items-center">
-      <Button
-        variant="ghost" 
-        size="icon"   
-        onClick={() => handleVote(1)}
-        disabled={userVote === 1 || loading}
-        
-        className={`p-1 text-gray-700 ${userVote === 1 ? 'bg-muted' : ''}`}
-      >
-        <ThumbsUpIcon 
-          className="h-4 w-4"
-          // fill={`${userVote === 1 ? 'green' : 'none'}`}
-        />
-      </Button>
-      <span className="mx-2">{votes}</span>
-
-      <Button
-        variant="ghost" 
-        size="icon" 
-        // className="p-1 text-gray-700 bg-muted"
-        onClick={() => handleVote(-1)}
-        disabled={userVote === -1 || loading}
-        className={`p-1 text-gray-700 ${userVote === -1 ? 'bg-accent text-accent-foreground' : ''}`}
-        >
-            <ThumbsDownIcon className="h-4 w-4" />
-            <span className="sr-only">Downvote</span>
-      </Button>
-{/* 
-      <button
-        onClick={() => handleVote(-1)}
-        disabled={userVote === -1 || loading}
-        className={`p-1 text-gray-700 ${userVote === -1 ? '' : ''}`}
-      >
-        
-        <ThumbsDownIcon 
-          className="h-4 w-4"
-          fill={`${userVote === -1 ? 'red' : 'none'}`}
-          stroke={`${userVote === -1 ? 'currentColor' : 'currentColor'}`}
-        />
-      </button> */}
-    </div>
-  )
+return (
+  <div className="flex items-center gap-2 justify-end">
+          <Button
+              variant="ghost"
+              size="icon"
+              disabled={userVote === 1}
+              className={`p-2 text-gray-700 hover:bg-gray-100 ${userVote === 1 ? 'text-green-500' : ''}`}
+              onClick={() => handleVote(1)}
+            >
+              <ThumbsUpIcon className="w-4 h-4" />
+              <span className="sr-only">Like</span>
+            </Button>
+            <span className="text-muted-foreground text-sm">{upvotes}</span>
+            <Button 
+              variant="ghost" size="icon" 
+              //className="text-muted-foreground hover:bg-muted" 
+              disabled={userVote === -1}
+              className={`p-2 text-gray-700 hover:bg-gray-100 ${userVote === -1 ? 'text-red-500' : ''}`}
+              onClick={() => handleVote(-1)}>
+              <ThumbsDownIcon className="w-4 h-4" />
+              <span className="sr-only">Dislike</span>
+            </Button>
+            <span className="text-muted-foreground text-sm">{downvotes}</span>
+          </div>
+)
 }
 
 function ThumbsDownIcon(props) {
