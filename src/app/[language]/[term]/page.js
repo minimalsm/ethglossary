@@ -1,5 +1,7 @@
 import TranslationsSection from '@/components/translations/TranslationsSection'
 import CommentsPanel from '@/components/comments/CommentsPanel'
+import TermsModal from '@/components/modals/TermsModal'
+import CommentsModal from '@/components/modals/CommentsModal'
 import { fetchTerms } from '@/lib/fetchTerms'
 import { fetchTranslations } from '@/lib/translations'
 import { fetchComments } from '@/lib/comments'
@@ -46,34 +48,49 @@ export default async function TermPage({ params }) {
   // console.log('translations before render', translations)
 
   return (
-    <div className="flex">
-      <Sidebar className="p-4" terms={terms} languageCode={language} />
-      <div className="flex-1 p-4">
-        <div className="flex space-x-8">
-          <div className="w-2/3 ">
-            <h1 className="text-2xl font-bold mb-4">
-              Translations for "{term}" in {language}
-            </h1>
-            <div className="mb-2 p-4 border rounded bg-gray-200">
-              An ethereum transaction requires gas
+    <div>
+      <div className="bg-gray-100 flex justify-between md:hidden">
+        <TermsModal terms={terms} languageCode={language} />
+        <CommentsModal
+          termId={termId}
+          languageId={languageId}
+          initialComments={comments}
+        />
+      </div>
+
+      <div className="flex flex-col md:flex-row">
+        <Sidebar
+          className="hidden md:block p-4"
+          terms={terms}
+          languageCode={language}
+        />
+        <div className="flex-1 p-4">
+          <div className="flex flex-col md:flex-row md:space-x-8">
+            <div className="w-full md:w-2/3">
+              <h1 className="text-2xl font-bold mb-4">
+                Translations for "{term}" in {language}
+              </h1>
+              <div className="mb-2 p-4 border rounded bg-gray-200">
+                An ethereum transaction requires gas
+              </div>
+              <div className="mb-4 p-4 border rounded bg-gray-200">
+                Gas is the fee required to successfully conduct a transaction or
+                execute a contract on the Ethereum blockchain platform
+              </div>
+              <hr className="my-4" />
+              <TranslationsSection
+                initialTranslations={translations}
+                termId={termId}
+                languageId={languageId}
+              />
             </div>
-            <div className="mb-4 p-4 border rounded bg-gray-200">
-              Gas is the fee required to successfully conduct a transaction or
-              execute a contract on the Ethereum blockchain platform
+            <div className="hidden md:block w-1/3">
+              <CommentsPanel
+                termId={termId}
+                languageId={languageId}
+                initialComments={comments}
+              />
             </div>
-            <hr className="my-4" />
-            <TranslationsSection
-              initialTranslations={translations}
-              termId={termId}
-              languageId={languageId}
-            />
-          </div>
-          <div className="w-1/3">
-            <CommentsPanel
-              initialComments={comments}
-              termId={termId}
-              languageId={languageId}
-            />
           </div>
         </div>
       </div>
