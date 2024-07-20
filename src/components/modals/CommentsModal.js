@@ -6,21 +6,27 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import CommentsSidebar from '@/components/comments/CommentsPanel'
+import CommentsPanel from '@/components/comments/CommentsPanel'
 
-export default function CommentsModal({ termId, languageId, initialComments }) {
+export default function CommentsModal({
+  termId,
+  languageId,
+  initialComments,
+  commentCount,
+}) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="ghost">
-          <MessageIcon /> Comments
+          <MessageIcon />
+          Comments ({commentCount})
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Comments</DialogTitle>
         </DialogHeader>
-        <CommentsSidebar
+        <CommentsPanel
           termId={termId}
           languageId={languageId}
           initialComments={initialComments}

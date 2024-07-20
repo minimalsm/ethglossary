@@ -40,12 +40,10 @@ export default async function TermPage({ params }) {
   const languageId = languageData.id
 
   // Fetch translations and comments
-  const [translations, comments] = await Promise.all([
+  const [translations, { comments, count: commentCount }] = await Promise.all([
     fetchTranslations(termId, languageId),
     fetchComments(termId, languageId),
   ])
-
-  // console.log('translations before render', translations)
 
   return (
     <div>
@@ -55,6 +53,7 @@ export default async function TermPage({ params }) {
           termId={termId}
           languageId={languageId}
           initialComments={comments}
+          commentCount={commentCount}
         />
       </div>
 

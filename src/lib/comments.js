@@ -25,7 +25,7 @@ export async function fetchComments(termId, languageId) {
     languageId,
   )
 
-  const { data, error } = await supabase
+  const { data, error, count } = await supabase
     .from('sidebarcomments')
     .select(
       `
@@ -33,6 +33,7 @@ export async function fetchComments(termId, languageId) {
       profiles(display_name, avatar_url),
       comment_votes(vote)
     `,
+      { count: 'exact' },
     )
     .eq('term_id', termId)
     .eq('language_id', languageId)
@@ -62,7 +63,7 @@ export async function fetchComments(termId, languageId) {
   })
 
   console.log('Comments with votes:', commentsWithVotes)
-  return commentsWithVotes
+  return { comments: commentsWithVotes, count }
 }
 
 export async function addComment(termId, languageId, userId, commentText) {
