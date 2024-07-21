@@ -3,8 +3,8 @@ import { supabase } from './supabaseClient'
 export async function fetchTranslations(termId, languageId, userId) {
   // Fetch translations
   const { data: allTranslations, error } = await supabase
-    .from('translations')
-    .select('*, votes(*)')
+    .from('translations_with_profiles')
+    .select('*')
     .eq('term_id', termId)
     .eq('language_id', languageId)
 
@@ -31,7 +31,7 @@ export async function fetchTranslations(termId, languageId, userId) {
   }
 
   const translationsWithVotes = allTranslations.map(translation => {
-    const voteData = translation.votes
+    const voteData = translation.votes || []
     const upvotes = voteData.filter(({ vote }) => vote === 1).length
     const downvotes = voteData.filter(({ vote }) => vote === -1).length
 

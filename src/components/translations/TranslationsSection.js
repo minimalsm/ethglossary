@@ -35,13 +35,19 @@ export default function TranslationsSection({
       />
       {submitted ? (
         translations.map(translation => (
-          <div key={translation.id} className="mb-4 p-4 border rounded-md">
-            <p>{translation.translation}</p>
-            <VoteButtons
-              translationId={translation.id}
-              initialVotes={translation.votes}
-              userId={user?.id}
-            />
+          <div key={translation.id} className="mb-4 pb-4">
+            <div className="mb-0 p-4 pb-0 border rounded-md">
+              <p>{translation.translation}</p>
+              <VoteButtons
+                translationId={translation.id}
+                initialVotes={translation.votes}
+                userId={user?.id}
+              />
+            </div>
+
+            <div className="text-sm text-gray-500 bg-gray-100 px-2 py-1">
+              Suggested by {translation.display_name || 'Anonymous'}
+            </div>
           </div>
         ))
       ) : (
