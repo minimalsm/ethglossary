@@ -7,6 +7,7 @@ import { fetchTranslations } from '@/lib/translations'
 import { fetchComments } from '@/lib/comments'
 import { fetchLanguages } from '@/lib/fetchLanguages'
 import Sidebar from '@/components/navigation/Sidebar'
+import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
 
 export async function generateMetadata({ params }) {
   return {
@@ -15,6 +16,27 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function TermPage({ params }) {
+  const supabase = createSupabaseServerComponentClient()
+
+  const {
+    data: { session },
+    error,
+  } = await createSupabaseServerComponentClient().auth.getSession()
+
+  let user = null
+  if (session?.user) {
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', session.user.id)
+      .maybeSingle()
+
+    if (profileError) {
+      console.error('Error fetching profile:', profileError)
+    }
+    user = profile
+  }
+
   const { language, term } = params
 
   // Fetch term ID
@@ -81,6 +103,7 @@ export default async function TermPage({ params }) {
                 initialTranslations={translations}
                 termId={termId}
                 languageId={languageId}
+                user={user}
               />
             </div>
             <div className="hidden md:block w-1/3">
@@ -88,6 +111,7 @@ export default async function TermPage({ params }) {
                 termId={termId}
                 languageId={languageId}
                 initialComments={comments}
+                user={user}
               />
             </div>
           </div>

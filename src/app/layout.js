@@ -1,5 +1,4 @@
 import '../styles/globals.css'
-import { AuthProvider } from '@/context/AuthContext'
 import NavBar from '@/components/navigation/Navbar'
 import { fetchTerms } from '@/lib/fetchTerms'
 
@@ -10,11 +9,9 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <head />
       <body>
-        <AuthProvider>
-          <NavBar />
-          <div className="flex-1">{children}</div>
-          {/* <div className="flex-1 p-4">{children}</div> */}
-        </AuthProvider>
+        <NavBar />
+        <div className="flex-1">{children}</div>
+        {/* <div className="flex-1 p-4">{children}</div> */}
       </body>
     </html>
   )

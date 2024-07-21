@@ -1,13 +1,16 @@
 'use client'
 import { useState } from 'react'
-import { useAuth } from '@/context/AuthContext'
 import AddCommentForm from '@/components/comments/AddCommentForm'
 import CommentCard from '@/components/comments/CommentCard'
 import { addComment } from '@/lib/comments'
 
-export default function CommentsPanel({ initialComments, termId, languageId }) {
+export default function CommentsPanel({
+  initialComments,
+  termId,
+  languageId,
+  user,
+}) {
   const [comments, setComments] = useState(initialComments || [])
-  const { user } = useAuth()
 
   const handleAddComment = async commentText => {
     if (!user) {

@@ -2,15 +2,14 @@
 import { useState } from 'react'
 import AddTranslationForm from '@/components/translations/AddTranslationForm'
 import VoteButtons from '@/components/common/VoteButtons'
-import { useAuth } from '@/context/AuthContext'
 
 export default function TranslationsSection({
   initialTranslations,
   termId,
   languageId,
+  user,
 }) {
   const [translations, setTranslations] = useState(initialTranslations)
-  const { user } = useAuth()
 
   const handleNewTranslation = (newTranslation, tempId) => {
     setTranslations(prevTranslations => {
