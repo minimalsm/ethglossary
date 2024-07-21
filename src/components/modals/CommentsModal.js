@@ -5,6 +5,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
 import { Button } from '@/components/ui/button'
 import CommentsPanel from '@/components/comments/CommentsPanel'
 
@@ -15,24 +22,24 @@ export default function CommentsModal({
   commentCount,
 }) {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <Drawer>
+      <DrawerTrigger asChild>
         <Button variant="ghost">
           <MessageIcon />
           Comments ({commentCount})
         </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Comments</DialogTitle>
-        </DialogHeader>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Comments</DrawerTitle>
+        </DrawerHeader>
         <CommentsPanel
           termId={termId}
           languageId={languageId}
           initialComments={initialComments}
         />
-      </DialogContent>
-    </Dialog>
+      </DrawerContent>
+    </Drawer>
   )
 }
 
