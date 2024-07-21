@@ -8,6 +8,7 @@ export default function AddTranslationForm({
   termId,
   languageId,
   onTranslationAdded,
+  userId,
 }) {
   const [translation, setTranslation] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -32,6 +33,7 @@ export default function AddTranslationForm({
         termId,
         languageId,
         translation,
+        userId,
       )
       setTranslation('')
 

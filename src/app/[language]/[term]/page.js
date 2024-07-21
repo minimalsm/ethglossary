@@ -39,6 +39,8 @@ export default async function TermPage({ params }) {
 
   const { language, term } = params
 
+  const userId = session?.user?.id
+
   // Fetch term ID
   const terms = await fetchTerms()
   const termData = terms.find(t => t.term === term)
@@ -61,11 +63,25 @@ export default async function TermPage({ params }) {
   }
   const languageId = languageData.id
 
-  // Fetch translations and comments
-  const [translations, { comments, count: commentCount }] = await Promise.all([
-    fetchTranslations(termId, languageId),
+  // // Fetch translations and comments
+  // const [translations, { comments, count: commentCount }] = await Promise.all([
+  //   fetchTranslations(termId, languageId),
+  //   fetchComments(termId, languageId),
+  // ])
+
+  // Fetch at once to improve performance
+  const [
+    { translationsWithVotes, hasSubmittedTranslation },
+    { comments, count: commentCount },
+  ] = await Promise.all([
+    fetchTranslations(termId, languageId, userId),
     fetchComments(termId, languageId),
   ])
+
+  // console.log('Translations on server', allTranslations)
+  // console.log('Comments on server', comments)
+
+  // console.log('ALL TRANSLATIONS', translationsWithVotes)
 
   return (
     <div>
@@ -100,10 +116,11 @@ export default async function TermPage({ params }) {
               </div>
               <hr className="my-4" />
               <TranslationsSection
-                initialTranslations={translations}
+                initialTranslations={translationsWithVotes}
                 termId={termId}
                 languageId={languageId}
                 user={user}
+                hasSubmittedTranslation={hasSubmittedTranslation}
               />
             </div>
             <div className="hidden md:block w-1/3">

@@ -1,7 +1,8 @@
 import { supabase } from './supabaseClient'
 
-export async function fetchTranslations(termId, languageId) {
-  const { data, error } = await supabase
+export async function fetchTranslations(termId, languageId, userId) {
+  // Fetch translations
+  const { data: allTranslations, error } = await supabase
     .from('translations')
     .select('*, votes(*)')
     .eq('term_id', termId)
@@ -11,7 +12,25 @@ export async function fetchTranslations(termId, languageId) {
     throw new Error(`Error fetching translations: ${error.message}`)
   }
 
-  const translationsWithVotes = data.map(translation => {
+  let hasSubmittedTranslation = false
+
+  if (userId) {
+    // Check if the user has submitted a translation
+    const { data: userTranslations, error: userError } = await supabase
+      .from('translations')
+      .select('*')
+      .eq('term_id', termId)
+      .eq('language_id', languageId)
+      .eq('user_id', userId)
+
+    if (userError) {
+      throw new Error(`Error checking user translations: ${userError.message}`)
+    }
+
+    hasSubmittedTranslation = userTranslations.length > 0
+  }
+
+  const translationsWithVotes = allTranslations.map(translation => {
     const voteData = translation.votes
     console.log('Votedata', voteData)
 
@@ -33,10 +52,15 @@ export async function fetchTranslations(termId, languageId) {
     }
   })
 
-  return translationsWithVotes
+  return { translationsWithVotes, hasSubmittedTranslation }
 }
 
-export async function addTranslation(termId, languageId, translationText) {
+export async function addTranslation(
+  termId,
+  languageId,
+  translationText,
+  userId,
+) {
   const { data, error } = await supabase
     .from('translations')
     .insert([
@@ -44,6 +68,7 @@ export async function addTranslation(termId, languageId, translationText) {
         term_id: termId,
         language_id: languageId,
         translation: translationText,
+        user_id: userId,
       },
     ])
     .select()

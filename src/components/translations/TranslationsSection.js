@@ -8,8 +8,10 @@ export default function TranslationsSection({
   termId,
   languageId,
   user,
+  hasSubmittedTranslation,
 }) {
   const [translations, setTranslations] = useState(initialTranslations)
+  const [submitted, setSubmitted] = useState(hasSubmittedTranslation)
 
   const handleNewTranslation = (newTranslation, tempId) => {
     setTranslations(prevTranslations => {
@@ -29,17 +31,22 @@ export default function TranslationsSection({
         termId={termId}
         languageId={languageId}
         onTranslationAdded={handleNewTranslation}
+        userId={user?.id}
       />
-      {translations.map(translation => (
-        <div key={translation.id} className="mb-4 p-4 border rounded-md">
-          <p>{translation.translation}</p>
-          <VoteButtons
-            translationId={translation.id}
-            initialVotes={translation.votes}
-            userId={user?.id}
-          />
-        </div>
-      ))}
+      {submitted ? (
+        translations.map(translation => (
+          <div key={translation.id} className="mb-4 p-4 border rounded-md">
+            <p>{translation.translation}</p>
+            <VoteButtons
+              translationId={translation.id}
+              initialVotes={translation.votes}
+              userId={user?.id}
+            />
+          </div>
+        ))
+      ) : (
+        <p>Please submit a translation to view existing translations.</p>
+      )}
     </div>
   )
 }
