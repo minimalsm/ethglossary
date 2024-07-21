@@ -25,6 +25,7 @@ export default function AddTranslationForm({
       translation,
       upvotes: 0,
       downvotes: 0,
+      user_id: userId,
     }
     onTranslationAdded(optimisticTranslation)
 

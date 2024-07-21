@@ -16,13 +16,13 @@ export default function TranslationsSection({
   const handleNewTranslation = (newTranslation, tempId) => {
     setTranslations(prevTranslations => {
       if (tempId) {
-        // replace the temporary translation with the one from the server
         return prevTranslations.map(translation =>
           translation.id === tempId ? newTranslation : translation,
         )
       }
       return [...prevTranslations, newTranslation]
     })
+    setSubmitted(true)
   }
 
   return (
