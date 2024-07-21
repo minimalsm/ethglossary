@@ -8,7 +8,7 @@ export async function GET(request) {
   const next = searchParams.get('next') || '/'
 
   if (code) {
-    console.log('Code passed:', code)
+    // console.log('Code passed:', code)
     const cookieStore = cookies()
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -20,7 +20,7 @@ export async function GET(request) {
           },
           setAll(cookies) {
             cookies.forEach(({ name, value, options }) => {
-              console.log(`Setting cookie: ${name} = ${value}`, options)
+              // console.log(`Setting cookie: ${name} = ${value}`, options)
               cookieStore.set(name, value, {
                 ...options,
                 httpOnly: true,
@@ -34,15 +34,15 @@ export async function GET(request) {
     )
 
     const { data, error } = await supabase.auth.exchangeCodeForSession(code)
-    console.log('Data:', data, 'Error:', error)
+    // console.log('Data:', data, 'Error:', error)
 
     if (!error) {
-      console.log(`Redirecting to: ${origin}${next}`)
+      // console.log(`Redirecting to: ${origin}${next}`)
       return NextResponse.redirect(`${origin}${next}`)
     } else {
-      console.error('Error exchanging code for session:', error)
+      // console.error('Error exchanging code for session:', error)
     }
   }
-  console.log(`Redirecting to: ${origin}/auth/error`)
+  // console.log(`Redirecting to: ${origin}/auth/error`)
   return NextResponse.redirect(`${origin}/auth/error`)
 }

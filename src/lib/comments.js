@@ -18,13 +18,6 @@ async function fetchCommentVotes(commentId) {
 }
 
 export async function fetchComments(termId, languageId) {
-  console.log(
-    'Fetching comments with termId:',
-    termId,
-    'and languageId:',
-    languageId,
-  )
-
   const { data, error, count } = await supabase
     .from('sidebarcomments')
     .select(
@@ -62,7 +55,6 @@ export async function fetchComments(termId, languageId) {
     return new Date(a.created_at) - new Date(b.created_at)
   })
 
-  console.log('Comments with votes:', commentsWithVotes)
   return { comments: commentsWithVotes, count }
 }
 

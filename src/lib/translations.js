@@ -32,8 +32,6 @@ export async function fetchTranslations(termId, languageId, userId) {
 
   const translationsWithVotes = allTranslations.map(translation => {
     const voteData = translation.votes
-    console.log('Votedata', voteData)
-
     const upvotes = voteData.filter(({ vote }) => vote === 1).length
     const downvotes = voteData.filter(({ vote }) => vote === -1).length
 

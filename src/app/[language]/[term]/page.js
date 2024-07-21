@@ -78,11 +78,6 @@ export default async function TermPage({ params }) {
     fetchComments(termId, languageId),
   ])
 
-  // console.log('Translations on server', allTranslations)
-  // console.log('Comments on server', comments)
-
-  // console.log('ALL TRANSLATIONS', translationsWithVotes)
-
   return (
     <div>
       <div className="bg-gray-100 flex justify-between md:hidden">

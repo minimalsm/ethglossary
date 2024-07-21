@@ -7,8 +7,6 @@ import { usePathname } from 'next/navigation'
 export default function Sidebar({ terms, className, languageCode }) {
   const pathname = usePathname()
 
-  console.log(languageCode)
-
   return (
     <div className={cn('pb-12', className)}>
       <div className="space-y-4 pt-4">

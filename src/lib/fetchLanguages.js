@@ -9,6 +9,5 @@ export async function fetchLanguages() {
     throw new Error(`Error fetching languages: ${error.message}`)
   }
 
-  console.log('Fetched languages:', data) // Debugging log
   return data
 }

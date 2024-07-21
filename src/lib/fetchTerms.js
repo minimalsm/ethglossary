@@ -7,6 +7,5 @@ export async function fetchTerms() {
     throw new Error(`Error fetching terms: ${error.message}`)
   }
 
-  console.log('Fetched terms:', data) // Debugging log
   return data
 }
