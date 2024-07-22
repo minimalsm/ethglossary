@@ -1,28 +1,30 @@
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerClose,
+  DrawerOverlay,
+} from '@/components/ui/drawer'
 import { Button } from '@/components/ui/button'
 import Sidebar from '@/components/navigation/Sidebar'
 
 export default function TermsModal({ terms, languageCode }) {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <Drawer direction="left" className="content-none">
+      <DrawerTrigger asChild>
         <Button variant="ghost">
           <MenuIcon /> Terms
         </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Terms</DialogTitle>
-        </DialogHeader>
+      </DrawerTrigger>
+      <DrawerContent className="content-none my-auto fixed right-auto inset-y-0 left-0 z-50 h-full w-64 bg-background transition-transform transform translate-x-full md:translate-x-0">
+        <DrawerHeader>
+          <DrawerTitle>Terms</DrawerTitle>
+        </DrawerHeader>
         <Sidebar terms={terms} languageCode={languageCode} />
-      </DialogContent>
-    </Dialog>
+      </DrawerContent>
+    </Drawer>
   )
 }
 
