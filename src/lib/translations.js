@@ -77,3 +77,22 @@ export async function addTranslation(
 
   return data[0]
 }
+
+export async function hasUserTranslatedTerm(termId, languageId, userId) {
+  if (!userId) {
+    return false
+  }
+
+  const { data: userTranslations, error: userError } = await supabase
+    .from('translations')
+    .select('*')
+    .eq('term_id', termId)
+    .eq('language_id', languageId)
+    .eq('user_id', userId)
+
+  if (userError) {
+    throw new Error(`Error checking user translations: ${userError.message}`)
+  }
+
+  return userTranslations.length > 0
+}

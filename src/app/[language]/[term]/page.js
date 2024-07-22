@@ -3,12 +3,13 @@ import CommentsPanel from '@/components/comments/CommentsPanel'
 import TermsModal from '@/components/modals/TermsModal'
 import CommentsModal from '@/components/modals/CommentsModal'
 import { fetchTerms } from '@/lib/fetchTerms'
-import { fetchTranslations } from '@/lib/translations'
+import { fetchTranslations, hasUserTranslatedTerm } from '@/lib/translations'
 import { Button } from '@/components/ui/button'
 import { fetchComments } from '@/lib/comments'
 import { fetchLanguages } from '@/lib/fetchLanguages'
 import Sidebar from '@/components/navigation/Sidebar'
 import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
+import { BadgeCheck } from 'lucide-react'
 
 export async function generateMetadata({ params }) {
   return {
@@ -82,6 +83,15 @@ export default async function TermPage({ params }) {
   const currentTermIndex = terms.findIndex(t => t.id === termId)
   const nextTerm = terms[currentTermIndex + 1]
 
+  let hasTranslatedNextTerm = false
+  if (userId && nextTerm) {
+    hasTranslatedNextTerm = await hasUserTranslatedTerm(
+      nextTerm.id,
+      languageId,
+      userId,
+    )
+  }
+
   return (
     <div>
       <div className="bg-gray-100 flex justify-between md:hidden">
@@ -124,9 +134,21 @@ export default async function TermPage({ params }) {
               {/* Up Next Card */}
               {nextTerm && (
                 <div className="mt-8 p-4 border rounded-md bg-gray-100">
-                  <h3 className="text-lg font-semibold">Up next</h3>
+                  <h3 className="text-md font-light uppercase">Up next</h3>
                   <div className="flex justify-between items-center mt-4">
-                    <span>{nextTerm.term}</span>
+                    <div className="flex items-center">
+                      <span className="text-3xl">{nextTerm.term}</span>
+                      {hasTranslatedNextTerm ? (
+                        <BadgeCheck
+                          height={28}
+                          width={28}
+                          fill="green"
+                          stroke="white"
+                        />
+                      ) : (
+                        <BadgeCheck height={28} width={28} />
+                      )}
+                    </div>
                     <Button asChild variant="link" className="text-primary">
                       <a href={`/${language}/${nextTerm.term}`}>Go</a>
                     </Button>
