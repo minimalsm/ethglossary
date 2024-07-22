@@ -35,8 +35,8 @@ export default function TranslationsSection({
       />
       {submitted ? (
         translations.map(translation => (
-          <div key={translation.id} className="mb-4 pb-4">
-            <div className="mb-0 p-4 pb-0 border rounded-md">
+          <div key={translation.id} className="my-4 pb-4">
+            <div className="mb-0 p-4 pb-0 border border-black">
               <p>{translation.translation}</p>
               <VoteButtons
                 translationId={translation.id}

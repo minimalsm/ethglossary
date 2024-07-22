@@ -2,7 +2,9 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input'
 import { addTranslation } from '@/lib/translations'
+import { Label } from '@/components/ui/label'
 
 export default function AddTranslationForm({
   termId,
@@ -51,12 +53,17 @@ export default function AddTranslationForm({
 
   return (
     <form onSubmit={handleAddTranslation} className="space-y-4">
-      <Textarea
+      <Label htmlFor="translation">
+        into <strong>Français</strong>
+      </Label>
+      <Input
+        id="translation"
         type="text"
         value={translation}
         onChange={e => setTranslation(e.target.value)}
         placeholder="Translation"
         disabled={isSubmitting}
+        className="rounded-none border-0 border-b border-b-grey-300 text-3xl py-8"
       />
       <Button type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Submitting...' : 'Submit Translation'}

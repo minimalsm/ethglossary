@@ -9,7 +9,7 @@ import { fetchComments } from '@/lib/comments'
 import { fetchLanguages } from '@/lib/fetchLanguages'
 import Sidebar from '@/components/navigation/Sidebar'
 import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
-import { BadgeCheck } from 'lucide-react'
+import { BadgeCheck, ChevronRight } from 'lucide-react'
 
 export async function generateMetadata({ params }) {
   return {
@@ -82,6 +82,7 @@ export default async function TermPage({ params }) {
 
   const currentTermIndex = terms.findIndex(t => t.id === termId)
   const nextTerm = terms[currentTermIndex + 1]
+  const totalTerms = terms.length
 
   let hasTranslatedNextTerm = false
   if (userId && nextTerm) {
@@ -113,17 +114,18 @@ export default async function TermPage({ params }) {
         <div className="flex-1 p-4">
           <div className="flex flex-col md:flex-row md:space-x-8">
             <div className="w-full md:w-2/3">
-              <h1 className="text-2xl font-bold mb-4">
-                Translations for "{term}" in {language}
-              </h1>
-              <div className="mb-2 p-4 border rounded bg-gray-200">
+              <h1 className="text-sm mb-4">Translate</h1>
+              <p className="text-3xl mb-8">{term}</p>
+              <span className="text "></span>
+              <div className="mb-2 px-2 py-1 border bg-gray-200 text-sm">
                 An ethereum transaction requires gas
               </div>
-              <div className="mb-4 p-4 border rounded bg-gray-200">
+              <div className="mb-4 px-2 py-1 border bg-gray-200 text-sm">
                 Gas is the fee required to successfully conduct a transaction or
                 execute a contract on the Ethereum blockchain platform
               </div>
               <hr className="my-4" />
+              {/* pass to section below: Translations for "{term}" in {language} */}
               <TranslationsSection
                 initialTranslations={translationsWithVotes}
                 termId={termId}
@@ -133,27 +135,13 @@ export default async function TermPage({ params }) {
               />
               {/* Up Next Card */}
               {nextTerm && (
-                <div className="mt-8 p-4 border rounded-md bg-gray-100">
-                  <h3 className="text-md font-light uppercase">Up next</h3>
-                  <div className="flex justify-between items-center mt-4">
-                    <div className="flex items-center">
-                      <span className="text-3xl">{nextTerm.term}</span>
-                      {hasTranslatedNextTerm ? (
-                        <BadgeCheck
-                          height={28}
-                          width={28}
-                          fill="green"
-                          stroke="white"
-                        />
-                      ) : (
-                        <BadgeCheck height={28} width={28} />
-                      )}
-                    </div>
-                    <Button asChild variant="link" className="text-primary">
-                      <a href={`/${language}/${nextTerm.term}`}>Go</a>
-                    </Button>
-                  </div>
-                </div>
+                <UpNextComponent
+                  language={language}
+                  nextTerm={nextTerm.term}
+                  nextTermIndex={currentTermIndex + 1}
+                  termsLength={totalTerms}
+                  hasTranslatedNextTerm={hasTranslatedNextTerm}
+                />
               )}
             </div>
             <div className="hidden md:block w-1/3">
@@ -168,5 +156,42 @@ export default async function TermPage({ params }) {
         </div>
       </div>
     </div>
+  )
+}
+
+const UpNextComponent = ({
+  nextTerm,
+  language,
+  nextTermIndex,
+  termsLength,
+  hasTranslatedNextTerm = false,
+}) => {
+  return (
+    <a
+      href={`/${language}/${nextTerm}`}
+      className="relative flex items-center justify-between border border-black p-4 w-full shadow-md mx-auto"
+    >
+      <div className="absolute top-0 right-0 bg-black px-4">
+        <span className="text-white text-sm">
+          {nextTermIndex}/{termsLength}0
+        </span>
+      </div>
+      <div>
+        <span className="text-gray-500 text-xs uppercase tracking-widest">
+          Up Next
+        </span>
+        <div className="flex items-center space-x-2">
+          <span className="text-4xl">{nextTerm}</span>
+          {hasTranslatedNextTerm ? (
+            <BadgeCheck height={30} width={30} fill="green" stroke="white" />
+          ) : (
+            <BadgeCheck height={28} width={28} />
+          )}
+        </div>
+      </div>
+      <div className="flex items-end justify-end space-x-2">
+        <ChevronRight />
+      </div>
+    </a>
   )
 }
