@@ -4,6 +4,7 @@ import TermsModal from '@/components/modals/TermsModal'
 import CommentsModal from '@/components/modals/CommentsModal'
 import { fetchTerms } from '@/lib/fetchTerms'
 import { fetchTranslations } from '@/lib/translations'
+import { Button } from '@/components/ui/button'
 import { fetchComments } from '@/lib/comments'
 import { fetchLanguages } from '@/lib/fetchLanguages'
 import Sidebar from '@/components/navigation/Sidebar'
@@ -78,6 +79,9 @@ export default async function TermPage({ params }) {
     fetchComments(termId, languageId),
   ])
 
+  const currentTermIndex = terms.findIndex(t => t.id === termId)
+  const nextTerm = terms[currentTermIndex + 1]
+
   return (
     <div>
       <div className="bg-gray-100 flex justify-between md:hidden">
@@ -117,6 +121,18 @@ export default async function TermPage({ params }) {
                 user={user}
                 hasSubmittedTranslation={hasSubmittedTranslation}
               />
+              {/* Up Next Card */}
+              {nextTerm && (
+                <div className="mt-8 p-4 border rounded-md bg-gray-100">
+                  <h3 className="text-lg font-semibold">Up next</h3>
+                  <div className="flex justify-between items-center mt-4">
+                    <span>{nextTerm.term}</span>
+                    <Button asChild variant="link" className="text-primary">
+                      <a href={`/${language}/${nextTerm.term}`}>Go</a>
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
             <div className="hidden md:block w-1/3">
               <CommentsPanel
