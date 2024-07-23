@@ -36,7 +36,7 @@ export default function TranslationsSection({
     <div className="">
       <div className="bg-[#F7F7F7] p-4 pt-6">
         <h1 className="text-sm mb-4">Translate</h1>
-        <p className="text-[40px] mb-8">gas</p>
+        <p className="text-[40px] mb-8">{term}</p>
         <span className="text "></span>
         <p className="font-semibold">Examples</p>
 
