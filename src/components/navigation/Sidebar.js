@@ -4,8 +4,17 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { usePathname } from 'next/navigation'
 
-export default function Sidebar({ terms, className, languageCode }) {
+export default function Sidebar({
+  terms,
+  className,
+  languageCode,
+  localeLanguageData,
+  userHasTranslatedCount,
+  termsLength,
+}) {
   const pathname = usePathname()
+  const space = '\u00a0'
+  console.log('Terms length', termsLength)
 
   return (
     <div className={cn('pb-12', className)}>
@@ -14,9 +23,13 @@ export default function Sidebar({ terms, className, languageCode }) {
           <div className="flex items-top justify-between">
             <p className="font-semibold">Terms</p>
             <div className="flex items-center text-sm">
-              <span className="font-semibold">Français: </span>
-              <span> </span>
-              <span className="mr-1">4 / 50</span>
+              <span className="font-semibold">
+                {localeLanguageData.localName}:{' '}
+              </span>
+              <span>{space}</span>
+              <span className="mr-1">
+                {userHasTranslatedCount} / {termsLength}
+              </span>
               <CheckDecagramGreen />
             </div>
           </div>

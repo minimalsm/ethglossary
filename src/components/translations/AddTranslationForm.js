@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { addTranslation } from '@/lib/translations'
 import { Label } from '@/components/ui/label'
+import { getLanguageData } from '@/lib/languageUtils'
 
 export default function AddTranslationForm({
   termId,
@@ -12,9 +13,13 @@ export default function AddTranslationForm({
   onTranslationAdded,
   userId,
   children,
+  localeLanguageData,
 }) {
   const [translation, setTranslation] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const languageData = getLanguageData('fr')
+  console.log('languageData', languageData)
 
   const handleAddTranslation = async e => {
     e.preventDefault()
@@ -55,7 +60,7 @@ export default function AddTranslationForm({
   return (
     <form onSubmit={handleAddTranslation} className="space-y-4">
       <Label htmlFor="translation">
-        into <strong>Français</strong>
+        into <strong>{localeLanguageData.localName}</strong>
       </Label>
       <Input
         id="translation"

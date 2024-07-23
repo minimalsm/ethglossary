@@ -16,6 +16,7 @@ export default function TranslationsSection({
   nextTermIndex,
   termsLength,
   hasTranslatedNextTerm,
+  localeLanguageData,
 }) {
   const [translations, setTranslations] = useState(initialTranslations)
   const [submitted, setSubmitted] = useState(hasSubmittedTranslation)
@@ -53,6 +54,7 @@ export default function TranslationsSection({
           languageId={languageId}
           onTranslationAdded={handleNewTranslation}
           userId={user?.id}
+          localeLanguageData={localeLanguageData}
         >
           <UpNextComponent
             nextTerm={nextTerm}

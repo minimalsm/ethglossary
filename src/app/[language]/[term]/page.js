@@ -11,6 +11,7 @@ import { fetchTermsWithUserTranslations } from '@/lib/fetchTermsWithUserTranslat
 import Sidebar from '@/components/navigation/Sidebar'
 import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
 import { updateUserDefaultLanguage } from '@/lib/userProfile'
+import { getLanguageData } from '@/lib/languageUtils'
 
 export async function generateMetadata({ params }) {
   return {
@@ -42,6 +43,7 @@ export default async function TermPage({ params }) {
 
   const { language, term } = params
   const userId = session?.user?.id
+  const localeLanguageData = getLanguageData(language)
 
   console.log('userId:', userId, user)
 
@@ -80,6 +82,11 @@ export default async function TermPage({ params }) {
   const currentTermIndex = terms.findIndex(t => t.id === termId)
   const nextTerm = terms[currentTermIndex + 1]
   const totalTerms = terms.length
+  const userHasTranslatedCount = terms.filter(
+    term => term.user_has_translated,
+  ).length
+
+  console.log('total terms', totalTerms)
 
   let hasTranslatedNextTerm = false
   if (userId && nextTerm) {
@@ -112,6 +119,9 @@ export default async function TermPage({ params }) {
           className="hidden md:block"
           terms={terms}
           languageCode={language}
+          localeLanguageData={localeLanguageData}
+          termsLength={totalTerms}
+          userHasTranslatedCount={userHasTranslatedCount}
         />
 
         <TranslationsSection
@@ -127,6 +137,7 @@ export default async function TermPage({ params }) {
           nextTermIndex={currentTermIndex + 1}
           termsLength={totalTerms}
           hasTranslatedNextTerm={hasTranslatedNextTerm}
+          localeLanguageData={localeLanguageData}
         />
 
         <div className="hidden md:flex">
