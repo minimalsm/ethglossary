@@ -35,7 +35,7 @@ export default function TranslationsSection({
   return (
     <div className="">
       <div className="bg-[#F7F7F7] p-4 pt-6">
-        <h1 className="text-sm mb-4">Translate</h1>
+        <TranslationStatus submitted={submitted} />
         <p className="text-[40px] mb-8">{term}</p>
         <span className="text "></span>
         <p className="font-semibold">Examples</p>
@@ -102,6 +102,19 @@ export default function TranslationsSection({
       </div>
     </div>
   )
+}
+
+const TranslationStatus = ({ submitted }) => {
+  if (submitted) {
+    return (
+      <div className="inline-flex gap-1 items-center bg-green-100 rounded-full px-2 py-1 mb-4">
+        <CheckDecagramGreen />
+        <p className="text-green-800 font-bold text-sm">Translated</p>
+      </div>
+    )
+  }
+
+  return <p className="text-sm px-2 py-1 mb-4">Translate</p>
 }
 
 const UpNextComponent = ({
