@@ -18,7 +18,7 @@ export default function TermsModal({ terms, languageCode }) {
           <MenuIcon /> Terms
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="content-none my-auto fixed right-auto inset-y-0 left-0 z-50 h-full w-64 bg-background transition-transform transform translate-x-full md:translate-x-0">
+      <DrawerContent className="content-none my-auto fixed right-auto inset-y-0 left-0 z-50 h-full w-80 bg-background transition-transform transform translate-x-full md:translate-x-0">
         <DrawerHeader>
           <DrawerTitle>Terms</DrawerTitle>
         </DrawerHeader>

@@ -11,6 +11,7 @@ export default function AddTranslationForm({
   languageId,
   onTranslationAdded,
   userId,
+  children,
 }) {
   const [translation, setTranslation] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -63,11 +64,14 @@ export default function AddTranslationForm({
         onChange={e => setTranslation(e.target.value)}
         placeholder="Translation"
         disabled={isSubmitting}
-        className="rounded-none border-0 border-b border-b-grey-300 text-3xl py-8"
+        className="m-0 py-8 rounded-none border-0 border-b border-b-grey-300 bg-inherit text-[32px]"
       />
-      <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Submitting...' : 'Submit Translation'}
-      </Button>
+      <div className="flex items-center justify-between">
+        <Button type="submit" disabled={isSubmitting} className="rounded-none">
+          {isSubmitting ? 'Submitting...' : 'Suggest translation'}
+        </Button>
+        {children}
+      </div>
     </form>
   )
 }

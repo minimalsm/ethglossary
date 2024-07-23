@@ -1,12 +1,18 @@
 import '../styles/globals.css'
 import NavBar from '@/components/navigation/Navbar'
 import { fetchTerms } from '@/lib/fetchTerms'
+import { Inter } from 'next/font/google'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export default async function RootLayout({ children }) {
   const terms = await fetchTerms()
 
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <head />
       <body>
         <NavBar />

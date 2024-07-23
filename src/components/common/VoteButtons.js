@@ -110,12 +110,12 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
   //               </div>
 
   return (
-    <div className="flex items-center gap-2 justify-end">
+    <div className="flex items-center gap-2">
       <Button
         variant="ghost"
         size="icon"
         disabled={userVote === 1}
-        className={`p-2 text-gray-700 hover:bg-gray-100 ${userVote === 1 ? 'text-green-500' : ''}`}
+        className={` text-gray-700 hover:bg-gray-100 ${userVote === 1 ? 'text-green-500' : ''} h-auto`}
         onClick={() => handleVote(1)}
       >
         <ThumbsUpIcon className="w-4 h-4" />
@@ -127,7 +127,7 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
         size="icon"
         //className="text-muted-foreground hover:bg-muted"
         disabled={userVote === -1}
-        className={`p-2 text-gray-700 hover:bg-gray-100 ${userVote === -1 ? 'text-red-500' : ''}`}
+        className={`text-gray-700 hover:bg-gray-100 ${userVote === -1 ? 'text-red-500' : ''} h-auto`}
         onClick={() => handleVote(-1)}
       >
         <ThumbsDownIcon className="w-4 h-4" />
@@ -145,8 +145,6 @@ function ThumbsDownIcon(props) {
     <svg
       {...rest}
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -167,8 +165,6 @@ function ThumbsUpIcon(props) {
     <svg
       {...rest}
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
