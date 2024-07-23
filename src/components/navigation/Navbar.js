@@ -27,8 +27,10 @@ export default async function NavBar() {
   }
 
   return (
-    <header className="flex items-center justify-between h-16 px-4 bg-gray-200">
-      <h1 className="text-xl font-bold">EthGlossary</h1>
+    <header className="flex items-center justify-between h-16 bg-gray-200 px-8 md:px-12">
+      <h1 className="text-2xl font-bold">
+        ETH<span className="font-normal">g</span>
+      </h1>
       <nav className="hidden md:flex space-x-4 items-center">
         <a href="/languages" className="text-gray-700" prefetch={false}>
           Languages

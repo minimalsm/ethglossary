@@ -101,49 +101,35 @@ export default async function TermPage({ params }) {
         />
       </div>
 
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row gap-12">
         <Sidebar
-          className="hidden md:block p-4"
+          className="hidden md:block"
           terms={terms}
           languageCode={language}
         />
-        <div className="flex-1 p-4 ">
-          <div className="flex flex-col md:flex-row md:space-x-8">
-            <div className="w-full md:w-2/3">
-              {/* <h1 className="text-sm mb-4">Translate</h1>
-              <p className="text-3xl mb-8">{term}</p>
-              <span className="text "></span>
-              <div className="mb-2 px-2 py-1 border bg-gray-200 text-sm">
-                An ethereum transaction requires gas
-              </div>
-              <div className="mb-4 px-2 py-1 border bg-gray-200 text-sm">
-                Gas is the fee required to successfully conduct a transaction or
-                execute a contract on the Ethereum blockchain platform
-              </div>
-              <hr className="my-4" /> */}
-              {/* pass to section below: Translations for "{term}" in {language} */}
-              <TranslationsSection
-                initialTranslations={translationsWithVotes}
-                termId={termId}
-                languageId={languageId}
-                user={user}
-                hasSubmittedTranslation={hasSubmittedTranslation}
-                language={language}
-                nextTerm={nextTerm.term}
-                nextTermIndex={currentTermIndex + 1}
-                termsLength={totalTerms}
-                hasTranslatedNextTerm={hasTranslatedNextTerm}
-              />
-            </div>
-            <div className="hidden md:block w-1/3">
-              <CommentsPanel
-                termId={termId}
-                languageId={languageId}
-                initialComments={comments}
-                user={user}
-              />
-            </div>
-          </div>
+
+        <TranslationsSection
+          className="flex-1"
+          initialTranslations={translationsWithVotes}
+          termId={termId}
+          term={term}
+          languageId={languageId}
+          user={user}
+          hasSubmittedTranslation={hasSubmittedTranslation}
+          language={language}
+          nextTerm={nextTerm.term}
+          nextTermIndex={currentTermIndex + 1}
+          termsLength={totalTerms}
+          hasTranslatedNextTerm={hasTranslatedNextTerm}
+        />
+
+        <div className="hidden md:flex">
+          <CommentsPanel
+            termId={termId}
+            languageId={languageId}
+            initialComments={comments}
+            user={user}
+          />
         </div>
       </div>
     </div>

@@ -58,9 +58,9 @@ export default function CommentCard({ comment, userId }) {
   }
 
   return (
-    <Card className="w-full max-w-md p-4 grid gap-6">
-      <div className="flex items-start gap-4">
-        <Avatar>
+    <Card className="w-full max-w-md grid gap-2 border-none shadow-none">
+      <div id="card-header" className="flex items-center gap-2">
+        <Avatar className="h-8 w-8">
           <AvatarImage src={comment.profiles?.avatar_url} />
           <AvatarFallback>
             {comment.profiles?.display_name
@@ -68,37 +68,43 @@ export default function CommentCard({ comment, userId }) {
               : 'U'}
           </AvatarFallback>
         </Avatar>
-        <div className="space-y-2 flex-1">
-          <div className="flex items-center justify-between">
-            <h4 className="text-base font-medium">
-              {comment.profiles?.display_name || 'Anonymous'}
-            </h4>
-          </div>
-          <p className="text-muted-foreground">{comment.comment}</p>
-          <div className="flex items-center gap-2 justify-end">
-            <Button
-              variant="ghost"
-              size="icon"
-              disabled={userVote === 1}
-              className={`p-2 text-gray-700 hover:bg-gray-100 ${userVote === 1 ? 'text-green-500' : ''}`}
-              onClick={() => handleVote(1)}
-            >
-              <ThumbsUpIcon className="w-4 h-4" />
-              <span className="sr-only">Like</span>
-            </Button>
-            <span className="text-muted-foreground text-sm">{upvotes}</span>
-            <Button
-              variant="ghost"
-              size="icon"
-              disabled={userVote === -1}
-              className={`p-2 text-gray-700 hover:bg-gray-100 ${userVote === -1 ? 'text-red-500' : ''}`}
-              onClick={() => handleVote(-1)}
-            >
-              <ThumbsDownIcon className="w-4 h-4" />
-              <span className="sr-only">Dislike</span>
-            </Button>
-            <span className="text-muted-foreground text-sm">{downvotes}</span>
-          </div>
+        <div className="flex flex-col">
+          <span className="text-sm font-semibold">
+            {comment.profiles?.display_name || 'Anonymous'}
+          </span>
+          <span className="text-xs text-[#606060]">15 minutes ago</span>
+        </div>
+      </div>
+      <div id="card-body">
+        <p className="text-sm">{comment.comment}</p>
+      </div>
+      <div className="flex items-center justify-end gap-2">
+        <div className="flex items-center gap-1 m-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            disabled={userVote === 1}
+            className={` text-gray-700 hover:bg-gray-100 ${userVote === 1 ? 'text-green-500' : ''} w-auto h-auto`}
+            onClick={() => handleVote(1)}
+          >
+            <ThumbsUpIcon className="w-4 h-4" />
+            <span className="sr-only">Like</span>
+          </Button>
+          <span className="text-muted-foreground text-sm">{upvotes}</span>
+        </div>
+
+        <div className="flex items-center gap-1 m-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            disabled={userVote === -1}
+            className={` text-gray-700 hover:bg-gray-100 ${userVote === -1 ? 'text-red-500' : ''} w-auto h-auto`}
+            onClick={() => handleVote(-1)}
+          >
+            <ThumbsDownIcon className="w-4 h-4" />
+            <span className="sr-only">Dislike</span>
+          </Button>
+          <span className="text-muted-foreground text-sm">{downvotes}</span>
         </div>
       </div>
     </Card>

@@ -9,7 +9,7 @@ export default function Sidebar({ terms, className, languageCode }) {
 
   return (
     <div className={cn('pb-12', className)}>
-      <div className="space-y-4 pt-4 ">
+      <div className="space-y-4 pt-6 ">
         <div className="max-w-72 w-72">
           <div className="flex items-top justify-between">
             <p className="font-semibold">Terms</p>

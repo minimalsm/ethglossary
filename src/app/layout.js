@@ -15,9 +15,8 @@ export default async function RootLayout({ children }) {
     <html lang="en" className={inter.className}>
       <head />
       <body>
-        <NavBar />
-        <div className="flex-1">{children}</div>
-        {/* <div className="flex-1 p-4">{children}</div> */}
+        <NavBar className="px-8 md:px-8" />
+        <div className="flex-1 p-4 md:px-12 md:py-8">{children}</div>
       </body>
     </html>
   )

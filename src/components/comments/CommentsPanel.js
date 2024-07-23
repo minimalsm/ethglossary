@@ -57,11 +57,14 @@ export default function CommentsPanel({
   }
 
   return (
-    <div className="w-full">
-      <h2 className="text-lg font-semibold mb-4">Comments</h2>
+    <div className="mt-6 flex flex-col gap-4 w-72 grow-0 shrink-1 basis-72">
+      <h2 className="text-base font-semibold">Comments</h2>
       <div className="space-y-4">
         {comments.map(comment => (
-          <CommentCard comment={comment} key={comment.id} userId={user?.id} />
+          <>
+            <hr />
+            <CommentCard comment={comment} key={comment.id} userId={user?.id} />
+          </>
         ))}
       </div>
       <AddCommentForm onAddComment={handleAddComment} />
