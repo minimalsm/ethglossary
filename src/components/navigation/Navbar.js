@@ -1,7 +1,6 @@
 // components/NavBar.js
 import * as React from 'react'
 import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
-import LogoutButton from '@/components/logout-button'
 import {
   Drawer,
   DrawerTrigger,
@@ -11,6 +10,8 @@ import {
   DrawerClose,
   DrawerOverlay,
 } from '@/components/ui/drawer'
+import TranslateLink from '@/components/navigation/TranslateLink'
+import NavItems from '@/components/navigation/NavItems'
 
 export default async function NavBar() {
   const {
@@ -19,6 +20,7 @@ export default async function NavBar() {
   } = await createSupabaseServerComponentClient().auth.getSession()
   const user = session?.user
   const avatarUrl = session?.user.user_metadata.avatar_url
+  const defaultLanguage = user?.default_language
 
   if (user !== null) {
     console.log('user in navbar', user)
@@ -27,33 +29,16 @@ export default async function NavBar() {
   }
 
   return (
-    <header className="flex items-center justify-between h-16 bg-gray-200 px-8 md:px-12">
+    <header className="flex items-center justify-between h-16 px-8 md:px-12 shadow-sm">
       <h1 className="text-2xl font-bold">
         ETH<span className="font-normal">g</span>
       </h1>
-      <nav className="hidden md:flex space-x-4 items-center">
-        <a href="/languages" className="text-gray-700" prefetch={false}>
-          Languages
-        </a>
-        <a href="#" className="text-gray-700" prefetch={false}>
-          Leaderboard
-        </a>
-        {user ? (
-          <>
-            <LogoutButton />
-            {avatarUrl && (
-              <img
-                src={avatarUrl}
-                alt="User Avatar"
-                className="w-8 h-8 rounded-full"
-              />
-            )}
-          </>
-        ) : (
-          <a href="/auth/login" className="text-gray-700" prefetch={false}>
-            Login
-          </a>
-        )}
+      <nav className="hidden md:flex items-center gap-6">
+        <NavItems
+          user={user}
+          avatarUrl={avatarUrl}
+          translateLink={<TranslateLink userId={user.id} />}
+        />
       </nav>
       <Drawer direction="right">
         <DrawerTrigger asChild>
@@ -103,28 +88,7 @@ export default async function NavBar() {
             </DrawerClose>
           </DrawerHeader>
           <div className="p-4">
-            <a href="/languages" className="block text-gray-700 mb-4">
-              Languages
-            </a>
-            <a href="#" className="block text-gray-700 mb-4">
-              Leaderboard
-            </a>
-            {user ? (
-              <>
-                <LogoutButton />
-                {avatarUrl && (
-                  <img
-                    src={avatarUrl}
-                    alt="User Avatar"
-                    className="w-8 h-8 rounded-full"
-                  />
-                )}
-              </>
-            ) : (
-              <a href="/auth/login" className="block text-gray-700 mb-4">
-                Login
-              </a>
-            )}
+            {/* <NavItems user={user} avatarUrl={avatarUrl} /> */}
           </div>
         </DrawerContent>
       </Drawer>

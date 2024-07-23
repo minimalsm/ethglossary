@@ -10,6 +10,7 @@ import { fetchLanguages } from '@/lib/fetchLanguages'
 import { fetchTermsWithUserTranslations } from '@/lib/fetchTermsWithUserTranslations'
 import Sidebar from '@/components/navigation/Sidebar'
 import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
+import { updateUserDefaultLanguage } from '@/lib/userProfile'
 
 export async function generateMetadata({ params }) {
   return {
@@ -42,8 +43,8 @@ export default async function TermPage({ params }) {
   const { language, term } = params
   const userId = session?.user?.id
 
-  // todo: handle not signed in user
-  // const terms = await fetchTerms()
+  console.log('userId:', userId, user)
+
   // Fetch terms with user translation status
   const terms = await fetchTermsWithUserTranslations(userId)
   const termData = terms.find(t => t.term === term)
@@ -87,6 +88,11 @@ export default async function TermPage({ params }) {
       languageId,
       userId,
     )
+  }
+
+  // Update user's default language if necessary
+  if (user && user.default_language !== language) {
+    await updateUserDefaultLanguage(user.id, language)
   }
 
   return (
