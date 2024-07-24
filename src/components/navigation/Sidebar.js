@@ -23,20 +23,20 @@ export default function Sidebar({
         className,
       )}
     >
-      {/* <div className="flex items-top justify-between">
-            <p className="font-semibold">Terms</p>
-            <div className="flex items-center text-sm">
-              <span className="font-semibold">
-                {localeLanguageData.localName}:{' '}
-              </span>
-              <span>{space}</span>
-              <span className="mr-1">
-                {userHasTranslatedCount} / {termsLength}
-              </span>
-              <CheckDecagramGreen />
-            </div>
-          </div>
-          <hr className="mt-3 mb-5" /> */}
+      <div className="flex items-top justify-between">
+        <p className="font-semibold">Terms</p>
+        <div className="flex items-center text-sm">
+          <span className="font-semibold">
+            {localeLanguageData.localName}:{' '}
+          </span>
+          <span>{space}</span>
+          <span className="mr-1">
+            {userHasTranslatedCount} / {termsLength}
+          </span>
+          <CheckDecagramGreen />
+        </div>
+      </div>
+      <hr className="mt-3 mb-5" />
 
       {terms.map(term => {
         const termPath = `/${languageCode}/${term.term}`
