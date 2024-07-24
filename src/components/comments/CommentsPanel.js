@@ -4,6 +4,7 @@ import AddCommentForm from '@/components/comments/AddCommentForm'
 import CommentCard from '@/components/comments/CommentCard'
 import { addComment } from '@/lib/comments'
 import { fetchUserMetadata } from '@/lib/userProfile'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 export default function CommentsPanel({
   initialComments,
@@ -70,14 +71,21 @@ export default function CommentsPanel({
   return (
     <div className="mt-6 flex flex-col gap-4 grow-0 shrink-1 basis-72">
       <h2 className="text-base font-semibold">Comments ({commentCount})</h2>
-      <div className="space-y-4">
-        {comments.map(comment => (
-          <>
-            <hr />
-            <CommentCard comment={comment} key={comment.id} userId={user?.id} />
-          </>
-        ))}
-      </div>
+      {/* Todo: add a more elegant solution here */}
+      <ScrollArea className="max-h-[calc(100vh-350px)]">
+        <div className="space-y-4">
+          {comments.map(comment => (
+            <>
+              <hr />
+              <CommentCard
+                comment={comment}
+                key={comment.id}
+                userId={user?.id}
+              />
+            </>
+          ))}
+        </div>
+      </ScrollArea>
       <AddCommentForm onAddComment={handleAddComment} />
     </div>
   )
