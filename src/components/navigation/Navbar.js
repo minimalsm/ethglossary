@@ -37,7 +37,7 @@ export default async function NavBar() {
         <NavItems
           user={user}
           avatarUrl={avatarUrl}
-          translateLink={<TranslateLink userId={user.id} />}
+          translateLink={<TranslateLink userId={user?.id} />}
         />
       </nav>
       <Drawer direction="right">
