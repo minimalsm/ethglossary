@@ -8,7 +8,6 @@ export async function GET(request) {
   const next = searchParams.get('next') || '/'
 
   if (code) {
-    // console.log('Code passed:', code)
     const cookieStore = cookies()
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -20,7 +19,6 @@ export async function GET(request) {
           },
           setAll(cookies) {
             cookies.forEach(({ name, value, options }) => {
-              // console.log(`Setting cookie: ${name} = ${value}`, options)
               cookieStore.set(name, value, {
                 ...options,
                 httpOnly: true,
@@ -34,15 +32,32 @@ export async function GET(request) {
     )
 
     const { data, error } = await supabase.auth.exchangeCodeForSession(code)
-    // console.log('Data:', data, 'Error:', error)
 
-    if (!error) {
-      // console.log(`Redirecting to: ${origin}${next}`)
+    console.log(data.session)
+
+    // when a user logs in, update their profile in supabase
+    if (!error && data?.user) {
+      const { user } = data
+      const discordUsername = user.user_metadata?.full_name
+
+      const { error: profileError } = await supabase.from('profiles').upsert({
+        id: user.id,
+        user_id: user.id,
+        username: user.email,
+        display_name: discordUsername,
+        avatar_url: user.user_metadata?.avatar_url,
+      })
+
+      if (profileError) {
+        console.error('Error creating/updating profile:', profileError)
+      } else {
+        console.log('Profile created/updated successfully')
+      }
+
       return NextResponse.redirect(`${origin}${next}`)
     } else {
-      // console.error('Error exchanging code for session:', error)
+      console.error('Error exchanging code for session:', error)
     }
   }
-  // console.log(`Redirecting to: ${origin}/auth/error`)
   return NextResponse.redirect(`${origin}/auth/error`)
 }

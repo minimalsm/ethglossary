@@ -1,7 +1,6 @@
 'use server'
 
 import { redirect } from 'next/navigation'
-
 import { createClient } from '@/lib/supabase/server'
 
 export async function oAuthSignIn(provider) {
@@ -19,7 +18,7 @@ export async function oAuthSignIn(provider) {
   })
 
   if (error) {
-    redirect('/login?message=Could not authenticate user')
+    return redirect('/login?message=Could not authenticate user')
   }
 
   return redirect(data.url)

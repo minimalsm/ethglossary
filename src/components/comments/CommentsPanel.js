@@ -3,6 +3,7 @@ import { useState } from 'react'
 import AddCommentForm from '@/components/comments/AddCommentForm'
 import CommentCard from '@/components/comments/CommentCard'
 import { addComment } from '@/lib/comments'
+import { fetchUserMetadata } from '@/lib/userProfile'
 
 export default function CommentsPanel({
   initialComments,
@@ -22,6 +23,7 @@ export default function CommentsPanel({
     // Optimistically update the UI
     const optimisticComment = {
       id: Date.now(), // Temporary ID
+      key: Date.now(),
       term_id: termId,
       language_id: languageId,
       user_id: user.id,
@@ -29,19 +31,27 @@ export default function CommentsPanel({
       upvotes: 0,
       downvotes: 0,
       profiles: {
-        display_name: user.user_metadata.name,
-        avatar_url: user.user_metadata.avatar_url,
+        display_name: user.display_name,
+        avatar_url: user.user_metadata?.avatar_url || user.avatar_url,
       },
     }
     setComments(prevComments => [...prevComments, optimisticComment])
 
     try {
-      const newCommentData = await addComment(
+      const newComment = await addComment(
         termId,
         languageId,
         user.id,
         commentText,
       )
+
+      const userMetadata = await fetchUserMetadata(newComment.user_id)
+
+      const newCommentData = {
+        ...newComment,
+        profiles: userMetadata,
+      }
+
       // Replace temporary comment with actual comment from the server
       setComments(prevComments =>
         prevComments.map(comment =>

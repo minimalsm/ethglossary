@@ -24,3 +24,17 @@ export async function updateUserDefaultLanguage(userId, languageCode) {
     throw new Error(`Error updating default language: ${error.message}`)
   }
 }
+
+export async function fetchUserMetadata(userId) {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('display_name, avatar_url')
+    .eq('id', userId)
+    .single()
+
+  if (error) {
+    throw new Error(`Error fetching user metadata: ${error.message}`)
+  }
+
+  return data
+}

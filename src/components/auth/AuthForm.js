@@ -8,6 +8,10 @@ export default function OAuthButtons() {
       name: 'google',
       displayName: 'Google',
     },
+    {
+      name: 'discord',
+      displayName: 'Discord',
+    },
   ]
 
   return (
