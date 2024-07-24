@@ -17,10 +17,13 @@ export default function Sidebar({
   console.log('Terms length', termsLength)
 
   return (
-    <div className={cn('pb-12', className)}>
-      <div className="space-y-4 pt-6 ">
-        <div className="max-w-72 w-72">
-          <div className="flex items-top justify-between">
+    <div
+      className={cn(
+        'pb-12 grow-0 shrink-1 basis-72 space-y-1 flex flex-col',
+        className,
+      )}
+    >
+      {/* <div className="flex items-top justify-between">
             <p className="font-semibold">Terms</p>
             <div className="flex items-center text-sm">
               <span className="font-semibold">
@@ -33,39 +36,36 @@ export default function Sidebar({
               <CheckDecagramGreen />
             </div>
           </div>
-          <hr className="mt-3 mb-5" />
-          <div className="space-y-1 flex flex-col w-full">
-            {terms.map(term => {
-              const termPath = `/${languageCode}/${term.term}`
-              const isActive = pathname === termPath
+          <hr className="mt-3 mb-5" /> */}
 
-              return (
-                <Button
-                  asChild
-                  variant={isActive ? 'secondary' : 'ghost'}
-                  className={cn('w-full justify-start px-3 rounded-none', {
-                    'active-class': isActive,
-                  })}
-                  key={term.term}
-                >
-                  <a
-                    href={termPath}
-                    className={cn(
-                      'flex gap-1 font-normal',
-                      term.user_has_translated ? 'bg-primaryTheme' : 'bg-white',
-                    )}
-                  >
-                    <TermItem
-                      user_has_translated={term.user_has_translated}
-                      term={term.term}
-                    />
-                  </a>
-                </Button>
-              )
+      {terms.map(term => {
+        const termPath = `/${languageCode}/${term.term}`
+        const isActive = pathname === termPath
+
+        return (
+          <Button
+            asChild
+            variant={isActive ? 'secondary' : 'ghost'}
+            className={cn('w-full justify-start px-3 rounded-none', {
+              'active-class': isActive,
             })}
-          </div>
-        </div>
-      </div>
+            key={term.term}
+          >
+            <a
+              href={termPath}
+              className={cn(
+                'flex gap-1 font-normal',
+                term.user_has_translated ? 'bg-primaryTheme' : 'bg-white',
+              )}
+            >
+              <TermItem
+                user_has_translated={term.user_has_translated}
+                term={term.term}
+              />
+            </a>
+          </Button>
+        )
+      })}
     </div>
   )
 }

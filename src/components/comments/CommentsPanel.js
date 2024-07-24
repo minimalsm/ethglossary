@@ -58,7 +58,7 @@ export default function CommentsPanel({
   }
 
   return (
-    <div className="mt-6 flex flex-col gap-4 w-72 grow-0 shrink-1 basis-72">
+    <div className="mt-6 flex flex-col gap-4 grow-0 shrink-1 basis-72">
       <h2 className="text-base font-semibold">Comments ({commentCount})</h2>
       <div className="space-y-4">
         {comments.map(comment => (

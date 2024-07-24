@@ -34,7 +34,7 @@ export default function TranslationsSection({
   }
 
   return (
-    <div className="">
+    <div className="grow-1 shrink-1 basis-auto">
       <div className="bg-[#F7F7F7] p-4 pt-6">
         <TranslationStatus submitted={submitted} />
         <p className="text-[40px] mb-8">{term}</p>

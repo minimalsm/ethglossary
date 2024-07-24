@@ -103,7 +103,7 @@ export default async function TermPage({ params }) {
   }
 
   return (
-    <div>
+    <div className="">
       <div className="bg-gray-100 flex justify-between md:hidden">
         <TermsModal terms={terms} languageCode={language} />
         <CommentsModal
@@ -116,7 +116,7 @@ export default async function TermPage({ params }) {
 
       <div className="flex flex-col md:flex-row gap-12">
         <Sidebar
-          className="hidden md:block"
+          className="hidden md:flex"
           terms={terms}
           languageCode={language}
           localeLanguageData={localeLanguageData}
@@ -125,7 +125,6 @@ export default async function TermPage({ params }) {
         />
 
         <TranslationsSection
-          className="flex-1"
           initialTranslations={translationsWithVotes}
           termId={termId}
           term={term}
