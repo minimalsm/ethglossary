@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Card } from '@/components/ui/card'
 import { voteOnComment, hasUserVoted } from '@/lib/comment_votes'
+import { formatDistanceToNow } from 'date-fns'
 
 export default function CommentCard({ comment, userId }) {
   const [upvotes, setUpvotes] = useState(comment.upvotes || 0)
@@ -72,7 +73,12 @@ export default function CommentCard({ comment, userId }) {
           <span className="text-sm font-semibold">
             {comment.profiles?.display_name || 'Anonymous'}
           </span>
-          <span className="text-xs text-[#606060]">15 minutes ago</span>
+          {/* Todo: extract this out and refactor lazy approach */}
+          <span className="text-xs text-[#606060]">
+            {formatDistanceToNow(new Date(comment.created_at || Date.now()), {
+              addSuffix: true,
+            })}
+          </span>
         </div>
       </div>
       <div id="card-body">
