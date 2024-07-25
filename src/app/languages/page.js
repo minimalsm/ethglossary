@@ -31,27 +31,24 @@ export default async function LanguagesPage() {
     getLanguageData(defaultLanguage)?.localName || 'Pick a language'
 
   return (
-    <>
-      <TranslatingNowBanner defaultLocalLanguage={defaultLocalLanguage} />
-      <div className="max-w-screen-sm mx-auto p-4 pt-0 mt-8">
-        <h1 className="text-2xl font-bold mb-4">Languages</h1>
-        <div className="flex flex-col gap-3">
-          <p>
-            Join our community of translators making the Ethereum glossary
-            accessible to everyone.
-          </p>
-          <p>
-            Select a language below to translate the glossary into your
-            preferred language.
-          </p>
-          <p>
-            <span className="font-semibold">Don’t see your language?</span>{' '}
-            Contact us and let us know!
-          </p>
-        </div>
-        <LanguagesFilterAndList languages={languagesWithLocalAndCountries} />
+    <div className="max-w-screen-sm mx-auto p-4 pt-0 mt-8">
+      <h1 className="text-2xl font-bold mb-4">Languages</h1>
+      <div className="flex flex-col gap-3">
+        <p>
+          Join our community of translators making the Ethereum glossary
+          accessible to everyone.
+        </p>
+        <p>
+          Select a language below to translate the glossary into your preferred
+          language.
+        </p>
+        <p>
+          <span className="font-semibold">Don’t see your language?</span>{' '}
+          Contact us and let us know!
+        </p>
       </div>
-    </>
+      <LanguagesFilterAndList languages={languagesWithLocalAndCountries} />
+    </div>
   )
 }
 

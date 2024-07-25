@@ -28,7 +28,7 @@ export async function updateUserDefaultLanguage(userId, languageCode) {
 export async function fetchUserMetadata(userId) {
   const { data, error } = await supabase
     .from('profiles')
-    .select('display_name, avatar_url')
+    .select('display_name, avatar_url, default_language')
     .eq('id', userId)
     .single()
 
