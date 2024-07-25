@@ -1,19 +1,23 @@
 {
     "fr": {
       "name": "French",
-      "localName": "Français"
+      "localName": "Français",
+      "countries": ["Belgium", "France", "Luxembourg", "Monaco", "Switzerland"]
     },
     "de": {
       "name": "German",
-      "localName": "Deutsch"
+      "localName": "Deutsch",
+      "countries": ["Austria", "Germany", "Liechtenstein", "Luxembourg", "Switzerland"]
     },
     "ar": {
       "name": "Arabic",
-      "localName": "العربية"
+      "localName": "العربية",
+      "countries": ["Algeria", "Bahrain", "Egypt", "Iraq", "Jordan", "Kuwait", "Lebanon", "Morocco", "Oman", "Qatar", "Saudi Arabia", "Syria", "Tunisia", "United Arab Emirates", "Yemen"]
     },
     "es": {
       "name": "Spanish",
-      "localName": "Español"
+      "localName": "Español",
+      "countries": ["Argentina", "Bolivia", "Chile", "Colombia", "Ecuador", "Paraguay", "Peru", "Uruguay", "Venezuela"]
     }
   }
   
