@@ -16,8 +16,7 @@ export default async function RootLayout({ children }) {
       <head />
       <body>
         <NavBar className="" />
-        {/* <div className="flex-1 p-4 md:px-12 md:py-8">{children}</div> */}
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 mx-4 md:mx-12 md:my-8">{children}</div>
       </body>
     </html>
   )
