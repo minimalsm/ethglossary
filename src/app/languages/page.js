@@ -6,8 +6,9 @@ import { getUserProfile } from '@/lib/userProfile'
 
 export default async function LanguagesPage() {
   const languages = await fetchLanguagesWithStats()
-  const { data: user } =
-    await createSupabaseServerComponentClient().auth.getUser()
+  const {
+    data: { user },
+  } = await createSupabaseServerComponentClient().auth.getUser()
   const userId = user?.id
 
   let defaultLanguage = null
@@ -17,17 +18,12 @@ export default async function LanguagesPage() {
     defaultLanguage = userProfile?.default_language || null
   }
 
-  const defaultLocalLanguage = getLanguageData(defaultLanguage)?.localName || ''
+  const defaultLocalLanguage =
+    getLanguageData(defaultLanguage)?.localName || 'Pick a language'
 
   return (
     <>
-      <div className="flex items-center justify-center gap-1 py-4 bg-gray-100">
-        <GlobeIcon />
-        <p className="text-sm">
-          Translating now:{' '}
-          <span className="font-semibold">{defaultLocalLanguage}</span>
-        </p>
-      </div>
+      <TranslatingNowBanner defaultLocalLanguage={defaultLocalLanguage} />
       <div className="max-w-screen-sm mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">Languages</h1>
         <div className="flex flex-col gap-3">
@@ -52,6 +48,18 @@ export default async function LanguagesPage() {
         </div>
       </div>
     </>
+  )
+}
+
+const TranslatingNowBanner = ({ defaultLocalLanguage }) => {
+  return (
+    <div className="flex items-center justify-center gap-1 py-4 bg-gray-100">
+      <GlobeIcon />
+      <p className="text-sm">
+        Translating now:{' '}
+        <span className="font-semibold">{defaultLocalLanguage}</span>
+      </p>
+    </div>
   )
 }
 
