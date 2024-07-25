@@ -6,34 +6,29 @@ import { getUserProfile } from '@/lib/userProfile'
 
 export default async function LanguagesPage() {
   const languages = await fetchLanguagesWithStats()
-  const {
-    data: { user },
-    error,
-  } = await createSupabaseServerComponentClient().auth.getUser()
+  const { data: user } =
+    await createSupabaseServerComponentClient().auth.getUser()
   const userId = user?.id
 
   let defaultLanguage = null
 
   if (userId) {
-    console.log('getting user id')
-    const profile = await getUserProfile(userId)
-    if (profile?.default_language) {
-      defaultLanguage = profile.default_language
-    }
+    const userProfile = await getUserProfile(userId)
+    defaultLanguage = userProfile?.default_language || null
   }
 
-  const defaultLocalLanguage = getLanguageData(defaultLanguage).localName
+  const defaultLocalLanguage = getLanguageData(defaultLanguage)?.localName || ''
 
   return (
     <>
-      <div className="flex items-center justify-center gap-1 p-4 bg-[#F7F7F7]">
+      <div className="flex items-center justify-center gap-1 py-4 bg-gray-100">
         <GlobeIcon />
-        <p>
+        <p className="text-sm">
           Translating now:{' '}
-          <span className="text-sm font-semibold">{defaultLocalLanguage}</span>
+          <span className="font-semibold">{defaultLocalLanguage}</span>
         </p>
       </div>
-      <div className="p-4 max-w-screen-sm mx-auto">
+      <div className="max-w-screen-sm mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">Languages</h1>
         <div className="flex flex-col gap-3">
           <p>
