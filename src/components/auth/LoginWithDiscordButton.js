@@ -15,5 +15,9 @@
 import { discordSignIn } from '../../app/login/actions'
 
 export default function LoginWithDiscordButton() {
-  return <button onClick={async () => discordSignIn()}>Logout</button>
+  return (
+    <button onClick={async () => discordSignIn()}>
+      Login w/Discord server action
+    </button>
+  )
 }
