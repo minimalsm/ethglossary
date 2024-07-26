@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { oAuthSignIn } from '../../app/login/actions'
 import { createClient } from '@/lib/supabase/client'
+import LoginWithDiscordButton from './LoginWithDiscordButton'
 
 export default function OAuthButtons(props) {
   const supabase = createClient()
@@ -29,7 +30,8 @@ export default function OAuthButtons(props) {
 
   return (
     <>
-      {oAuthProviders.map(provider => (
+      <LoginWithDiscordButton />
+      {/* {oAuthProviders.map(provider => (
         <Button
           key={provider.name}
           className="w-full flex items-center justify-center gap-2"
@@ -38,7 +40,7 @@ export default function OAuthButtons(props) {
         >
           Login with {provider.displayName}
         </Button>
-      ))}
+      ))} */}
     </>
   )
 }

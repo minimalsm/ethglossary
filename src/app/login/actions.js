@@ -2,6 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { getURL } from '../../utils/getUrl'
 
 export async function oAuthSignIn(provider) {
   if (!provider) {
@@ -9,7 +10,7 @@ export async function oAuthSignIn(provider) {
   }
 
   const supabase = createClient()
-  const redirectUrl = '/auth/callback'
+  const redirectUrl = getUrl('/auth/callback')
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
@@ -18,7 +19,25 @@ export async function oAuthSignIn(provider) {
   })
 
   if (error) {
-    return redirect('/login?message=Could not authenticate user')
+    return redirect('/auth/login?message=Could not authenticate user')
+  }
+
+  return redirect(data.url)
+}
+
+export async function discordSignIn() {
+  const supabase = createClient()
+  const redirectUrl = getURL('/auth/callback')
+  console.log('redirect', redirectUrl)
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'discord',
+    options: {
+      redirectTo: redirectUrl,
+    },
+  })
+
+  if (error) {
+    return redirect('/auth/login?message=Could not authenticate user')
   }
 
   return redirect(data.url)
