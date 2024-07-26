@@ -99,7 +99,9 @@ const UserLeaderboardTab = ({ value, children }) => {
   console.log('value', value)
   return (
     <TabsTrigger
-      className="text-[13px] bg-white text-black data-[state='active']:bg-black data-[state='active']:text-white rounded-full p-0 py-2 px-3"
+      // className="text-[13px] bg-white text-black data-[state='active']:bg-[black] data-[state='active']:text-white rounded-full p-0 py-2 px-3"
+      // Hardcoding black/white for active state as it was causing a bug where the default styling woudl show
+      className="text-[13px] bg-white text-black data-[state='active']:bg-[#000] data-[state='active']:text-[#fff] rounded-full p-0 py-2 px-3"
       value={value}
     >
       {children}
