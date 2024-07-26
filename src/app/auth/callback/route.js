@@ -1,39 +1,15 @@
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
-import { createServerClient } from '@supabase/ssr'
+import { createClient } from './../../../lib/supabase/server'
 
 export async function GET(request) {
-  const { searchParams, origin } = new URL(request.url)
-  const code = searchParams.get('code')
-  const next = searchParams.get('next') || '/'
+  const requestUrl = new URL(request.url)
+  const code = requestUrl.searchParams.get('code')
+  const next = requestUrl.searchParams.get('next') || '/'
 
   if (code) {
-    const cookieStore = cookies()
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll()
-          },
-          setAll(cookies) {
-            cookies.forEach(({ name, value, options }) => {
-              cookieStore.set(name, value, {
-                ...options,
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'lax',
-              })
-            })
-          },
-        },
-      },
-    )
-
+    const supabase = createClient()
     const { data, error } = await supabase.auth.exchangeCodeForSession(code)
-
-    console.log(data.session)
 
     // when a user logs in, update their profile in supabase
     if (!error && data?.user) {
@@ -54,10 +30,10 @@ export async function GET(request) {
         console.log('Profile created/updated successfully')
       }
 
-      return NextResponse.redirect(`${origin}${next}`)
+      return NextResponse.redirect(requestUrl.origin)
     } else {
       console.error('Error exchanging code for session:', error)
     }
+    return NextResponse.redirect(`${origin}/auth/error`)
   }
-  return NextResponse.redirect(`${origin}/auth/error`)
 }
