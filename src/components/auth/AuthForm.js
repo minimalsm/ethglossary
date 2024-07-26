@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 // import { oAuthSignIn } from '../../app/login/actions'
 import { createClient } from '@/lib/supabase/server'
-import LoginWithDiscordButton from './LoginWithDiscordButton'
+// import LoginWithDiscordButton from './LoginWithDiscordButton'
 // import LoginWithGoogleButton from './LoginWithGoogleButton'
 // import { getURL } from '../../utils/getUrl'
 import { redirect } from 'next/navigation'
@@ -28,7 +28,6 @@ export default async function AuthForm(props) {
 
   return (
     <div>
-      <LoginWithDiscordButton />
       <form className="w-full" action={signIn}>
         <Button type="submit">Sign in with Discord</Button>
       </form>
