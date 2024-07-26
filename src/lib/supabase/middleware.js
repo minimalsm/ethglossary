@@ -1,12 +1,9 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse } from 'next/server'
 
-export const createClient = request => {
-  // Create an initial unmodified response
-  let response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
+export async function updateSession(request) {
+  let supabaseResponse = NextResponse.next({
+    request,
   })
 
   const supabase = createServerClient(
@@ -14,66 +11,55 @@ export const createClient = request => {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
-        get(name) {
-          return request.cookies.get(name)?.value
+        getAll() {
+          return request.cookies.getAll()
         },
-        set(name, value, options = {}) {
-          // Set default options for testing (relaxed security)
-          const defaultOptions = {
-            httpOnly: false,
-            secure: false,
-            sameSite: 'Lax',
-            path: '/',
-            ...options,
-          }
-          // Update cookies on the request
-          request.cookies.set({
-            name,
-            value,
-            ...defaultOptions,
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) =>
+            request.cookies.set(name, value),
+          )
+          supabaseResponse = NextResponse.next({
+            request,
           })
-          // Update the response to reflect the cookie changes
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          })
-          response.cookies.set({
-            name,
-            value,
-            ...defaultOptions,
-          })
-        },
-        remove(name, options = {}) {
-          // Set default options for testing (relaxed security)
-          const defaultOptions = {
-            httpOnly: false,
-            secure: false,
-            sameSite: 'Lax',
-            path: '/',
-            ...options,
-          }
-          // Update cookies on the request
-          request.cookies.set({
-            name,
-            value: '',
-            ...defaultOptions,
-          })
-          // Update the response to reflect the cookie changes
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          })
-          response.cookies.set({
-            name,
-            value: '',
-            ...defaultOptions,
-          })
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options),
+          )
         },
       },
     },
   )
 
-  return { supabase, response }
+  // IMPORTANT: Avoid writing any logic between createServerClient and
+  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
+  // issues with users being randomly logged out.
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (
+    !user &&
+    !request.nextUrl.pathname.startsWith('/login') &&
+    !request.nextUrl.pathname.startsWith('/auth')
+  ) {
+    // no user, potentially respond by redirecting the user to the login page
+    const url = request.nextUrl.clone()
+    url.pathname = '/auth/login'
+    return NextResponse.redirect(url)
+  }
+
+  // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
+  // creating a new response object with NextResponse.next() make sure to:
+  // 1. Pass the request in it, like so:
+  //    const myNewResponse = NextResponse.next({ request })
+  // 2. Copy over the cookies, like so:
+  //    myNewResponse.cookies.setAll(supabaseResponse.cookies.getAll())
+  // 3. Change the myNewResponse object to fit your needs, but avoid changing
+  //    the cookies!
+  // 4. Finally:
+  //    return myNewResponse
+  // If this is not done, you may be causing the browser and server to go out
+  // of sync and terminate the user's session prematurely!
+
+  return supabaseResponse
 }
