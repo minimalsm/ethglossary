@@ -45,6 +45,26 @@ export async function discordSignIn() {
   return redirect(data.url)
 }
 
+export async function googleSignIn() {
+  const supabase = createClient()
+  const redirectUrl = getURL('/auth/callback')
+  console.log('redirect', redirectUrl)
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: redirectUrl,
+    },
+  })
+
+  console.log('data', data)
+
+  if (error) {
+    return redirect('/leaderboard')
+  }
+
+  return redirect(data.url)
+}
+
 export async function signOut() {
   const supabase = createClient()
   await supabase.auth.signOut()
