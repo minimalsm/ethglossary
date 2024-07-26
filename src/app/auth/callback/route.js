@@ -1,11 +1,13 @@
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
+import { getURL } from '@/utils/getUrl'
 
 export async function GET(request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
   const next = searchParams.get('next') || '/'
+  const siteURL = getURL()
 
   if (code) {
     const cookieStore = cookies()
@@ -54,7 +56,7 @@ export async function GET(request) {
         console.log('Profile created/updated successfully')
       }
 
-      return NextResponse.redirect(`${origin}${next}`)
+      return NextResponse.redirect(`${siteURL}${next}`)
     } else {
       console.error('Error exchanging code for session:', error)
     }
