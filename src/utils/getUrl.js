@@ -23,5 +23,5 @@
 // }
 
 export const getURL = (path = '') => {
-  return `${process.env.NEXT_PUBLIC_SITE_URL}${path}`
+  return `${process.env.NEXT_PUBLIC_VERCEL_URL}${path}`
 }
