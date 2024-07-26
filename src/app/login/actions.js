@@ -27,7 +27,7 @@ export async function oAuthSignIn(provider) {
 
 export async function discordSignIn() {
   const supabase = createClient()
-  const redirectUrl = getURL('/auth/callback')
+  const redirectUrl = await getURL('/auth/callback')
   console.log('redirect', redirectUrl)
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'discord',
@@ -42,12 +42,12 @@ export async function discordSignIn() {
     return redirect('/leaderboard')
   }
 
-  return redirect(redirectUrl)
+  return redirect(data.url)
 }
 
 export async function googleSignIn() {
   const supabase = createClient()
-  const redirectUrl = getURL('/auth/callback')
+  const redirectUrl = await getURL('/auth/callback')
   const redirectUrl2 = 'https://google.com'
   console.log('redirect', redirectUrl)
   const { data, error } = await supabase.auth.signInWithOAuth({
@@ -63,7 +63,7 @@ export async function googleSignIn() {
     return redirect('/leaderboard')
   }
 
-  return redirect(redirectUrl)
+  return redirect(data.url)
 }
 
 export async function signOut() {
