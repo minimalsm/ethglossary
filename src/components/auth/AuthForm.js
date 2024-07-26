@@ -1,49 +1,34 @@
-'use client'
 import { Button } from '@/components/ui/button'
-import { oAuthSignIn } from '../../app/login/actions'
-import { createClient } from '@/lib/supabase/client'
-import LoginWithDiscordButton from './LoginWithDiscordButton'
-import LoginWithGoogleButton from './LoginWithGoogleButton'
-import { getURL } from 'next/dist/shared/lib/utils'
+// import { oAuthSignIn } from '../../app/login/actions'
+import { createClient } from '@/lib/supabase/server'
+// import LoginWithDiscordButton from './LoginWithDiscordButton'
+// import LoginWithGoogleButton from './LoginWithGoogleButton'
+// import { getURL } from '../../utils/getUrl'
+import { redirect } from 'next/navigation'
+import { headers } from 'next/headers'
 
-export default function OAuthButtons(props) {
-  const supabase = createClient()
-  const oAuthProviders = [
-    {
-      name: 'google',
-      displayName: 'Google',
-    },
-    {
-      name: 'discord',
-      displayName: 'Discord',
-    },
-  ]
-
-  const path = getURL('/auth/callback')
-
-  const handleLogin = async ({ provider }) => {
-    await supabase.auth.signInWithOAuth({
-      provider: provider.name,
+export default async function AuthForm(props) {
+  const signIn = async () => {
+    'use server'
+    const supabase = createClient()
+    const origin = headers().get('origin')
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'discord',
       options: {
-        redirectTo: `${path}k?next=${props.nextUrl || ''}`,
+        redirectTo: `${origin}/auth/callback`,
       },
     })
+
+    if (error) {
+      console.log(error)
+    } else {
+      return redirect(data.url)
+    }
   }
 
   return (
-    <>
-      <LoginWithGoogleButton />
-      <LoginWithDiscordButton />
-      {oAuthProviders.map(provider => (
-        <Button
-          key={provider.name}
-          className="w-full flex items-center justify-center gap-2"
-          variant="outline"
-          onClick={handleLogin}
-        >
-          Login with {provider.displayName}
-        </Button>
-      ))}
-    </>
+    <form className="w-full" action={signIn}>
+      <Button type="submit">Sign in with Discord</Button>
+    </form>
   )
 }
