@@ -95,6 +95,18 @@ const UserLeaderboardTable = ({ data }) => {
   )
 }
 
+const UserLeaderboardTab = ({ value, children }) => {
+  console.log('value', value)
+  return (
+    <TabsTrigger
+      className="text-[13px] bg-white text-black data-[state='active']:bg-black data-[state='active']:text-white rounded-full p-0 py-2 px-3"
+      value={value}
+    >
+      {children}
+    </TabsTrigger>
+  )
+}
+
 // UserLeaderboardTabs Component
 const UserLeaderboardTabs = ({
   orderedByTotal,
@@ -104,11 +116,13 @@ const UserLeaderboardTabs = ({
 }) => {
   return (
     <Tabs defaultValue="total" className="w-full">
-      <TabsList className="flex gap-4">
-        <TabsTrigger value="total">Total</TabsTrigger>
-        <TabsTrigger value="translations">Translations</TabsTrigger>
-        <TabsTrigger value="comments">Comments</TabsTrigger>
-        <TabsTrigger value="votes">Votes</TabsTrigger>
+      <TabsList className="flex gap-2 w-full max-[350px]:h-auto max-[350px]:flex-wrap mb-4 bg-white">
+        <UserLeaderboardTab value="total">Overall</UserLeaderboardTab>
+        <UserLeaderboardTab value="translations">
+          Translations
+        </UserLeaderboardTab>
+        <UserLeaderboardTab value="comments">Comments</UserLeaderboardTab>
+        <UserLeaderboardTab value="votes">Votes</UserLeaderboardTab>
       </TabsList>
 
       <TabsContent value="total">
@@ -127,6 +141,17 @@ const UserLeaderboardTabs = ({
   )
 }
 
+const PageLeaderboardTabTrigger = ({ value, children }) => {
+  return (
+    <TabsTrigger
+      value={value}
+      className="basis-[120px] text-base rounded-none text-black font-normal data-[state='active']:font-semibold data-[state='active']:text-black data-[state='active']:bg-none data-[state='active']:shadow-none data-[state='active']:border-b-[3px] data-[state='active']:border-black"
+    >
+      {children}
+    </TabsTrigger>
+  )
+}
+
 const PageLeaderboardTabs = ({
   orderedByTotal,
   orderedByTranslations,
@@ -135,9 +160,13 @@ const PageLeaderboardTabs = ({
 }) => {
   return (
     <Tabs defaultValue="users" className="w-full">
-      <TabsList className="flex gap-4">
-        <TabsTrigger value="users">Users</TabsTrigger>
-        <TabsTrigger value="languages">Languages</TabsTrigger>
+      <TabsList className="flex justify-evenly bg-white">
+        <PageLeaderboardTabTrigger value="users">
+          Users
+        </PageLeaderboardTabTrigger>
+        <PageLeaderboardTabTrigger value="languages">
+          Languages
+        </PageLeaderboardTabTrigger>
       </TabsList>
 
       <TabsContent value="users">
