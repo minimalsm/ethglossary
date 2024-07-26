@@ -36,6 +36,8 @@ export async function discordSignIn() {
     },
   })
 
+  console.log('data', data)
+
   if (error) {
     return redirect('/auth/login?message=Could not authenticate user')
   }
