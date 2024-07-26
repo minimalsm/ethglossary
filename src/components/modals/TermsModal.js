@@ -9,22 +9,35 @@ import {
 } from '@/components/ui/drawer'
 import { Button } from '@/components/ui/button'
 import Sidebar from '@/components/navigation/Sidebar'
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
 
 export default function TermsModal({ terms, languageCode }) {
   return (
-    <Drawer direction="left" className="content-none">
-      <DrawerTrigger asChild>
+    <Sheet direction="left" className="content-none">
+      <SheetTrigger asChild>
         <Button variant="ghost">
           <MenuIcon /> Terms
         </Button>
-      </DrawerTrigger>
-      <DrawerContent className="content-none my-auto fixed right-auto inset-y-0 left-0 z-50 h-full w-80 bg-background transition-transform transform translate-x-full md:translate-x-0">
-        <DrawerHeader>
-          <DrawerTitle>Terms</DrawerTitle>
-        </DrawerHeader>
+      </SheetTrigger>
+      <SheetContent
+        side="left"
+        // className="content-none my-auto fixed right-auto inset-y-0 left-0 z-50 h-full w-80 bg-background transition-transform transform translate-x-full md:translate-x-0"
+      >
+        <SheetHeader>
+          <SheetTitle>EthGlossary</SheetTitle>
+        </SheetHeader>
         <Sidebar terms={terms} languageCode={languageCode} />
-      </DrawerContent>
-    </Drawer>
+      </SheetContent>
+    </Sheet>
   )
 }
 

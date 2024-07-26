@@ -27,7 +27,7 @@ export default function Sidebar({
         <p className="font-semibold">Terms</p>
         <div className="flex items-center text-sm">
           <span className="font-semibold">
-            {localeLanguageData.localName}:{' '}
+            {localeLanguageData?.localName}:{' '}
           </span>
           <span>{space}</span>
           <span className="mr-1">

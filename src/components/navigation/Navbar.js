@@ -7,6 +7,16 @@ import {
   DrawerTitle,
   DrawerClose,
 } from '@/components/ui/drawer'
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
 import TranslateLink from '@/components/navigation/TranslateLink'
 import NavItems from '@/components/navigation/NavItems'
 import TranslatingNowBanner from '@/components/navigation/TranslatingNowBanner'
@@ -49,8 +59,8 @@ export default async function NavBar() {
             translateLink={<TranslateLink userId={user?.id} />}
           />
         </nav>
-        <Drawer direction="right">
-          <DrawerTrigger asChild>
+        <Sheet>
+          <SheetTrigger asChild>
             <button
               className="p-2 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white md:hidden"
               aria-label="Open menu"
@@ -70,11 +80,11 @@ export default async function NavBar() {
                 />
               </svg>
             </button>
-          </DrawerTrigger>
-          <DrawerContent className="my-auto fixed left-auto inset-y-0 right-0 z-50 h-full w-64 bg-background transition-transform transform translate-x-full md:translate-x-0">
-            <DrawerHeader>
-              <DrawerTitle>Menu</DrawerTitle>
-              <DrawerClose>
+          </SheetTrigger>
+          <SheetContent className="w-full">
+            <SheetHeader>
+              <SheetTitle>Menu</SheetTitle>
+              <SheetClose>
                 <button
                   className="absolute top-4 right-4 p-2 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                   aria-label="Close menu"
@@ -94,13 +104,13 @@ export default async function NavBar() {
                     />
                   </svg>
                 </button>
-              </DrawerClose>
-            </DrawerHeader>
+              </SheetClose>
+            </SheetHeader>
             <div className="p-4">
-              {/* <NavItems user={user} avatarUrl={avatarUrl} /> */}
+              <NavItems user={user} avatarUrl={avatarUrl} />
             </div>
-          </DrawerContent>
-        </Drawer>
+          </SheetContent>
+        </Sheet>
       </header>
       <TranslatingNowBanner defaultLocalLanguage={defaultLocalLanguage} />
     </>
