@@ -42,7 +42,7 @@ export async function discordSignIn() {
     return redirect('/leaderboard')
   }
 
-  return redirect(data.url)
+  return redirect(redirectUrl)
 }
 
 export async function googleSignIn() {
@@ -63,7 +63,7 @@ export async function googleSignIn() {
     return redirect('/leaderboard')
   }
 
-  return redirect(data.url)
+  return redirect(redirectUrl)
 }
 
 export async function signOut() {
