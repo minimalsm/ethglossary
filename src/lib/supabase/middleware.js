@@ -2,7 +2,7 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse } from 'next/server'
 
 export const createClient = request => {
-  // Create an unmodified response
+  // Create an initial unmodified response
   let response = NextResponse.next({
     request: {
       headers: request.headers,
@@ -17,13 +17,22 @@ export const createClient = request => {
         get(name) {
           return request.cookies.get(name)?.value
         },
-        set(name, value, options) {
-          // If the cookie is updated, update the cookies for the request and response
+        set(name, value, options = {}) {
+          // Set default options for testing (relaxed security)
+          const defaultOptions = {
+            httpOnly: false,
+            secure: false,
+            sameSite: 'Lax',
+            path: '/',
+            ...options,
+          }
+          // Update cookies on the request
           request.cookies.set({
             name,
             value,
-            ...options,
+            ...defaultOptions,
           })
+          // Update the response to reflect the cookie changes
           response = NextResponse.next({
             request: {
               headers: request.headers,
@@ -32,16 +41,25 @@ export const createClient = request => {
           response.cookies.set({
             name,
             value,
-            ...options,
+            ...defaultOptions,
           })
         },
-        remove(name, options) {
-          // If the cookie is removed, update the cookies for the request and response
+        remove(name, options = {}) {
+          // Set default options for testing (relaxed security)
+          const defaultOptions = {
+            httpOnly: false,
+            secure: false,
+            sameSite: 'Lax',
+            path: '/',
+            ...options,
+          }
+          // Update cookies on the request
           request.cookies.set({
             name,
             value: '',
-            ...options,
+            ...defaultOptions,
           })
+          // Update the response to reflect the cookie changes
           response = NextResponse.next({
             request: {
               headers: request.headers,
@@ -50,7 +68,7 @@ export const createClient = request => {
           response.cookies.set({
             name,
             value: '',
-            ...options,
+            ...defaultOptions,
           })
         },
       },
