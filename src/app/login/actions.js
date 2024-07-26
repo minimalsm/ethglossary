@@ -9,7 +9,7 @@ export async function oAuthSignIn(provider) {
   }
 
   const supabase = createClient()
-  const redirectUrl = 'http://localhost:3000/auth/callback'
+  const redirectUrl = '/auth/callback'
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
