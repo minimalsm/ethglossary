@@ -2,7 +2,7 @@
 'use client'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
-import LogoutButton from '@/components/logout-button'
+import LogoutButton from '@/components/auth/LogoutButton'
 
 const NAV_ITEMS = {
   '/': 'Home',
@@ -11,8 +11,8 @@ const NAV_ITEMS = {
 }
 
 // Todos:
-// [] Add login
-// [] Fix logout button
+// [x] Add login
+// [x] Fix logout button
 // [] Refactor to use NAV_ITEMS object
 export default function NavItems({ user, avatarUrl, translateLink }) {
   const pathname = usePathname()
@@ -66,46 +66,3 @@ const NavItem = ({ href, pathname, children }) => {
     </a>
   )
 }
-
-// export default function NavItems({ user, avatarUrl }) {
-//   const pathname = usePathname()
-
-//   return (
-// <>
-//   <a
-//     href="/languages"
-//     className={`text-gray-700 ${pathname === '/languages' ? 'font-bold' : ''}`}
-//     prefetch={false}
-//   >
-//     Languages
-//   </a>
-//       <a
-//         href="#"
-//         className={`text-gray-700 ${pathname === '#' ? 'font-bold' : ''}`}
-//         prefetch={false}
-//       >
-//         Leaderboard
-//       </a>
-//       {user ? (
-//         <>
-//           <LogoutButton />
-//           {avatarUrl && (
-//             <img
-//               src={avatarUrl}
-//               alt="User Avatar"
-//               className="w-8 h-8 rounded-full"
-//             />
-//           )}
-//         </>
-//       ) : (
-//         <a
-//           href="/auth/login"
-//           className={`text-gray-700 ${pathname === '/auth/login' ? 'font-bold' : ''}`}
-//           prefetch={false}
-//         >
-//           Login
-//         </a>
-//       )}
-//     </>
-//   )
-// }
