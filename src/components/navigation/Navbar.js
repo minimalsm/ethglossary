@@ -21,7 +21,7 @@ export default async function NavBar() {
   const user = session?.user
   const avatarUrl = session?.user.user_metadata.avatar_url
   let defaultLanguage = null
-  const userId = user.id
+  const userId = user?.id
 
   if (userId) {
     const profile = await getUserProfile(userId)
