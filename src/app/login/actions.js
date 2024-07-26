@@ -48,11 +48,12 @@ export async function discordSignIn() {
 export async function googleSignIn() {
   const supabase = createClient()
   const redirectUrl = getURL('/auth/callback')
+  const redirectUrl2 = 'https://google.com'
   console.log('redirect', redirectUrl)
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: redirectUrl,
+      redirectTo: redirectUrl2,
     },
   })
 
