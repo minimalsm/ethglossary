@@ -31,9 +31,9 @@ export default async function LanguagesPage() {
     getLanguageData(defaultLanguage)?.localName || 'Pick a language'
 
   return (
-    <div className="max-w-screen-sm mx-auto p-4 pt-0 mt-8">
-      <h1 className="text-2xl font-bold mb-4">Languages</h1>
-      <div className="flex flex-col gap-3">
+    <div className="max-w-screen-sm mx-auto mt-8">
+      <h1 className="text-[28px] font-bold mb-4">Languages</h1>
+      <div className="flex flex-col gap-3 text-sm">
         <p>
           Join our community of translators making the Ethereum glossary
           accessible to everyone.

@@ -19,11 +19,11 @@ module.exports = {
     extend: {
       colors: {
         primaryTheme: '#EDF9F3',
-        border: 'hsl(var(--border))',
+        border: 'var(--border)',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
@@ -38,10 +38,10 @@ module.exports = {
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
+          foreground: 'var(--muted-foreground)',
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
+          DEFAULT: 'var(--accent)',
           foreground: 'hsl(var(--accent-foreground))',
         },
         popover: {
@@ -58,6 +58,16 @@ module.exports = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+        serif: ['var(--font-serif)'],
+      },
+      fontSize: {
+        xs: ['12px', { lineHeight: '20px' }],
+        sm: ['14px', { lineHeight: '22px' }],
+        lg: ['18px', { lineHeight: '26px' }],
+        '3xl': ['28px', { lineHeight: '36px' }],
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
@@ -71,6 +81,13 @@ module.exports = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      backgroundImage: {
+        // Todo: try to get gradient in CSS file to work properly
+        'banner-gradient':
+          'linear-gradient(90.8deg, #851211 0.89%, #652424 99.1%)',
+        'card-gradient':
+          'linear-gradient(94.3deg, rgba(235, 52, 49, 0.25) 4.12%, rgba(91, 11, 30, 0.25) 81.07%, rgba(66, 5, 4, 0.25) 94.25%);',
       },
     },
   },

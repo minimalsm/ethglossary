@@ -1,12 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 @tailwind base;
   @tailwind components;
   @tailwind utilities;
 
   @layer base {
     :root {
-      --background: 0 0% 100%;
-      --foreground: 222.2 84% 4.9%;
+      --font-inter: Inter, sans-serif;
+      --font-serif: 'Noto Serif', serif;
 
+      /* --background: 0 0% 100%; */
+      --background: #1C202F;
+      /* --foreground: 222.2 84% 4.9%; */
+      --foreground: #F1F1F3;
+      
       --card: 0 0% 100%;
       --card-foreground: 222.2 84% 4.9%;
 
@@ -20,15 +28,18 @@
       --secondary-foreground: 222.2 47.4% 11.2%;
 
       --muted: 210 40% 96.1%;
-      --muted-foreground: 215.4 16.3% 46.9%;
+      /* --muted-foreground: 215.4 16.3% 46.9%; */
+      --muted-foreground: #DBDBDB;
 
-      --accent: 210 40% 96.1%;
+      /* --accent: 210 40% 96.1%; */
+      --accent: #282D3E;
       --accent-foreground: 222.2 47.4% 11.2%;
 
       --destructive: 0 84.2% 60.2%;
       --destructive-foreground: 210 40% 98%;
 
-      --border: 214.3 31.8% 91.4%;
+      /* --border: 214.3 31.8% 91.4%; */
+      --border: #3A3E50;
       --input: 214.3 31.8% 91.4%;
       --ring: 222.2 84% 4.9%;
 
@@ -73,4 +84,17 @@
     body {
       @apply bg-background text-foreground;
     }
+  }
+
+  body {
+    @apply font-sans
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+
+  h1, h2, h3 {
+    @apply font-serif
   }

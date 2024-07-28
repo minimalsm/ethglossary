@@ -35,18 +35,22 @@ export default function TranslationsSection({
 
   return (
     <div className="grow-1 shrink-1 basis-auto">
-      <div className="bg-[#F7F7F7] p-4 pt-6">
+      <div className="bg-background md:bg-[#F7F7F7] p-4 pt-6">
         <TranslationStatus submitted={submitted} />
         <p className="text-[40px] mb-8">{term}</p>
         <span className="text "></span>
-        <p className="font-semibold">Examples</p>
+        <p className="text-sm font-semibold mb-2">Examples</p>
 
-        <div className="mb-3 p-2 border bg-[#EEEEEE]">
-          An ethereum transaction requires gas
+        <div className="mb-2 p-2 rounded bg-accent">
+          <p>
+            An ethereum transaction requires{' '}
+            <span className="bg-[#651A1A] p-1 rounded">gas</span>
+          </p>
         </div>
-        <div className="p-2 border bg-[#EEEEEE]">
-          Gas is the fee required to successfully conduct a transaction or
-          execute a contract on the Ethereum blockchain platform
+        <div className="p-2 rounded bg-accent">
+          <span className="bg-[#651A1A] p-1 rounded">Gas</span> is the fee
+          required to successfully conduct a transaction or execute a contract
+          on the Ethereum blockchain platform
         </div>
         <hr className="mt-5 h-px my-8 bg-gray-200 border-0" />
         <AddTranslationForm

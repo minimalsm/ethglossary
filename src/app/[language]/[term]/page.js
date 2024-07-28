@@ -104,7 +104,7 @@ export default async function TermPage({ params }) {
 
   return (
     <div className="">
-      <div className="bg-gray-100 flex justify-between md:hidden">
+      <div className="bg-banner-gradient flex justify-between md:hidden">
         <TermsModal terms={terms} languageCode={language} />
         <CommentsModal
           termId={termId}

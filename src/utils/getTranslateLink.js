@@ -1,8 +1,9 @@
 import { getUserProfile } from '@/lib/userProfile'
-import { getTranslateLinkPath } from '@/utils/getTranslateLink'
 
-export default async function TranslateLink({ userId }) {
+export async function getTranslateLinkPath({ userId }) {
   let defaultLanguage = null
+
+  // console.log(userId)
 
   if (userId) {
     const profile = await getUserProfile(userId)
@@ -12,11 +13,8 @@ export default async function TranslateLink({ userId }) {
   }
 
   const route = defaultLanguage ? `/${defaultLanguage}/hello` : '/languages'
-  // const route = await getTranslateLinkPath(userId)
 
-  return (
-    <a href={route} className="btn btn-primary">
-      Translate
-    </a>
-  )
+  console.log('route in getTranslateLinkPath', route)
+
+  return route
 }
