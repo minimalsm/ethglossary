@@ -18,9 +18,6 @@ export default function AddTranslationForm({
   const [translation, setTranslation] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const languageData = getLanguageData('fr')
-  console.log('languageData', languageData)
-
   const handleAddTranslation = async e => {
     e.preventDefault()
     setIsSubmitting(true)

@@ -51,8 +51,6 @@ export async function fetchTranslations(termId, languageId, userId) {
     }
   })
 
-  console.log('translationsWithVotes', translationsWithVotes)
-
   return { translationsWithVotes, hasSubmittedTranslation }
 }
 

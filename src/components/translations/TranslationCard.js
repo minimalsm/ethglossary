@@ -7,8 +7,6 @@ export default function TranslationCard({ translation, userId, initialVotes }) {
   const [downvotes, setDownvotes] = useState(translation.downvotes)
   const [userVote, setUserVote] = useState(initialVotes)
 
-  console.log('translation', translation)
-
   useEffect(() => {
     // Load user's vote if needed
   }, [translation.id, userId])

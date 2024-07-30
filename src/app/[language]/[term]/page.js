@@ -45,8 +45,6 @@ export default async function TermPage({ params }) {
   const userId = session?.user?.id
   const localeLanguageData = getLanguageData(language)
 
-  console.log('userId:', userId, user)
-
   // Fetch terms with user translation status
   const terms = await fetchTermsWithUserTranslations(userId)
   const termData = terms.find(t => t.term === term)
@@ -85,8 +83,6 @@ export default async function TermPage({ params }) {
   const userHasTranslatedCount = terms.filter(
     term => term.user_has_translated,
   ).length
-
-  console.log('total terms', totalTerms)
 
   let hasTranslatedNextTerm = false
   if (userId && nextTerm) {

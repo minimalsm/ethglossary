@@ -14,7 +14,5 @@ export async function getTranslateLinkPath({ userId }) {
 
   const route = defaultLanguage ? `/${defaultLanguage}/hello` : '/languages'
 
-  console.log('route in getTranslateLinkPath', route)
-
   return route
 }

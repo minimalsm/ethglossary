@@ -10,8 +10,6 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
   const [loading, setLoading] = useState(false)
   const supabase = createClientComponentClient()
 
-  console.log('Initial votes', initialVotes)
-
   useEffect(() => {
     const fetchUserVote = async () => {
       if (userId) {

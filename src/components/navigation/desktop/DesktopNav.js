@@ -15,7 +15,6 @@ export const DesktopNav = ({ navSections, defaultLanguage }) => {
 }
 
 const DesktopNavItemsList = ({ items, defaultLanguage }) => {
-  console.log(items)
   return (
     <div className="flex gap-6">
       {items.map((item, index) => (

@@ -98,7 +98,6 @@ const UserLeaderboardTable = ({ data }) => {
 }
 
 const UserLeaderboardTabTrigger = ({ value, children }) => {
-  console.log('value', value)
   return (
     <TabsTrigger
       // className="text-[13px] bg-white text-black data-[state='active']:bg-[black] data-[state='active']:text-white rounded-full p-0 py-2 px-3"
@@ -201,7 +200,6 @@ export default async function LeaderboardPage() {
     orderedByComments,
     orderedByVotes,
   } = await fetchOrderedLeaderboardData()
-  console.log('by total', orderedByTotal)
 
   return (
     <div className="max-w-screen-sm mx-auto">
