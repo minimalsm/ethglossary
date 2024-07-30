@@ -102,16 +102,16 @@ export default function TranslationsSection({
             {translations.map(translation => (
               <div key={translation.id}>
                 <div className="flex justify-between items-center mb-0 py-3 px-4 border border-black bg-white">
-                  <p>{translation.translation}</p>
+                  <p className="text-black">{translation.translation}</p>
                   <VoteButtons
                     translationId={translation.id}
                     initialVotes={translation.votes}
                     userId={user?.id}
                   />
                 </div>
-                <div className="text-sm text-gray-500 bg-[#E3E3E3] px-2 py-1">
+                {/* <div className="text-sm text-gray-500 bg-[#E3E3E3] px-2 py-1">
                   Suggested by {translation.display_name || 'Anonymous'}
-                </div>
+                </div> */}
               </div>
             ))}
           </div>

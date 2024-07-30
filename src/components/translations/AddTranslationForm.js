@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { submitTranslation as addTranslation } from '@/lib/translations'
 import { Label } from '@/components/ui/label'
@@ -18,18 +17,13 @@ export default function AddTranslationForm({
   const [translation, setTranslation] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  console.log('Rendering AddTranslationForm') // debug statement
-
   const handleAddTranslation = async e => {
-    console.log('handleAddTranslation') // debug statement
     e.preventDefault()
     setIsSubmitting(true)
 
     const existingTranslation = translations.find(
       t => t.translation.toLowerCase() === translation.toLowerCase(),
     )
-
-    console.log('existingTranslation: ', existingTranslation) // debug statement
 
     if (existingTranslation) {
       // Optimistically update the UI for existing translation
@@ -40,8 +34,6 @@ export default function AddTranslationForm({
           upvotes: existingTranslation.votes.upvotes + 1,
         },
       }
-
-      console.log('optimisticTranslation: ', optimisticTranslation) // debug statement
 
       onTranslationAdded(optimisticTranslation, existingTranslation.id)
 
@@ -56,11 +48,10 @@ export default function AddTranslationForm({
 
         // Ensure the existing translation is replaced by the actual server response
         onTranslationAdded(
-          { ...existingTranslation, ...updatedTranslation },
+          { ...optimisticTranslation, ...updatedTranslation },
           existingTranslation.id,
         )
       } catch (error) {
-        console.log('Error updating translation: ', error) // debug statement
         alert(error.message)
         // Revert optimistic update if there's an error
         onTranslationAdded(existingTranslation, existingTranslation.id)
@@ -81,8 +72,6 @@ export default function AddTranslationForm({
         user_id: userId,
       }
 
-      console.log('optimisticTranslation: ', optimisticTranslation) // debug statement
-
       onTranslationAdded(optimisticTranslation)
 
       try {
@@ -100,7 +89,6 @@ export default function AddTranslationForm({
           optimisticTranslation.id,
         )
       } catch (error) {
-        console.log('Error adding translation: ', error) // debug statement
         alert(error.message)
         // Revert optimistic update if there's an error
         onTranslationAdded(null, optimisticTranslation.id)
@@ -109,8 +97,6 @@ export default function AddTranslationForm({
       }
     }
   }
-
-  console.log('rendering form') // debug statement
 
   return (
     <form onSubmit={handleAddTranslation} className="space-y-4">
