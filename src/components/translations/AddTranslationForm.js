@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
-import { addTranslation } from '@/lib/translations'
+import { submitTranslation as addTranslation } from '@/lib/translations'
 import { Label } from '@/components/ui/label'
 import { getLanguageData } from '@/lib/languageUtils'
 
@@ -31,7 +31,7 @@ export default function AddTranslationForm({
       term_id: termId,
       language_id: languageId,
       translation,
-      upvotes: 0,
+      upvotes: 1,
       downvotes: 0,
       user_id: userId,
     }

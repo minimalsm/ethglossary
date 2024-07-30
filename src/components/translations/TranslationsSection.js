@@ -35,7 +35,7 @@ export default function TranslationsSection({
 
   return (
     <div className="grow-1 shrink-1 basis-auto">
-      <div className="bg-background md:bg-[#F7F7F7] p-4 pt-6">
+      <div className="bg-background p-4 pt-6">
         <TranslationStatus submitted={submitted} />
         <p className="text-[40px] mb-8">{term}</p>
         <span className="text "></span>
@@ -69,7 +69,7 @@ export default function TranslationsSection({
           />
         </AddTranslationForm>
       </div>
-      <div className="my-4 p-8 flex flex-col gap-4 bg-[#F7F7F7]">
+      <div className="my-4 p-8 flex flex-col gap-4 bg-background">
         {submitted ? (
           <div className="">
             <h2 className="text-xl font-semibold mb-4">
@@ -151,43 +151,6 @@ const UpNextComponent = ({
     </a>
   )
 }
-
-// const UpNextComponentMobile = ({
-//   nextTerm,
-//   language,
-//   nextTermIndex,
-//   termsLength,
-//   hasTranslatedNextTerm = false,
-// }) => {
-//   return (
-//     <a
-//       href={`/${language}/${nextTerm}`}
-//       className="relative flex items-center justify-between border border-black p-4 w-full shadow-md mx-auto"
-//     >
-//       <div className="absolute top-0 right-0 bg-black px-4">
-//         <span className="text-white text-sm">
-//           {nextTermIndex}/{termsLength}0
-//         </span>
-//       </div>
-//       <div>
-//         <span className="text-gray-500 text-xs uppercase tracking-widest">
-//           Up Next
-//         </span>
-//         <div className="flex items-center space-x-2">
-//           <span className="text-xl">{nextTerm}</span>
-//           {hasTranslatedNextTerm ? (
-//             <BadgeCheck height={30} width={30} fill="green" stroke="white" />
-//           ) : (
-//             <BadgeCheck height={28} width={28} />
-//           )}
-//         </div>
-//       </div>
-//       <div className="flex items-end justify-end space-x-2">
-//         <ChevronRight />
-//       </div>
-//     </a>
-//   )
-// }
 
 const CheckDecagramOutline = () => (
   <svg

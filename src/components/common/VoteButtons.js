@@ -10,11 +10,13 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
   const [loading, setLoading] = useState(false)
   const supabase = createClientComponentClient()
 
+  console.log('Initial votes', initialVotes)
+
   useEffect(() => {
     const fetchUserVote = async () => {
       if (userId) {
         const { data: userVoteData, error } = await supabase
-          .from('votes')
+          .from('translation_votes')
           .select('vote')
           .eq('user_id', userId)
           .eq('translation_id', translationId)
@@ -39,7 +41,7 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
 
     try {
       const { data: existingVote, error: fetchError } = await supabase
-        .from('votes')
+        .from('translation_votes')
         .select('id, vote')
         .eq('user_id', userId)
         .eq('translation_id', translationId)
@@ -57,7 +59,7 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
         }
 
         const { error: updateError } = await supabase
-          .from('votes')
+          .from('translation_votes')
           .update({ vote })
           .eq('id', existingVote.id)
 
@@ -78,7 +80,7 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
         }
       } else {
         const { error: insertError } = await supabase
-          .from('votes')
+          .from('translation_votes')
           .insert({ user_id: userId, translation_id: translationId, vote })
 
         if (insertError) {
@@ -99,15 +101,6 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
 
     setLoading(false)
   }
-
-  //   <div className="flex space-x-2">
-  //                 <button className="p-1 text-gray-700">
-  //                   <ThumbsUpIcon className="h-4 w-4" />
-  //                 </button>
-  //                 <button className="p-1 text-gray-700">
-  //                   <ThumbsDownIcon className="h-4 w-4" />
-  //                 </button>
-  //               </div>
 
   return (
     <div className="flex items-center gap-2">
