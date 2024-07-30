@@ -8,6 +8,8 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { fetchOrderedLeaderboardData } from '@/lib/leaderboards'
 import { cn } from '@/lib/utils'
+import { DataTable } from '@/components/leaderboard/data-table'
+import { columns } from '@/components/leaderboard/columns'
 
 const getPositionBgColor = position => {
   switch (position) {
@@ -134,16 +136,16 @@ const UserLeaderboardTabs = ({
       </TabsList>
 
       <TabsContent value="total">
-        <UserLeaderboardTable data={orderedByTotal} />
+        <DataTable columns={columns} data={orderedByTotal} />
       </TabsContent>
       <TabsContent value="translations">
-        <UserLeaderboardTable data={orderedByTranslations} />
+        <DataTable columns={columns} data={orderedByTranslations} />
       </TabsContent>
       <TabsContent value="comments">
-        <UserLeaderboardTable data={orderedByComments} />
+        <DataTable columns={columns} data={orderedByComments} />
       </TabsContent>
       <TabsContent value="votes">
-        <UserLeaderboardTable data={orderedByVotes} />
+        <DataTable columns={columns} data={orderedByVotes} />
       </TabsContent>
     </Tabs>
   )
@@ -199,17 +201,24 @@ export default async function LeaderboardPage() {
     orderedByComments,
     orderedByVotes,
   } = await fetchOrderedLeaderboardData()
+  console.log('by total', orderedByTotal)
 
   return (
     <div className="max-w-screen-sm mx-auto">
       <h1 className="text-2xl font-bold mb-4">Leaderboard</h1>
+      <UserLeaderboardTabs
+        orderedByTotal={orderedByTotal}
+        orderedByVotes={orderedByVotes}
+        orderedByComments={orderedByComments}
+        orderedByTranslations={orderedByTranslations}
+      />
 
-      <PageLeaderboardTabs
+      {/* <PageLeaderboardTabs
         orderedByTotal={orderedByTotal}
         orderedByTranslations={orderedByTranslations}
         orderedByComments={orderedByComments}
         orderedByVotes={orderedByVotes}
-      />
+      /> */}
     </div>
   )
 }

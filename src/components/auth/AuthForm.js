@@ -1,9 +1,5 @@
 import { Button } from '@/components/ui/button'
-// import { oAuthSignIn } from '../../app/login/actions'
 import { createClient } from '@/lib/supabase/server'
-// import LoginWithDiscordButton from './LoginWithDiscordButton'
-// import LoginWithGoogleButton from './LoginWithGoogleButton'
-// import { getURL } from '../../utils/getUrl'
 import { redirect } from 'next/navigation'
 import { headers } from 'next/headers'
 
