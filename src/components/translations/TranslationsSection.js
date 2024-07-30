@@ -23,6 +23,19 @@ export default function TranslationsSection({
 
   const handleNewTranslation = (newTranslation, tempId) => {
     setTranslations(prevTranslations => {
+      const existingTranslation = prevTranslations.find(
+        t =>
+          t.translation.toLowerCase() ===
+          newTranslation.translation.toLowerCase(),
+      )
+      if (existingTranslation) {
+        return prevTranslations.map(translation =>
+          translation.translation.toLowerCase() ===
+          newTranslation.translation.toLowerCase()
+            ? { ...existingTranslation, votes: newTranslation.votes }
+            : translation,
+        )
+      }
       if (tempId) {
         return prevTranslations.map(translation =>
           translation.id === tempId ? newTranslation : translation,
@@ -57,6 +70,7 @@ export default function TranslationsSection({
           termId={termId}
           languageId={languageId}
           onTranslationAdded={handleNewTranslation}
+          translations={translations}
           userId={user?.id}
           localeLanguageData={localeLanguageData}
         >
@@ -87,7 +101,6 @@ export default function TranslationsSection({
             </div>
             {translations.map(translation => (
               <div key={translation.id}>
-                <p></p>
                 <div className="flex justify-between items-center mb-0 py-3 px-4 border border-black bg-white">
                   <p>{translation.translation}</p>
                   <VoteButtons

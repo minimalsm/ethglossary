@@ -57,61 +57,59 @@ export async function fetchTranslations(termId, languageId, userId) {
 export async function submitTranslation(
   termId,
   languageId,
-  translationText,
+  translation,
   userId,
 ) {
-  // Check if the translation already exists
-  let { data: existingTranslation, error: fetchError } = await supabase
+  const { data: existingTranslation, error: fetchError } = await supabase
     .from('translations')
-    .select('id')
+    .select('*')
     .eq('term_id', termId)
     .eq('language_id', languageId)
-    .eq('translation', translationText)
+    .eq('translation', translation)
     .single()
 
   if (fetchError && fetchError.code !== 'PGRST116') {
-    throw new Error(`Error checking translation: ${fetchError.message}`)
+    throw new Error(`Error fetching translation: ${fetchError.message}`)
   }
-
-  let translationId
 
   if (existingTranslation) {
-    translationId = existingTranslation.id
-  } else {
-    // Insert new translation
-    const { data: newTranslation, error: insertError } = await supabase
-      .from('translations')
-      .insert([
-        {
-          term_id: termId,
-          language_id: languageId,
-          translation: translationText,
-        },
-      ])
-      .select()
-      .single()
+    // Upvote the existing translation
+    const { data: voteData, error: voteError } = await supabase
+      .from('translation_votes')
+      .upsert(
+        { user_id: userId, translation_id: existingTranslation.id, vote: 1 },
+        { onConflict: ['user_id', 'translation_id'] },
+      )
 
-    if (insertError) {
-      throw new Error(`Error adding translation: ${insertError.message}`)
+    if (voteError) {
+      throw new Error(`Error voting on translation: ${voteError.message}`)
     }
 
-    translationId = newTranslation.id
+    return existingTranslation
+  } else {
+    // Insert a new translation
+    const { data, error } = await supabase
+      .from('translations')
+      .insert([{ term_id: termId, language_id: languageId, translation }])
+      .select()
+
+    if (error) {
+      throw new Error(`Error adding translation: ${error.message}`)
+    }
+
+    // Upvote the new translation
+    const newTranslationId = data[0].id
+
+    const { data: voteData, error: voteError } = await supabase
+      .from('translation_votes')
+      .insert({ user_id: userId, translation_id: newTranslationId, vote: 1 })
+
+    if (voteError) {
+      throw new Error(`Error voting on translation: ${voteError.message}`)
+    }
+
+    return data[0]
   }
-
-  // Add submission
-  const { data, error: submissionError } = await supabase
-    .from('translation_submissions')
-    .insert([{ user_id: userId, translation_id: translationId }])
-    .select()
-
-  if (submissionError) {
-    throw new Error(`Error adding submission: ${submissionError.message}`)
-  }
-
-  // Automatically upvote the translation
-  await voteOnTranslation(userId, translationId, 1)
-
-  return { translationId, upvoteCount: await fetchVoteCounts(translationId) }
 }
 
 export async function voteOnTranslation(userId, translationId, vote) {

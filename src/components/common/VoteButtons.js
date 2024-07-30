@@ -4,8 +4,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Button } from '@/components/ui/button'
 
 export default function VoteButtons({ translationId, initialVotes, userId }) {
-  const [upvotes, setUpvotes] = useState(initialVotes?.upvotes || 0)
-  const [downvotes, setDownvotes] = useState(initialVotes?.downvotes || 0)
+  const [votes, setVotes] = useState(initialVotes)
   const [userVote, setUserVote] = useState(null)
   const [loading, setLoading] = useState(false)
   const supabase = createClientComponentClient()
@@ -28,6 +27,10 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
 
     fetchUserVote()
   }, [translationId, userId, supabase])
+
+  useEffect(() => {
+    setVotes(initialVotes)
+  }, [initialVotes])
 
   const handleVote = async vote => {
     if (!userId) {
@@ -66,14 +69,14 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
         }
 
         if (vote === 1) {
-          setUpvotes(prev => prev + 1)
+          setVotes(prev => ({ ...prev, upvotes: prev.upvotes + 1 }))
           if (existingVote.vote === -1) {
-            setDownvotes(prev => prev - 1)
+            setVotes(prev => ({ ...prev, downvotes: prev.downvotes - 1 }))
           }
         } else {
-          setDownvotes(prev => prev + 1)
+          setVotes(prev => ({ ...prev, downvotes: prev.downvotes + 1 }))
           if (existingVote.vote === 1) {
-            setUpvotes(prev => prev - 1)
+            setVotes(prev => ({ ...prev, upvotes: prev.upvotes - 1 }))
           }
         }
       } else {
@@ -86,9 +89,9 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
         }
 
         if (vote === 1) {
-          setUpvotes(prev => prev + 1)
+          setVotes(prev => ({ ...prev, upvotes: prev.upvotes + 1 }))
         } else {
-          setDownvotes(prev => prev + 1)
+          setVotes(prev => ({ ...prev, downvotes: prev.downvotes + 1 }))
         }
       }
 
@@ -112,11 +115,12 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
         <ThumbsUpIcon className="w-4 h-4" />
         <span className="sr-only">Like</span>
       </Button>
-      <span className="text-muted-foreground text-sm">{upvotes}</span>
+      <span className="text-muted-foreground text-sm">
+        {votes?.upvotes || 0}
+      </span>
       <Button
         variant="ghost"
         size="icon"
-        //className="text-muted-foreground hover:bg-muted"
         disabled={userVote === -1}
         className={`text-gray-700 hover:bg-gray-100 ${userVote === -1 ? 'text-red-500' : ''} h-auto`}
         onClick={() => handleVote(-1)}
@@ -124,7 +128,9 @@ export default function VoteButtons({ translationId, initialVotes, userId }) {
         <ThumbsDownIcon className="w-4 h-4" />
         <span className="sr-only">Dislike</span>
       </Button>
-      <span className="text-muted-foreground text-sm">{downvotes}</span>
+      <span className="text-muted-foreground text-sm">
+        {votes?.downvotes || 0}
+      </span>
     </div>
   )
 }
@@ -136,6 +142,8 @@ function ThumbsDownIcon(props) {
     <svg
       {...rest}
       xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -156,6 +164,8 @@ function ThumbsUpIcon(props) {
     <svg
       {...rest}
       xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
