@@ -31,7 +31,7 @@ export default async function HomePage() {
             Unlock the power of Ethereum in your language
           </p>
           <button className="bg-button-gradient font-extrabold max-w-[223px] text-[27px] px-4 py-2 rounded-lg">
-            Let's go
+            Let&apos;s go
           </button>
         </div>
       </section>
@@ -46,7 +46,7 @@ export default async function HomePage() {
                 height="108"
                 viewBox="0 0 95 108"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"x
               >
                 <path
                   d="M2.5 10.9819C2.5 6.02132 6.52024 2 11.4795 2H83.5206C88.4798 2 92.5 6.02133 92.5 10.9819V79.8759C92.5 84.8365 88.4798 88.8578 83.5206 88.8578H79.2024C75.2288 88.8578 72.0101 92.0845 72.0188 96.0591L72.0407 106L51.9463 91.286C49.7917 89.7083 47.1908 88.8578 44.5206 88.8578H20.5342H11.4794C6.52023 88.8578 2.5 84.8365 2.5 79.8759V10.9819Z"
@@ -65,9 +65,9 @@ export default async function HomePage() {
             core set of Ethereum terms into more than 60 languages.
           </p>
           <p className="text-lg">
-            Whether you're an aspiring translator looking to gain experience or
-            a passionate advocate for Ethereum accessibility, your contributions
-            can make a difference.
+            Whether you&apos;re an aspiring translator looking to gain
+            experience or a passionate advocate for Ethereum accessibility, your
+            contributions can make a difference.
           </p>
         </div>
 
