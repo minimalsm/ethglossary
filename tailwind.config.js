@@ -67,6 +67,7 @@ module.exports = {
         sm: ['14px', { lineHeight: '22px' }],
         lg: ['18px', { lineHeight: '26px' }],
         '3xl': ['28px', { lineHeight: '36px' }],
+        '4xl': ['36px', { lineHeight: '44px' }],
       },
       keyframes: {
         'accordion-down': {
@@ -92,6 +93,9 @@ module.exports = {
           'linear-gradient(180deg, #1C202F 15.23%, #0E121F 36.54%, #1C202F 60.27%)',
         'button-gradient':
           'linear-gradient(106.76deg, #F7E544 4.85%, #EC0061 79.22%)',
+        'dotted-gradient': 'radial-gradient(#49506B 2px, transparent 0);',
+        'dolphin-gradient':
+          'linear-gradient(180deg, #2B0758 0%, #1C043A 54%, #110225 100%);',
       },
     },
   },

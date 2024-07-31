@@ -29,8 +29,16 @@ export default async function NavBar() {
   return (
     <>
       <header className="flex items-center justify-between h-16 px-8 md:px-12 shadow-sm">
-        <h1 className="text-2xl font-bold">
-          ETH<span className="font-normal">g</span>
+        <h1 className="text-2xl font-bold flex items-center gap-1">
+          <img
+            src="/images/icon.png"
+            width={40}
+            alt="Logo"
+            className="object-contain"
+          />
+          <span>
+            ETH<span className="font-normal">glossary</span>
+          </span>
         </h1>
         <nav className="hidden md:flex items-center md:self-center gap-6">
           <DesktopNav

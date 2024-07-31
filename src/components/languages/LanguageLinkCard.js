@@ -24,15 +24,18 @@ const LanguageLinkCard = ({ language }) => {
           {countriesList}
         </div>
       </div>
-      <div id="stats" className="flex flex-col space-y-2">
-        <div className="text-sm flex items-center gap-1">
-          <TranslateIcon />
-          {language.translationsCount}
-        </div>
-        <div className="text-sm flex items-center gap-1">
-          <CommentsIcon /> {language.commentsCount}
-        </div>
-      </div>
+      {language.translationsCount &&
+        language.commentsCount(
+          <div id="stats" className="flex flex-col space-y-2">
+            <div className="text-sm flex items-center gap-1">
+              <TranslateIcon />
+              {language.translationsCount}
+            </div>
+            <div className="text-sm flex items-center gap-1">
+              <CommentsIcon /> {language.commentsCount}
+            </div>
+          </div>,
+        )}
     </Link>
   )
 }
