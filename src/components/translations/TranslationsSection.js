@@ -5,6 +5,7 @@ import VoteButtons from '@/components/common/VoteButtons'
 import CheckDecagramGreen from '@/components/icons/CheckDecagramGreen'
 import CheckDecagramOutline from '@/components/icons/CheckDecagramOutline'
 import ArrowRight from '@/components/icons/ArrowRight'
+import { Button } from '../ui/button'
 
 export default function TranslationsSection({
   initialTranslations,
@@ -31,10 +32,23 @@ export default function TranslationsSection({
           newTranslation.translation.toLowerCase(),
       )
       if (existingTranslation) {
+        const updatedTranslation = {
+          ...existingTranslation,
+          votes: newTranslation.votes,
+          translation_submissions: [
+            ...existingTranslation.translation_submissions,
+            {
+              user_id: user.id,
+              profiles: {
+                display_name: user.display_name,
+                avatar_url: user.avatar_url,
+              },
+            },
+          ],
+        }
         return prevTranslations.map(translation =>
-          translation.translation.toLowerCase() ===
-          newTranslation.translation.toLowerCase()
-            ? { ...existingTranslation, votes: newTranslation.votes }
+          translation.id === existingTranslation.id
+            ? updatedTranslation
             : translation,
         )
       }
@@ -47,6 +61,21 @@ export default function TranslationsSection({
     })
     setSubmitted(true)
   }
+
+  // console.log(
+  //   'translations in section',
+  //   translations[0].translation_submissions,
+  // )
+  // logs:
+  // translations in section [
+  //   {
+  //     user_id: '922651f5-bba7-49c7-a104-dca5b1c7320d',
+  //     profiles: {
+  //       avatar_url: 'https://cdn.discordapp.com/avatars/643099918998831144/6be3d8b32a6ca22fe61be6ada89775d3.png',
+  //       display_name: 'joshuaisbuilding'
+  //     }
+  //   }
+  // ]
 
   return (
     <div className="grow-1 shrink-1 basis-auto">
@@ -72,13 +101,15 @@ export default function TranslationsSection({
           termId={termId}
           languageId={languageId}
           onTranslationAdded={handleNewTranslation}
+          hasSubmittedTranslation={submitted}
           translations={translations}
           userId={user?.id}
           localeLanguageData={localeLanguageData}
+          user={user}
         >
           <UpNextComponent
             nextTerm={nextTerm}
-            language={languageId}
+            language={language}
             nextTermIndex={nextTermIndex}
             termsLength={termsLength}
             hasTranslatedNextTerm={hasTranslatedNextTerm}
@@ -101,21 +132,48 @@ export default function TranslationsSection({
                 discussion in the comments section!
               </p>
             </div>
-            {translations.map(translation => (
-              <div key={translation.id}>
-                <div className="flex justify-between items-center mb-0 py-3 px-4 border border-black bg-white">
-                  <p className="text-black">{translation.translation}</p>
-                  <VoteButtons
-                    translationId={translation.id}
-                    initialVotes={translation.votes}
-                    userId={user?.id}
-                  />
+            {translations.map(translation => {
+              // Get all user display_names
+              const translators = translation.translation_submissions.map(
+                submission => submission.profiles?.display_name || 'Anonymous',
+              )
+
+              console.log('translators when mapping', translators)
+
+              const isUserTranslator = translators.includes(user?.display_name)
+
+              // Construct the suggested by message
+              let suggestedByMessage = ''
+              if (isUserTranslator) {
+                const otherTranslators = translators.filter(
+                  name => name !== user.display_name,
+                )
+                if (otherTranslators.length === 0) {
+                  suggestedByMessage = 'Suggested by you'
+                } else {
+                  suggestedByMessage = `Suggested by you and ${otherTranslators.length} others`
+                }
+              } else if (translators.length === 1) {
+                suggestedByMessage = `Suggested by ${translators[0]}`
+              } else {
+                suggestedByMessage = `Suggested by ${translators[0]} and ${translators.length - 1} others`
+              }
+              return (
+                <div key={translation.id}>
+                  <div className="flex justify-between items-center mb-0 py-3 px-4 border border-black bg-white">
+                    <p className="text-black">{translation.translation}</p>
+                    <VoteButtons
+                      translationId={translation.id}
+                      initialVotes={translation.votes}
+                      userId={user?.id}
+                    />
+                  </div>
+                  <div className="text-sm text-gray-500 bg-[#E3E3E3] px-2 py-1">
+                    {suggestedByMessage}
+                  </div>
                 </div>
-                {/* <div className="text-sm text-gray-500 bg-[#E3E3E3] px-2 py-1">
-                  Suggested by {translation.display_name || 'Anonymous'}
-                </div> */}
-              </div>
-            ))}
+              )
+            })}
           </div>
         ) : (
           <p>Please submit a translation to view existing translations.</p>
@@ -141,28 +199,19 @@ const TranslationStatus = ({ submitted }) => {
 const UpNextComponent = ({
   nextTerm,
   language,
-  nextTermIndex,
-  termsLength,
   hasTranslatedNextTerm = false,
 }) => {
   return (
-    <a href={`/${language}/${nextTerm}`} className="flex gap-4 items-center ">
-      <div className="flex flex-col gap-1">
-        <span className="text-gray-500 text-xs uppercase tracking-widest">
-          Up Next
-        </span>
-        <div className="flex items-center space-x-2">
-          <span className="text-xl">{nextTerm}</span>
-          {hasTranslatedNextTerm ? (
-            <CheckDecagramGreen />
-          ) : (
-            <CheckDecagramOutline />
-          )}
-        </div>
+    <>
+      <a href={`/${language}/${nextTerm}`}>Next Term</a>
+      <div className="md:hidden flex items-center space-x-2 self-center">
+        <span className="text-xl">{nextTerm}</span>
+        {hasTranslatedNextTerm ? (
+          <CheckDecagramGreen />
+        ) : (
+          <CheckDecagramOutline />
+        )}
       </div>
-      <div className="flex items-end space-x-2">
-        <ArrowRight />
-      </div>
-    </a>
+    </>
   )
 }

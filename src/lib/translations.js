@@ -4,7 +4,16 @@ export async function fetchTranslations(termId, languageId, userId) {
   // Fetch translations
   const { data: allTranslations, error: translationsError } = await supabase
     .from('translations')
-    .select('*, translation_submissions(user_id), translation_votes(vote)')
+    .select(
+      `
+      *,
+      translation_submissions (
+        user_id,
+        profiles (display_name, avatar_url)
+      ),
+      translation_votes(vote)
+    `,
+    )
     .eq('term_id', termId)
     .eq('language_id', languageId)
 
@@ -48,6 +57,8 @@ export async function fetchTranslations(termId, languageId, userId) {
         upvotes,
         downvotes,
       },
+      display_name: translation.profiles?.display_name || 'Anonymous',
+      avatar_url: translation.profiles?.avatar_url || null,
     }
   })
 

@@ -12,7 +12,9 @@ export default function AddTranslationForm({
   translations,
   userId,
   children,
+  hasSubmittedTranslation,
   localeLanguageData,
+  user,
 }) {
   const [translation, setTranslation] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -33,6 +35,15 @@ export default function AddTranslationForm({
           ...existingTranslation.votes,
           upvotes: existingTranslation.votes.upvotes + 1,
         },
+        translation_submissions: [
+          ...(existingTranslation.translation_submissions || []),
+          {
+            profiles: {
+              display_name: user.display_name,
+              avatar_url: user.avatar_url,
+            },
+          },
+        ],
       }
 
       onTranslationAdded(optimisticTranslation, existingTranslation.id)
@@ -70,6 +81,14 @@ export default function AddTranslationForm({
           downvotes: 0,
         },
         user_id: userId,
+        translation_submissions: [
+          {
+            profiles: {
+              display_name: user.display_name,
+              avatar_url: user.avatar_url,
+            },
+          },
+        ],
       }
 
       onTranslationAdded(optimisticTranslation)
@@ -112,12 +131,37 @@ export default function AddTranslationForm({
         disabled={isSubmitting}
         className="m-0 py-8 rounded-none border-0 border-b border-b-grey-300 bg-inherit text-[32px]"
       />
-      <div className="flex items-center justify-between">
-        <Button type="submit" disabled={isSubmitting} className="rounded-none">
-          {isSubmitting ? 'Submitting...' : 'Suggest translation'}
-        </Button>
-        {children}
+      <div className="flex flex-col md:items-center md:justify-between md:flex-row">
+        <SubmissionState
+          hasSubmittedTranslation={hasSubmittedTranslation}
+          isSubmitting={isSubmitting}
+        >
+          {children}
+        </SubmissionState>
       </div>
     </form>
   )
+}
+
+const SubmissionState = ({
+  isSubmitting,
+  children,
+  hasSubmittedTranslation,
+}) => {
+  if (hasSubmittedTranslation === true) {
+    return (
+      <>
+        <Button type="submit" disabled={isSubmitting} className="rounded-none">
+          {isSubmitting ? 'Submitting...' : 'Suggest another'}
+        </Button>
+        {children}
+      </>
+    )
+  } else {
+    return (
+      <Button type="submit" disabled={isSubmitting} className="rounded-none">
+        {isSubmitting ? 'Submitting...' : 'Suggest translation'}
+      </Button>
+    )
+  }
 }
