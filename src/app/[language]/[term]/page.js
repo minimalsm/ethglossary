@@ -137,7 +137,7 @@ export default async function TermPage({ params }) {
           localeLanguageData={localeLanguageData}
         />
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex">
           <CommentsPanel
             termId={termId}
             languageId={languageId}

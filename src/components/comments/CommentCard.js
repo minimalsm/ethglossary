@@ -59,7 +59,7 @@ export default function CommentCard({ comment, userId }) {
   }
 
   return (
-    <Card className="w-full max-w-md grid gap-2 border-none shadow-none">
+    <Card className="w-full md:max-w-xs grid gap-2 border-none shadow-none">
       <div id="card-header" className="flex items-center gap-2">
         <Avatar className="h-8 w-8">
           <AvatarImage src={comment.profiles?.avatar_url} />
@@ -82,7 +82,7 @@ export default function CommentCard({ comment, userId }) {
         </div>
       </div>
       <div id="card-body">
-        <p className="text-sm">{comment.comment}</p>
+        <p className="text-sm break-all">{comment.comment}</p>
       </div>
       <div className="flex items-center justify-end gap-2">
         <div className="flex items-center gap-1 m-1">
