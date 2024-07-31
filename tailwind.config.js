@@ -88,6 +88,10 @@ module.exports = {
           'linear-gradient(90.8deg, #851211 0.89%, #652424 99.1%)',
         'card-gradient':
           'linear-gradient(94.3deg, rgba(235, 52, 49, 0.25) 4.12%, rgba(91, 11, 30, 0.25) 81.07%, rgba(66, 5, 4, 0.25) 94.25%);',
+        'homepage-gradient':
+          'linear-gradient(180deg, #1C202F 15.23%, #0E121F 36.54%, #1C202F 60.27%)',
+        'button-gradient':
+          'linear-gradient(106.76deg, #F7E544 4.85%, #EC0061 79.22%)',
       },
     },
   },

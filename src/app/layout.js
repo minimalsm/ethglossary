@@ -21,7 +21,9 @@ export default async function RootLayout({ children }) {
       <head />
       <body className="background">
         <NavBar className="" />
-        <div className="flex-1 mx-5 md:mx-12 md:my-8">{children}</div>
+        {/* Taking off layout to dev homepage */}
+        {/* <div className="flex-1 mx-5 md:mx-12 md:my-8">{children}</div> */}
+        <div className="">{children}</div>
       </body>
     </html>
   )
