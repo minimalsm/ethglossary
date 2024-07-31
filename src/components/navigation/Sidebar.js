@@ -55,7 +55,7 @@ export default function Sidebar({
               href={termPath}
               className={cn(
                 'flex gap-1 font-normal',
-                term.user_has_translated ? 'bg-primaryTheme' : 'bg-white',
+                term.user_has_translated ? 'bg-primaryTheme' : 'bg-accent',
               )}
             >
               <TermItem
