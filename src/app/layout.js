@@ -20,7 +20,7 @@ export default async function RootLayout({ children }) {
     <html lang="en" className={inter.className}>
       <head />
       <body className="background">
-        <NavBar className="" />
+        {/* <NavBar className="" /> */}
         {/* Taking off layout to dev homepage */}
         {/* <div className="flex-1 mx-5 md:mx-12 md:my-8">{children}</div> */}
         <div className="">{children}</div>
