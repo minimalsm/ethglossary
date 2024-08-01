@@ -21,11 +21,11 @@ export default function Sidebar({
   return (
     <div
       className={cn(
-        'pb-12 grow-0 shrink-1 basis-72 space-y-1 flex flex-col',
+        'shrink-1 flex grow-0 basis-72 flex-col space-y-1 pb-12',
         className,
       )}
     >
-      <div className="flex items-top justify-between">
+      <div className="items-top flex justify-between">
         <p className="font-semibold">Terms</p>
         <div className="flex items-center text-sm">
           <span className="font-semibold">
@@ -38,7 +38,7 @@ export default function Sidebar({
           <CheckDecagramGreen />
         </div>
       </div>
-      <hr className="mt-3 mb-5" />
+      <hr className="mb-5 mt-3" />
 
       {terms.map(term => {
         const termPath = `/${languageCode}/${term.term}`
@@ -64,7 +64,7 @@ const TermButton = ({ term, termPath, isActive, hasTranslated }) => {
       asChild
       variant="ghost"
       className={cn(
-        'w-full justify-start px-3 rounded-none bg-[#1C202F] hover:bg-[#3A3E50] hover:text-white',
+        'w-full justify-start rounded-none bg-[#1C202F] px-3 hover:bg-[#3A3E50] hover:text-white',
         {
           'bg-[#282D3E] font-semibold': isActive,
           'bg-[#1B2E3A] hover:bg-[#184951]': hasTranslated,

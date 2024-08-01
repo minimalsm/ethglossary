@@ -59,7 +59,7 @@ export default function CommentCard({ comment, userId }) {
   }
 
   return (
-    <Card className="w-full md:max-w-xs grid gap-2 border-none shadow-none">
+    <Card className="grid w-full gap-2 border-none shadow-none md:max-w-xs">
       <div id="card-header" className="flex items-center gap-2">
         <Avatar className="h-8 w-8">
           <AvatarImage src={comment.profiles?.avatar_url} />
@@ -82,35 +82,35 @@ export default function CommentCard({ comment, userId }) {
         </div>
       </div>
       <div id="card-body">
-        <p className="text-sm break-all">{comment.comment}</p>
+        <p className="break-all text-sm">{comment.comment}</p>
       </div>
       <div className="flex items-center justify-end gap-2">
-        <div className="flex items-center gap-1 m-1">
+        <div className="m-1 flex items-center gap-1">
           <Button
             variant="ghost"
             size="icon"
             disabled={userVote === 1}
-            className={` text-gray-700 hover:bg-gray-100 ${userVote === 1 ? 'text-green-500' : ''} w-auto h-auto`}
+            className={`text-gray-700 hover:bg-gray-100 ${userVote === 1 ? 'text-green-500' : ''} h-auto w-auto`}
             onClick={() => handleVote(1)}
           >
-            <ThumbsUpIcon className="w-4 h-4" />
+            <ThumbsUpIcon className="h-4 w-4" />
             <span className="sr-only">Like</span>
           </Button>
-          <span className="text-muted-foreground text-sm">{upvotes}</span>
+          <span className="text-sm text-muted-foreground">{upvotes}</span>
         </div>
 
-        <div className="flex items-center gap-1 m-1">
+        <div className="m-1 flex items-center gap-1">
           <Button
             variant="ghost"
             size="icon"
             disabled={userVote === -1}
-            className={` text-gray-700 hover:bg-gray-100 ${userVote === -1 ? 'text-red-500' : ''} w-auto h-auto`}
+            className={`text-gray-700 hover:bg-gray-100 ${userVote === -1 ? 'text-red-500' : ''} h-auto w-auto`}
             onClick={() => handleVote(-1)}
           >
-            <ThumbsDownIcon className="w-4 h-4" />
+            <ThumbsDownIcon className="h-4 w-4" />
             <span className="sr-only">Dislike</span>
           </Button>
-          <span className="text-muted-foreground text-sm">{downvotes}</span>
+          <span className="text-sm text-muted-foreground">{downvotes}</span>
         </div>
       </div>
     </Card>

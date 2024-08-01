@@ -7,13 +7,13 @@ export default function LanguagesSearch({ onSearch }) {
   }
 
   return (
-    <form className="relative w-full md:w-1/2 my-6">
+    <form className="relative my-6 w-full md:w-1/2">
       <MagnifyIcon className="absolute right-2.5 top-2.5" />
       <Input
         type="search"
         placeholder="Search by language or country"
         onChange={handleInputChange}
-        className="px-3 py-4 rounded-lg border-border"
+        className="rounded-lg border-border px-3 py-4"
       />
     </form>
   )

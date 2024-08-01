@@ -48,7 +48,7 @@ export default function TranslationCard({ translation, userId, initialVotes }) {
   }
 
   return (
-    <div className="p-4 border rounded-md">
+    <div className="rounded-md border p-4">
       <p>{translation.translation}</p>
       <div className="flex items-center">
         <Button
@@ -68,11 +68,11 @@ export default function TranslationCard({ translation, userId, initialVotes }) {
           disabled={userVote === -1}
           className={userVote === -1 ? 'text-red-500' : ''}
         >
-          <ThumbsDownIcon className="w-4 h-4" />
+          <ThumbsDownIcon className="h-4 w-4" />
         </Button>
         <span className="mx-2">{downvotes}</span>
       </div>
-      <div className="text-sm text-gray-500 bg-[#E3E3E3] px-2 py-1">
+      <div className="bg-[#E3E3E3] px-2 py-1 text-sm text-gray-500">
         Suggested by {translation.display_name || 'Anonymous'}
       </div>
     </div>

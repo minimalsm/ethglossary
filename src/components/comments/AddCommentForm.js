@@ -30,13 +30,13 @@ export default function AddCommentForm({ onAddComment }) {
         value={newComment}
         onChange={e => setNewComment(e.target.value)}
         placeholder="Join the discussion..."
-        className="w-full p-2 border rounded-md min-h-[48px] flex items-center justify-center"
+        className="flex min-h-[48px] w-full items-center justify-center rounded-md border p-2"
         disabled={isSubmitting}
       />
-      <div className="absolute right-3 flex items-center justify-center h-full ml-2">
+      <div className="absolute right-3 ml-2 flex h-full items-center justify-center">
         <button
           type="submit"
-          className="w-[20px] h-[20px] flex bg-white text-black items-center justify-center rounded-full"
+          className="flex h-[20px] w-[20px] items-center justify-center rounded-full bg-white text-black"
           disabled={isSubmitting}
         >
           {isSubmitting ? '...' : '↑'}

@@ -13,11 +13,11 @@ const LanguageLinkCard = ({ language }) => {
   return (
     <Link
       href={`/${language.code}/hello`}
-      className="flex gap-4 items-center justify-between rounded-lg border hover:bg-card-gradient hover:border-[#E8D3D3] p-4"
+      className="flex items-center justify-between gap-4 rounded-lg border p-4 hover:border-[#E8D3D3] hover:bg-card-gradient"
     >
       <div id="content" className="flex flex-col space-y-0.5">
         <div id="langs" className="flex items-baseline">
-          <div className="text-xl font-semibold mr-2 font-serif">
+          <div className="mr-2 font-serif text-xl font-semibold">
             {localLanguageName}
           </div>
           <div className="text-sm">{capitalisedEnglishName}</div>
@@ -29,11 +29,11 @@ const LanguageLinkCard = ({ language }) => {
       {language.translationsCount !== undefined &&
       language.commentsCount !== undefined ? (
         <div id="stats" className="flex flex-col space-y-2">
-          <div className="text-sm flex items-center gap-1">
+          <div className="flex items-center gap-1 text-sm">
             <TranslateIcon />
             {language.translationsCount}
           </div>
-          <div className="text-sm flex items-center gap-1">
+          <div className="flex items-center gap-1 text-sm">
             <CommentsIcon /> {language.commentsCount}
           </div>
         </div>

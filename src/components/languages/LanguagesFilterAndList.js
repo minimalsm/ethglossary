@@ -28,7 +28,7 @@ const LanguagesFilterAndList = ({ languages }) => {
   return (
     <div>
       <LanguagesFilter onSearch={handleSearch} />
-      <p className="text-sm mb-3">
+      <p className="mb-3 text-sm">
         Showing{' '}
         <span className="font-semibold">
           {numberFilteredLanguages} of {numberTotalLanguages}

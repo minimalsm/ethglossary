@@ -129,9 +129,9 @@ export default function AddTranslationForm({
         onChange={e => setTranslation(e.target.value)}
         placeholder="Translation"
         disabled={isSubmitting}
-        className="m-0 py-8 rounded-none border-0 border-b border-b-grey-300 bg-inherit text-[32px]"
+        className="border-b-grey-300 m-0 rounded-none border-0 border-b bg-inherit py-8 text-[32px]"
       />
-      <div className="flex flex-col md:items-center md:justify-between md:flex-row">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between">
         <SubmissionState
           hasSubmittedTranslation={hasSubmittedTranslation}
           isSubmitting={isSubmitting}

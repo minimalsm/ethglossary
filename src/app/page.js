@@ -28,39 +28,39 @@ export default async function HomePage() {
   const url = getURL('/auth/login') || 'none'
 
   return (
-    <div className="flex min-h-screen flex-col items-center text-white font-sans">
+    <div className="flex min-h-screen flex-col items-center font-sans text-white">
       {/* <div>
         <Button>Next term</Button>
         <Button variant="outline">Suggest another</Button>
       </div> */}
-      <section className="relative w-full h-screen max-h-[720px] flex items-center justify-center">
+      <section className="relative flex h-screen max-h-[720px] w-full items-center justify-center">
         <img
           src="/images/hero.png"
-          className="absolute inset-0 w-full h-full object-cover z-[-1] "
+          className="absolute inset-0 z-[-1] h-full w-full object-cover"
           alt="hero"
         />
-        <div className="relative z-10 flex flex-col basis-[1024px] max-w-screen-lg p-4">
-          <h1 className="flex flex-col font-serif font-bold text-[40px] leading-[48px] md:text-[80px] md:leading-[88px] mb-8">
+        <div className="relative z-10 flex max-w-screen-lg basis-[1024px] flex-col p-4">
+          <h1 className="mb-8 flex flex-col font-serif text-[40px] font-bold leading-[48px] md:text-[80px] md:leading-[88px]">
             <span>A glossary for</span>
-            <span className="md:text-[86px] md:leading=[94px] text-[#F7C544]">
+            <span className="md:leading=[94px] text-[#F7C544] md:text-[86px]">
               Ethereum jargon
             </span>
           </h1>
           <p className="mb-4 text-2xl">
             Unlock the power of Ethereum in your language
           </p>
-          <button className="bg-button-gradient font-extrabold max-w-[223px] text-[27px] px-4 py-2 rounded-lg">
+          <button className="max-w-[223px] rounded-lg bg-button-gradient px-4 py-2 text-[27px] font-extrabold">
             Let&apos;s go
           </button>
         </div>
       </section>
 
       {/* <div  className="grid md:grid-cols-[minmax(220px,288px)_minmax(240px,auto)_minmax(220px,288px)] gap-4"></div> */}
-      <div className="bg-homepage-gradient w-full flex flex-col items-center">
+      <div className="flex w-full flex-col items-center bg-homepage-gradient">
         {/* What is EthGlossary section */}
-        <section className="mt-40 flex flex-col lg:flex-row items-center max-w-[961px] w-full relative ">
+        <section className="relative mt-40 flex w-full max-w-[961px] flex-col items-center lg:flex-row">
           <div className="flex-1 p-4">
-            <div className="flex items-center mb-4 relative">
+            <div className="relative mb-4 flex items-center">
               {/* <div className="text-pink-600 text-4xl mr-2 absolute -left-20">
               <svg
                 width="95"
@@ -77,7 +77,7 @@ export default async function HomePage() {
                 />
               </svg>
             </div> */}
-              <h2 className="text-[64px] font-bold font-serif">
+              <h2 className="font-serif text-[64px] font-bold">
                 What is ETHGlossary?
               </h2>
             </div>
@@ -92,19 +92,19 @@ export default async function HomePage() {
             </p>
           </div>
 
-          <div className="flex-1 flex justify-center lg:justify-end p-4 pl-20">
+          <div className="flex flex-1 justify-center p-4 pl-20 lg:justify-end">
             <img
               src="/images/globe.png"
               alt="Globe"
-              className="w-48 h-48 lg:w-96 lg:h-96 object-contain"
+              className="h-48 w-48 object-contain lg:h-96 lg:w-96"
             />
           </div>
         </section>
 
         {/* Languages */}
 
-        <section className="mt-40 flex flex-col max-w-[961px]">
-          <h2 className="flex flex-col text-5xl font-bold mb-12">
+        <section className="mt-40 flex max-w-[961px] flex-col">
+          <h2 className="mb-12 flex flex-col text-5xl font-bold">
             <span className="text-[156px]">62</span>
             <span>Translation languages</span>
           </h2>
@@ -114,20 +114,20 @@ export default async function HomePage() {
             }
             languages={languagesWithLocalAndCountries}
           />
-          <button className="mt-4 self-center bg-button-gradient font-extrabold text-[27px] px-[54px] py-2 rounded-lg">
+          <button className="mt-4 self-center rounded-lg bg-button-gradient px-[54px] py-2 text-[27px] font-extrabold">
             See all languages
           </button>
         </section>
 
         {/* How it works */}
-        <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-darkBlue text-white">
-          <section className="flex flex-col lg:flex-row items-start max-w-6xl w-full space-y-8 lg:space-y-0 lg:space-x-8">
+        <div className="bg-darkBlue flex min-h-screen flex-col items-center justify-center p-6 text-white">
+          <section className="flex w-full max-w-6xl flex-col items-start space-y-8 lg:flex-row lg:space-x-8 lg:space-y-0">
             {/* <!-- Heading Section --> */}
             <div className="flex-1">
-              <div className="relative flex items-center mb-4">
-                <div className="absolute left-[-200px] top-4 text-blue-400 text-4xl mr-2">
+              <div className="relative mb-4 flex items-center">
+                <div className="absolute left-[-200px] top-4 mr-2 text-4xl text-blue-400">
                   {/* <!-- Placeholder for Speech Bubble Icon --> */}
-                  <SpeechBubble className="w-36 h-36" />
+                  <SpeechBubble className="h-36 w-36" />
                 </div>
                 <h2 className="text-[64px] font-bold">How it works</h2>
               </div>
@@ -135,7 +135,7 @@ export default async function HomePage() {
 
             {/* <!-- Steps Section --> */}
             <div className="flex-1 space-y-6">
-              <ol className="space-y-6 list-decimal list-inside">
+              <ol className="list-inside list-decimal space-y-6">
                 {howItWorksData.map((item, index) => (
                   <HowItWorksListItem
                     key={index}
@@ -148,7 +148,7 @@ export default async function HomePage() {
               </ol>
 
               <div>
-                <button className="mt-6 bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded-lg text-lg font-bold flex items-center space-x-2">
+                <button className="mt-6 flex items-center space-x-2 rounded-lg bg-yellow-400 px-6 py-3 text-lg font-bold text-black hover:bg-yellow-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -172,15 +172,15 @@ export default async function HomePage() {
       </div>
 
       {/* how to get started */}
-      <section className="w-full bg-dotted-gradient bg-[length:16px_16px] flex flex-col items-center">
-        <div className="flex flex-col items-center max-w-[960px] w-full mt-36">
-          <h2 className="flex flex-col text-5xl font-bold mb-14">
+      <section className="flex w-full flex-col items-center bg-dotted-gradient bg-[length:16px_16px]">
+        <div className="mt-36 flex w-full max-w-[960px] flex-col items-center">
+          <h2 className="mb-14 flex flex-col text-5xl font-bold">
             How to get started
           </h2>
           {/* <div className="w-[720px] h-[400px] bg-[#434C6A] mb-16 flex items-center justify-center">
             <span className="text-8xl">▶️</span>
           </div> */}
-          <div className="grid gap-3 md:grid-cols-3 md:gap-8 max-w-[960px] w-full mb-72">
+          <div className="mb-72 grid w-full max-w-[960px] gap-3 md:grid-cols-3 md:gap-8">
             {getStartedCardData.map((item, index) => (
               <GetStartedCard
                 key={item.number}
@@ -194,16 +194,16 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="flex flex-col items-center w-full">
-        <div className="flex items-center justify-center w-full bg-dolphin-gradient">
-          <div className="relative flex flex-col items-center max-w-[1144px] text-center   w-full">
-            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <section className="flex w-full flex-col items-center">
+        <div className="flex w-full items-center justify-center bg-dolphin-gradient">
+          <div className="relative flex w-full max-w-[1144px] flex-col items-center text-center">
+            <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 transform">
               <img src="/images/dolphin.png" alt="hero" />
             </div>
-            <div className="mt-40 mb-36">
-              <p className="text-[#B3A8C0] mb-2">Part of ethereum.org</p>
-              <h2 className="text-4xl font-bold mb-10">Translatathon 2024</h2>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8 max-w-[1144px] w-full">
+            <div className="mb-36 mt-40">
+              <p className="mb-2 text-[#B3A8C0]">Part of ethereum.org</p>
+              <h2 className="mb-10 text-4xl font-bold">Translatathon 2024</h2>
+              <div className="grid w-full max-w-[1144px] grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
                 {translatathonCardData.map((item, index) => (
                   <TranslatathonCard
                     key={index}
@@ -213,7 +213,7 @@ export default async function HomePage() {
                   />
                 ))}
               </div>
-              <button className="mt-16 px-6 py-3 bg-transparent border-2 border-[#F7E544] text-[#F7E544] font-bold rounded-full">
+              <button className="mt-16 rounded-full border-2 border-[#F7E544] bg-transparent px-6 py-3 font-bold text-[#F7E544]">
                 Learn more
               </button>
             </div>
@@ -229,11 +229,11 @@ const GetStartedCard = ({ number, color, heading, text }) => {
     <div
       className={cn(
         `border-[${color}]`,
-        'flex flex-col items-center gap-3 py-8 px-6 bg-background rounded-sm border-2 text-center',
+        'flex flex-col items-center gap-3 rounded-sm border-2 bg-background px-6 py-8 text-center',
       )}
       style={{ borderColor: color }}
     >
-      <h3 className="text-xl font-semibold font-sans">{heading}</h3>
+      <h3 className="font-sans text-xl font-semibold">{heading}</h3>
       <p>{text}</p>
     </div>
   )
@@ -288,12 +288,12 @@ const TranslatathonCard = ({ number, emoji, color, heading, text }) => {
   return (
     <div
       className={cn(
-        'flex flex-col items-start gap-3 py-8 px-6 bg-[#341A54] border border-[#4F2A7F] rounded-md',
+        'flex flex-col items-start gap-3 rounded-md border border-[#4F2A7F] bg-[#341A54] px-6 py-8',
       )}
     >
       <span className="text-[40px]">{emoji}</span>
       <div className="flex flex-col items-start gap-2">
-        <h3 className="text-xl font-semibold font-sans">{heading}</h3>
+        <h3 className="font-sans text-xl font-semibold">{heading}</h3>
         <p className="text-left">{text}</p>
       </div>
     </div>

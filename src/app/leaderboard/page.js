@@ -33,8 +33,8 @@ const UserLeaderboardRow = ({
   voteCount,
 }) => {
   return (
-    <TableRow className="border-none flex items-center justify-start">
-      <TableCell className="p-0 m-0">
+    <TableRow className="flex items-center justify-start border-none">
+      <TableCell className="m-0 p-0">
         <div className="relative inline-block">
           <Avatar className="h-10 w-10">
             <AvatarImage src={avatarUrl} alt="U" />
@@ -42,7 +42,7 @@ const UserLeaderboardRow = ({
           </Avatar>
           <div
             className={cn(
-              'absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 text-black rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold',
+              'absolute right-0 top-0 flex h-4 w-4 -translate-y-1/4 translate-x-1/4 transform items-center justify-center rounded-full text-[10px] font-bold text-black',
               getPositionBgColor(position),
             )}
           >
@@ -50,24 +50,24 @@ const UserLeaderboardRow = ({
           </div>
         </div>
       </TableCell>
-      <TableCell className="flex-1 p-0 m-4 font-semibold">
+      <TableCell className="m-4 flex-1 p-0 font-semibold">
         {displayName}
       </TableCell>
-      <TableCell className="flex gap-1 p-0 m-4 text-center justify-self-end">
+      <TableCell className="m-4 flex gap-1 justify-self-end p-0 text-center">
         {translationCount !== undefined && (
-          <div className="py-0.5 px-1 flex gap-1 items-center">
+          <div className="flex items-center gap-1 px-1 py-0.5">
             <TranslateIcon />
             <span>{translationCount}</span>
           </div>
         )}
         {commentCount !== undefined && (
-          <div className="py-0.5 px-1 flex gap-1 items-center">
+          <div className="flex items-center gap-1 px-1 py-0.5">
             <CommentsIcon />
             <span>{commentCount}</span>
           </div>
         )}
         {voteCount !== undefined && (
-          <div className="py-0.5 px-1 flex gap-1 items-center">
+          <div className="flex items-center gap-1 px-1 py-0.5">
             <CommentsIcon />
             <span>{voteCount}</span>
           </div>
@@ -102,7 +102,7 @@ const UserLeaderboardTabTrigger = ({ value, children }) => {
     <TabsTrigger
       // className="text-[13px] bg-white text-black data-[state='active']:bg-[black] data-[state='active']:text-white rounded-full p-0 py-2 px-3"
       // Hardcoding black/white for active state as it was causing a bug where the default styling woudl show
-      className=" text-[13px] shadow-none bg-white text-black data-[state=active]:bg-[#000] data-[state=active]:text-[#fff] rounded-full p-0 py-2 px-3"
+      className="rounded-full bg-white p-0 px-3 py-2 text-[13px] text-black shadow-none data-[state=active]:bg-[#000] data-[state=active]:text-[#fff]"
       value={value}
     >
       {children}
@@ -119,7 +119,7 @@ const UserLeaderboardTabs = ({
 }) => {
   return (
     <Tabs defaultValue="total" className="w-full">
-      <TabsList className="flex gap-2 w-full max-[350px]:h-auto max-[350px]:flex-wrap mb-4">
+      <TabsList className="mb-4 flex w-full gap-2 max-[350px]:h-auto max-[350px]:flex-wrap">
         <UserLeaderboardTabTrigger value="total">
           Overall
         </UserLeaderboardTabTrigger>
@@ -154,7 +154,7 @@ const PageLeaderboardTabTrigger = ({ value, children }) => {
   return (
     <TabsTrigger
       value={value}
-      className="basis-[120px] text-base rounded-none text-black font-normal data-[state='active']:font-semibold data-[state='active']:text-black data-[state='active']:bg-none data-[state='active']:shadow-none data-[state='active']:border-b-[3px] data-[state='active']:border-black"
+      className="basis-[120px] rounded-none text-base font-normal text-black data-[state='active']:border-b-[3px] data-[state='active']:border-black data-[state='active']:bg-none data-[state='active']:font-semibold data-[state='active']:text-black data-[state='active']:shadow-none"
     >
       {children}
     </TabsTrigger>
@@ -202,8 +202,8 @@ export default async function LeaderboardPage() {
   } = await fetchOrderedLeaderboardData()
 
   return (
-    <div className="max-w-screen-sm mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Leaderboard</h1>
+    <div className="mx-auto max-w-screen-sm">
+      <h1 className="mb-4 text-2xl font-bold">Leaderboard</h1>
       <UserLeaderboardTabs
         orderedByTotal={orderedByTotal}
         orderedByVotes={orderedByVotes}

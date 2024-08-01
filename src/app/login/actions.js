@@ -28,7 +28,6 @@ export async function oAuthSignIn(provider) {
 export async function discordSignIn() {
   const supabase = createClient()
   const redirectUrl = await getURL('/auth/callback')
-  console.log('redirect', redirectUrl)
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'discord',
     options: {
@@ -56,8 +55,6 @@ export async function googleSignIn() {
       redirectTo: redirectUrl2,
     },
   })
-
-  console.log('data', data)
 
   if (error) {
     return redirect('/leaderboard')

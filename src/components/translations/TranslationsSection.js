@@ -81,22 +81,22 @@ export default function TranslationsSection({
     <div className="grow-1 shrink-1 basis-auto">
       <div className="bg-background p-4 pt-6">
         <TranslationStatus submitted={submitted} />
-        <p className="font-serif text-[40px] mb-8">{term}</p>
-        <span className="text "></span>
-        <p className="text-sm font-semibold mb-2">Examples</p>
+        <p className="mb-8 font-serif text-[40px]">{term}</p>
+        <span className="text"></span>
+        <p className="mb-2 text-sm font-semibold">Examples</p>
 
-        <div className="mb-2 p-2 rounded bg-accent">
+        <div className="mb-2 rounded bg-accent p-2">
           <p>
             An ethereum transaction requires{' '}
-            <span className="bg-[#651A1A] p-1 rounded">gas</span>
+            <span className="rounded bg-[#651A1A] p-1">gas</span>
           </p>
         </div>
-        <div className="p-2 rounded bg-accent">
-          <span className="bg-[#651A1A] p-1 rounded">Gas</span> is the fee
+        <div className="rounded bg-accent p-2">
+          <span className="rounded bg-[#651A1A] p-1">Gas</span> is the fee
           required to successfully conduct a transaction or execute a contract
           on the Ethereum blockchain platform
         </div>
-        <hr className="mt-5 h-px my-8 bg-gray-200 border-0" />
+        <hr className="my-8 mt-5 h-px border-0 bg-gray-200" />
         <AddTranslationForm
           termId={termId}
           languageId={languageId}
@@ -116,13 +116,13 @@ export default function TranslationsSection({
           />
         </AddTranslationForm>
       </div>
-      <div className="my-4 p-8 flex flex-col gap-4 bg-background">
+      <div className="my-4 flex flex-col gap-4 bg-background p-8">
         {submitted ? (
           <div className="">
-            <h2 className="text-xl font-semibold mb-4">
+            <h2 className="mb-4 text-xl font-semibold">
               Suggested translations
             </h2>
-            <div className="flex flex-col gap-3 mb-6">
+            <div className="mb-6 flex flex-col gap-3">
               <p>
                 <strong>Cast your vote on the terms below</strong> to help the
                 community select the best translation.
@@ -164,7 +164,7 @@ export default function TranslationsSection({
                 }
                 return (
                   <div key={translation.id}>
-                    <div className="flex justify-between items-center mb-0 py-3 px-4 border rounded-md rounded-b-none">
+                    <div className="mb-0 flex items-center justify-between rounded-md rounded-b-none border px-4 py-3">
                       <p className="">{translation.translation}</p>
                       <VoteButtons
                         translationId={translation.id}
@@ -172,7 +172,7 @@ export default function TranslationsSection({
                         userId={user?.id}
                       />
                     </div>
-                    <div className="text-sm bg-[#3F375D] px-2 py-1 rounded-md rounded-t-none">
+                    <div className="rounded-md rounded-t-none bg-[#3F375D] px-2 py-1 text-sm">
                       {suggestedByMessage}
                     </div>
                   </div>
@@ -191,14 +191,14 @@ export default function TranslationsSection({
 const TranslationStatus = ({ submitted }) => {
   if (submitted) {
     return (
-      <div className="inline-flex gap-1 items-center bg-secondary rounded-full px-2 py-1 mb-4">
+      <div className="mb-4 inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-1">
         <CheckDecagramGreen />
-        <p className=" font-bold text-sm">Translated</p>
+        <p className="text-sm font-bold">Translated</p>
       </div>
     )
   }
 
-  return <p className="text-sm px-2 py-1 mb-4">Translate</p>
+  return <p className="mb-4 px-2 py-1 text-sm">Translate</p>
 }
 
 const UpNextComponent = ({
@@ -209,7 +209,7 @@ const UpNextComponent = ({
   return (
     <>
       <a href={`/${language}/${nextTerm}`}>Next Term</a>
-      <div className="md:hidden flex items-center space-x-2 self-center">
+      <div className="flex items-center space-x-2 self-center md:hidden">
         <span className="text-xl">{nextTerm}</span>
         {hasTranslatedNextTerm ? (
           <CheckDecagramGreen />
