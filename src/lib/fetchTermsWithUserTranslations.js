@@ -1,7 +1,6 @@
-// lib/fetchTermsWithUserTranslations.js
 import { supabase } from './supabaseClient'
 
-export async function fetchTermsWithUserTranslations(userId) {
+export async function fetchTermsWithUserTranslations(userId, languageId) {
   // Fetch all terms
   const { data: terms, error: termsError } = await supabase
     .from('strings')
@@ -19,25 +18,52 @@ export async function fetchTermsWithUserTranslations(userId) {
     }))
   }
 
-  // Fetch user's translations
-  const { data: userTranslations, error: userTranslationsError } =
-    await supabase.from('translations').select('term_id').eq('user_id', userId)
+  // Fetch translations related to each term and check if the user has translated any of them
+  const termsWithUserStatus = await Promise.all(
+    terms.map(async term => {
+      // Fetch translation IDs for the current term
+      const { data: translations, error: translationsError } = await supabase
+        .from('translations')
+        .select('id')
+        .eq('term_id', term.id)
+        .eq('language_id', languageId)
 
-  if (userTranslationsError) {
-    throw new Error(
-      `Error fetching user translations: ${userTranslationsError.message}`,
-    )
-  }
+      if (translationsError) {
+        throw new Error(
+          `Error fetching translations: ${translationsError.message}`,
+        )
+      }
 
-  const userTranslatedTermIds = new Set(
-    userTranslations.map(translation => translation.term_id),
+      // Extract the translation IDs
+      const translationIds = translations.map(t => t.id)
+
+      if (translationIds.length === 0) {
+        return {
+          ...term,
+          user_has_translated: false,
+        }
+      }
+
+      // Check if there are any translation submissions by the user for these translation IDs
+      const { data: userSubmissions, error: userSubmissionsError } =
+        await supabase
+          .from('translation_submissions')
+          .select('id')
+          .in('translation_id', translationIds)
+          .eq('user_id', userId)
+
+      if (userSubmissionsError) {
+        throw new Error(
+          `Error checking user submissions: ${userSubmissionsError.message}`,
+        )
+      }
+
+      return {
+        ...term,
+        user_has_translated: userSubmissions.length > 0,
+      }
+    }),
   )
-
-  // Combine data
-  const termsWithUserStatus = terms.map(term => ({
-    ...term,
-    user_has_translated: userTranslatedTermIds.has(term.id),
-  }))
 
   return termsWithUserStatus
 }

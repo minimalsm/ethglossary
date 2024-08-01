@@ -46,15 +46,6 @@ export default async function TermPage({ params }) {
   const localeLanguageData = getLanguageData(language)
 
   // Fetch terms with user translation status
-  const terms = await fetchTermsWithUserTranslations(userId)
-  const termData = terms.find(t => t.term === term)
-  if (!termData) {
-    console.error('Term not found:', term)
-    return {
-      notFound: true,
-    }
-  }
-  const termId = termData.id
 
   // Fetch language ID
   const languages = await fetchLanguages()
@@ -66,6 +57,16 @@ export default async function TermPage({ params }) {
     }
   }
   const languageId = languageData.id
+
+  const terms = await fetchTermsWithUserTranslations(userId, languageId)
+  const termData = terms.find(t => t.term === term)
+  if (!termData) {
+    console.error('Term not found:', term)
+    return {
+      notFound: true,
+    }
+  }
+  const termId = termData.id
 
   // Fetch translations and comments concurrently
   const [
@@ -119,6 +120,7 @@ export default async function TermPage({ params }) {
           languageCode={language}
           localeLanguageData={localeLanguageData}
           termsLength={totalTerms}
+          // userhastransltedcount needs fixed
           userHasTranslatedCount={userHasTranslatedCount}
         />
 
