@@ -100,6 +100,11 @@ module.exports = {
         'dotted-gradient': 'radial-gradient(#49506B 2px, transparent 0);',
         'dolphin-gradient':
           'linear-gradient(180deg, #2B0758 0%, #1C043A 54%, #110225 100%);',
+        'multi-texture': "url('/images/textures/multicolor-glyph.png')",
+        'yellow-texture': "url('/images/textures/yellow-glyph.png')",
+      },
+      zIndex: {
+        '-1': '-1', // To ensure your background is behind other content
       },
     },
   },

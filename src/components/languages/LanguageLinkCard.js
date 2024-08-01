@@ -13,7 +13,7 @@ const LanguageLinkCard = ({ language }) => {
   return (
     <Link
       href={`/${language.code}/hello`}
-      className="flex items-center justify-between gap-4 rounded-lg border p-4 hover:border-[#E8D3D3] hover:bg-card-gradient"
+      className="flex items-center justify-between gap-4 rounded-lg border bg-background p-4 hover:border-[#E8D3D3] hover:bg-card-gradient"
     >
       <div id="content" className="flex flex-col space-y-0.5">
         <div id="langs" className="flex items-baseline">
