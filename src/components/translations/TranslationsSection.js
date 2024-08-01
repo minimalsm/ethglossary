@@ -81,7 +81,7 @@ export default function TranslationsSection({
     <div className="grow-1 shrink-1 basis-auto">
       <div className="bg-background p-4 pt-6">
         <TranslationStatus submitted={submitted} />
-        <p className="text-[40px] mb-8">{term}</p>
+        <p className="font-serif text-[40px] mb-8">{term}</p>
         <span className="text "></span>
         <p className="text-sm font-semibold mb-2">Examples</p>
 
