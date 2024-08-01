@@ -151,7 +151,7 @@ const SubmissionState = ({
   if (hasSubmittedTranslation === true) {
     return (
       <>
-        <Button type="submit" disabled={isSubmitting} className="rounded-none">
+        <Button variant="outline" type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Submitting...' : 'Suggest another'}
         </Button>
         {children}
@@ -159,7 +159,7 @@ const SubmissionState = ({
     )
   } else {
     return (
-      <Button type="submit" disabled={isSubmitting} className="rounded-none">
+      <Button type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Submitting...' : 'Suggest translation'}
       </Button>
     )

@@ -6,6 +6,7 @@ import { getLanguageData } from '@/lib/languageUtils'
 import LanguageList from '@/components/languages/LanguagesList'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 
 export default async function HomePage() {
   const {
@@ -28,17 +29,20 @@ export default async function HomePage() {
 
   return (
     <div className="flex min-h-screen flex-col items-center text-white font-sans">
-      <div></div>
-      <section className="relative w-full h-screen flex items-center justify-center">
+      {/* <div>
+        <Button>Next term</Button>
+        <Button variant="outline">Suggest another</Button>
+      </div> */}
+      <section className="relative w-full h-screen max-h-[720px] flex items-center justify-center">
         <img
           src="/images/hero.png"
-          className="absolute inset-0 w-full h-full object-cover z-[-1]"
+          className="absolute inset-0 w-full h-full object-cover z-[-1] "
           alt="hero"
         />
-        <div className="relative z-10 flex flex-col basis-[1024px] max-w-screen-lg">
-          <h1 className="flex flex-col font-serif font-bold text-[80px] leading-[88px] mb-8">
+        <div className="relative z-10 flex flex-col basis-[1024px] max-w-screen-lg p-4">
+          <h1 className="flex flex-col font-serif font-bold text-[40px] leading-[48px] md:text-[80px] md:leading-[88px] mb-8">
             <span>A glossary for</span>
-            <span className="text-[86px] leading=[94px] text-[#F7C544]">
+            <span className="md:text-[86px] md:leading=[94px] text-[#F7C544]">
               Ethereum jargon
             </span>
           </h1>
