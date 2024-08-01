@@ -8,6 +8,8 @@ const LanguageLinkCard = ({ language }) => {
   const localLanguageName = language.localName
   const countriesList = language?.countries?.join(', ') || null
 
+  console.log(language)
+
   return (
     <Link
       href={`/${language.code}/hello`}
@@ -24,18 +26,20 @@ const LanguageLinkCard = ({ language }) => {
           {countriesList}
         </div>
       </div>
-      {language.translationsCount &&
-        language.commentsCount(
-          <div id="stats" className="flex flex-col space-y-2">
-            <div className="text-sm flex items-center gap-1">
-              <TranslateIcon />
-              {language.translationsCount}
-            </div>
-            <div className="text-sm flex items-center gap-1">
-              <CommentsIcon /> {language.commentsCount}
-            </div>
-          </div>,
-        )}
+      {language.translationsCount !== undefined &&
+      language.commentsCount !== undefined ? (
+        <div id="stats" className="flex flex-col space-y-2">
+          <div className="text-sm flex items-center gap-1">
+            <TranslateIcon />
+            {language.translationsCount}
+          </div>
+          <div className="text-sm flex items-center gap-1">
+            <CommentsIcon /> {language.commentsCount}
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
     </Link>
   )
 }
