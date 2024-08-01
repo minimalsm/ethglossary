@@ -132,48 +132,53 @@ export default function TranslationsSection({
                 discussion in the comments section!
               </p>
             </div>
-            {translations.map(translation => {
-              // Get all user display_names
-              const translators = translation.translation_submissions.map(
-                submission => submission.profiles?.display_name || 'Anonymous',
-              )
-
-              console.log('translators when mapping', translators)
-
-              const isUserTranslator = translators.includes(user?.display_name)
-
-              // Construct the suggested by message
-              let suggestedByMessage = ''
-              if (isUserTranslator) {
-                const otherTranslators = translators.filter(
-                  name => name !== user.display_name,
+            <div className="flex flex-col gap-4">
+              {translations.map(translation => {
+                // Get all user display_names
+                const translators = translation.translation_submissions.map(
+                  submission =>
+                    submission.profiles?.display_name || 'Anonymous',
                 )
-                if (otherTranslators.length === 0) {
-                  suggestedByMessage = 'Suggested by you'
+
+                console.log('translators when mapping', translators)
+
+                const isUserTranslator = translators.includes(
+                  user?.display_name,
+                )
+
+                // Construct the suggested by message
+                let suggestedByMessage = ''
+                if (isUserTranslator) {
+                  const otherTranslators = translators.filter(
+                    name => name !== user.display_name,
+                  )
+                  if (otherTranslators.length === 0) {
+                    suggestedByMessage = 'Suggested by you'
+                  } else {
+                    suggestedByMessage = `Suggested by you and ${otherTranslators.length} others`
+                  }
+                } else if (translators.length === 1) {
+                  suggestedByMessage = `Suggested by ${translators[0]}`
                 } else {
-                  suggestedByMessage = `Suggested by you and ${otherTranslators.length} others`
+                  suggestedByMessage = `Suggested by ${translators[0]} and ${translators.length - 1} others`
                 }
-              } else if (translators.length === 1) {
-                suggestedByMessage = `Suggested by ${translators[0]}`
-              } else {
-                suggestedByMessage = `Suggested by ${translators[0]} and ${translators.length - 1} others`
-              }
-              return (
-                <div key={translation.id}>
-                  <div className="flex justify-between items-center mb-0 py-3 px-4 border border-black bg-white">
-                    <p className="text-black">{translation.translation}</p>
-                    <VoteButtons
-                      translationId={translation.id}
-                      initialVotes={translation.votes}
-                      userId={user?.id}
-                    />
+                return (
+                  <div key={translation.id}>
+                    <div className="flex justify-between items-center mb-0 py-3 px-4 border rounded-md rounded-b-none">
+                      <p className="">{translation.translation}</p>
+                      <VoteButtons
+                        translationId={translation.id}
+                        initialVotes={translation.votes}
+                        userId={user?.id}
+                      />
+                    </div>
+                    <div className="text-sm bg-[#3F375D] px-2 py-1 rounded-md rounded-t-none">
+                      {suggestedByMessage}
+                    </div>
                   </div>
-                  <div className="text-sm text-gray-500 bg-[#E3E3E3] px-2 py-1">
-                    {suggestedByMessage}
-                  </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
           </div>
         ) : (
           <p>Please submit a translation to view existing translations.</p>
