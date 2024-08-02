@@ -39,6 +39,9 @@
       --accent: #BBC0D8;
       --accent-foreground: 222.2 47.4% 11.2%;
       --accent-green: #156568;
+      --accent-ultra-violet: #CBB4F8;
+      --accent-trop-indigo: #AA7FFF;
+      --accent-surface: #E7EDFF;
 
       --banner: #3957C0;
       --banner-foreground: #fff;
@@ -91,6 +94,9 @@
       --accent: #282D3E;
       --accent-foreground: 222.2 47.4% 11.2%;
       --accent-green: #0EAAA0;
+      --accent-ultra-violet: #5B4782;
+      --accent-trop-indigo: #AA7FFF;
+      --accent-surface: #222739;
 
       --banner: #2B408C;
       --banner-foreground: #fff;

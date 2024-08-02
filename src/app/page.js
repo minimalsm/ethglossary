@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { FaDiscord } from 'react-icons/fa'
+import ThemeSwitch from '@/components/ThemeSwitch'
 
 export default async function HomePage() {
   const {
@@ -227,12 +228,15 @@ const HeroSection = () => {
           </p>
         </div>
 
-        <Button asChild className="mr-4 justify-self-end">
-          <Link href="/auth/login" aria-label="Sign in with Discord">
-            <FaDiscord className="mr-2 size-[16px]" />
-            <span className="text-xs font-bold">Sign In</span>
-          </Link>
-        </Button>
+        <div>
+          <Button asChild className="mr-4 justify-self-end">
+            <Link href="/auth/login" aria-label="Sign in with Discord">
+              <FaDiscord className="mr-2 size-[16px]" />
+              <span className="text-xs font-bold">Sign In</span>
+            </Link>
+          </Button>
+          <ThemeSwitch />
+        </div>
       </nav>
       <div className="container relative z-10 mx-auto flex flex-col items-start justify-center self-start">
         <h1 className="text-4.5xl mb-8 flex flex-col font-serif text-[40px] font-bold leading-[48px] md:text-7xl">

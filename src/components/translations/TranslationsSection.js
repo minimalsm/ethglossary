@@ -85,16 +85,20 @@ export default function TranslationsSection({
         <span className="text"></span>
         <p className="mb-2 text-sm font-semibold">Examples</p>
 
-        <div className="mb-2 rounded bg-accent p-2">
+        <div className="bg-accent-surface mb-2 rounded p-2">
           <p>
             An ethereum transaction requires{' '}
-            <span className="rounded bg-[#651A1A] p-1">gas</span>
+            <span className="bg-accent-ultraViolet border-accent-tropIndigo rounded border p-0.5">
+              gas
+            </span>
           </p>
         </div>
-        <div className="rounded bg-accent p-2">
-          <span className="rounded bg-[#651A1A] p-1">Gas</span> is the fee
-          required to successfully conduct a transaction or execute a contract
-          on the Ethereum blockchain platform
+        <div className="bg-accent-surface rounded p-2">
+          <span className="bg-accent-ultraViolet border-accent-tropIndigo rounded border p-0.5">
+            Gas
+          </span>{' '}
+          is the fee required to successfully conduct a transaction or execute a
+          contract on the Ethereum blockchain platform
         </div>
         <hr className="my-8 mt-5 h-px border-0 bg-gray-200" />
         <AddTranslationForm

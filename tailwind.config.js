@@ -45,6 +45,9 @@ module.exports = {
           DEFAULT: 'var(--accent)',
           foreground: 'hsl(var(--accent-foreground))',
           green: 'var(--accent-green)',
+          ultraViolet: 'var(--accent-ultra-violet)',
+          tropIndigo: 'var(--accent-trop-indigo)',
+          surface: 'var(--accent-surface)',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
