@@ -6,7 +6,7 @@ const TranslatingNowBanner = ({ defaultLocalLanguage = 'Pick a language' }) => {
 
   if (languagesPath) {
     return (
-      <div className="flex items-center justify-center gap-1 bg-banner-gradient py-4">
+      <div className="bg-banner flex items-center justify-center gap-1 py-4">
         <GlobeIcon />
         <p className="text-sm">
           Translating now:{' '}

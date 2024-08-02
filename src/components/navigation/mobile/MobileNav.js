@@ -15,21 +15,19 @@ export const MobileNav = ({ defaultLanguage, navSections }) => {
     <Sheet>
       <SheetTrigger asChild>
         <button
-          className="p-2 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white md:hidden"
+          className="rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white md:hidden"
           aria-label="Open menu"
         >
           <svg
-            className="h-6 w-6"
+            width="22"
+            height="14"
+            viewBox="0 0 22 14"
             fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16m-7 6h7"
+              d="M0.5 0H21.5V2.33333H0.5V0ZM0.5 5.83333H21.5V8.16667H0.5V5.83333ZM0.5 11.6667H21.5V14H0.5V11.6667Z"
+              fill="currentColor"
             />
           </svg>
         </button>
@@ -39,7 +37,7 @@ export const MobileNav = ({ defaultLanguage, navSections }) => {
           <SheetTitle className="text-left font-sans">ETHglossary</SheetTitle>
           <SheetClose>
             <button
-              className="absolute top-4 right-4 p-2 rounded-md  focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              className="absolute right-4 top-4 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-label="Close menu"
             >
               <svg
@@ -59,7 +57,7 @@ export const MobileNav = ({ defaultLanguage, navSections }) => {
             </button>
           </SheetClose>
         </SheetHeader>
-        <Separator className="mt-4 mb-20 " />
+        <Separator className="mb-20 mt-4" />
         {navSections.map((section, index) => (
           <MobileNavSection
             key={index}
@@ -76,7 +74,7 @@ export const MobileNav = ({ defaultLanguage, navSections }) => {
 const MobileNavSection = ({ heading, items, defaultLanguage }) => {
   return (
     <>
-      <h3 className="text-xs text-[#71768A] uppercase tracking-[2px] mt-6">
+      <h3 className="mt-6 text-xs uppercase tracking-[2px] text-[#71768A]">
         {heading}
       </h3>
       <MobileNavItemList items={items} defaultLanguage={defaultLanguage} />

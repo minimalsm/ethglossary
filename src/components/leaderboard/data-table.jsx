@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/table"
 
 import { Button } from "@/components/ui/button"
+import ArrowRight from "@/components/icons/ArrowRight"
+import ArrowLeft from "@/components/icons/ArrowLeft"
 
 export function DataTable ({columns, data}) {
   const visibleColumns = columns.filter(column => column.visible !== false);
@@ -33,8 +35,8 @@ export function DataTable ({columns, data}) {
 
   return (
     <>
-    <div className="rounded-md border max-w-[640px]">
-      <Table>
+    <div className="rounded-md max-w-[640px]">
+      <Table className='border-none'>
         <TableHeader className="hidden">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -87,22 +89,27 @@ export function DataTable ({columns, data}) {
       </Table>
     </div>
     
-            <div className="flex items-center justify-end space-x-2 py-4">
+            <div className="flex items-center justify-center space-x-2 py-4">
         <Button
           variant="outline"
           size="sm"
+          className='rounded-none border-none p-1.5 text-primary bg-accent disabled:text-white'
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
+          // disabled={false}
         >
-          Previous
+          <ArrowLeft />
+          
         </Button>
         <Button
           variant="outline"
           size="sm"
+          className='rounded-none border-none p-1.5 text-primary bg-accent disabled:text-white'
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
+          // disabled={false}
         >
-          Next
+          <ArrowRight />
         </Button>
       
 

@@ -104,7 +104,7 @@ export default async function DemoPage() {
   const data = await getData()
 
   return (
-    <div className="max-w-screen-sm mx-auto">
+    <div className="mx-auto max-w-screen-sm">
       <DataTable columns={columns} data={data} />
     </div>
   )

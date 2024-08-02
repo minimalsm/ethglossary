@@ -39,6 +39,9 @@
       --accent: #282D3E;
       --accent-foreground: 222.2 47.4% 11.2%;
 
+      --banner: #2B408C;
+      --banner-foreground: #fff;
+
       --destructive: 0 84.2% 60.2%;
       --destructive-foreground: 210 40% 98%;
 

@@ -102,7 +102,7 @@ const UserLeaderboardTabTrigger = ({ value, children }) => {
     <TabsTrigger
       // className="text-[13px] bg-white text-black data-[state='active']:bg-[black] data-[state='active']:text-white rounded-full p-0 py-2 px-3"
       // Hardcoding black/white for active state as it was causing a bug where the default styling woudl show
-      className="rounded-full bg-white p-0 px-3 py-2 text-[13px] text-black shadow-none data-[state=active]:bg-[#000] data-[state=active]:text-[#fff]"
+      className="rounded-full border border-white bg-background p-0 px-3 py-2 text-[13px] shadow-none data-[state=active]:bg-[#fff] data-[state=active]:text-background"
       value={value}
     >
       {children}
@@ -119,7 +119,7 @@ const UserLeaderboardTabs = ({
 }) => {
   return (
     <Tabs defaultValue="total" className="w-full">
-      <TabsList className="mb-4 flex w-full gap-2 max-[350px]:h-auto max-[350px]:flex-wrap">
+      <TabsList className="mb-4 flex w-full gap-2 bg-background max-[350px]:h-auto max-[350px]:flex-wrap">
         <UserLeaderboardTabTrigger value="total">
           Overall
         </UserLeaderboardTabTrigger>

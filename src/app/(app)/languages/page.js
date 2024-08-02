@@ -31,7 +31,7 @@ export default async function LanguagesPage() {
     getLanguageData(defaultLanguage)?.localName || 'Pick a language'
 
   return (
-    <div className="mx-auto mt-8 max-w-screen-sm">
+    <div className="mx-5 mt-8 max-w-screen-sm md:mx-auto">
       <h1 className="mb-4 text-[28px] font-bold">Languages</h1>
       <div className="flex flex-col gap-3 text-sm">
         <p>
@@ -51,19 +51,6 @@ export default async function LanguagesPage() {
     </div>
   )
 }
-
-const TranslatingNowBanner = ({ defaultLocalLanguage }) => {
-  return (
-    <div className="flex items-center justify-center gap-1 bg-gray-100 py-4">
-      <GlobeIcon />
-      <p className="text-sm">
-        Translating now:{' '}
-        <span className="font-semibold">{defaultLocalLanguage}</span>
-      </p>
-    </div>
-  )
-}
-
 const GlobeIcon = () => {
   return (
     <svg
