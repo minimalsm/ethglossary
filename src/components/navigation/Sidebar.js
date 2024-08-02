@@ -64,11 +64,11 @@ const TermButton = ({ term, termPath, isActive, hasTranslated }) => {
       asChild
       variant="ghost"
       className={cn(
-        'w-full justify-start rounded-none bg-[#1C202F] px-3 hover:bg-[#3A3E50] hover:text-white',
+        'w-full justify-start rounded-none bg-background px-3 hover:bg-border hover:text-inherit',
         {
-          'bg-[#282D3E] font-semibold': isActive,
-          'bg-[#1B2E3A] hover:bg-[#184951]': hasTranslated,
-          'bg-[#193C46]': isActive && hasTranslated,
+          'bg-accent font-semibold': isActive,
+          'bg-translated hover:bg-translatedHover': hasTranslated,
+          'bg-translatedActive': isActive && hasTranslated,
         },
       )}
       key={term}

@@ -191,8 +191,8 @@ export default function TranslationsSection({
 const TranslationStatus = ({ submitted }) => {
   if (submitted) {
     return (
-      <div className="mb-4 inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-1">
-        <CheckDecagramGreen />
+      <div className="bg-accent-green mb-4 inline-flex items-center gap-1 rounded-full px-2 py-1 text-white dark:text-background">
+        <CheckDecagramGreen className="" />
         <p className="text-sm font-bold">Translated</p>
       </div>
     )

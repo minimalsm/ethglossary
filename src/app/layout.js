@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import NavBar from '@/components/navigation/Navbar'
 import { fetchTerms } from '@/lib/fetchTerms'
 import { Inter, Noto_Serif } from 'next/font/google'
+import { Providers } from './providers'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,13 +18,13 @@ export default async function RootLayout({ children }) {
   const terms = await fetchTerms()
 
   return (
-    <html lang="en" className={inter.className}>
+    // Supressing hydration warning as theme is rendered on server then updated based on user preference
+    <html lang="en" className={inter.className} suppressHydrationWarning>
       <head />
       <body className="background">
-        {/* <NavBar className="" /> */}
-        {/* Taking off layout to dev homepage */}
-        {/* <div className="flex-1 mx-5 md:mx-12 md:my-8">{children}</div> */}
-        <div className="">{children}</div>
+        <Providers>
+          <div className="">{children}</div>
+        </Providers>
       </body>
     </html>
   )

@@ -44,6 +44,7 @@ module.exports = {
         accent: {
           DEFAULT: 'var(--accent)',
           foreground: 'hsl(var(--accent-foreground))',
+          green: 'var(--accent-green)',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
@@ -56,6 +57,18 @@ module.exports = {
         banner: {
           DEFAULT: 'var(--banner)',
           foreground: 'var(--banner-foreground)',
+        },
+        translated: {
+          DEFAULT: 'var(--translated)',
+          foreground: 'var(--translated-foreground)',
+        },
+        translatedHover: {
+          DEFAULT: 'var(--translated-hover)',
+          foreground: 'var(--translated-foreground)',
+        },
+        translatedActive: {
+          DEFAULT: 'var(--translated-active)',
+          foreground: 'var(--translated-active-foreground)',
         },
       },
       borderRadius: {
@@ -113,4 +126,5 @@ module.exports = {
     },
   },
   plugins: [require('tailwindcss-animate')],
+  darkMode: 'class',
 }
