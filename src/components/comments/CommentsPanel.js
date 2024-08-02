@@ -72,7 +72,7 @@ export default function CommentsPanel({
     <div className="grow-1 mt-6 flex shrink-0 flex-col gap-4">
       <h2 className="text-base font-semibold">Comments ({commentCount})</h2>
       {/* Todo: add a more elegant solution here */}
-      <ScrollArea className="max-h-[calc(100vh-350px)]">
+      <ScrollArea className="max-h-[calc(100vh-300px)] min-h-[300px]">
         <div className="flex flex-col space-y-4">
           {comments.map(comment => (
             <>

@@ -48,6 +48,7 @@ module.exports = {
           ultraViolet: 'var(--accent-ultra-violet)',
           tropIndigo: 'var(--accent-trop-indigo)',
           surface: 'var(--accent-surface)',
+          vote: 'var(--accent-vote)',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
@@ -72,6 +73,9 @@ module.exports = {
         translatedActive: {
           DEFAULT: 'var(--translated-active)',
           foreground: 'var(--translated-active-foreground)',
+        },
+        text: {
+          tertiary: 'var(--text-tertiary)',
         },
       },
       borderRadius: {

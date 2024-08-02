@@ -59,7 +59,7 @@ export default function CommentCard({ comment, userId }) {
   }
 
   return (
-    <Card className="grid w-full gap-2 border-none shadow-none md:max-w-xs">
+    <Card className="grid w-full gap-2 border-none bg-background shadow-none md:max-w-xs">
       <div id="card-header" className="flex items-center gap-2">
         <Avatar className="h-8 w-8">
           <AvatarImage src={comment.profiles?.avatar_url} />
@@ -70,11 +70,11 @@ export default function CommentCard({ comment, userId }) {
           </AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
-          <span className="text-sm font-semibold">
+          <span className="text-sm font-bold">
             {comment.profiles?.display_name || 'Anonymous'}
           </span>
           {/* Todo: extract this out and refactor lazy approach */}
-          <span className="text-xs text-[#606060]">
+          <span className="text-text-tertiary text-xs">
             {formatDistanceToNow(new Date(comment.created_at || Date.now()), {
               addSuffix: true,
             })}
