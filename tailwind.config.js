@@ -49,6 +49,7 @@ module.exports = {
           tropIndigo: 'var(--accent-trop-indigo)',
           surface: 'var(--accent-surface)',
           vote: 'var(--accent-vote)',
+          purple: 'var(--accent-purple)',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',

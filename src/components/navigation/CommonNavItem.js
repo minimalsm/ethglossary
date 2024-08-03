@@ -24,6 +24,7 @@ export const CommonNavItem = ({
   }
 
   const translateRoute = getTranslateRoute()
+  const translateRouteActive = translateRoute === pathname
 
   const containerClassName = isMobile
     ? 'py-3 px-4 font-serif text-xl rounded-[8px]'
@@ -44,10 +45,19 @@ export const CommonNavItem = ({
   return (
     <a
       href={isTranslateLink ? translateRoute : href}
-      className={cn(containerClassName, isActive && activeClassName)}
+      className={cn(containerClassName)}
       prefetch={false}
     >
-      <p className={cn(textClassName, isActive && 'font-bold')}>{linkText}</p>
+      <p
+        className={cn(
+          textClassName,
+          'px-4',
+          (isActive || translateRouteActive) &&
+            'rounded-tl-md rounded-tr-md border-b border-black bg-white font-bold dark:border-primary dark:bg-accent dark:text-primary',
+        )}
+      >
+        {linkText}
+      </p>
       {translatingNow && (
         <TranslatingNow localLanguageName={localLanguageName} />
       )}

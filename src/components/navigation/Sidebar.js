@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { usePathname } from 'next/navigation'
 import CheckDecagramGreen from '@/components/icons/CheckDecagramGreen'
 import CheckDecagramOutline from '@/components/icons/CheckDecagramOutline'
+import Link from 'next/link'
 
 export default function Sidebar({
   terms,
@@ -64,7 +65,7 @@ const TermButton = ({ term, termPath, isActive, hasTranslated }) => {
       asChild
       variant="ghost"
       className={cn(
-        'w-full justify-start rounded-none bg-background px-3 hover:bg-border hover:text-inherit',
+        'h-10 w-full justify-start rounded-none bg-background px-3 hover:bg-border hover:text-inherit',
         {
           'bg-accent font-semibold': isActive,
           'bg-translated hover:bg-translatedHover': hasTranslated,
@@ -73,10 +74,14 @@ const TermButton = ({ term, termPath, isActive, hasTranslated }) => {
       )}
       key={term}
     >
-      <a href={termPath} className={cn('flex gap-1 font-normal')}>
+      <Link
+        prefetch={true}
+        href={termPath}
+        className={cn('flex gap-1 font-normal')}
+      >
         {hasTranslated ? <CheckDecagramGreen /> : <CheckDecagramOutline />}
         <p className="text-base">{term}</p>
-      </a>
+      </Link>
     </Button>
   )
 }

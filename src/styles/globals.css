@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
   @tailwind components;
@@ -7,7 +8,7 @@
 
   @layer base {
     :root {
-      --font-inter: Inter, sans-serif;
+      --font-inter: "Noto Sans", sans-serif;
       --font-serif: 'Noto Serif', serif;
 
       /* --background: 0 0% 100%; */
@@ -43,6 +44,7 @@
       --accent-trop-indigo: #AA7FFF;
       --accent-surface: #E7EDFF;
       --accent-vote: var(--foreground);
+      --accent-purple: #CDC3F1;
 
       --banner: #3957C0;
       --banner-foreground: #fff;
@@ -51,7 +53,7 @@
       --destructive-foreground: 210 40% 98%;
 
       /* --border: 214.3 31.8% 91.4%; */
-      --border: #E7EDFF;
+      --border: #ADB4D0;
       --input: 214.3 31.8% 91.4%;
       --ring: 222.2 84% 4.9%;
 
@@ -65,7 +67,7 @@
     }
 
     .dark {
-      --font-inter: Inter, sans-serif;
+      --font-inter: "Noto sans", sans-serif;
       --font-serif: 'Noto Serif', serif;
 
       /* --background: 0 0% 100%; */
@@ -101,6 +103,7 @@
       --accent-trop-indigo: #AA7FFF;
       --accent-surface: #222739;
       --accent-vote: var(--primary);
+      --accent-purple: #3F375D;
 
       --banner: #2B408C;
       --banner-foreground: #fff;

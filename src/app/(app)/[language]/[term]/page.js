@@ -12,6 +12,7 @@ import Sidebar from '@/components/navigation/Sidebar'
 import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
 import { updateUserDefaultLanguage } from '@/lib/userProfile'
 import { getLanguageData } from '@/lib/languageUtils'
+import { cookies } from 'next/headers'
 
 export async function generateMetadata({ params }) {
   return {
@@ -99,6 +100,26 @@ export default async function TermPage({ params }) {
     await updateUserDefaultLanguage(user.id, language)
   }
 
+  const cookieStore = cookies()
+  let completionPercentage = 100 // Replace with your logic for determining percentage
+  let bannerKey = ''
+
+  if (completionPercentage >= 0 && completionPercentage < 50) {
+    bannerKey = 'bannerDismissed-0-49'
+  } else if (completionPercentage >= 50 && completionPercentage < 100) {
+    bannerKey = 'bannerDismissed-50-99'
+  } else if (completionPercentage === 100) {
+    bannerKey = 'bannerDismissed-100'
+  }
+
+  const isDismissedInitially = cookieStore.get(bannerKey)?.value === 'true'
+
+  console.log(cookieStore.get(bannerKey))
+
+  console.log(isDismissedInitially)
+
+  console.log('Banner key:', bannerKey)
+
   return (
     <div className="container p-0">
       <div className="bg-banner text-banner-foreground flex justify-between md:hidden">
@@ -137,6 +158,8 @@ export default async function TermPage({ params }) {
           termsLength={totalTerms}
           hasTranslatedNextTerm={hasTranslatedNextTerm}
           localeLanguageData={localeLanguageData}
+          completionPercentage={completionPercentage}
+          isDismissedInitially={isDismissedInitially}
         />
 
         <div className="hidden md:flex">

@@ -6,6 +6,8 @@ import CheckDecagramGreen from '@/components/icons/CheckDecagramGreen'
 import CheckDecagramOutline from '@/components/icons/CheckDecagramOutline'
 import ArrowRight from '@/components/icons/ArrowRight'
 import { Button } from '../ui/button'
+import Banner from './Banner'
+import CommunityLinks from './CommunityLinks'
 
 export default function TranslationsSection({
   initialTranslations,
@@ -20,6 +22,8 @@ export default function TranslationsSection({
   termsLength,
   hasTranslatedNextTerm,
   localeLanguageData,
+  isDismissedInitially,
+  completionPercentage,
 }) {
   const [translations, setTranslations] = useState(initialTranslations)
   const [submitted, setSubmitted] = useState(hasSubmittedTranslation)
@@ -77,8 +81,14 @@ export default function TranslationsSection({
   //   }
   // ]
 
+  console.log('Completion percentage', completionPercentage)
+
   return (
     <div className="grow-1 shrink-1 basis-auto">
+      <Banner
+        completionPercentage={completionPercentage}
+        initialDismissed={isDismissedInitially}
+      />
       <div className="bg-background p-4 pt-6">
         <TranslationStatus submitted={submitted} />
         <p className="mb-8 font-serif text-[40px]">{term}</p>
@@ -120,7 +130,7 @@ export default function TranslationsSection({
           />
         </AddTranslationForm>
       </div>
-      <div className="my-4 flex flex-col gap-4 bg-background p-8">
+      <div className="bg-accent-surface my-4 flex flex-col gap-4 p-8">
         {submitted ? (
           <div className="">
             <h2 className="mb-4 text-xl font-semibold">
@@ -176,7 +186,7 @@ export default function TranslationsSection({
                         userId={user?.id}
                       />
                     </div>
-                    <div className="rounded-md rounded-t-none bg-[#3F375D] px-2 py-1 text-sm">
+                    <div className="bg-accent-purple rounded-md rounded-t-none px-2 py-1 text-sm">
                       {suggestedByMessage}
                     </div>
                   </div>
@@ -188,6 +198,7 @@ export default function TranslationsSection({
           <p>Please submit a translation to view existing translations.</p>
         )}
       </div>
+      <CommunityLinks />
     </div>
   )
 }
@@ -212,9 +223,13 @@ const UpNextComponent = ({
 }) => {
   return (
     <>
-      <a href={`/${language}/${nextTerm}`}>Next Term</a>
+      <Button asChild>
+        <a href={`/${language}/${nextTerm}`}>Next Term</a>
+      </Button>
       <div className="flex items-center space-x-2 self-center md:hidden">
-        <span className="text-xl">{nextTerm}</span>
+        <span className="text-sm">
+          <span className="font-bold">Up next:</span> {nextTerm}
+        </span>
         {hasTranslatedNextTerm ? (
           <CheckDecagramGreen />
         ) : (

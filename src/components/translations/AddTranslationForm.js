@@ -131,7 +131,7 @@ export default function AddTranslationForm({
         disabled={isSubmitting}
         className="border-b-grey-300 m-0 rounded-none border-0 border-b bg-inherit py-8 text-[32px]"
       />
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <SubmissionState
           hasSubmittedTranslation={hasSubmittedTranslation}
           isSubmitting={isSubmitting}
