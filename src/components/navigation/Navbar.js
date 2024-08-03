@@ -29,24 +29,13 @@ export default async function NavBar() {
 
   return (
     <>
-      <header className="flex h-16 items-center justify-between px-8 shadow-sm md:px-12">
-        <h1 className="flex items-center gap-1 text-2xl font-bold">
-          <img
-            src="/images/icon.png"
-            width={40}
-            alt="Logo"
-            className="object-contain"
-          />
-          <span>
-            ETH<span className="font-normal">glossary</span>
-          </span>
-        </h1>
-        <nav className="hidden items-center gap-6 md:flex md:self-center">
+      <header className="flex h-16 w-full items-center justify-between px-8 shadow-sm md:px-12">
+        <nav className="mx-auto hidden w-full max-w-[1440px] items-center gap-6 md:flex md:self-center">
           <DesktopNav
             navSections={navSections}
             defaultLanguage={defaultLanguage}
           />
-          <ThemeSwitch />
+          {/* <ThemeSwitch /> */}
         </nav>
         <MobileNav
           defaultLanguage={defaultLanguage}

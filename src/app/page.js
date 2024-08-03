@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { FaDiscord } from 'react-icons/fa'
 import ThemeSwitch from '@/components/ThemeSwitch'
+import HomepageDesktopNav from '@/components/navigation/homepage/HomepageDesktopNav'
 
 export default async function HomePage() {
   const {
@@ -211,33 +212,8 @@ const HeroSection = () => {
           alt="hero"
         />
       </div>
-
       {/* new nav */}
-      <nav className="mx-auto mt-4 flex w-full justify-between self-start">
-        <div className="flex items-center gap-2">
-          <Image
-            src="/images/icon.png"
-            width={32}
-            height={32}
-            alt="ETHGlossary Logo"
-            className="ml-8 object-contain"
-          />
-          <p className="hidden text-3xl leading-[10px] text-primary md:block">
-            <span className="font-bold leading-[10px]">ETH</span>
-            <span className="font-light leading-[10px]">Glossary</span>
-          </p>
-        </div>
-
-        <div>
-          <Button asChild className="mr-4 justify-self-end">
-            <Link href="/auth/login" aria-label="Sign in with Discord">
-              <FaDiscord className="mr-2 size-[16px]" />
-              <span className="text-xs font-bold">Sign In</span>
-            </Link>
-          </Button>
-          <ThemeSwitch />
-        </div>
-      </nav>
+      <HomepageDesktopNav />
       <div className="container relative z-10 mx-auto flex flex-col items-start justify-center self-start">
         <h1 className="text-4.5xl mb-8 flex flex-col font-serif text-[40px] font-bold leading-[48px] md:text-7xl">
           <span>A glossary for</span>

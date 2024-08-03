@@ -24,14 +24,15 @@ export const CommonNavItem = ({
   }
 
   const translateRoute = getTranslateRoute()
-  const translateRouteActive = translateRoute === pathname
+
+  // Check if the current pathname includes the default language only for the translate link
+  const translateRouteActive =
+    isTranslateLink && pathname.includes(`/${defaultLanguage}`)
 
   const containerClassName = isMobile
     ? 'py-3 px-4 font-serif text-xl rounded-[8px]'
     : 'p-2'
-  const activeClassName = isMobile
-    ? 'bg-[#31222F]'
-    : 'font-bold border-b border-black'
+  const activeClassName = isMobile ? 'bg-[#31222F]' : 'font-bold'
   const textClassName = isMobile ? '' : 'p-2'
 
   if (href === '/logout') {
@@ -45,15 +46,18 @@ export const CommonNavItem = ({
   return (
     <a
       href={isTranslateLink ? translateRoute : href}
-      className={cn(containerClassName)}
+      className={cn(
+        containerClassName,
+        (isActive || translateRouteActive) && activeClassName,
+      )}
       prefetch={false}
     >
       <p
         className={cn(
           textClassName,
-          'px-4',
           (isActive || translateRouteActive) &&
-            'rounded-tl-md rounded-tr-md border-b border-black bg-white font-bold dark:border-primary dark:bg-accent dark:text-primary',
+            !isMobile &&
+            'rounded-tl-md rounded-tr-md border-b border-black bg-white px-4 font-bold dark:border-primary dark:bg-accent dark:text-primary',
         )}
       >
         {linkText}
