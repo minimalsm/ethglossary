@@ -14,6 +14,7 @@ import {
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import CheckDecagramGreen from '@/components/icons/CheckDecagramGreen'
 // import { ExclamationCircleIcon } from '@heroicons/react/solid'
 
 export default function AddTranslationForm({
@@ -28,6 +29,7 @@ export default function AddTranslationForm({
   user,
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const translationSchema = z.object({
     translation: z
@@ -107,6 +109,11 @@ export default function AddTranslationForm({
           { ...optimisticTranslation, ...updatedTranslation },
           existingTranslation.id,
         )
+
+        setIsSubmitted(true)
+        setTimeout(() => {
+          setIsSubmitted(false)
+        }, 3000)
       } catch (error) {
         alert(error.message)
         onTranslationAdded(existingTranslation, existingTranslation.id)
@@ -149,6 +156,11 @@ export default function AddTranslationForm({
           { ...optimisticTranslation, ...newTranslation },
           optimisticTranslation.id,
         )
+
+        setIsSubmitted(true)
+        setTimeout(() => {
+          setIsSubmitted(false)
+        }, 3000)
       } catch (error) {
         alert(error.message)
         onTranslationAdded(null, optimisticTranslation.id)
@@ -207,6 +219,7 @@ export default function AddTranslationForm({
           <SubmissionState
             hasSubmittedTranslation={hasSubmittedTranslation}
             isSubmitting={isSubmitting}
+            isSubmitted={isSubmitted}
           >
             {children}
           </SubmissionState>
@@ -220,7 +233,20 @@ const SubmissionState = ({
   isSubmitting,
   children,
   hasSubmittedTranslation,
+  isSubmitted,
 }) => {
+  if (isSubmitted) {
+    return (
+      <>
+        <Button className="bg-[#80D0CF]">
+          <span className="mr-2">Translation suggested</span>{' '}
+          <CheckDecagramGreen />
+        </Button>
+        {children}
+      </>
+    )
+  }
+
   if (hasSubmittedTranslation === true) {
     return (
       <>
