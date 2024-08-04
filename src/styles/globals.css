@@ -49,8 +49,8 @@
       --banner: #3957C0;
       --banner-foreground: #fff;
 
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 210 40% 98%;
+      --destructive: #A81A1A;
+      --destructive-foreground: #A81A1A;
 
       /* --border: 214.3 31.8% 91.4%; */
       --border: #ADB4D0;
@@ -108,8 +108,8 @@
       --banner: #2B408C;
       --banner-foreground: #fff;
 
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 210 40% 98%;
+      --destructive: #FF8C8C;
+      --destructive-foreground: #FF8C8C;
 
       /* --border: 214.3 31.8% 91.4%; */
       --border: #3A3E50;
