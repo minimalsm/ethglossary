@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { FaDiscord } from 'react-icons/fa'
 import ThemeSwitch from '@/components/ThemeSwitch'
 import HomepageDesktopNav from '@/components/navigation/homepage/HomepageDesktopNav'
+import { ArrowUpAndRight } from '@/components/icons'
 
 export default async function HomePage() {
   const {
@@ -31,9 +32,9 @@ export default async function HomePage() {
   const url = getURL('/auth/login') || 'none'
 
   return (
-    <div className="flex min-h-screen flex-col items-center font-sans text-white">
+    <div className="flex min-h-screen flex-col items-center font-sans">
       <HeroSection />
-      <div className="relative z-[-1] flex w-full flex-col items-center bg-homepage-gradient px-4">
+      <div className="dark:bg-dark-homepage-gradient relative flex w-full flex-col items-center bg-homepage-gradient px-4">
         <WhatIsETHGlossarySection />
         <LanguagesSection
           languages={languagesWithLocalAndCountries}
@@ -114,7 +115,7 @@ const TranslatathonCard = ({ number, emoji, color, heading, text }) => {
   return (
     <div
       className={cn(
-        'flex flex-col items-start gap-3 rounded-md border border-[#4F2A7F] bg-[#341A54] px-6 py-8',
+        'flex flex-col items-start gap-3 rounded-md border border-[#F0F0F0] bg-[#E1D7F3] px-6 py-8 dark:border-[#4F2A7F] dark:bg-[#341A54]',
       )}
     >
       <span className="text-[40px]">{emoji}</span>
@@ -128,13 +129,13 @@ const TranslatathonCard = ({ number, emoji, color, heading, text }) => {
 
 const BackgroundMulticolorTexture = () => {
   return (
-    <div className="bg-multi-texture absolute left-[-150px] top-1/2 z-[-1] h-[490px] w-[308px]" />
+    <div className="absolute left-[-150px] top-1/2 z-[-1] h-[490px] w-[308px] bg-multi-texture" />
   )
 }
 
 const BackgroundYellowTexture = () => {
   return (
-    <div className="bg-yellow-texture absolute right-1 top-1/3 z-[-1] h-[250px] w-[152px]" />
+    <div className="absolute right-1 top-1/3 z-[-1] h-[250px] w-[152px] bg-yellow-texture" />
   )
 }
 
@@ -202,20 +203,21 @@ const SpeechBubble = ({ number = null, color, className = 'w-16 h-16' }) => {
   )
 }
 
+// Todo: fix image background color
 const HeroSection = () => {
   return (
     <section className="relative grid h-screen max-h-[540px] w-full grid-cols-[minmax(auto,1440px)] md:max-h-[640px]">
       <div className="absolute inset-0 z-[-1] h-full w-full object-cover">
         <img
           src="/images/hero.png"
-          className="fixed inset-0 z-[-1] h-full w-full object-cover md:h-[700px]"
+          className="fixed inset-0 z-[-1] h-full w-full bg-blue-400 object-cover md:h-[700px]"
           alt="hero"
         />
       </div>
       {/* new nav */}
       <HomepageDesktopNav />
-      <div className="container relative z-10 mx-auto flex flex-col items-start justify-center self-start">
-        <h1 className="text-4.5xl mb-8 flex flex-col font-serif text-[40px] font-bold leading-[48px] md:text-7xl">
+      <div className="container relative z-10 mx-auto flex flex-col items-start justify-center self-start text-white">
+        <h1 className="mb-8 flex flex-col font-serif text-4.5xl text-[40px] font-bold leading-[48px] md:text-7xl">
           <span>A glossary for</span>
           <span className="text-primary">Ethereum jargon</span>
         </h1>
@@ -239,7 +241,7 @@ const WhatIsETHGlossarySection = () => {
       <div className="flex basis-8/12 flex-col gap-4 md:flex-row md:gap-8">
         <BubbleSvgTest color="#ED0161" />
         <div className="flex-1">
-          <h2 className="text-4.5xl md:text-6.5xl mb-4 font-serif font-bold">
+          <h2 className="mb-4 font-serif text-4.5xl font-bold md:text-6.5xl">
             What is ETHGlossary?
           </h2>
 
@@ -325,7 +327,7 @@ const HowItWorksSection = () => {
     <section className="mb-11 flex w-full max-w-[961px] flex-col items-start space-y-8 md:mb-16 md:flex-row lg:space-x-8 lg:space-y-0">
       <div className="flex flex-col gap-4 md:flex-row md:gap-8">
         <BubbleSvgTest color="#479CEA" />
-        <h2 className="text-4.5xl md:text-6.5xl max-w-[10ch] flex-1 font-bold">
+        <h2 className="max-w-[10ch] flex-1 text-4.5xl font-bold md:text-6.5xl">
           How it works
         </h2>
       </div>
@@ -359,7 +361,7 @@ const HowItWorksSection = () => {
 
 const HowToGetStartedSection = () => {
   return (
-    <section className="flex w-full flex-col items-center bg-dotted-gradient bg-[length:16px_16px] px-4">
+    <section className="flex w-full flex-col items-center bg-[#E7EDFF] bg-dotted-gradient bg-[length:16px_16px] px-4 dark:bg-[#0A1126]">
       <div className="mt-32 flex w-full max-w-[960px] flex-col items-center">
         <h2 className="mb-14 text-center text-5xl font-bold">
           How to get started
@@ -383,7 +385,7 @@ const HowToGetStartedSection = () => {
 const TranslatathonSection = () => {
   return (
     <section className="flex w-full flex-col items-center">
-      <div className="flex w-full items-center justify-center bg-dolphin-gradient px-4">
+      <div className="dark:bg-dark-dolphin-gradient flex w-full items-center justify-center bg-dolphin-gradient px-4">
         <div className="relative flex w-full max-w-[1144px] flex-col items-center text-center">
           <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 transform">
             <img src="/images/dolphin.png" alt="hero" className="min-w-64" />
@@ -401,9 +403,15 @@ const TranslatathonSection = () => {
                 />
               ))}
             </div>
-            <button className="mt-16 rounded-full border-2 border-[#F7E544] bg-transparent px-6 py-3 font-bold text-[#F7E544]">
-              Learn more
-            </button>
+            <Button
+              asChild
+              variant="outline"
+              className="mt-16 border-2 bg-transparent font-bold"
+            >
+              <Link href="https://ethereum.org/en/contributing/translation-program/translatathon/">
+                Learn more <ArrowUpAndRight className="ml-1" />
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

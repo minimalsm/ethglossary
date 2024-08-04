@@ -72,3 +72,21 @@ export const Close = ({ width = 24, height = 24 }) => (
     />
   </svg>
 )
+
+export const ArrowUpAndRight = ({ className = '' }) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path
+        d="M4.16667 14.6582L12.9917 5.83317H7.5V4.1665H15.8333V12.4998H14.1667V7.00817L5.34167 15.8332L4.16667 14.6582Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}

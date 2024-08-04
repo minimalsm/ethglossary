@@ -119,12 +119,16 @@ module.exports = {
         'card-gradient':
           'linear-gradient(94.3deg, rgba(235, 52, 49, 0.25) 4.12%, rgba(91, 11, 30, 0.25) 81.07%, rgba(66, 5, 4, 0.25) 94.25%);',
         'homepage-gradient':
+          'linear-gradient(180deg, #E5ECFF 0%, #EBF0FF 52%, #F8FAFF 100%)',
+        'dark-homepage-gradient':
           'linear-gradient(180deg, #1C202F 15.23%, #0E121F 36.54%, #1C202F 60.27%)',
         'button-gradient':
           'linear-gradient(106.76deg, #F7E544 4.85%, #EC0061 79.22%)',
-        'dotted-gradient': 'radial-gradient(#49506B 2px, transparent 0);',
-        'dolphin-gradient':
+        'dotted-gradient': 'radial-gradient(#49506B 1px, transparent 0);',
+        'dark-dolphin-gradient':
           'linear-gradient(180deg, #2B0758 0%, #1C043A 54%, #110225 100%);',
+        'dolphin-gradient':
+          'linear-gradient(180deg, #F8FAFF 0%, #EDE4FF 49%, #D2C3F0 100%);',
         'multi-texture': "url('/images/textures/multicolor-glyph.png')",
         'yellow-texture': "url('/images/textures/yellow-glyph.png')",
       },
