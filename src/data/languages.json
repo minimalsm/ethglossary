@@ -1,23 +1,157 @@
 {
     "fr": {
-      "name": "French",
-      "localName": "Français",
-      "countries": ["Belgium", "France", "Luxembourg", "Monaco", "Switzerland"]
+        "name": "French",
+        "localName": "Français",
+        "countries": ["Belgium", "France", "Luxembourg", "Monaco", "Switzerland"]
     },
     "de": {
-      "name": "German",
-      "localName": "Deutsch",
-      "countries": ["Austria", "Germany", "Liechtenstein", "Luxembourg", "Switzerland"]
+        "name": "German",
+        "localName": "Deutsch",
+        "countries": ["Austria", "Germany", "Liechtenstein", "Luxembourg", "Switzerland"]
     },
     "ar": {
-      "name": "Arabic",
-      "localName": "العربية",
-      "countries": ["Algeria", "Bahrain", "Egypt", "Iraq", "Jordan", "Kuwait", "Lebanon", "Morocco", "Oman", "Qatar", "Saudi Arabia", "Syria", "Tunisia", "United Arab Emirates", "Yemen"]
+        "name": "Arabic",
+        "localName": "العربية",
+        "countries": ["Algeria", "Bahrain", "Egypt", "Iraq", "Jordan", "Kuwait", "Lebanon", "Morocco", "Oman", "Qatar", "Saudi Arabia", "Syria", "Tunisia", "United Arab Emirates", "Yemen"]
     },
     "es": {
-      "name": "Spanish",
-      "localName": "Español",
-      "countries": ["Argentina", "Bolivia", "Chile", "Colombia", "Ecuador", "Paraguay", "Peru", "Uruguay", "Venezuela"]
+        "name": "Spanish",
+        "localName": "Español",
+        "countries": ["Argentina", "Bolivia", "Chile", "Colombia", "Ecuador", "Paraguay", "Peru", "Uruguay", "Venezuela"]
+    },
+    "pt": {
+        "name": "Portuguese",
+        "localName": "Português",
+        "countries": ["Angola", "Cape Verde", "Guinea-Bissau", "Mozambique", "Portugal", "São Tomé and Príncipe"]
+    },
+    "pt-br": {
+        "name": "Brazilian Portuguese",
+        "localName": "Português Brasileiro",
+        "countries": ["Brazil"]
+    },
+    "it": {
+        "name": "Italian",
+        "localName": "Italiano",
+        "countries": ["Italy", "Switzerland", "San Marino", "Vatican City"]
+    },
+    "ja": {
+        "name": "Japanese",
+        "localName": "日本語",
+        "countries": ["Japan"]
+    },
+    "zh": {
+        "name": "Chinese Simplified",
+        "localName": "简体中文",
+        "countries": ["China", "Singapore"]
+    },
+    "zh-tw": {
+        "name": "Chinese Traditional",
+        "localName": "繁體中文",
+        "countries": ["Taiwan", "Hong Kong", "Macau"]
+    },
+    "hu": {
+        "name": "Hungarian",
+        "localName": "Magyar",
+        "countries": ["Hungary"]
+    },
+    "tr": {
+        "name": "Turkish",
+        "localName": "Türkçe",
+        "countries": ["Turkey", "Cyprus"]
+    },
+    "id": {
+        "name": "Indonesian",
+        "localName": "Bahasa Indonesia",
+        "countries": ["Indonesia"]
+    },
+    "el": {
+        "name": "Greek",
+        "localName": "Ελληνικά",
+        "countries": ["Greece", "Cyprus"]
+    },
+    "fa": {
+        "name": "Persian",
+        "localName": "فارسی",
+        "countries": ["Iran", "Afghanistan", "Tajikistan"]
+    },
+    "ru": {
+        "name": "Russian",
+        "localName": "Русский",
+        "countries": ["Russia", "Belarus", "Kazakhstan", "Kyrgyzstan"]
+    },
+    "uk": {
+        "name": "Ukrainian",
+        "localName": "Українська",
+        "countries": ["Ukraine"]
+    },
+    "pl": {
+        "name": "Polish",
+        "localName": "Polski",
+        "countries": ["Poland"]
+    },
+    "hi": {
+        "name": "Hindi",
+        "localName": "हिन्दी",
+        "countries": ["India", "Fiji"]
+    },
+    "cs": {
+        "name": "Czech",
+        "localName": "Čeština",
+        "countries": ["Czech Republic"]
+    },
+    "fil": {
+        "name": "Filipino",
+        "localName": "Filipino",
+        "countries": ["Philippines"]
+    },
+    "ko": {
+        "name": "Korean",
+        "localName": "한국어",
+        "countries": ["South Korea", "North Korea"]
+    },
+    "ro": {
+        "name": "Romanian",
+        "localName": "Română",
+        "countries": ["Romania", "Moldova"]
+    },
+    "ms": {
+        "name": "Malay",
+        "localName": "Bahasa Melayu",
+        "countries": ["Malaysia", "Brunei", "Singapore"]
+    },
+    "nl": {
+        "name": "Dutch",
+        "localName": "Nederlands",
+        "countries": ["Netherlands", "Belgium", "Suriname"]
+    },
+    "bn": {
+        "name": "Bangla",
+        "localName": "বাংলা",
+        "countries": ["Bangladesh", "India"]
+    },
+    "vi": {
+        "name": "Vietnamese",
+        "localName": "Tiếng Việt",
+        "countries": ["Vietnam"]
+    },
+    "az": {
+        "name": "Azerbaijani",
+        "localName": "Azərbaycan dili",
+        "countries": ["Azerbaijan"]
+    },
+    "ca": {
+        "name": "Catalan",
+        "localName": "Català",
+        "countries": ["Spain", "Andorra"]
+    },
+    "sl": {
+        "name": "Slovenian",
+        "localName": "Slovenščina",
+        "countries": ["Slovenia"]
+    },
+    "ig": {
+        "name": "Igbo",
+        "localName": "Igbo",
+        "countries": ["Nigeria"]
     }
   }
-  
