@@ -49,7 +49,10 @@ export default async function LanguagesPage() {
           Contact us and let us know!
         </p>
       </div>
-      <LanguagesFilterAndList languages={languagesWithLocalAndCountries} />
+      <LanguagesFilterAndList
+        languages={languagesWithLocalAndCountries}
+        defaultLanguage={defaultLanguage}
+      />
     </div>
   )
 }
