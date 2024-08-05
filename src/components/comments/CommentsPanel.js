@@ -70,13 +70,13 @@ export default function CommentsPanel({
   }
 
   return (
-    <div className="hidden md:block">
+    <div className="flex flex-col">
       <h2 className="font-sans text-base font-semibold">
         Comments ({commentCount})
       </h2>
       <Separator className="mb-4 mt-3" />
       {/* Todo: add a more elegant solution here */}
-      <ScrollArea className="h-full max-h-[calc(100vh-210px)] min-h-[300px]">
+      <div className="max-h-[calc(100vh-230px)] min-h-[300px] overflow-y-auto overflow-x-hidden">
         <div className="space-y-4">
           {comments.map(comment => (
             <>
@@ -89,7 +89,7 @@ export default function CommentsPanel({
             </>
           ))}
         </div>
-      </ScrollArea>
+      </div>
       <AddCommentForm onAddComment={handleAddComment} />
     </div>
   )
