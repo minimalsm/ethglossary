@@ -70,11 +70,11 @@ export default function CommentCard({ comment, userId }) {
           </AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
-          <span className="text-sm font-bold">
+          <span className="mb-1 text-sm font-bold leading-none">
             {comment.profiles?.display_name || 'Anonymous'}
           </span>
           {/* Todo: extract this out and refactor lazy approach */}
-          <span className="text-text-tertiary text-xs">
+          <span className="text-xs leading-none text-text-tertiary">
             {formatDistanceToNow(new Date(comment.created_at || Date.now()), {
               addSuffix: true,
             })}
@@ -82,7 +82,8 @@ export default function CommentCard({ comment, userId }) {
         </div>
       </div>
       <div id="card-body">
-        <p className="break-all text-sm">{comment.comment}</p>
+        {/* Padding right to account for scrollbar */}
+        <p className="break-before-auto pr-1 text-sm">{comment.comment}</p>
       </div>
       <div className="flex items-center justify-end gap-2">
         <div className="m-1 flex items-center gap-1">

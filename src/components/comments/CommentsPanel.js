@@ -5,6 +5,7 @@ import CommentCard from '@/components/comments/CommentCard'
 import { addComment } from '@/lib/comments'
 import { fetchUserMetadata } from '@/lib/userProfile'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { Separator } from '@/components/ui/separator'
 
 export default function CommentsPanel({
   initialComments,
@@ -69,21 +70,22 @@ export default function CommentsPanel({
   }
 
   return (
-    <div className="flex-1 flex-col gap-4">
+    <div className="hidden md:block">
       <h2 className="font-sans text-base font-semibold">
         Comments ({commentCount})
       </h2>
+      <Separator className="mb-4 mt-3" />
       {/* Todo: add a more elegant solution here */}
-      <ScrollArea className="max-h-[calc(100vh-300px)] min-h-[300px]">
-        <div className="flex flex-col space-y-4">
+      <ScrollArea className="h-full max-h-[calc(100vh-210px)] min-h-[300px]">
+        <div className="space-y-4">
           {comments.map(comment => (
             <>
-              <hr />
               <CommentCard
                 comment={comment}
                 key={comment.id}
                 userId={user?.id}
               />
+              <Separator className="my-4" />
             </>
           ))}
         </div>
