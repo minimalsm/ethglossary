@@ -167,7 +167,7 @@ export default async function TermPage({ params }) {
           isDismissedInitially={isDismissedInitially}
         />
 
-        <div className="hidden md:flex">
+        <div className="sticky top-8 hidden self-start overflow-hidden md:block">
           <CommentsPanel
             termId={termId}
             languageId={languageId}
