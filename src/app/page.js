@@ -213,7 +213,7 @@ const SpeechBubble = ({ number = null, color, className = 'w-16 h-16' }) => {
 // Todo: fix image background color
 const HeroSection = ({ user = null }) => {
   return (
-    <section className="relative grid h-screen max-h-[540px] w-full max-w-[1440px] grid-cols-[minmax(auto,1440px)] px-4 md:max-h-[640px]">
+    <section className="relative grid h-screen max-h-[540px] w-full md:max-h-[640px]">
       <div className="absolute inset-0 z-[-1] h-full w-full object-cover">
         <img
           src="/images/hero.png"
@@ -222,8 +222,8 @@ const HeroSection = ({ user = null }) => {
         />
       </div>
       {/* new nav */}
-      <HomepageDesktopNav />
-      <div className="container relative z-10 mx-auto mb-2 flex flex-col items-start justify-center self-start p-0 text-white">
+      <HomepageDesktopNav user={user} />
+      <div className="container relative z-10 mx-auto mb-2 flex flex-col items-start justify-center self-start p-0 px-4 text-white">
         <h1 className="mb-4 flex flex-col font-serif text-4.5xl text-[40px] font-bold leading-[48px] md:text-7xl">
           <span>A glossary for</span>
           <span className="text-primary">Ethereum jargon</span>
