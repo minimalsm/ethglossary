@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import CheckDecagramGreen from '@/components/icons/CheckDecagramGreen'
 import CheckDecagramOutline from '@/components/icons/CheckDecagramOutline'
 import Link from 'next/link'
+import { slugify } from '@/utils/slugify'
 
 export default function Sidebar({
   terms,
@@ -42,7 +43,7 @@ export default function Sidebar({
       <hr className="mb-5 mt-3" />
 
       {terms.map(term => {
-        const termPath = `/${languageCode}/${term.term}`
+        const termPath = `/${languageCode}/${slugify(term.term)}`
         const isActive = pathname === termPath
 
         return (

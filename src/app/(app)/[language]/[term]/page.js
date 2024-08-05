@@ -13,16 +13,19 @@ import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
 import { updateUserDefaultLanguage } from '@/lib/userProfile'
 import { getLanguageData } from '@/lib/languageUtils'
 import { cookies } from 'next/headers'
+import { deslugify } from '@/utils/slugify'
 
 export async function generateMetadata({ params }) {
+  const term = deslugify(params.term)
+  console.log(term)
   return {
-    title: `Translations for "${params.term}" in ${params.language}`,
+    title: `Translations for "${term}" in ${params.language}`,
   }
 }
 
 export default async function TermPage({ params }) {
   const supabase = createSupabaseServerComponentClient()
-
+  const term = deslugify(params.term)
   const {
     data: { session },
     error,
@@ -42,7 +45,9 @@ export default async function TermPage({ params }) {
     user = profile
   }
 
-  const { language, term } = params
+  const { language } = params
+  // const deslugifiedTerm = deslugify(term)
+  // console.log('term afeer deslugify', term)
   const userId = session?.user?.id
   const localeLanguageData = getLanguageData(language)
 
@@ -153,7 +158,7 @@ export default async function TermPage({ params }) {
           user={user}
           hasSubmittedTranslation={hasSubmittedTranslation}
           language={language}
-          nextTerm={nextTerm.term}
+          nextTerm={nextTerm?.term}
           nextTermIndex={currentTermIndex + 1}
           termsLength={totalTerms}
           hasTranslatedNextTerm={hasTranslatedNextTerm}
