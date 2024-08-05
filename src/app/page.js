@@ -42,6 +42,8 @@ export default async function HomePage() {
     <div className="flex min-h-screen flex-col items-center font-sans">
       <HeroSection user={user} />
       <div className="dark:bg-dark-homepage-gradient relative flex w-full flex-col items-center bg-homepage-gradient px-4">
+        <BackgroundMulticolorTexture />
+        <BackgroundYellowTexture />
         <WhatIsETHGlossarySection />
         <LanguagesSection
           languages={languagesWithLocalAndCountries}
@@ -50,8 +52,6 @@ export default async function HomePage() {
         <HowItWorksSection />
 
         {/* Background textures */}
-        <BackgroundMulticolorTexture />
-        <BackgroundYellowTexture />
       </div>
       <HowToGetStartedSection />
       <TranslatathonSection />
@@ -136,13 +136,13 @@ const TranslatathonCard = ({ number, emoji, color, heading, text }) => {
 
 const BackgroundMulticolorTexture = () => {
   return (
-    <div className="absolute left-[-150px] top-1/2 z-[-1] h-[490px] w-[308px] bg-multi-texture" />
+    <div className="absolute left-[-150px] top-1/2 h-[490px] w-[308px] bg-multi-texture" />
   )
 }
 
 const BackgroundYellowTexture = () => {
   return (
-    <div className="absolute right-1 top-1/3 z-[-1] h-[250px] w-[152px] bg-yellow-texture" />
+    <div className="absolute right-1 top-1/3 h-[250px] w-[152px] bg-yellow-texture" />
   )
 }
 
@@ -315,7 +315,7 @@ const LanguagesSection = ({ languages, className }) => {
   return (
     <section
       className={cn(
-        'mt-11 flex max-w-[961px] flex-col gap-8 md:mt-40 md:gap-12',
+        'z-10 mt-11 flex max-w-[961px] flex-col gap-8 md:mt-40 md:gap-12',
         className,
       )}
     >
