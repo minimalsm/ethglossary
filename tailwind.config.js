@@ -50,6 +50,7 @@ module.exports = {
           surface: 'var(--accent-surface)',
           vote: 'var(--accent-vote)',
           purple: 'var(--accent-purple)',
+          callout: 'var(--accent-callout)',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
@@ -93,6 +94,7 @@ module.exports = {
         sm: ['14px', { lineHeight: '22px' }],
         lg: ['18px', { lineHeight: '26px' }],
         '3xl': ['28px', { lineHeight: '36px' }],
+        '3.5xl': ['32px', { lineHeight: '40px' }],
         '4xl': ['36px', { lineHeight: '44px' }],
         '4.5xl': ['38px', { lineHeight: '46px' }],
         '6.5xl': ['64px', { lineHeight: '72px' }],

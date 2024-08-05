@@ -8,6 +8,7 @@ import ArrowRight from '@/components/icons/ArrowRight'
 import { Button } from '../ui/button'
 import Banner from './Banner'
 import CommunityLinks from './CommunityLinks'
+import { Separator } from '@/components/ui/separator'
 
 export default function TranslationsSection({
   initialTranslations,
@@ -89,50 +90,61 @@ export default function TranslationsSection({
         completionPercentage={completionPercentage}
         initialDismissed={isDismissedInitially}
       />
-      <div className="bg-background p-4 pt-6">
-        <TranslationStatus submitted={submitted} />
-        <p className="mb-8 font-serif text-[40px]">{term}</p>
-        <span className="text"></span>
-        <p className="mb-2 text-sm font-semibold">Examples</p>
-
-        <div className="bg-accent-surface mb-2 rounded p-2">
-          <p>
-            An ethereum transaction requires{' '}
-            <span className="bg-accent-ultraViolet border-accent-tropIndigo rounded border p-0.5">
-              gas
-            </span>
+      <div className="bg-background">
+        {/* another container to allow for full width separator on mobile */}
+        <div className="px-4">
+          <TranslationStatus submitted={submitted} />
+          <p className="text-3.5xl mb-[72px] font-serif md:mb-20">{term}</p>
+          <span className="text"></span>
+          <p className="mb-2 text-sm font-semibold md:mb-3 md:text-base">
+            Examples
           </p>
+
+          <div className="mb-2 rounded bg-accent-surface p-2 text-xs md:text-base">
+            <p>
+              An ethereum transaction requires{' '}
+              <span className="rounded border border-accent-tropIndigo bg-accent-ultraViolet p-0.5">
+                gas
+              </span>
+            </p>
+          </div>
+          <div className="rounded bg-accent-surface p-2 text-xs md:text-base">
+            <span className="rounded border border-accent-tropIndigo bg-accent-ultraViolet p-0.5">
+              Gas
+            </span>{' '}
+            is the fee required to successfully conduct a transaction or execute
+            a contract on the Ethereum blockchain platform
+          </div>
         </div>
-        <div className="bg-accent-surface rounded p-2">
-          <span className="bg-accent-ultraViolet border-accent-tropIndigo rounded border p-0.5">
-            Gas
-          </span>{' '}
-          is the fee required to successfully conduct a transaction or execute a
-          contract on the Ethereum blockchain platform
+        <Separator className="mb-4 mt-5 w-auto md:mx-4 md:my-10" />
+        <div className="px-4">
+          <AddTranslationForm
+            termId={termId}
+            languageId={languageId}
+            onTranslationAdded={handleNewTranslation}
+            hasSubmittedTranslation={submitted}
+            translations={translations}
+            userId={user?.id}
+            localeLanguageData={localeLanguageData}
+            user={user}
+          >
+            <UpNextComponent
+              nextTerm={nextTerm}
+              language={language}
+              nextTermIndex={nextTermIndex}
+              termsLength={termsLength}
+              hasTranslatedNextTerm={hasTranslatedNextTerm}
+            />
+          </AddTranslationForm>
         </div>
-        <hr className="my-8 mt-5 h-px border-0 bg-gray-200" />
-        <AddTranslationForm
-          termId={termId}
-          languageId={languageId}
-          onTranslationAdded={handleNewTranslation}
-          hasSubmittedTranslation={submitted}
-          translations={translations}
-          userId={user?.id}
-          localeLanguageData={localeLanguageData}
-          user={user}
-        >
-          <UpNextComponent
-            nextTerm={nextTerm}
-            language={language}
-            nextTermIndex={nextTermIndex}
-            termsLength={termsLength}
-            hasTranslatedNextTerm={hasTranslatedNextTerm}
-          />
-        </AddTranslationForm>
       </div>
-      <div className="bg-accent-surface my-4 flex flex-col gap-4 p-8">
+
+      <Separator className="mb-6 mt-8 md:hidden" />
+
+      {/* <hr className="my-8 mt-5 h-px border-0 bg-gray-200" /> */}
+      <div className="mx-5 mt-8 md:mx-0 md:mt-14">
         {submitted ? (
-          <div className="">
+          <div className="my-4 flex flex-col gap-4 bg-accent-surface p-8">
             <h2 className="mb-4 text-xl font-semibold">
               Suggested translations
             </h2>
@@ -186,7 +198,7 @@ export default function TranslationsSection({
                         userId={user?.id}
                       />
                     </div>
-                    <div className="bg-accent-purple rounded-md rounded-t-none px-2 py-1 text-sm">
+                    <div className="rounded-md rounded-t-none bg-accent-purple px-2 py-1 text-sm">
                       {suggestedByMessage}
                     </div>
                   </div>
@@ -195,10 +207,20 @@ export default function TranslationsSection({
             </div>
           </div>
         ) : (
-          <p>Please submit a translation to view existing translations.</p>
+          <CalloutBox />
         )}
       </div>
-      <CommunityLinks />
+      <CommunityLinks className="mt-8" />
+    </div>
+  )
+}
+
+const CalloutBox = () => {
+  return (
+    <div className="bg-accent-callout rounded-8px my-4 rounded-[8px] px-8 py-6 md:py-10">
+      <p className="text-center">
+        Translate this term to view other suggested translations
+      </p>
     </div>
   )
 }
@@ -206,14 +228,14 @@ export default function TranslationsSection({
 const TranslationStatus = ({ submitted }) => {
   if (submitted) {
     return (
-      <div className="bg-accent-green mb-4 inline-flex items-center gap-1 rounded-full px-2 py-1 text-white dark:text-background">
+      <div className="mb-2 inline-flex items-center gap-1 rounded-full bg-accent-green px-2 py-1 text-white dark:text-background">
         <CheckDecagramGreen className="" />
         <p className="text-sm font-bold">Translated</p>
       </div>
     )
   }
 
-  return <p className="mb-4 px-2 py-1 text-sm">Translate</p>
+  return <p className="mb-4 px-2 text-sm">Translate</p>
 }
 
 const UpNextComponent = ({

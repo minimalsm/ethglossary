@@ -187,7 +187,7 @@ export default function AddTranslationForm({
               {...form.register('translation')}
               placeholder="Enter translation"
               disabled={isSubmitting}
-              className={`m-0 rounded-none border-0 border-b bg-inherit py-8 pl-1 pr-10 font-serif text-[32px] ${
+              className={`text-3.5xl m-0 rounded-none border-0 border-b bg-inherit py-8 pl-1 pr-10 font-serif placeholder:text-[#3A3E50] focus-visible:border-b-2 focus-visible:border-black ${
                 translationError ? 'border-destructive-foreground' : ''
               }`}
             />
@@ -215,7 +215,7 @@ export default function AddTranslationForm({
             )}
           </FormMessage>
         </FormItem>
-        <div className="flex flex-col flex-wrap gap-3 md:flex-row md:items-center md:justify-between">
+        <div className="mt-0 flex flex-col flex-wrap gap-3 pt-8 md:flex-row md:items-center md:justify-between">
           <SubmissionState
             hasSubmittedTranslation={hasSubmittedTranslation}
             isSubmitting={isSubmitting}

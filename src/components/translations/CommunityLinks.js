@@ -7,8 +7,9 @@ import {
 } from '@/components/ui/card'
 import Image from 'next/image'
 import Link from 'next/link'
+import { cn } from '@/lib/utils'
 
-const CommunityLinksCard = () => {
+const CommunityLinksCard = ({ className }) => {
   const links = [
     {
       href: '#',
@@ -31,7 +32,7 @@ const CommunityLinksCard = () => {
   ]
 
   return (
-    <Card className="border-none bg-[#E6DAFF] px-8 py-6">
+    <Card className={cn(className, 'border-none bg-[#E6DAFF] px-8 py-6')}>
       <CardHeader className="p-0">
         <CardTitle className="text-xl text-[#222739]">
           Translatathon 2024: Community links

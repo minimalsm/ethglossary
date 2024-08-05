@@ -45,6 +45,7 @@
       --accent-surface: #E7EDFF;
       --accent-vote: var(--foreground);
       --accent-purple: #CDC3F1;
+      --accent-callout: #B8DCF7;
 
       --banner: #3957C0;
       --banner-foreground: #fff;
@@ -104,6 +105,7 @@
       --accent-surface: #222739;
       --accent-vote: var(--primary);
       --accent-purple: #3F375D;
+      --accent-callout: #204057;
 
       --banner: #2B408C;
       --banner-foreground: #fff;
