@@ -18,7 +18,7 @@ const HomepageDesktopNav = ({ user }) => {
         svgClass="text-primary"
       />
 
-      <div>
+      <div className="flex">
         <Button asChild className="mr-4 justify-self-end px-4 py-3">
           <Link href="/auth/login" aria-label="Sign in with Discord">
             <FaDiscord className="mr-2 size-[16px]" />
@@ -26,7 +26,7 @@ const HomepageDesktopNav = ({ user }) => {
             <span className="inline md:hidden">Sign in</span>
           </Link>
         </Button>
-        <ThemeSwitch className="hidden" />
+        <ThemeSwitch className="hidden md:flex" />
       </div>
     </nav>
   )
