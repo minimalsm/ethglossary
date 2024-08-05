@@ -7,7 +7,7 @@ import LogoLink from '../LogoLink'
 
 const HomepageDesktopNav = () => {
   return (
-    <nav className="mx-auto mt-4 flex w-full justify-between self-start">
+    <nav className="mt-4 flex w-full justify-between self-start">
       <LogoLink
         logoWidth={40}
         textHeight={26}
@@ -16,13 +16,18 @@ const HomepageDesktopNav = () => {
       />
 
       <div>
-        <Button asChild className="mr-4 justify-self-end">
+        <Button asChild className="mr-4 justify-self-end px-4 py-3">
           <Link href="/auth/login" aria-label="Sign in with Discord">
             <FaDiscord className="mr-2 size-[16px]" />
-            <span className="text-xs font-bold">Sign In</span>
+            <span className="hidden text-xs font-bold leading-[12px] md:block">
+              Sign in with Discord
+            </span>
+            <span className="text-xs font-bold leading-[12px] md:hidden">
+              Sign in
+            </span>
           </Link>
         </Button>
-        <ThemeSwitch />
+        <ThemeSwitch className="hidden" />
       </div>
     </nav>
   )

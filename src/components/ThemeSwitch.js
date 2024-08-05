@@ -1,15 +1,14 @@
-// app/components/ThemeSwitch.tsx
 'use client'
 
-// import { FiSun, FiMoon } from 'react-icons/fi'
 import Sun from '@/components/icons/Sun'
 import Moon from '@/components/icons/Moon'
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import { Button } from './ui/button'
+import { cn } from '@/lib/utils'
 
-export default function ThemeSwitch() {
+export default function ThemeSwitch({ className }) {
   const [mounted, setMounted] = useState(false)
   const { setTheme, resolvedTheme } = useTheme()
 
@@ -32,7 +31,7 @@ export default function ThemeSwitch() {
     return (
       <Button
         variant="ghost"
-        className="rounded-md hover:text-primary"
+        className={cn(className, 'rounded-md text-foreground')}
         size="icon"
         onClick={() => setTheme('light')}
       >
@@ -45,7 +44,7 @@ export default function ThemeSwitch() {
     return (
       <Button
         variant="ghost"
-        className="rounded-md text-foreground"
+        className={cn(className, 'rounded-md text-foreground')}
         size="icon"
         onClick={() => setTheme('dark')}
       >

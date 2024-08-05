@@ -11,6 +11,8 @@ import { FaDiscord } from 'react-icons/fa'
 import ThemeSwitch from '@/components/ThemeSwitch'
 import HomepageDesktopNav from '@/components/navigation/homepage/HomepageDesktopNav'
 import { ArrowUpAndRight } from '@/components/icons'
+import { fetchUserMetadata } from '@/lib/userProfile'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 
 export default async function HomePage() {
   const {
@@ -29,11 +31,16 @@ export default async function HomePage() {
   })
 
   const user = session?.user
+  if (user) {
+    console.log('USER HERE', user)
+  }
+  // const userWithMetaData = await fetchUserMetadata(user)
+  // console.log(userWithMetaData)
   const url = getURL('/auth/login') || 'none'
 
   return (
     <div className="flex min-h-screen flex-col items-center font-sans">
-      <HeroSection />
+      <HeroSection user={user} />
       <div className="dark:bg-dark-homepage-gradient relative flex w-full flex-col items-center bg-homepage-gradient px-4">
         <WhatIsETHGlossarySection />
         <LanguagesSection
@@ -204,9 +211,9 @@ const SpeechBubble = ({ number = null, color, className = 'w-16 h-16' }) => {
 }
 
 // Todo: fix image background color
-const HeroSection = () => {
+const HeroSection = ({ user = null }) => {
   return (
-    <section className="relative grid h-screen max-h-[540px] w-full grid-cols-[minmax(auto,1440px)] md:max-h-[640px]">
+    <section className="relative grid h-screen max-h-[540px] w-full max-w-[1440px] grid-cols-[minmax(auto,1440px)] px-4 md:max-h-[640px]">
       <div className="absolute inset-0 z-[-1] h-full w-full object-cover">
         <img
           src="/images/hero.png"
@@ -216,19 +223,29 @@ const HeroSection = () => {
       </div>
       {/* new nav */}
       <HomepageDesktopNav />
-      <div className="container relative z-10 mx-auto flex flex-col items-start justify-center self-start text-white">
-        <h1 className="mb-8 flex flex-col font-serif text-4.5xl text-[40px] font-bold leading-[48px] md:text-7xl">
+      <div className="container relative z-10 mx-auto mb-2 flex flex-col items-start justify-center self-start p-0 text-white">
+        <h1 className="mb-4 flex flex-col font-serif text-4.5xl text-[40px] font-bold leading-[48px] md:text-7xl">
           <span>A glossary for</span>
           <span className="text-primary">Ethereum jargon</span>
         </h1>
-        <p className="mb-4 text-xl md:text-2xl">
+        <p className="mb-12 text-xl md:text-2xl">
           Unlock the power of Ethereum in your language
         </p>
-        <Button
-          asChild
-          className="h-auto rounded-full bg-button-gradient px-8 py-3 text-lg font-extrabold text-white shadow-2xl md:px-12 md:py-4 md:text-3xl"
-        >
-          <Link href="/languages">Let&apos;s go</Link>
+        <Button asChild className="text-xl font-bold">
+          {user ? (
+            <Link href="/languages">
+              <Avatar className="mr-2 h-8 w-8">
+                <AvatarImage src={user.user_metadata.avatar_url} alt="U" />
+                <AvatarFallback>L</AvatarFallback>
+              </Avatar>
+              Continue translating
+            </Link>
+          ) : (
+            <Link href="/auth/login">
+              <FaDiscord className="mr-2 size-[24px]" />
+              Sign in with Discord
+            </Link>
+          )}
         </Button>
       </div>
     </section>
