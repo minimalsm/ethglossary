@@ -6,7 +6,11 @@ export default function LanguagesList({ languages, className }) {
   return (
     <div className={containerClass}>
       {languages.map(language => (
-        <LanguageLinkCard key={language.code} language={language} />
+        <LanguageLinkCard
+          key={language.code}
+          language={language}
+          isDefault={language.isDefault}
+        />
       ))}
     </div>
   )

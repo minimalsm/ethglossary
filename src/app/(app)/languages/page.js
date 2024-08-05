@@ -4,7 +4,7 @@ import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
 import { getUserProfile } from '@/lib/userProfile'
 import LanguagesFilterAndList from '@/components/languages/LanguagesFilterAndList'
 
-export const revalidate = 3600 // revalidate the data at most every hour
+// export const revalidate = 3600 // revalidate the data at most every hour
 
 export default async function LanguagesPage() {
   const languages = await fetchLanguagesWithStats()
@@ -14,6 +14,8 @@ export default async function LanguagesPage() {
       ...language,
       localName: languageData?.localName,
       countries: languageData?.countries,
+      // Add the isDefault property
+      isDefault: false,
     }
   })
 
@@ -29,8 +31,21 @@ export default async function LanguagesPage() {
     defaultLanguage = userProfile?.default_language || null
   }
 
-  const defaultLocalLanguage =
-    getLanguageData(defaultLanguage)?.localName || 'Pick a language'
+  // Sort languages by moving the default language to the top if it exists
+  const sortedLanguages = defaultLanguage
+    ? languagesWithLocalAndCountries
+        .map(language => {
+          if (language.code === defaultLanguage) {
+            return { ...language, isDefault: true }
+          }
+          return language
+        })
+        .sort((a, b) => {
+          if (a.code === defaultLanguage) return -1
+          if (b.code === defaultLanguage) return 1
+          return 0
+        })
+    : languagesWithLocalAndCountries
 
   return (
     <div className="mx-5 mt-8 max-w-screen-sm md:mx-auto">
@@ -49,10 +64,7 @@ export default async function LanguagesPage() {
           Contact us and let us know!
         </p>
       </div>
-      <LanguagesFilterAndList
-        languages={languagesWithLocalAndCountries}
-        defaultLanguage={defaultLanguage}
-      />
+      <LanguagesFilterAndList languages={sortedLanguages} />
     </div>
   )
 }

@@ -3,6 +3,7 @@ import TranslateIcon from '@/components/icons/TranslateIcon'
 import CommentsIcon from '@/components/icons/CommentsIcon'
 
 const LanguageLinkCard = ({ language }) => {
+  console.log('lang thats failing', language)
   const capitalisedEnglishName =
     language.name.charAt(0).toUpperCase() + language.name.slice(1)
   const localLanguageName = language.localName
@@ -20,7 +21,8 @@ const LanguageLinkCard = ({ language }) => {
           <div className="mr-2 font-serif text-xl font-semibold">
             {localLanguageName}
           </div>
-          <div className="text-sm">{capitalisedEnglishName}</div>
+          <div className="mr-5 text-sm">{capitalisedEnglishName}</div>
+          {language.isDefault && <IsDefaultLanguageLabel />}
         </div>
         <div id="countries" className="flex text-xs">
           {countriesList}
@@ -41,6 +43,14 @@ const LanguageLinkCard = ({ language }) => {
         ''
       )}
     </Link>
+  )
+}
+
+const IsDefaultLanguageLabel = () => {
+  return (
+    <span className="rounded-full border border-red-100 px-4 py-2 text-xs leading-none">
+      Translating
+    </span>
   )
 }
 

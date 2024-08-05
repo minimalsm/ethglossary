@@ -29,6 +29,7 @@ export async function fetchLanguagesWithStats() {
         .eq('language_id', language.id)
 
       if (translationsError || commentsError) {
+        console.log(translationsError?.message || commentsError?.message)
         throw new Error(translationsError?.message || commentsError?.message)
       }
 
