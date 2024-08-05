@@ -122,7 +122,7 @@ export default async function TermPage({ params }) {
 
   return (
     <div className="container p-0">
-      <div className="bg-banner text-banner-foreground flex justify-between md:hidden">
+      <div className="flex justify-between bg-banner text-banner-foreground md:hidden">
         <TermsModal terms={terms} languageCode={language} />
         <CommentsModal
           termId={termId}
@@ -132,7 +132,7 @@ export default async function TermPage({ params }) {
         />
       </div>
 
-      <div class="grid gap-4 md:grid-cols-[minmax(220px,288px)_minmax(240px,auto)_minmax(220px,288px)]">
+      <div class="grid gap-4 md:grid-cols-[minmax(180px,288px)_minmax(320px,auto)_minmax(180px,288px)]">
         {/* <div className="grid grid-cols-[minmax(288px,1fr)_auto_minmax(288px,1fr)] gap-4"> */}
         {/* <div className="flex flex-col md:flex-row gap-12"> */}
         <Sidebar

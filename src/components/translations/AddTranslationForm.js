@@ -215,7 +215,7 @@ export default function AddTranslationForm({
             )}
           </FormMessage>
         </FormItem>
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col flex-wrap gap-3 md:flex-row md:items-center md:justify-between">
           <SubmissionState
             hasSubmittedTranslation={hasSubmittedTranslation}
             isSubmitting={isSubmitting}

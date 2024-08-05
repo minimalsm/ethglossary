@@ -69,7 +69,7 @@ export default function CommentsPanel({
   }
 
   return (
-    <div className="grow-1 mt-6 flex shrink-0 flex-col gap-4">
+    <div className="mt-6 flex-1 flex-col gap-4">
       <h2 className="text-base font-semibold">Comments ({commentCount})</h2>
       {/* Todo: add a more elegant solution here */}
       <ScrollArea className="max-h-[calc(100vh-300px)] min-h-[300px]">
