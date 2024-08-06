@@ -1,14 +1,5 @@
-import {
-  Drawer,
-  DrawerTrigger,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerClose,
-  DrawerOverlay,
-} from '@/components/ui/drawer'
 import { Button } from '@/components/ui/button'
-import Sidebar from '@/components/navigation/Sidebar'
+// import Sidebar from '@/components/navigation/Sidebar'
 import {
   Sheet,
   SheetClose,
@@ -19,8 +10,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
+import { Close } from '@/components/icons'
+import LogoLink from '@/components/navigation/LogoLink'
 
-export default function TermsModal({ terms, languageCode }) {
+export default function TermsModal({ children, terms, languageCode }) {
   return (
     <Sheet direction="left" className="content-none">
       <SheetTrigger asChild>
@@ -33,9 +26,19 @@ export default function TermsModal({ terms, languageCode }) {
         // className="content-none my-auto fixed right-auto inset-y-0 left-0 z-50 h-full w-80 bg-background transition-transform transform translate-x-full md:translate-x-0"
       >
         <SheetHeader>
-          <SheetTitle>EthGlossary</SheetTitle>
+          <SheetTitle className="text-left font-sans text-xl">
+            <LogoLink />
+          </SheetTitle>
+          <SheetClose>
+            <button
+              className="absolute right-4 top-4 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-label="Close menu"
+            >
+              <Close />
+            </button>
+          </SheetClose>
         </SheetHeader>
-        <Sidebar terms={terms} languageCode={languageCode} />
+        {children}
       </SheetContent>
     </Sheet>
   )

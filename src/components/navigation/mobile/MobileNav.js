@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import CommonNavItem from '@/components/navigation/CommonNavItem'
 import { getLanguageData } from '@/lib/languageUtils'
 import { Close } from '@/components/icons'
+import LogoLink from '@/components/navigation/LogoLink'
 
 export const MobileNav = ({ defaultLanguage, navSections }) => {
   return (
@@ -35,7 +36,9 @@ export const MobileNav = ({ defaultLanguage, navSections }) => {
       </SheetTrigger>
       <SheetContent className="w-full">
         <SheetHeader>
-          <SheetTitle className="text-left font-sans">ETHglossary</SheetTitle>
+          <SheetTitle className="text-left font-sans">
+            <LogoLink />
+          </SheetTitle>
           <SheetClose>
             <button
               className="absolute right-4 top-4 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"

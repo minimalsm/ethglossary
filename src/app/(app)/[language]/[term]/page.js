@@ -128,7 +128,17 @@ export default async function TermPage({ params }) {
   return (
     <div className="container p-0">
       <div className="flex justify-between bg-banner text-banner-foreground md:hidden">
-        <TermsModal terms={terms} languageCode={language} />
+        <TermsModal terms={terms} languageCode={language}>
+          <Sidebar
+            className=""
+            terms={terms}
+            languageCode={language}
+            localeLanguageData={localeLanguageData}
+            termsLength={totalTerms}
+            // userhastransltedcount needs fixed
+            userHasTranslatedCount={userHasTranslatedCount}
+          />
+        </TermsModal>
         <CommentsModal
           termId={termId}
           languageId={languageId}
