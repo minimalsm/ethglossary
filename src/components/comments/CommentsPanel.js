@@ -76,7 +76,7 @@ export default function CommentsPanel({
       </h2>
       <Separator className="mb-4 mt-3" />
       {/* Todo: add a more elegant solution here */}
-      <div className="max-h-[calc(100vh-230px)] min-h-[300px] overflow-y-auto overflow-x-hidden">
+      <div className="max-h-[calc(100vh-230px)] min-h-[120px] overflow-y-auto overflow-x-hidden">
         <div className="space-y-4">
           {comments.map(comment => (
             <>
