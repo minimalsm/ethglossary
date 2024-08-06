@@ -36,6 +36,8 @@
       /* --muted-foreground: 215.4 16.3% 46.9%; */
       --muted-foreground: #DBDBDB;
 
+      --surface-selected: #ffffff;
+
       /* --accent: 210 40% 96.1%; */
       --accent: #BBC0D8;
       --accent-foreground: 222.2 47.4% 11.2%;
@@ -95,6 +97,8 @@
       --muted: 210 40% 96.1%;
       /* --muted-foreground: 215.4 16.3% 46.9%; */
       --muted-foreground: #DBDBDB;
+
+      --surface-selected: #282D3E;
 
       /* --accent: 210 40% 96.1%; */
       --accent: #282D3E;

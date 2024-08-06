@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import TranslateIcon from '@/components/icons/TranslateIcon'
 import CommentsIcon from '@/components/icons/CommentsIcon'
+import { cn } from '@/lib/utils'
 
 const LanguageLinkCard = ({ language }) => {
   console.log('lang thats failing', language)
@@ -14,15 +15,20 @@ const LanguageLinkCard = ({ language }) => {
   return (
     <Link
       href={`/${language.code}/hello`}
-      className="flex items-center justify-between gap-4 rounded-lg border bg-background p-4 hover:border-[#E8D3D3] hover:bg-[#3A3E50]"
+      className={cn(
+        'hover:bg-surface-selected flex items-center justify-between gap-4 rounded-lg border bg-background p-4 hover:border-accent-green',
+        language.isDefault && 'bg-surface-selected border-accent-green',
+      )}
     >
       <div id="content" className="flex flex-col space-y-0.5">
         <div id="langs" className="flex items-baseline">
           <div className="mr-2 font-serif text-xl font-semibold">
             {localLanguageName}
           </div>
-          <div className="mr-5 text-sm">{capitalisedEnglishName}</div>
-          {language.isDefault && <IsDefaultLanguageLabel />}
+          <div className="mr-3 text-sm">{capitalisedEnglishName}</div>
+          {language.isDefault && (
+            <IsDefaultLanguageLabel className="self-center" />
+          )}
         </div>
         <div id="countries" className="flex text-xs">
           {countriesList}
@@ -46,9 +52,14 @@ const LanguageLinkCard = ({ language }) => {
   )
 }
 
-const IsDefaultLanguageLabel = () => {
+const IsDefaultLanguageLabel = ({ className }) => {
   return (
-    <span className="rounded-full border border-red-100 px-4 py-2 text-xs leading-none">
+    <span
+      className={cn(
+        'flex items-center rounded-full border border-accent-green px-2 py-1 text-xs leading-none text-accent-green',
+        className,
+      )}
+    >
       Translating
     </span>
   )

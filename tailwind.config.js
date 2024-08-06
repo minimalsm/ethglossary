@@ -79,6 +79,9 @@ module.exports = {
         text: {
           tertiary: 'var(--text-tertiary)',
         },
+        surface: {
+          selected: 'var(--surface-selected)',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
