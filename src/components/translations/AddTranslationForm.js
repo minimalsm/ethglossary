@@ -113,7 +113,7 @@ export default function AddTranslationForm({
         setIsSubmitted(true)
         setTimeout(() => {
           setIsSubmitted(false)
-        }, 3000)
+        }, 3500)
       } catch (error) {
         alert(error.message)
         onTranslationAdded(existingTranslation, existingTranslation.id)
@@ -160,7 +160,7 @@ export default function AddTranslationForm({
         setIsSubmitted(true)
         setTimeout(() => {
           setIsSubmitted(false)
-        }, 3000)
+        }, 3500)
       } catch (error) {
         alert(error.message)
         onTranslationAdded(null, optimisticTranslation.id)
