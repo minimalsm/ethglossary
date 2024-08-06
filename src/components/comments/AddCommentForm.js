@@ -22,10 +22,7 @@ export default function AddCommentForm({ onAddComment }) {
   }
 
   return (
-    <form
-      onSubmit={handleCommentSubmit}
-      className="relative mt-4 flex items-center"
-    >
+    <form onSubmit={handleCommentSubmit} className="relative flex items-center">
       <Input
         value={newComment}
         onChange={e => setNewComment(e.target.value)}
