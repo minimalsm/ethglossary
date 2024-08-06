@@ -13,12 +13,24 @@ import {
 import { Close } from '@/components/icons'
 import LogoLink from '@/components/navigation/LogoLink'
 
-export default function TermsModal({ children, terms, languageCode }) {
+// termsLength={totalTerms}
+//           userHasTranslatedCount={userHasTranslatedCount}
+
+export default function TermsModal({
+  children,
+  termsLength,
+  userHasTranslatedCount,
+}) {
   return (
     <Sheet direction="left" className="content-none">
       <SheetTrigger asChild>
-        <Button variant="ghost">
-          <MenuIcon /> Terms
+        <Button
+          variant="ghost"
+          className="flex gap-1 rounded-none px-5 text-[14px] font-normal leading-none"
+        >
+          <MenuIcon width={20} height={20} />{' '}
+          <span className="font-bold">Terms</span>{' '}
+          {`(${userHasTranslatedCount}/${termsLength})`}
         </Button>
       </SheetTrigger>
       <SheetContent
@@ -44,12 +56,12 @@ export default function TermsModal({ children, terms, languageCode }) {
   )
 }
 
-const MenuIcon = () => {
+const MenuIcon = ({ width = 24, height = 24, className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      width={width}
+      height={height}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -57,6 +69,7 @@ const MenuIcon = () => {
       stroke-linecap="round"
       stroke-linejoin="round"
       class="lucide lucide-square-menu"
+      className={className}
     >
       <rect width="18" height="18" x="3" y="3" rx="2" />
       <path d="M7 8h10" />
