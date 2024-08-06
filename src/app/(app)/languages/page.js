@@ -61,7 +61,13 @@ export default async function LanguagesPage() {
         </p>
         <p>
           <span className="font-semibold">Don’t see your language?</span>{' '}
-          Contact us and let us know!
+          <a
+            className="text-text-link font-bold"
+            href={`mailto:website@ethereum.org`}
+          >
+            Contact us
+          </a>{' '}
+          and let us know!
         </p>
       </div>
       <LanguagesFilterAndList languages={sortedLanguages} />
