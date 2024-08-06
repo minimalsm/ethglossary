@@ -77,12 +77,14 @@ module.exports = {
           foreground: 'var(--translated-active-foreground)',
         },
         text: {
+          primary: 'var(--text-primary)',
           tertiary: 'var(--text-tertiary)',
           link: 'var(--text-link)',
         },
         surface: {
           extra: 'var(--surface-extra)',
           selected: 'var(--surface-selected)',
+          hover: 'var(--surface-hover)',
         },
       },
       borderRadius: {

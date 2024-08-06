@@ -37,7 +37,7 @@ export default function Sidebar({
           <span className="mr-1">
             {userHasTranslatedCount} / {termsLength}
           </span>
-          <CheckDecagramGreen />
+          <CheckDecagramGreen className="text-accent-green" />
         </div>
       </div>
       <hr className="mb-5 mt-3" />
@@ -66,22 +66,24 @@ const TermButton = ({ term, termPath, isActive, hasTranslated }) => {
       asChild
       variant="ghost"
       className={cn(
-        'h-10 w-full justify-start rounded-none bg-background px-3 hover:bg-border hover:text-inherit',
+        'hover:bg-surface-hover w-full justify-start rounded-none bg-background px-3 py-2 hover:text-inherit',
         {
-          'bg-accent font-semibold': isActive,
+          'bg-surface-selected border-text-primary border-b font-semibold':
+            isActive,
           'bg-translated hover:bg-translatedHover': hasTranslated,
-          'bg-translatedActive': isActive && hasTranslated,
+          'border-b-accent-green bg-translatedActive':
+            isActive && hasTranslated,
         },
       )}
       key={term}
     >
-      <Link
-        prefetch={true}
-        href={termPath}
-        className={cn('flex gap-1 font-normal')}
-      >
-        {hasTranslated ? <CheckDecagramGreen /> : <CheckDecagramOutline />}
-        <p className="text-base">{term}</p>
+      <Link prefetch={true} href={termPath} className={cn('font-normal')}>
+        {hasTranslated ? (
+          <CheckDecagramGreen className="mr-2 shrink-0 text-accent-green" />
+        ) : (
+          <CheckDecagramOutline className="mr-2 shrink-0" />
+        )}
+        <p className="text-wrap text-base">{term}</p>
       </Link>
     </Button>
   )
