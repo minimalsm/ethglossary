@@ -58,17 +58,18 @@ export const ThumbUpFilled = ({ width = 24, height = 24 }) => (
   </svg>
 )
 
-export const Close = ({ width = 24, height = 24 }) => (
+export const Close = ({ width = 24, height = 24, className = '' }) => (
   <svg
     width={width}
     height={height}
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    className={className}
   >
     <path
-      d="M15.8333 5.34163L14.6583 4.16663L9.99996 8.82496L5.34163 4.16663L4.16663 5.34163L8.82496 9.99996L4.16663 14.6583L5.34163 15.8333L9.99996 11.175L14.6583 15.8333L15.8333 14.6583L11.175 9.99996L15.8333 5.34163Z"
-      fill="#1C202F"
+      d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"
+      fill="currentColor"
     />
   </svg>
 )

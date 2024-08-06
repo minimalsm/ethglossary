@@ -9,6 +9,7 @@ import {
 import { Separator } from '@/components/ui/separator'
 import CommonNavItem from '@/components/navigation/CommonNavItem'
 import { getLanguageData } from '@/lib/languageUtils'
+import { Close } from '@/components/icons'
 
 export const MobileNav = ({ defaultLanguage, navSections }) => {
   return (
@@ -40,20 +41,7 @@ export const MobileNav = ({ defaultLanguage, navSections }) => {
               className="absolute right-4 top-4 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-label="Close menu"
             >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <Close />
             </button>
           </SheetClose>
         </SheetHeader>

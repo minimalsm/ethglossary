@@ -1,19 +1,14 @@
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/drawer'
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import CommentsPanel from '@/components/comments/CommentsPanel'
+import { Close } from '@/components/icons'
 
 export default function CommentsModal({
   termId,
@@ -22,24 +17,34 @@ export default function CommentsModal({
   commentCount,
 }) {
   return (
-    <Drawer>
-      <DrawerTrigger asChild>
+    <Sheet>
+      <SheetTrigger asChild>
         <Button variant="ghost">
           <MessageIcon />
           Comments ({commentCount})
         </Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle>Comments</DrawerTitle>
-        </DrawerHeader>
+      </SheetTrigger>
+      <SheetContent className="" side="bottom">
+        <SheetHeader>
+          <SheetTitle className="text-left font-sans text-xl">
+            Comments ({commentCount})
+          </SheetTitle>
+          <SheetClose>
+            <button
+              className="absolute right-4 top-4 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-label="Close menu"
+            >
+              <Close />
+            </button>
+          </SheetClose>
+        </SheetHeader>
         <CommentsPanel
           termId={termId}
           languageId={languageId}
           initialComments={initialComments}
         />
-      </DrawerContent>
-    </Drawer>
+      </SheetContent>
+    </Sheet>
   )
 }
 

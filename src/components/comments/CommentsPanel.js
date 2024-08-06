@@ -71,7 +71,7 @@ export default function CommentsPanel({
 
   return (
     <div className="flex flex-col">
-      <h2 className="font-sans text-base font-semibold">
+      <h2 className="hidden font-sans text-base font-semibold md:block">
         Comments ({commentCount})
       </h2>
       <Separator className="mb-4 mt-3" />
