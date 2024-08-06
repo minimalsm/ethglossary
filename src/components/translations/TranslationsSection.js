@@ -228,14 +228,14 @@ const CalloutBox = () => {
 const TranslationStatus = ({ submitted }) => {
   if (submitted) {
     return (
-      <div className="mb-2 inline-flex items-center gap-1 rounded-full bg-accent-green px-2 py-1 text-white dark:text-background">
+      <div className="mb-4 inline-flex items-center gap-1 rounded-full bg-accent-green px-2 py-1 text-white dark:text-background">
         <CheckDecagramGreen className="" />
-        <p className="text-sm font-bold">Translated</p>
+        <p className="text-label-sm font-bold">Translated</p>
       </div>
     )
   }
 
-  return <p className="mb-4 px-2 text-sm">Translate</p>
+  return <p className="mb-4 font-bold">Translate</p>
 }
 
 const UpNextComponent = ({

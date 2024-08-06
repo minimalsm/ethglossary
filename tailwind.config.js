@@ -106,6 +106,7 @@ module.exports = {
         '4.5xl': ['38px', { lineHeight: '46px' }],
         '6.5xl': ['64px', { lineHeight: '72px' }],
         '7xl': ['72px', { lineHeight: '80px' }],
+        'label-sm': ['14px', { lineHeight: '14px' }],
       },
       keyframes: {
         'accordion-down': {
