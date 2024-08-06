@@ -4,6 +4,7 @@ export async function fetchLanguages() {
   const { data, error } = await supabase
     .from('languages')
     .select('id, code, name')
+    .order('name', { ascending: true })
 
   if (error) {
     throw new Error(`Error fetching languages: ${error.message}`)
