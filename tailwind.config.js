@@ -78,8 +78,10 @@ module.exports = {
         },
         text: {
           tertiary: 'var(--text-tertiary)',
+          link: 'var(--text-link)',
         },
         surface: {
+          extra: 'var(--surface-extra)',
           selected: 'var(--surface-selected)',
         },
       },

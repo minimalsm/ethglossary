@@ -36,6 +36,8 @@
       /* --muted-foreground: 215.4 16.3% 46.9%; */
       --muted-foreground: #DBDBDB;
 
+
+      --surface-extra: #E7EDFF;
       --surface-selected: #ffffff;
 
       /* --accent: 210 40% 96.1%; */
@@ -67,6 +69,7 @@
       --translated-active: #C5E7EC;
 
       --text-tertiary: #3A3E50;
+      --text-link: #156568;
     }
 
     .dark {
@@ -98,6 +101,7 @@
       /* --muted-foreground: 215.4 16.3% 46.9%; */
       --muted-foreground: #DBDBDB;
 
+      --surface-extra: #222739;
       --surface-selected: #282D3E;
 
       /* --accent: 210 40% 96.1%; */
@@ -129,6 +133,7 @@
       --translated-active: #193C46;
 
       --text-tertiary: #DBDBDB;
+      --text-link: #F7E544;
     }
 
   }
