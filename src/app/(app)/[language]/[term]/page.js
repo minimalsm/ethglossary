@@ -106,7 +106,9 @@ export default async function TermPage({ params }) {
   }
 
   const cookieStore = cookies()
-  let completionPercentage = 100 // Replace with your logic for determining percentage
+  const completionPercentage = Math.round(
+    (userHasTranslatedCount / totalTerms) * 100,
+  )
   let bannerKey = ''
 
   if (completionPercentage >= 0 && completionPercentage < 50) {
@@ -127,7 +129,7 @@ export default async function TermPage({ params }) {
 
   return (
     <div className="container p-0">
-      <div className="mb-5 flex justify-between bg-banner text-banner-foreground md:hidden">
+      <div className="flex justify-between bg-banner text-banner-foreground md:hidden">
         <TermsModal
           terms={terms}
           languageCode={language}

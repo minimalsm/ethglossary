@@ -62,7 +62,7 @@ const Banner = ({ completionPercentage, initialDismissed }) => {
 
   return (
     <Alert
-      className={`flex w-full items-center rounded border-none px-4 py-3 text-black ${bannerClass}`}
+      className={`flex w-full items-center rounded border-none px-4 py-3 text-black ${bannerClass} md:mb-10`}
     >
       <div className="">
         <AlertTitle className="mb-0 text-sm font-bold">

@@ -90,7 +90,7 @@ export default function TranslationsSection({
         completionPercentage={completionPercentage}
         initialDismissed={isDismissedInitially}
       />
-      <div className="bg-background">
+      <div className="mt-5 bg-background md:mt-0">
         {/* another container to allow for full width separator on mobile */}
         <div className="px-4">
           <TranslationStatus submitted={submitted} />
