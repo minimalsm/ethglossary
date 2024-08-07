@@ -37,7 +37,7 @@ export const columns = [
     cellClassName: 'h-10 w-10 p-0',
     cell: ({ row }) => {
       // data is sorted so we can use index for leaderboard position
-      const leaderboardPosition = row.index + 1
+      const leaderboardPosition = row.original.position
       const avatarUrl = row.original.avatar_url
       // console.log('Index', info.row.index)
       // const index = row.original

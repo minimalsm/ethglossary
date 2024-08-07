@@ -36,7 +36,8 @@ export async function fetchOrderedLeaderboardData() {
 
   const orderedByTotal = [...leaderboardData]
     .sort((a, b) => b.total_score - a.total_score)
-    .map(user => ({
+    .map((user, index) => ({
+      position: index + 1,
       id: user.id,
       avatar_url: user.avatar_url,
       display_name: user.display_name,
@@ -47,7 +48,8 @@ export async function fetchOrderedLeaderboardData() {
 
   const orderedByTranslations = [...leaderboardData]
     .sort((a, b) => b.translation_count - a.translation_count)
-    .map(user => ({
+    .map((user, index) => ({
+      position: index + 1,
       id: user.id,
       avatar_url: user.avatar_url,
       display_name: user.display_name,
@@ -56,7 +58,8 @@ export async function fetchOrderedLeaderboardData() {
 
   const orderedByComments = [...leaderboardData]
     .sort((a, b) => b.comment_count - a.comment_count)
-    .map(user => ({
+    .map((user, index) => ({
+      position: index + 1,
       id: user.id,
       avatar_url: user.avatar_url,
       display_name: user.display_name,
@@ -65,7 +68,8 @@ export async function fetchOrderedLeaderboardData() {
 
   const orderedByVotes = [...leaderboardData]
     .sort((a, b) => b.vote_count - a.vote_count)
-    .map(user => ({
+    .map((user, index) => ({
+      position: index + 1,
       id: user.id,
       avatar_url: user.avatar_url,
       display_name: user.display_name,
