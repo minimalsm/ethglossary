@@ -231,10 +231,10 @@ const HeroSection = ({ user = null }) => {
         <p className="mb-12 text-xl md:text-2xl">
           Unlock the power of Ethereum in your language
         </p>
-        <Button asChild className="text-xl font-bold">
+        <Button asChild className="text-xs font-bold leading-none md:text-xl">
           {user ? (
             <Link href="/languages">
-              <Avatar className="mr-2 h-8 w-8">
+              <Avatar className="mr-2 h-4 w-4 md:h-8 md:w-8">
                 <AvatarImage src={user.user_metadata.avatar_url} alt="U" />
                 <AvatarFallback>L</AvatarFallback>
               </Avatar>
