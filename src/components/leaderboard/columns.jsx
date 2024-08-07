@@ -36,11 +36,8 @@ export const columns = [
     header: 'Status',
     cellClassName: 'h-10 w-10 p-0',
     cell: ({ row }) => {
-      // data is sorted so we can use index for leaderboard position
-      const leaderboardPosition = row.original.position
-      const avatarUrl = row.original.avatar_url
-      // console.log('Index', info.row.index)
-      // const index = row.original
+      const leaderboardPosition = row.original?.position || row.position
+      const avatarUrl = row.original?.avatar_url || row.avatar_url
 
       return (
         <div className="relative inline-block">
@@ -63,18 +60,28 @@ export const columns = [
   {
     accessorKey: 'display_name',
     header: 'Name',
-    cellClassName : 'flex-1 p-0 my-0 mx-4 font-semibold'
-    // cellClassName : 'flex-1 p-0 m-4 font-semibold'
+    cellClassName : 'flex-1 p-0 my-0 mx-4 font-semibold',
+    cell: ({ row }) => {
+      console.log('row', row)
+      // data is sorted so we can use index for leaderboard position
+      const displayName = row.original?.display_name || row.display_name
+      
+      return (
+        <span>
+         {displayName}
+        </span>
+      )
+    },
   },
   {
     accessorKey: 'total',
     header: 'Total',
     cellClassName: 'flex gap-1 p-0 text-center justify-self-end grow-0',
     cell: ({ row }) => {
-      const translationsNumber = row.original?.translation_count
-      const commentsNumber = row.original?.comment_count
-      const votesNumber = row.original?.vote_count
-      const avatarUrl = row.original.avatar_url
+      // conditional handles different data structure if it's an outer table highlight
+      const translationsNumber = row.original?.translation_count || row.translation_count
+      const commentsNumber = row.original?.comment_count || row.comment_count
+      const votesNumber = row.original?.vote_count || row.vote_count
 
       return (
         <div className="flex gap-1 p-0 ml-4 text-center justify-self-end">

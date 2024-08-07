@@ -10,6 +10,7 @@ import { fetchOrderedLeaderboardData } from '@/lib/leaderboards'
 import { cn } from '@/lib/utils'
 import { DataTable } from '@/components/leaderboard/data-table'
 import { columns } from '@/components/leaderboard/columns'
+import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
 
 const getPositionBgColor = position => {
   switch (position) {
@@ -116,6 +117,7 @@ const UserLeaderboardTabs = ({
   orderedByTranslations,
   orderedByComments,
   orderedByVotes,
+  loggedInUserId,
 }) => {
   return (
     <Tabs defaultValue="total" className="w-full">
@@ -135,16 +137,32 @@ const UserLeaderboardTabs = ({
       </TabsList>
 
       <TabsContent value="total">
-        <DataTable columns={columns} data={orderedByTotal} />
+        <DataTable
+          columns={columns}
+          data={orderedByTotal}
+          loggedInUserId={loggedInUserId}
+        />
       </TabsContent>
       <TabsContent value="translations">
-        <DataTable columns={columns} data={orderedByTranslations} />
+        <DataTable
+          columns={columns}
+          data={orderedByTranslations}
+          loggedInUserId={loggedInUserId}
+        />
       </TabsContent>
       <TabsContent value="comments">
-        <DataTable columns={columns} data={orderedByComments} />
+        <DataTable
+          columns={columns}
+          data={orderedByComments}
+          loggedInUserId={loggedInUserId}
+        />
       </TabsContent>
       <TabsContent value="votes">
-        <DataTable columns={columns} data={orderedByVotes} />
+        <DataTable
+          columns={columns}
+          data={orderedByVotes}
+          loggedInUserId={loggedInUserId}
+        />
       </TabsContent>
     </Tabs>
   )
@@ -201,6 +219,12 @@ export default async function LeaderboardPage() {
     orderedByVotes,
   } = await fetchOrderedLeaderboardData()
 
+  const {
+    data: { user },
+  } = await createSupabaseServerComponentClient().auth.getUser()
+  const userId = user?.id
+  // const userId = '7abece47-0c9a-4631-962b-1d161782c172'
+
   return (
     <div className="mx-auto max-w-screen-sm">
       <h1 className="mb-4 text-2xl font-bold">Leaderboard</h1>
@@ -209,6 +233,7 @@ export default async function LeaderboardPage() {
         orderedByVotes={orderedByVotes}
         orderedByComments={orderedByComments}
         orderedByTranslations={orderedByTranslations}
+        loggedInUserId={userId}
       />
 
       {/* <PageLeaderboardTabs

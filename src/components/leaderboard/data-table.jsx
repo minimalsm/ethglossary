@@ -22,9 +22,11 @@ import { Button } from "@/components/ui/button"
 import ArrowRight from "@/components/icons/ArrowRight"
 import ArrowLeft from "@/components/icons/ArrowLeft"
 
-export function DataTable ({columns, data}) {
-  const visibleColumns = columns.filter(column => column.visible !== false);
+import { cn } from "@/lib/utils"
+import { Separator } from "@/components/ui/separator"
 
+export function DataTable ({columns, data, loggedInUserId}) {
+  const visibleColumns = columns.filter(column => column.visible !== false);
 
   const table = useReactTable({
     data,
@@ -33,15 +35,51 @@ export function DataTable ({columns, data}) {
     getPaginationRowModel: getPaginationRowModel(),
   })
 
+  // Access the paginated rows
+  const paginatedRows = table.getPaginationRowModel().rows;
+
+  // Check if the logged-in user is in the current page
+  const userInCurrentPage = paginatedRows.some(row => row.original.id === loggedInUserId);
+
+  // Find the logged-in user's data from the full dataset
+  const loggedInUserData = data.find(row => row.id === loggedInUserId);
+
   return (
     <>
     <div className="rounded-md max-w-[640px]">
+      {/* If the logged-in user is not in the current page, display them separately */}
+      {!userInCurrentPage && loggedInUserId && loggedInUserData && (
+        <>
+        <Table className="mt-4 p- rounded-lg">
+          <TableRow className="border-none rounded-full flex items-center justify-start p-4 bg-surface-selected">
+            {visibleColumns.map((column, index) => {
+              const cellContext = {
+                column,
+                row: loggedInUserData,
+                table
+              };
+              return (
+                <TableCell
+                  className={cn(column.cellClassName)}
+                  key={column.id}
+                  index={index}
+                >
+                  {flexRender(column.cell, cellContext)}
+                </TableCell>
+              );
+            })}
+          </TableRow>
+        </Table>
+        <div className="w-full flex justify-center">
+        <Separator className="my-4 max-w-[120px]" />
+        </div>
+        </>
+      )}
       <Table className='border-none'>
         <TableHeader className="hidden">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
-                console.log('header', header)
                 return (
                   <TableHead key={header.id}>
                     {header.isPlaceholder
@@ -57,13 +95,13 @@ export function DataTable ({columns, data}) {
           ))}
         </TableHeader>
         <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => {    
+          {paginatedRows.length ? (
+            paginatedRows.map((row) => {    
               return (
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className="border-none flex items-center justify-start p-4"
+                className={cn("border-none hover:bg-surface-selected rounded-full flex items-center justify-start p-4", row.original.id === loggedInUserId ? "bg-surface-selected rounded-full" : "")} // Highlight logged-in user row
               >
                 {row.getVisibleCells().map((cell, index) => {
                   
@@ -89,14 +127,13 @@ export function DataTable ({columns, data}) {
       </Table>
     </div>
     
-            <div className="flex items-center justify-center space-x-2 py-4">
+    <div className="flex items-center justify-center space-x-2 py-4">
         <Button
           variant="outline"
           size="sm"
           className='rounded-none border-none p-1.5 text-primary bg-accent disabled:text-white'
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
-          // disabled={false}
         >
           <ArrowLeft />
           
@@ -107,14 +144,10 @@ export function DataTable ({columns, data}) {
           className='rounded-none border-none p-1.5 text-primary bg-accent disabled:text-white'
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
-          // disabled={false}
         >
           <ArrowRight />
         </Button>
-      
-
     </div>
     </>
   )
 }
-
