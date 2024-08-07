@@ -5,9 +5,9 @@ export async function fetchLeaderboardData() {
       id,
       display_name,
       avatar_url,
-      translations:translations ( id ),
+      translations:translation_submissions ( id ),
       comments:sidebarcomments ( id ),
-      votes:votes ( id )
+      votes:translation_votes ( id )
     `)
 
   if (error) {
