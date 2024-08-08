@@ -144,7 +144,6 @@ export default async function TermPage({ params }) {
             languageCode={language}
             localeLanguageData={localeLanguageData}
             termsLength={totalTerms}
-            // userhastransltedcount needs fixed
             userHasTranslatedCount={userHasTranslatedCount}
           />
         </TermsModal>
@@ -157,15 +156,12 @@ export default async function TermPage({ params }) {
       </div>
 
       <div class="grid gap-4 md:grid-cols-[minmax(180px,288px)_minmax(320px,auto)_minmax(180px,288px)] md:gap-12">
-        {/* <div className="grid grid-cols-[minmax(288px,1fr)_auto_minmax(288px,1fr)] gap-4"> */}
-        {/* <div className="flex flex-col md:flex-row gap-12"> */}
         <Sidebar
-          className="hidden md:block"
+          className="sticky top-8 hidden self-start md:block"
           terms={terms}
           languageCode={language}
           localeLanguageData={localeLanguageData}
           termsLength={totalTerms}
-          // userhastransltedcount needs fixed
           userHasTranslatedCount={userHasTranslatedCount}
         />
 

@@ -51,7 +51,7 @@
       "Staking involves locking up ETH to help secure Ethereum",
       "Validators earn rewards by staking ETH on Ethereum"
     ],
-    "Account": [
+    "account": [
       "An Ethereum account is identified by a unique address",
       "Accounts can hold ETH and interact with smart contracts"
     ],

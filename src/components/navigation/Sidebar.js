@@ -1,5 +1,6 @@
 'use client'
 
+import React, { useEffect, useRef } from 'react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { usePathname } from 'next/navigation'
@@ -18,7 +19,6 @@ export default function Sidebar({
 }) {
   const pathname = usePathname()
   const space = '\u00a0'
-  console.log('Terms length', termsLength)
 
   return (
     <div
@@ -41,7 +41,7 @@ export default function Sidebar({
         </div>
       </div>
       <hr className="mb-5 mt-3" />
-      <div className="max-h-[calc(100vh-130px)] min-h-[300px] overflow-y-auto overflow-x-hidden">
+      <div className="max-h-[calc(100vh-150px)] min-h-[300px] overflow-y-auto overflow-x-hidden md:max-h-[calc(100vh-200px)]">
         {terms.map(term => {
           const termPath = `/${languageCode}/${slugify(term.term)}`
           const isActive = pathname === termPath
@@ -62,6 +62,17 @@ export default function Sidebar({
 }
 
 const TermButton = ({ term, termPath, isActive, hasTranslated }) => {
+  const termRef = useRef(null)
+
+  useEffect(() => {
+    if (isActive && termRef.current) {
+      termRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest', // scroll within the sidebar, not the whole page
+      })
+    }
+  }, [isActive])
+
   return (
     <Button
       asChild
@@ -78,7 +89,12 @@ const TermButton = ({ term, termPath, isActive, hasTranslated }) => {
       )}
       key={term}
     >
-      <Link prefetch={true} href={termPath} className={cn('font-normal')}>
+      <Link
+        prefetch={true}
+        href={termPath}
+        className={cn('font-normal')}
+        ref={termRef}
+      >
         {hasTranslated ? (
           <CheckDecagramGreen className="mr-2 shrink-0 text-accent-green" />
         ) : (
