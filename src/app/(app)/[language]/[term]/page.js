@@ -152,6 +152,7 @@ export default async function TermPage({ params }) {
           languageId={languageId}
           initialComments={comments}
           commentCount={commentCount}
+          user={user}
         />
       </div>
 

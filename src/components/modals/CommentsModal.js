@@ -15,6 +15,7 @@ export default function CommentsModal({
   languageId,
   initialComments,
   commentCount,
+  user,
 }) {
   return (
     <Sheet>
@@ -45,6 +46,7 @@ export default function CommentsModal({
           termId={termId}
           languageId={languageId}
           initialComments={initialComments}
+          user={user}
         />
       </SheetContent>
     </Sheet>
