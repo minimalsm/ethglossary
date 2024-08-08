@@ -304,7 +304,10 @@ const UpNextComponent = ({
   return (
     <>
       <Button asChild>
-        <a href={`/${language}/${nextTerm}`}>Next Term</a>
+        <a href={`/${language}/${nextTerm}`}>
+          Next term
+          <ArrowRight className="ml-2" />
+        </a>
       </Button>
       <div className="flex items-center space-x-2 self-center md:hidden">
         <span className="text-sm">
