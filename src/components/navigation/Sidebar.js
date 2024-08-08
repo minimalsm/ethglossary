@@ -41,21 +41,22 @@ export default function Sidebar({
         </div>
       </div>
       <hr className="mb-5 mt-3" />
+      <div className="max-h-[calc(100vh-130px)] min-h-[300px] overflow-y-auto overflow-x-hidden">
+        {terms.map(term => {
+          const termPath = `/${languageCode}/${slugify(term.term)}`
+          const isActive = pathname === termPath
 
-      {terms.map(term => {
-        const termPath = `/${languageCode}/${slugify(term.term)}`
-        const isActive = pathname === termPath
-
-        return (
-          <TermButton
-            key={term.term}
-            term={term.term}
-            termPath={termPath}
-            isActive={isActive}
-            hasTranslated={term.user_has_translated}
-          />
-        )
-      })}
+          return (
+            <TermButton
+              key={term.term}
+              term={term.term}
+              termPath={termPath}
+              isActive={isActive}
+              hasTranslated={term.user_has_translated}
+            />
+          )
+        })}
+      </div>
     </div>
   )
 }

@@ -160,7 +160,7 @@ export default async function TermPage({ params }) {
         {/* <div className="grid grid-cols-[minmax(288px,1fr)_auto_minmax(288px,1fr)] gap-4"> */}
         {/* <div className="flex flex-col md:flex-row gap-12"> */}
         <Sidebar
-          className="hidden md:flex"
+          className="hidden md:block"
           terms={terms}
           languageCode={language}
           localeLanguageData={localeLanguageData}
