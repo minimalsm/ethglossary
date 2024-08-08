@@ -187,7 +187,7 @@ export default function AddTranslationForm({
               {...form.register('translation')}
               placeholder="Enter translation"
               disabled={isSubmitting}
-              className={`text-3.5xl m-0 rounded-none border-0 border-b bg-inherit py-8 pl-1 pr-10 font-serif placeholder:text-[#3A3E50] focus-visible:border-b-2 focus-visible:border-black ${
+              className={`text-3.5xl focus-visible:border-border-selectedStrong m-0 rounded-none border-0 border-b bg-inherit py-8 pl-1 pr-10 font-serif placeholder:text-text-tertiary focus-visible:border-b-2 ${
                 translationError ? 'border-destructive-foreground' : ''
               }`}
             />

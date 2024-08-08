@@ -19,7 +19,10 @@ module.exports = {
     extend: {
       colors: {
         primaryTheme: '#EDF9F3',
-        border: 'var(--border)',
+        border: {
+          DEFAULT: 'var(--border)',
+          selectedStrong: 'var(--border-selected-strong)',
+        },
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'var(--background)',
