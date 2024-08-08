@@ -13,6 +13,23 @@ export async function fetchLanguages() {
   return data
 }
 
+async function fetchWithRetry(queryFunction, retries = 3, delay = 1000) {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      return await queryFunction()
+    } catch (error) {
+      if (error.status === 503 && attempt < retries) {
+        console.warn(
+          `Service unavailable. Retrying in ${delay}ms... (Attempt ${attempt} of ${retries})`,
+        )
+        await new Promise(resolve => setTimeout(resolve, delay))
+      } else {
+        throw error
+      }
+    }
+  }
+}
+
 export async function fetchLanguagesWithStats() {
   try {
     console.log('Starting to fetch languages...')
@@ -24,11 +41,21 @@ export async function fetchLanguagesWithStats() {
         console.log(
           `Fetching stats for language: ${language.name} (ID: ${language.id})`,
         )
-        const { count: translationsCount, error: translationsError } =
-          await supabase
+
+        const fetchTranslations = () =>
+          supabase
             .from('translations')
             .select('id', { count: 'exact', head: true })
             .eq('language_id', language.id)
+
+        const fetchComments = () =>
+          supabase
+            .from('sidebarcomments')
+            .select('id', { count: 'exact', head: true })
+            .eq('language_id', language.id)
+
+        const { count: translationsCount, error: translationsError } =
+          await fetchWithRetry(fetchTranslations)
 
         if (translationsError) {
           console.error(
@@ -38,10 +65,8 @@ export async function fetchLanguagesWithStats() {
           throw new Error(translationsError.message)
         }
 
-        const { count: commentsCount, error: commentsError } = await supabase
-          .from('sidebarcomments')
-          .select('id', { count: 'exact', head: true })
-          .eq('language_id', language.id)
+        const { count: commentsCount, error: commentsError } =
+          await fetchWithRetry(fetchComments)
 
         if (commentsError) {
           console.error(
