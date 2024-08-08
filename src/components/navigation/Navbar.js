@@ -2,10 +2,11 @@ import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
 import { DesktopNav } from '@/components/navigation/desktop/DesktopNav'
 import { MobileNav } from '@/components/navigation/mobile/MobileNav'
 import TranslatingNowBanner from '@/components/navigation/TranslatingNowBanner'
+import LeaderboardBanner from '@/components/navigation/LeaderboardBanner'
 import { getLanguageData } from '@/lib/languageUtils'
 import { getUserProfile } from '@/lib/userProfile'
 import { getNavSections } from '../../utils/getNavSections'
-import ThemeSwitch from '../ThemeSwitch'
+import { getEventStatus } from '@/utils/getTranslatathonStatus'
 
 export default async function NavBar() {
   const {
@@ -25,6 +26,7 @@ export default async function NavBar() {
     }
   }
 
+  const translatathonStatus = getEventStatus()
   const defaultLocalLanguage = getLanguageData(defaultLanguage)?.localName
 
   return (
@@ -43,6 +45,7 @@ export default async function NavBar() {
         />
       </header>
       <TranslatingNowBanner defaultLocalLanguage={defaultLocalLanguage} />
+      <LeaderboardBanner eventStatus={translatathonStatus} />
     </>
   )
 }
