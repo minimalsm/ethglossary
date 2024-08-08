@@ -24,8 +24,6 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export const revalidate = 0
-
 export default async function TermPage({ params }) {
   const supabase = createSupabaseServerComponentClient()
   const term = deslugify(params.term)
