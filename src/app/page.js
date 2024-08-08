@@ -231,7 +231,7 @@ const HeroSection = ({ user = null }) => {
       <div className="absolute inset-0 z-[-1] h-full w-full object-cover">
         <img
           src="/images/hero.png"
-          className="fixed inset-0 z-[-1] h-full w-full bg-blue-400 object-cover md:h-[700px]"
+          className="fixed inset-0 z-[-1] h-full w-full bg-blue-400 bg-dotted-gradient bg-[length:16px_16px] object-cover md:h-[650px]"
           alt="hero"
         />
       </div>
