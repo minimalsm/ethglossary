@@ -74,7 +74,7 @@ export const MobileNav = ({ defaultLanguage, navSections }) => {
 const MobileNavSection = ({ heading, items, defaultLanguage }) => {
   return (
     <>
-      <h3 className="mt-6 text-xs uppercase tracking-[2px] text-[#71768A]">
+      <h3 className="mt-6 font-sans text-xs uppercase tracking-[2px] text-accent-green">
         {heading}
       </h3>
       <MobileNavItemList items={items} defaultLanguage={defaultLanguage} />
