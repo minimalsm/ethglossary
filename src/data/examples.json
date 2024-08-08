@@ -1,0 +1,283 @@
+{
+    "block": [
+      "A block on Ethereum contains multiple transactions and a reference to the previous block",
+      "Stakers can propose new blocks"
+    ],
+    "transaction": [
+      "My friend sent a transaction on Ethereum",
+      "Deploying a smart contract also counts as a transaction"
+    ],
+    "node": [
+      "A node verifies transactions and stores the blockchain",
+      "Nodes communicate with each other to maintain the Ethereum network"
+    ],
+    "network": [
+      "The Ethereum network is made up of many connected nodes",
+      "Many networks are built ontop of Ethereum"
+    ],
+    "smart contract": [
+      "A smart contract automates the execution of an agreement",
+      "Developers write smart contracts that power dapps"
+    ],
+    "client": [
+      "Ethereum clients like Geth are used to interact with the blockchain",
+      "Running a client allows you to become a node in the Ethereum network"
+    ],
+    "validator": [
+      "Validators propose and confirm new blocks in a proof-of-stake system",
+      "Becoming a validator on Ethereum requires staking ETH"
+    ],
+    "blockchain": [
+      "A blockchain is a chain of blocks, each containing a list of transactions",
+      "Ethereum's blockchain is public and decentralized"
+    ],
+    "transactions": [
+      "Transactions on Ethereum can be transfers of ETH or interactions with smart contracts",
+      "All transactions are recorded on the blockchain"
+    ],
+    "consensus": [
+      "Consensus ensures all nodes agree on the state of the blockchain",
+      "Ethereum uses proof-of-stake to achieve consensus"
+    ],
+    "token": [
+      "ERC-20 are the standard token on Ethereum",
+      "Tokens can represent anything from assets to voting rights"
+    ],
+    "dapp": [
+      "Dapps are apps on the Ethereum network",
+      "Dapp is short for decentralized application"
+    ],
+    "staking": [
+      "Staking involves locking up ETH to help secure Ethereum",
+      "Validators earn rewards by staking ETH on Ethereum"
+    ],
+    "Account": [
+      "An Ethereum account is identified by a unique address",
+      "Accounts can hold ETH and interact with smart contracts"
+    ],
+    "wallet": [
+      "A wallet stores your private keys and allows you to manage your Ethereum account",
+      "Use a wallet to send and receive ETH or interact with dapps"
+    ],
+    "gas": [
+      "Gas is used to pay for transaction fees on Ethereum",
+      "The amount of gas needed depends on the complexity of the transaction"
+    ],
+    "rollup": [
+      "Rollups bundle multiple transactions into a single one to reduce fees",
+      "Optimistic and zk-rollups are popular layer 2 scaling solutions"
+    ],
+    "address": [
+      "An Ethereum address is a unique identifier for accounts on the network",
+      "Send ETH or tokens to another user's address"
+    ],
+    "decentralized": [
+      "Ethereum is a decentralized platform with no central authority",
+      "Decentralized systems are resistant to censorship"
+    ],
+    "blocks": [
+      "New blocks are added to the blockchain every few seconds",
+      "Each block includes a reference to the previous block"
+    ],
+    "dapps": [
+      "Dapps operate on the blockchain without intermediaries",
+      "Uniswap is a popular dapp on Ethereum"
+    ],
+    "validators": [
+      "Validators help secure the Ethereum network by validating transactions",
+      "Validators replace miners in Ethereum’s proof-of-stake system"
+    ],
+    "layer 2": [
+      "Layer 2 solutions help scale Ethereum by processing transactions off-chain",
+      "Rollups are a common form of layer 2 technology"
+    ],
+    "web3": [
+      "Web3 represents the decentralized internet powered by blockchain",
+      "Dapps and smart contracts are web3 technologies"
+    ],
+    "proof-of-stake": [
+      "Proof-of-stake replaces miners with validators to secure the network",
+      "Validators in proof-of-stake earn rewards for proposing blocks"
+    ],
+    "rollups": [
+      "Rollups process transactions off-chain and post the results to the main Ethereum blockchain",
+      "Rollups are used to improve Ethereum's scalability"
+    ],
+    "mainnet": [
+      "The Ethereum Mainnet is the primary public network where transactions occur",
+      "Developers deploy finalized smart contracts to Mainnet"
+    ],
+    "roadmap": [
+      "Ethereum's roadmap outlines future upgrades like sharding",
+      "The roadmap included the transition to proof-of-stake"
+    ],
+    "proof-of-work": [
+      "Proof-of-work requires miners to solve puzzles to create new blocks",
+      "Ethereum transitioned from proof-of-work to proof-of-stake in 2022"
+    ],
+    "scaling": [
+      "Scaling solutions aim to increase Ethereum's transaction throughput",
+      "Rollups and sharding are key scaling strategies for Ethereum"
+    ],
+    "consensus client": [
+      "A consensus client helps maintain the Ethereum blockchain’s consensus",
+      "Consensus clients interacts with the execution client  to validate blocks"
+    ],
+    "fork": [
+      "A fork occurs when the blockchain splits into two separate chains",
+      "The 'fork' in a hard-forks means a 'fork in the road' (not a dinner utensil!)"
+    ],
+    "attestation": [
+      "Validators submit attestations to confirm blocks on the Ethereum network",
+      "Attestations are a key part of the proof-of-stake process"
+    ],
+    "algorithm": [
+      "The consensus algorithm determines how nodes agree on the blockchain state",
+      "Ethereum’s proof-of-stake algorithm relies on validators instead of miners"
+    ],
+    "stablecoin": [
+      "Stablecoins are cryptocurrencies pegged to a stable asset like USD",
+      "USDC and DAI are popular stablecoins on Ethereum"
+    ],
+    "execution client": [
+      "An execution client processes transactions and smart contracts on Ethereum",
+      "Geth is a widely-used Ethereum execution client"
+    ],
+    "consensus mechanism": [
+      "A consensus mechanism ensures all nodes agree on the blockchain state",
+      "Ethereum uses proof-of-stake as its consensus mechanism"
+    ],
+    "oracle": [
+      "Oracles fetch real-world data for smart contracts to use",
+      "A smart contract might use an oracle to get the current price of USD"
+    ],
+    "transaction fee": [
+      "Transaction fees are also known as 'gas fees'",
+      "Higher transaction fees can speed up transaction confirmation"
+    ],
+    "contract address": [
+      "A contract address is where a deployed smart contract resides on Ethereum",
+      "Users interact with smart contracts through their contract address"
+    ],
+    "beacon chain": [
+      "The Beacon Chain coordinates Ethereum's proof-of-stake protocol",
+      "Validators are managed through the Beacon Chain"
+    ],
+    "swap": [
+      "Swapping allows you to exchange one token for another on a DEX",
+      "Use a dapp like Uniswap to perform token swaps"
+    ],
+    "gas fee": [
+      "Gas fees are paid for executing transactions on the Ethereum network",
+      "The gas fee depends on the transaction complexity and network traffic"
+    ],
+    "sharding": [
+      "Data sharding divides the Ethereum network into smaller, more manageable pieces",
+      "Sharding is a scaling solution to increase transaction throughput"
+    ],
+    "zero-knowledge": [
+      "Zero-knowledge proofs allow one party to prove something to another without revealing details",
+      "ZK-rollups use zero-knowledge proofs to scale Ethereum securely"
+    ],
+    "finality": [
+      "Finality means a transaction cannot be reversed or altered once confirmed",
+      "In Ethereum’s proof-of-stake, finality is achieved through validator consensus"
+    ],
+    "private key": [
+      "A private key allows you to access and control your Ethereum account",
+      "Keep your private key secure; losing it means losing access to your funds"
+    ],
+    "consensus layer": [
+      "The consensus layer manages block validation and network consensus",
+      "It works with the execution layer to maintain the blockchain"
+    ],
+    "execution layer": [
+      "The execution layer handles transactions and smart contract operations",
+      "In the execution layer, all Ethereum transactions are processed and executed"
+    ],
+    "epoch": [
+      "An epoch is a period in which the Ethereum network processes a batch of blocks",
+      "Validators rotate duties at the end of each epoch"
+    ],
+    "staker": [
+      "A staker locks up their ETH to become a validator on Ethereum",
+      "Stakers earn rewards for helping secure the network"
+    ],
+    "cryptocurrency": [
+      "Ether (ETH) is the native cryptocurrency of the Ethereum network",
+      "Cryptocurrencies can be used for transactions or stored as an investment"
+    ],
+    "testnet": [
+      "Developers use a testnet to test smart contracts before deploying on Mainnet",
+      "Testnets allow experimentation without risking real assets"
+    ],
+    "validity proof": [
+      "Validity proofs are used to verify transactions in zk-rollups",
+      "Validity proofs ensure transactions are correctly processed without revealing all details"
+    ],
+    "cryptographic": [
+      "Ethereum uses cryptographic algorithms to secure transactions and data",
+      "Cryptographic techniques ensure the integrity and confidentiality of blockchain data"
+    ],
+    "distributed": [
+      "Ethereum is a distributed network with no central point of failure",
+      "Data is stored across many nodes in a distributed manner"
+    ],
+    "Public Key": [
+      "Your public key is derived from your private key and used to receive transactions",
+      "It is safe to share your public key with others"
+    ],
+    "sidechain": [
+      "A sidechain is a separate blockchain that runs parallel to Ethereum",
+      "Sidechains can help scale Ethereum by offloading transactions"
+    ],
+    "decentralized application": [
+      "A decentralized application operates on the blockchain without intermediaries",
+      "Popular dapps include platforms for trading, lending, and gaming"
+    ],
+    "base fee": [
+      "The base fee is the minimum gas price required for a transaction to be included in a block",
+      "Ethereum’s base fee adjusts automatically based on network demand"
+    ],
+    "ethereum virtual machine": [
+      "The Ethereum Virtual Machine (EVM) executes smart contracts on the blockchain",
+      "All Ethereum nodes run the EVM to maintain network consensus"
+    ],
+    "fraud proof": [
+      "Fraud proofs are used to detect and challenge invalid transactions in optimistic rollups",
+      "Fraud proofs ensure transactions are processed correctly"
+    ],
+    "ledger": [
+      "A ledger records all transactions that occur on the Ethereum network",
+      "The blockchain serves as a public, immutable ledger of all transactions"
+    ],
+    "gas limit": [
+      "The gas limit is the maximum amount of gas a transaction can consume",
+      "Setting a higher gas limit can ensure a transaction is processed promptly"
+    ],
+    "faucet": [
+      "A faucet provides small amounts of testnet ETH for developers to use",
+      "Faucets help users experiment with Ethereum without using real funds"
+    ],
+    "centralized exchange": [
+      "Centralized exchanges like Coinbase failitate trading",
+      "Centralized exchanges offer an easy way to buy and sell cryptocurrencies"
+    ],
+    "seed phrase": [
+      "A seed phrase is a set of words that can be used to recover your wallet",
+      "Keep your seed phrase secure to protect your Ethereum assets"
+    ],
+    "block explorer": [
+      "A block explorer allows you to view all transactions on Ethereum",
+      "Use a block explorer to check the status of a transaction"
+    ],
+    "permissionless": [
+      "Ethereum is a permissionless network where anyone can participate",
+      "Being permissionless means no central authority controls who can access Ethereum"
+    ],
+    "decentralized exchange": [
+      "A decentralized exchange (DEX) allows users to trade directly from their wallets",
+      "Decentralized exchanges operate without a central authority, unlike traditional exchanges"
+    ]
+  }
+  

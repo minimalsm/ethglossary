@@ -25,6 +25,7 @@ export default function TranslationsSection({
   localeLanguageData,
   isDismissedInitially,
   completionPercentage,
+  examples,
 }) {
   const [translations, setTranslations] = useState(initialTranslations)
   const [submitted, setSubmitted] = useState(hasSubmittedTranslation)
@@ -96,7 +97,8 @@ export default function TranslationsSection({
           <TranslationStatus submitted={submitted} />
           <p className="text-3.5xl mb-[72px] font-serif md:mb-20">{term}</p>
           <span className="text"></span>
-          <p className="mb-2 text-sm font-semibold md:mb-3 md:text-base">
+          <TermExamplesDisplay term={term} examples={examples} />
+          {/* <p className="mb-2 text-sm font-semibold md:mb-3 md:text-base">
             Examples
           </p>
 
@@ -114,7 +116,7 @@ export default function TranslationsSection({
             </span>{' '}
             is the fee required to successfully conduct a transaction or execute
             a contract on the Ethereum blockchain platform
-          </div>
+          </div> */}
         </div>
         <Separator className="mb-4 mt-5 w-auto md:mx-4 md:my-10" />
         <div className="px-4">
@@ -211,6 +213,62 @@ export default function TranslationsSection({
         )}
       </div>
       <CommunityLinks className="mt-8" />
+    </div>
+  )
+}
+
+const TermExamplesDisplay = ({ term, examples }) => {
+  // const examples = getTermExamples(term)
+
+  return (
+    <div>
+      <ExampleList term={term} examples={examples} />
+    </div>
+  )
+}
+
+const ExampleList = ({ term, examples }) => {
+  if (examples.length === 0) {
+    return null
+  }
+
+  return (
+    <div>
+      <p className="mb-2 text-sm font-semibold md:mb-3 md:text-base">
+        Examples
+      </p>
+      {/* Map over the examples array */}
+      {examples.map((example, index) => (
+        <ExampleItem key={index} example={example} term={term} />
+      ))}
+    </div>
+  )
+}
+
+const ExampleItem = ({ example, term }) => {
+  // regex to match both singular and plural forms of the term
+  const singularOrPluralRegex = new RegExp(
+    `(${term}s?|${term.slice(0, -1)}(?:app|apps)?)`,
+    'gi',
+  )
+
+  return (
+    <div className="mb-2 rounded bg-accent-surface p-2 text-xs md:text-base">
+      <p>
+        {example.split(singularOrPluralRegex).map((part, index) =>
+          part.toLowerCase().includes(term.toLowerCase()) ||
+          part.toLowerCase().includes(term.slice(0, -1).toLowerCase()) ? (
+            <span
+              key={index}
+              className="rounded border border-accent-tropIndigo bg-accent-ultraViolet p-0.5"
+            >
+              {part}
+            </span>
+          ) : (
+            part
+          ),
+        )}
+      </p>
     </div>
   )
 }

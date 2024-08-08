@@ -14,6 +14,7 @@ import { updateUserDefaultLanguage } from '@/lib/userProfile'
 import { getLanguageData } from '@/lib/languageUtils'
 import { cookies } from 'next/headers'
 import { deslugify } from '@/utils/slugify'
+import { getTermExamples } from '@/lib/termsUtils'
 
 export async function generateMetadata({ params }) {
   const term = deslugify(params.term)
@@ -73,6 +74,7 @@ export default async function TermPage({ params }) {
     }
   }
   const termId = termData.id
+  const examples = getTermExamples(termData.term)
 
   // Fetch translations and comments concurrently
   const [
@@ -182,6 +184,7 @@ export default async function TermPage({ params }) {
           localeLanguageData={localeLanguageData}
           completionPercentage={completionPercentage}
           isDismissedInitially={isDismissedInitially}
+          examples={examples}
         />
 
         <div className="sticky top-8 hidden self-start overflow-hidden md:block">
