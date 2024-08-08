@@ -32,7 +32,7 @@ export const CommonNavItem = ({
   const containerClassName = isMobile
     ? 'py-3 px-4 font-serif text-xl rounded-[8px]'
     : 'p-2'
-  const activeClassName = isMobile ? 'bg-[#31222F]' : 'font-bold'
+  const activeClassName = isMobile ? 'bg-surface-selected' : 'font-bold'
   const textClassName = isMobile ? '' : 'p-2'
 
   if (href === '/logout') {
