@@ -29,7 +29,7 @@ export default async function NavBar() {
 
   return (
     <>
-      <header className="flex h-16 w-full items-center justify-between bg-background px-4 shadow-sm md:px-12">
+      <header className="sticky top-0 z-40 flex h-16 w-full items-center justify-between bg-background px-4 shadow-sm md:px-12">
         <nav className="mx-auto hidden w-full max-w-[1440px] items-center gap-6 md:flex md:self-center">
           <DesktopNav
             navSections={navSections}

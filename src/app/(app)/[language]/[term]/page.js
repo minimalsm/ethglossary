@@ -158,7 +158,7 @@ export default async function TermPage({ params }) {
 
       <div class="grid gap-4 md:grid-cols-[minmax(180px,288px)_minmax(320px,auto)_minmax(180px,288px)] md:gap-12">
         <Sidebar
-          className="sticky top-8 hidden self-start md:block"
+          className="sticky top-24 hidden self-start md:block"
           terms={terms}
           languageCode={language}
           localeLanguageData={localeLanguageData}
@@ -184,7 +184,7 @@ export default async function TermPage({ params }) {
           examples={examples}
         />
 
-        <div className="sticky top-8 hidden self-start overflow-hidden md:block">
+        <div className="sticky top-24 hidden self-start overflow-hidden md:block">
           <CommentsPanel
             termId={termId}
             languageId={languageId}
