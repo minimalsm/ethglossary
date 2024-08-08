@@ -18,7 +18,7 @@ export const CommonNavItem = ({
 
   const getTranslateRoute = () => {
     if (isTranslateLink) {
-      return defaultLanguage ? `/${defaultLanguage}/hello` : '/languages'
+      return defaultLanguage ? `/${defaultLanguage}/block` : '/languages'
     }
     return href
   }

@@ -12,7 +12,7 @@ export async function getTranslateLinkPath({ userId }) {
     }
   }
 
-  const route = defaultLanguage ? `/${defaultLanguage}/hello` : '/languages'
+  const route = defaultLanguage ? `/${defaultLanguage}/block` : '/languages'
 
   return route
 }

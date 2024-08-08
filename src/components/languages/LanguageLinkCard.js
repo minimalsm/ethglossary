@@ -14,7 +14,7 @@ const LanguageLinkCard = ({ language }) => {
 
   return (
     <Link
-      href={`/${language.code}/hello`}
+      href={`/${language.code}/block`}
       className={cn(
         'hover:bg-surface-selected flex items-center justify-between gap-4 rounded-lg border bg-background p-4 hover:border-accent-green',
         language.isDefault && 'bg-surface-selected border-accent-green',
