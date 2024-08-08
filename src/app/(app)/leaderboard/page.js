@@ -227,7 +227,7 @@ export default async function LeaderboardPage() {
 
   return (
     <div className="mx-auto max-w-screen-sm">
-      <h1 className="mb-4 text-2xl font-bold">Leaderboard</h1>
+      {/* <h1 className="mb-4 text-2xl font-bold">Leaderboard</h1> */}
       <UserLeaderboardTabs
         orderedByTotal={orderedByTotal}
         orderedByVotes={orderedByVotes}
