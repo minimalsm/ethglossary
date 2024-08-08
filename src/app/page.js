@@ -78,19 +78,19 @@ const getStartedCardData = [
     number: 1,
     color: '#AA7FFF',
     heading: 'Sign in with Discord',
-    text: 'Why this is important / benefits the user, copy that probably runs over two lines.',
+    text: 'Register for an ETHGlossary account using your Discord login details',
   },
   {
     number: 2,
     color: '#0EAAA0',
-    heading: 'Crowdin',
-    text: 'Why this is important / benefits the user, copy that probably runs over two lines.',
+    heading: 'Select a language',
+    text: 'Choose the language you would like to translate the Ethereum glossary into',
   },
   {
     number: 3,
     color: '#479CEA',
-    heading: 'Join the Discord channel',
-    text: 'Why this is important / benefits the user, copy that probably runs over two lines.',
+    heading: 'Start translating',
+    text: 'Suggest translations and vote on the translations suggested by others in the community',
   },
 ]
 
@@ -99,22 +99,22 @@ const translatathonCardData = [
     number: 1,
     emoji: '🎉',
     color: '#AA7FFF',
-    heading: 'Sign in with Discord',
-    text: 'Why this is important / benefits the user, copy that probably runs over two lines.',
+    heading: 'Event begins',
+    text: 'Translate, translate, translate! The event runs from Fri 9 Aug – Sun Aug 18 2024.',
   },
   {
     number: 2,
     emoji: '🔍',
     color: '#0EAAA0',
-    heading: 'Crowdin?',
-    text: 'Why this is important / benefits the user, copy that probably runs over two lines.',
+    heading: 'Evaluation period',
+    text: 'Each translation is evaluated for authenticity. The use of AI is prohibited.',
   },
   {
     number: 3,
     emoji: '👑',
     color: '#479CEA',
-    heading: 'Join the Discord channel',
-    text: 'Why this is important / benefits the user, copy that probably runs over two lines.',
+    heading: 'Winners announced',
+    text: 'Results will be announced on the ethereum.org community call.',
   },
 ]
 
@@ -156,14 +156,28 @@ const howItWorksData = [
   {
     number: 2,
     color: '#0EAAA0',
-    heading: 'Vote and comment',
+    heading: 'Interact with the community',
     text: 'Vote and comment on the translations suggested by others, to reach consensus on the best translations.',
   },
   {
     number: 3,
     color: '#479CEA',
     heading: 'Get rewarded',
-    text: 'Receive a Translatathon score multiplier for translating terms! Learn more about rewards on Crowdin etc.',
+    text: (
+      <>
+        Receive 100 points for every 10 terms translated. Translate all 70 terms
+        for 1000 points! Learn more about rewards on{' '}
+        <a
+          href="https://crowdin.com/profile/ethdotorg"
+          target="_blank"
+          rel="noreferrer"
+          className="text-text-link font-bold"
+        >
+          Crowdin
+        </a>
+        .
+      </>
+    ),
   },
 ]
 
@@ -315,7 +329,7 @@ const LanguagesSection = ({ languages, className }) => {
   return (
     <section
       className={cn(
-        'z-10 mt-11 flex max-w-[961px] flex-col gap-8 md:mt-40 md:gap-12',
+        'z-10 mt-11 flex max-w-[961px] flex-col gap-8 md:mt-32 md:gap-12',
         className,
       )}
     >
@@ -341,7 +355,7 @@ const LanguagesSection = ({ languages, className }) => {
 
 const HowItWorksSection = ({ user = null }) => {
   return (
-    <section className="mb-11 flex w-full max-w-[961px] flex-col items-start space-y-8 md:mb-16 md:flex-row lg:space-x-8 lg:space-y-0">
+    <section className="mb-11 mt-11 flex w-full max-w-[961px] flex-col items-start space-y-8 md:mb-16 md:mt-32 md:flex-row lg:space-x-8 lg:space-y-0">
       <div className="flex flex-col gap-4 md:flex-row md:gap-8">
         <BubbleSvgTest color="#479CEA" />
         <h2 className="max-w-[10ch] flex-1 text-4.5xl font-bold md:text-6.5xl">
