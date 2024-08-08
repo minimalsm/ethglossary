@@ -231,7 +231,7 @@ const HeroSection = ({ user = null }) => {
       <div className="absolute inset-0 z-[-1] h-full w-full object-cover">
         <img
           src="/images/hero.png"
-          className="fixed inset-0 z-[-1] h-full w-full bg-blue-400 bg-dotted-gradient bg-[length:16px_16px] object-cover md:h-[650px]"
+          className="bg-light-dotted-gradient fixed inset-0 z-[-1] h-full w-full bg-blue-400 bg-[length:16px_16px] object-cover md:h-[650px]"
           alt="hero"
         />
       </div>
@@ -411,7 +411,7 @@ const HowItWorksSection = ({ user = null }) => {
 
 const HowToGetStartedSection = () => {
   return (
-    <section className="flex w-full flex-col items-center bg-[#E7EDFF] bg-dotted-gradient bg-[length:16px_16px] px-4 dark:bg-[#0A1126]">
+    <section className="bg-light-dotted-gradient flex w-full flex-col items-center bg-[#E7EDFF] bg-[length:16px_16px] px-4 dark:bg-[#0A1126] dark:bg-dotted-gradient">
       <div className="mt-32 flex w-full max-w-[960px] flex-col items-center">
         <h2 className="mb-14 text-center text-5xl font-bold">
           How to get started

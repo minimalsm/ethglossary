@@ -137,6 +137,7 @@ module.exports = {
           'linear-gradient(180deg, #1C202F 15.23%, #0E121F 36.54%, #1C202F 60.27%)',
         'button-gradient':
           'linear-gradient(106.76deg, #F7E544 4.85%, #EC0061 79.22%)',
+        'light-dotted-gradient': 'radial-gradient(#CDD1D9 1px, transparent 0);',
         'dotted-gradient': 'radial-gradient(#49506B 1px, transparent 0);',
         'dark-dolphin-gradient':
           'linear-gradient(180deg, #2B0758 0%, #1C043A 54%, #110225 100%);',
