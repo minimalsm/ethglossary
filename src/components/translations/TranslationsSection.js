@@ -144,7 +144,7 @@ export default function TranslationsSection({
       <Separator className="mb-6 mt-8 md:hidden" />
 
       {/* <hr className="my-8 mt-5 h-px border-0 bg-gray-200" /> */}
-      <div className="mx-5 mt-8 md:mx-0 md:mt-14">
+      <div className="mt-8 md:mx-0 md:mt-14">
         {submitted ? (
           <div className="my-4 flex flex-col gap-4 bg-accent-surface p-8">
             <h2 className="mb-4 font-sans text-xl font-semibold">
@@ -212,7 +212,7 @@ export default function TranslationsSection({
           <CalloutBox />
         )}
       </div>
-      <CommunityLinks className="mt-8" />
+      <CommunityLinks className="mt-5 md:mt-8" />
     </div>
   )
 }

@@ -32,7 +32,12 @@ const CommunityLinksCard = ({ className }) => {
   ]
 
   return (
-    <Card className={cn(className, 'border-none bg-[#E6DAFF] px-8 py-6')}>
+    <Card
+      className={cn(
+        className,
+        'mx-5 border-none bg-[#E6DAFF] px-8 py-6 md:mx-0',
+      )}
+    >
       <CardHeader className="p-0">
         <CardTitle className="font-sans text-xl text-[#222739]">
           Translatathon 2024: Community links
