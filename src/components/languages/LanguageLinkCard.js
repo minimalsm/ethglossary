@@ -4,13 +4,16 @@ import CommentsIcon from '@/components/icons/CommentsIcon'
 import { cn } from '@/lib/utils'
 
 const LanguageLinkCard = ({ language }) => {
-  console.log('lang thats failing', language)
+  console.log('language', language)
+
   const capitalisedEnglishName =
     language.name.charAt(0).toUpperCase() + language.name.slice(1)
   const localLanguageName = language.localName
   const countriesList = language?.countries?.join(', ') || null
 
-  console.log(language)
+  console.log('capitalisedEnglishName', capitalisedEnglishName)
+  console.log('localLanguageName', localLanguageName)
+  console.log('countriesList', countriesList)
 
   return (
     <Link
@@ -39,10 +42,13 @@ const LanguageLinkCard = ({ language }) => {
         <div id="stats" className="flex flex-col space-y-2">
           <div className="flex items-center gap-1 text-sm">
             <TranslateIcon />
+            {console.log('translationsCount', language.translationsCount)}
             {language.translationsCount}
           </div>
           <div className="flex items-center gap-1 text-sm">
-            <CommentsIcon /> {language.commentsCount}
+            <CommentsIcon />{' '}
+            {console.log('commentsCount', language.commentsCount)}
+            {language.commentsCount}
           </div>
         </div>
       ) : (

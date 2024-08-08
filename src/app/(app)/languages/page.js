@@ -7,72 +7,87 @@ import LanguagesFilterAndList from '@/components/languages/LanguagesFilterAndLis
 // export const revalidate = 3600 // revalidate the data at most every hour
 
 export default async function LanguagesPage() {
-  const languages = await fetchLanguagesWithStats()
-  const languagesWithLocalAndCountries = languages.map(language => {
-    const languageData = getLanguageData(language.code)
-    return {
-      ...language,
-      localName: languageData?.localName,
-      countries: languageData?.countries,
-      // Add the isDefault property
-      isDefault: false,
+  try {
+    console.log('Fetching languages...')
+    const languages = await fetchLanguagesWithStats()
+    console.log('Languages fetched:', languages)
+
+    console.log('Mapping languages with local and countries...')
+    const languagesWithLocalAndCountries = languages.map(language => {
+      const languageData = getLanguageData(language.code)
+      console.log('Language:', language, 'Data:', languageData)
+      return {
+        ...language,
+        localName: languageData?.localName,
+        countries: languageData?.countries,
+        // Add the isDefault property
+        isDefault: false,
+      }
+    })
+    console.log('Languages mapped:', languagesWithLocalAndCountries)
+
+    console.log('Fetching user...')
+    const { data } = await createSupabaseServerComponentClient().auth.getUser()
+    const userId = data?.user?.id
+    console.log('User fetched:', userId)
+
+    let defaultLanguage = null
+
+    if (userId) {
+      console.log('Fetching user profile...')
+      const userProfile = await getUserProfile(userId)
+      console.log('User profile fetched:', userProfile)
+      defaultLanguage = userProfile?.default_language || null
     }
-  })
 
-  const {
-    data: { user },
-  } = await createSupabaseServerComponentClient().auth.getUser()
-  const userId = user?.id
+    console.log('Sorting languages...')
+    const sortedLanguages = defaultLanguage
+      ? languagesWithLocalAndCountries
+          .map(language => {
+            if (language.code === defaultLanguage) {
+              return { ...language, isDefault: true }
+            }
+            return language
+          })
+          .sort((a, b) => {
+            if (a.code === defaultLanguage) return -1
+            if (b.code === defaultLanguage) return 1
+            return 0
+          })
+      : languagesWithLocalAndCountries
+    console.log('Languages sorted:', sortedLanguages)
 
-  let defaultLanguage = null
-
-  if (userId) {
-    const userProfile = await getUserProfile(userId)
-    defaultLanguage = userProfile?.default_language || null
-  }
-
-  // Sort languages by moving the default language to the top if it exists
-  const sortedLanguages = defaultLanguage
-    ? languagesWithLocalAndCountries
-        .map(language => {
-          if (language.code === defaultLanguage) {
-            return { ...language, isDefault: true }
-          }
-          return language
-        })
-        .sort((a, b) => {
-          if (a.code === defaultLanguage) return -1
-          if (b.code === defaultLanguage) return 1
-          return 0
-        })
-    : languagesWithLocalAndCountries
-
-  return (
-    <div className="mx-5 mt-8 max-w-screen-sm md:mx-auto">
-      <h1 className="mb-4 text-[28px] font-bold">Languages</h1>
-      <div className="flex flex-col gap-3 text-sm">
-        <p>
-          Join our community of translators making the Ethereum glossary
-          accessible to everyone.
-        </p>
-        <p>
-          Select a language below to translate the glossary into your preferred
-          language.
-        </p>
-        <p>
-          <span className="font-semibold">Don’t see your language?</span>{' '}
-          <a
-            className="text-text-link font-bold"
-            href={`mailto:website@ethereum.org`}
-          >
-            Contact us
-          </a>{' '}
-          and let us know!
-        </p>
+    console.log('Rendering LanguagesPage...')
+    return (
+      <div className="mx-5 mt-8 max-w-screen-sm md:mx-auto">
+        <h1 className="mb-4 text-[28px] font-bold">Languages</h1>
+        <div className="flex flex-col gap-3 text-sm">
+          <p>
+            Join our community of translators making the Ethereum glossary
+            accessible to everyone.
+          </p>
+          <p>
+            Select a language below to translate the glossary into your
+            preferred language.
+          </p>
+          <p>
+            <span className="font-semibold">Don’t see your language?</span>{' '}
+            <a
+              className="text-text-link font-bold"
+              href={`mailto:website@ethereum.org`}
+            >
+              Contact us
+            </a>{' '}
+            and let us know!
+          </p>
+        </div>
+        <LanguagesFilterAndList languages={sortedLanguages} />
       </div>
-      <LanguagesFilterAndList languages={sortedLanguages} />
-    </div>
-  )
+    )
+  } catch (error) {
+    console.error('Error in LanguagesPage:', error)
+    return <div>Error occurred while fetching languages.</div>
+  }
 }
 const GlobeIcon = () => {
   return (

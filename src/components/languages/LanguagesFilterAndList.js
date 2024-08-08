@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { SearchNotFound } from '@/components/icons'
 import { Link } from 'next/link'
 
-const LanguagesFilterAndList = ({ languages }) => {
+const LanguagesFilterAndList = ({ languages = [] }) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [showAll, setShowAll] = useState(false)
 
@@ -16,15 +16,20 @@ const LanguagesFilterAndList = ({ languages }) => {
     setShowAll(false)
   }
 
-  const filteredLanguages = languages.filter(
-    language =>
-      language.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      language.localName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (language.countries &&
-        language.countries.some(country =>
-          country.toLowerCase().includes(searchQuery.toLowerCase()),
-        )),
-  )
+  const filteredLanguages = languages.filter(language => {
+    if (!language) return false
+    const lowerCaseQuery = searchQuery.toLowerCase()
+    const languageName = language.name?.toLowerCase()
+    const localName = language.localName?.toLowerCase()
+    const countries = language.countries?.map(country => country?.toLowerCase())
+
+    return (
+      languageName?.includes(lowerCaseQuery) ||
+      localName?.includes(lowerCaseQuery) ||
+      (countries &&
+        countries.some(country => country?.includes(lowerCaseQuery)))
+    )
+  })
 
   const displayedLanguages =
     showAll || searchQuery ? filteredLanguages : filteredLanguages.slice(0, 10)
