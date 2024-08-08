@@ -4,8 +4,6 @@ import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
 import { getUserProfile } from '@/lib/userProfile'
 import LanguagesFilterAndList from '@/components/languages/LanguagesFilterAndList'
 
-// export const revalidate = 3600 // revalidate the data at most every hour
-
 export default async function LanguagesPage() {
   try {
     console.log('Fetching languages...')

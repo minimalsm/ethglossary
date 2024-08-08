@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import LanguagesFilter from '@/components/languages/LanguagesSearch'
 import LanguagesList from '@/components/languages/LanguagesList'
 import { Button } from '@/components/ui/button'
@@ -11,7 +11,12 @@ const LanguagesFilterAndList = ({ languages = [] }) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [showAll, setShowAll] = useState(false)
 
+  useEffect(() => {
+    console.log('LanguagesFilterAndList mounted with languages:', languages)
+  }, [languages])
+
   const handleSearch = query => {
+    console.log('Search query updated:', query)
     setSearchQuery(query)
     setShowAll(false)
   }
@@ -31,6 +36,8 @@ const LanguagesFilterAndList = ({ languages = [] }) => {
     )
   })
 
+  console.log('Filtered languages based on query:', filteredLanguages)
+
   const displayedLanguages =
     showAll || searchQuery ? filteredLanguages : filteredLanguages.slice(0, 10)
 
@@ -38,6 +45,8 @@ const LanguagesFilterAndList = ({ languages = [] }) => {
     !showAll &&
     !searchQuery &&
     displayedLanguages.length < filteredLanguages.length
+
+  console.log('Displaying languages:', displayedLanguages)
 
   return (
     <div>
