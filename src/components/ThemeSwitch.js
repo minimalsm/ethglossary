@@ -36,7 +36,6 @@ export default function ThemeSwitch({ className }) {
         onClick={() => setTheme('light')}
       >
         <Sun />
-        Light mode
       </Button>
     )
   }
@@ -49,7 +48,6 @@ export default function ThemeSwitch({ className }) {
         size="icon"
         onClick={() => setTheme('dark')}
       >
-        Dark mode
         <Moon />
       </Button>
     )
