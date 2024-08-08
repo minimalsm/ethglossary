@@ -37,18 +37,18 @@ const LanguageLinkCard = ({ language }) => {
           {countriesList}
         </div>
       </div>
-      {language.translationsCount !== undefined &&
-      language.commentsCount !== undefined ? (
+      {language.translations_count !== undefined &&
+      language.comments_count !== undefined ? (
         <div id="stats" className="flex flex-col space-y-2">
           <div className="flex items-center gap-1 text-sm">
             <TranslateIcon />
-            {console.log('translationsCount', language.translationsCount)}
-            {language.translationsCount}
+            {console.log('translationsCount', language.translations_count)}
+            {language.translations_count}
           </div>
           <div className="flex items-center gap-1 text-sm">
             <CommentsIcon />{' '}
-            {console.log('commentsCount', language.commentsCount)}
-            {language.commentsCount}
+            {console.log('commentsCount', language.comments_count)}
+            {language.comments_count}
           </div>
         </div>
       ) : (
