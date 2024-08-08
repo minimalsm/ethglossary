@@ -89,12 +89,7 @@ const TermButton = ({ term, termPath, isActive, hasTranslated }) => {
       )}
       key={term}
     >
-      <Link
-        prefetch={true}
-        href={termPath}
-        className={cn('font-normal')}
-        ref={termRef}
-      >
+      <Link href={termPath} className={cn('font-normal')} ref={termRef}>
         {hasTranslated ? (
           <CheckDecagramGreen className="mr-2 shrink-0 text-accent-green" />
         ) : (
