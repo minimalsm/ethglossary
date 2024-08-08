@@ -147,7 +147,7 @@ export default function TranslationsSection({
       <div className="mx-5 mt-8 md:mx-0 md:mt-14">
         {submitted ? (
           <div className="my-4 flex flex-col gap-4 bg-accent-surface p-8">
-            <h2 className="mb-4 text-xl font-semibold">
+            <h2 className="mb-4 font-sans text-xl font-semibold">
               Suggested translations
             </h2>
             <div className="mb-6 flex flex-col gap-3">
