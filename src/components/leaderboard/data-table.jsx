@@ -131,7 +131,7 @@ export function DataTable ({columns, data, loggedInUserId}) {
         <Button
           variant="outline"
           size="sm"
-          className='rounded-none border-none p-1.5 text-primary bg-accent disabled:text-white'
+          className='rounded-none border-none p-1.5 text-text-primary dark:text-primary bg-none'
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
@@ -141,7 +141,7 @@ export function DataTable ({columns, data, loggedInUserId}) {
         <Button
           variant="outline"
           size="sm"
-          className='rounded-none border-none p-1.5 text-primary bg-accent disabled:text-white'
+          className='rounded-none border-none p-1.5 text-text-primary dark:text-primary bg-none'
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
