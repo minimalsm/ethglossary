@@ -16,7 +16,7 @@ const LanguageLinkCard = ({ language }) => {
     <Link
       href={`/${language.code}/block`}
       className={cn(
-        'hover:bg-surface-selected flex items-center justify-between gap-4 rounded-lg border bg-background p-4 hover:border-accent-green',
+        'hover:bg-surface-hover hover:border-surface-hover flex items-center justify-between gap-4 rounded-lg border bg-background p-4',
         language.isDefault && 'bg-surface-selected border-accent-green',
       )}
     >
