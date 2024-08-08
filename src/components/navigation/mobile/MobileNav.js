@@ -12,6 +12,7 @@ import { getLanguageData } from '@/lib/languageUtils'
 import { Close } from '@/components/icons'
 import LogoLink from '@/components/navigation/LogoLink'
 import React from 'react'
+import { MobileThemeSwitch } from '@/components/ThemeSwitch'
 
 export const MobileNav = ({ defaultLanguage, navSections }) => {
   return (
@@ -37,7 +38,7 @@ export const MobileNav = ({ defaultLanguage, navSections }) => {
             </svg>
           </button>
         </SheetTrigger>
-        <SheetContent className="w-full">
+        <SheetContent className="h-full w-full">
           <SheetHeader>
             <SheetTitle className="text-left font-sans">
               <LogoLink />
@@ -51,15 +52,19 @@ export const MobileNav = ({ defaultLanguage, navSections }) => {
               </button>
             </SheetClose>
           </SheetHeader>
-          <Separator className="mb-20 mt-4" />
-          {navSections.map((section, index) => (
-            <MobileNavSection
-              key={index}
-              heading={section.heading}
-              items={section.items}
-              defaultLanguage={defaultLanguage}
-            />
-          ))}
+          <Separator className="mb-4 mt-4" />
+          <div className="flex flex-col justify-between">
+            {navSections.map((section, index) => (
+              <MobileNavSection
+                key={index}
+                heading={section.heading}
+                items={section.items}
+                defaultLanguage={defaultLanguage}
+              />
+            ))}
+
+            <MobileThemeSwitch className="mt-20" />
+          </div>
         </SheetContent>
       </Sheet>
     </div>
