@@ -177,7 +177,7 @@ export default function AddTranslationForm({
         className="relative space-y-4"
       >
         <FormItem>
-          <Label htmlFor="translation">
+          <Label htmlFor="translation" className="md:text-base">
             into <strong>{localeLanguageData.localName}</strong>
           </Label>
           <div className="relative">
