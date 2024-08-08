@@ -314,7 +314,7 @@ const UpNextComponent = ({
           <span className="font-bold">Up next:</span> {nextTerm}
         </span>
         {hasTranslatedNextTerm ? (
-          <CheckDecagramGreen />
+          <CheckDecagramGreen className="text-accent-green" />
         ) : (
           <CheckDecagramOutline />
         )}
