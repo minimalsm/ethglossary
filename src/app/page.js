@@ -49,7 +49,7 @@ export default async function HomePage() {
           languages={languagesWithLocalAndCountries}
           className="mb-11"
         />
-        <HowItWorksSection />
+        <HowItWorksSection user={user} />
 
         {/* Background textures */}
       </div>
@@ -231,7 +231,7 @@ const HeroSection = ({ user = null }) => {
         <p className="mb-12 text-xl md:text-2xl">
           Unlock the power of Ethereum in your language
         </p>
-        <Button asChild className="text-xs font-bold leading-none md:text-xl">
+        <Button asChild className="text-sm font-bold leading-none md:text-xl">
           {user ? (
             <Link href="/languages">
               <Avatar className="mr-2 h-4 w-4 md:h-8 md:w-8">
@@ -339,7 +339,7 @@ const LanguagesSection = ({ languages, className }) => {
   )
 }
 
-const HowItWorksSection = () => {
+const HowItWorksSection = ({ user = null }) => {
   return (
     <section className="mb-11 flex w-full max-w-[961px] flex-col items-start space-y-8 md:mb-16 md:flex-row lg:space-x-8 lg:space-y-0">
       <div className="flex flex-col gap-4 md:flex-row md:gap-8">
@@ -364,10 +364,29 @@ const HowItWorksSection = () => {
         </ol>
 
         <div className="flex flex-col gap-4 md:flex-row">
-          <Button className="w-full py-6 text-base font-bold">
-            Sign in with Discord
+          <Button
+            asChild
+            className="text-sm font-bold leading-none md:px-6 md:py-5 md:text-base"
+          >
+            {user ? (
+              <Link href="/languages">
+                <Avatar className="mr-2 h-4 w-4 md:h-6 md:w-6">
+                  <AvatarImage src={user.user_metadata.avatar_url} alt="U" />
+                  <AvatarFallback>L</AvatarFallback>
+                </Avatar>
+                Continue translating
+              </Link>
+            ) : (
+              <Link href="/auth/login">
+                <FaDiscord className="mr-2 size-[24px]" />
+                Sign in with Discord
+              </Link>
+            )}
           </Button>
-          <Button variant="outline" className="w-full py-6 text-base font-bold">
+          <Button
+            variant="outline"
+            className="text-sm font-bold leading-none md:px-6 md:py-5 md:text-base"
+          >
             About the translatathon
           </Button>
         </div>
