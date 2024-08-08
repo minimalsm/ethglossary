@@ -54,6 +54,7 @@ export const CommonNavItem = ({
     >
       <p
         className={cn(
+          'hover:text-text-primary text-text-tertiary dark:hover:text-primary',
           textClassName,
           (isActive || translateRouteActive) &&
             !isMobile &&
