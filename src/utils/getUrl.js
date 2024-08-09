@@ -8,7 +8,7 @@ export async function getURL(path = '') {
         process?.env?.NEXT_PUBLIC_VERCEL_URL &&
           process.env.NEXT_PUBLIC_VERCEL_URL.trim() !== ''
         ? process.env.NEXT_PUBLIC_VERCEL_URL
-        : // If neither is set, default to localhost for local development.
+        : // If neither is set, default to localhost for local development..
           'http://localhost:3000/'
 
   // Trim the URL and remove trailing slash if exists.
