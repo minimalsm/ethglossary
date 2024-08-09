@@ -273,5 +273,40 @@
         "name": "Zulu",
         "localName": "isiZulu",
         "countries": ["South Africa"]
-    }
+    },
+    "tw": {
+      "name": "Twi",
+      "localName": "Twi",
+      "countries": ["Ghana"]
+  },
+  "sn": {
+      "name": "Shona",
+      "localName": "chiShona",
+      "countries": ["Zimbabwe", "Mozambique"]
+  },
+  "ps": {
+      "name": "Pashto",
+      "localName": "پښتو",
+      "countries": ["Afghanistan", "Pakistan"]
+  },
+  "ne": {
+      "name": "Nepali",
+      "localName": "नेपाली",
+      "countries": ["Nepal", "India"]
+  },
+  "lt": {
+      "name": "Lithuanian",
+      "localName": "Lietuvių",
+      "countries": ["Lithuania"]
+  },
+  "kn": {
+      "name": "Kannada",
+      "localName": "ಕನ್ನಡ",
+      "countries": ["India"]
+  },
+  "he": {
+      "name": "Hebrew",
+      "localName": "עברית",
+      "countries": ["Israel"]
+  }
 }
