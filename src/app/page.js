@@ -13,6 +13,7 @@ import HomepageDesktopNav from '@/components/navigation/homepage/HomepageDesktop
 import { ArrowUpAndRight } from '@/components/icons'
 import { fetchUserMetadata } from '@/lib/userProfile'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import AuthButton from '@/components/auth/AuthButton'
 
 export default async function HomePage() {
   const {
@@ -245,8 +246,8 @@ const HeroSection = ({ user = null }) => {
         <p className="mb-12 text-xl md:text-2xl">
           Unlock the power of Ethereum in your language
         </p>
-        <Button asChild className="text-sm font-bold leading-none md:text-xl">
-          {user ? (
+        {user ? (
+          <Button asChild className="text-sm font-bold leading-none md:text-xl">
             <Link href="/languages">
               <Avatar className="mr-2 h-4 w-4 md:h-8 md:w-8">
                 <AvatarImage src={user.user_metadata.avatar_url} alt="U" />
@@ -254,13 +255,13 @@ const HeroSection = ({ user = null }) => {
               </Avatar>
               Continue translating
             </Link>
-          ) : (
-            <Link href="/auth/login">
-              <FaDiscord className="mr-2 size-[24px]" />
-              Sign in with Discord
-            </Link>
-          )}
-        </Button>
+          </Button>
+        ) : (
+          <AuthButton
+            className="text-sm font-bold leading-none md:text-xl"
+            size="size-[20px] md:size-[24px]"
+          />
+        )}
       </div>
     </section>
   )
@@ -378,11 +379,11 @@ const HowItWorksSection = ({ user = null }) => {
         </ol>
 
         <div className="flex flex-col gap-4 md:flex-row">
-          <Button
-            asChild
-            className="text-sm font-bold leading-none md:px-6 md:py-5 md:text-base"
-          >
-            {user ? (
+          {user ? (
+            <Button
+              asChild
+              className="text-sm font-bold leading-none md:px-6 md:py-5 md:text-base"
+            >
               <Link href="/languages">
                 <Avatar className="mr-2 h-4 w-4 md:h-6 md:w-6">
                   <AvatarImage src={user.user_metadata.avatar_url} alt="U" />
@@ -390,13 +391,14 @@ const HowItWorksSection = ({ user = null }) => {
                 </Avatar>
                 Continue translating
               </Link>
-            ) : (
-              <Link href="/auth/login">
-                <FaDiscord className="mr-2 size-[24px]" />
-                Sign in with Discord
-              </Link>
-            )}
-          </Button>
+            </Button>
+          ) : (
+            <AuthButton
+              className="text-sm font-bold leading-none md:px-6 md:py-5 md:text-base"
+              size="size-[24px]"
+            />
+          )}
+
           <Button
             variant="outline"
             className="text-sm font-bold leading-none md:px-6 md:py-5 md:text-base"

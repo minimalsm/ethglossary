@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import ThemeSwitch from '@/components/ThemeSwitch'
 import LogoLink from '../LogoLink'
 import NavBar from '../Navbar'
+import AuthButton from '@/components/auth/AuthButton'
 
 const HomepageDesktopNav = ({ user }) => {
   if (user) {
@@ -19,13 +20,11 @@ const HomepageDesktopNav = ({ user }) => {
       />
 
       <div className="flex">
-        <Button asChild className="mr-4 justify-self-end px-4 py-3">
-          <Link href="/auth/login" aria-label="Sign in with Discord">
-            <FaDiscord className="mr-2 size-[16px]" />
-            <span className="hidden md:inline">Sign in with Discord</span>
-            <span className="inline md:hidden">Sign in</span>
-          </Link>
-        </Button>
+        <AuthButton className="mr-4 justify-self-end px-4 py-3">
+          <FaDiscord className="mr-2 size-[16px]" />
+          <span className="hidden md:inline">Sign in with Discord</span>
+          <span className="inline md:hidden">Sign in</span>
+        </AuthButton>
         <ThemeSwitch className="hidden md:flex" />
       </div>
     </nav>
