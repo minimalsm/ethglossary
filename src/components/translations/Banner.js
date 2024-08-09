@@ -30,7 +30,7 @@ const Banner = ({ translatedTerms, initialDismissed }) => {
     bannerTitle = 'Congratulations!'
     bannerText = (
       <>
-        <strong>You've earned 300 points for translating 30 terms</strong>.
+        <strong>You&apos;ve earned 300 points for translating 30 terms</strong>.
         Translate all 70 terms for <strong>1000 points</strong> 🎉
       </>
     )
@@ -40,7 +40,7 @@ const Banner = ({ translatedTerms, initialDismissed }) => {
     bannerTitle = 'Congratulations!'
     bannerText = (
       <>
-        <strong>You've earned 600 points for translating 60 terms</strong>.
+        <strong>You&apos;ve earned 600 points for translating 60 terms</strong>.
         Translate the last 10 for <strong>1000 points</strong> 🎉
       </>
     )
@@ -51,7 +51,7 @@ const Banner = ({ translatedTerms, initialDismissed }) => {
     bannerClass = 'bg-[#BFF5DB]'
     bannerText = (
       <>
-        <strong>Thank you</strong> ❤️ You've earned the maximum of{' '}
+        <strong>Thank you</strong> ❤️ You&apos;ve earned the maximum of{' '}
         <strong>1000 points</strong> towards your total Translatathon score!
       </>
     )
