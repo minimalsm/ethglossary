@@ -348,6 +348,7 @@ const LanguagesSection = ({ languages, className }) => {
           'grid grid-cols-1 gap-4 md:grid md:grid-cols-[minmax(220px,309px)_minmax(240px,309px)_minmax(220px,309px)] md:gap-3'
         }
         languages={languages}
+        max={15}
       />
       <p className="text-right font-serif text-2xl font-bold">...and more!</p>
     </section>
