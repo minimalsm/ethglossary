@@ -8,8 +8,11 @@ export async function getURL(path = '') {
         process?.env?.NEXT_PUBLIC_VERCEL_URL &&
           process.env.NEXT_PUBLIC_VERCEL_URL.trim() !== ''
         ? process.env.NEXT_PUBLIC_VERCEL_URL
-        : // If neither is set, default to localhost for local development..
-          'http://localhost:3000/'
+        : process?.env?.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL &&
+            process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL.trim() !== ''
+          ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
+          : // If neither is set, default to localhost for local development..
+            'http://localhost:3000/'
 
   // Trim the URL and remove trailing slash if exists.
   url = url.replace(/\/+$/, '')
