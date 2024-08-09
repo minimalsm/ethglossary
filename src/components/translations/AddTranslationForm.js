@@ -94,6 +94,7 @@ export default function AddTranslationForm({
         ],
       }
 
+      // Optimistically update UI with the new translation
       onTranslationAdded(optimisticTranslation, existingTranslation.id)
 
       try {
@@ -105,6 +106,7 @@ export default function AddTranslationForm({
         )
         form.reset()
 
+        // Replace optimistic translation with server response
         onTranslationAdded(
           { ...optimisticTranslation, ...updatedTranslation },
           existingTranslation.id,
@@ -122,7 +124,7 @@ export default function AddTranslationForm({
       }
     } else {
       const optimisticTranslation = {
-        id: Date.now(),
+        id: Date.now(), // Temporary ID for optimistic update
         term_id: termId,
         language_id: languageId,
         translation,
@@ -141,6 +143,7 @@ export default function AddTranslationForm({
         ],
       }
 
+      // Optimistically add new translation
       onTranslationAdded(optimisticTranslation)
 
       try {
@@ -152,6 +155,7 @@ export default function AddTranslationForm({
         )
         form.reset()
 
+        // Replace the optimistic translation with the one from server
         onTranslationAdded(
           { ...optimisticTranslation, ...newTranslation },
           optimisticTranslation.id,

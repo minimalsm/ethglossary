@@ -32,19 +32,52 @@ export default function TranslationsSection({
 
   const handleNewTranslation = (newTranslation, tempId) => {
     setTranslations(prevTranslations => {
+      // Check if this is a replacement for an optimistic update
+      if (tempId) {
+        const isOptimisticUpdate = prevTranslations.some(
+          translation => translation.id === tempId,
+        )
+
+        if (isOptimisticUpdate) {
+          console.log('Replacing optimistic translation with server response')
+
+          // Map through the current translations to find and replace the optimistic one
+          return prevTranslations.map(translation => {
+            if (translation.id === tempId) {
+              // Replace the optimistic translation with the server response
+              const updatedTranslation = {
+                ...translation, // Retain any other properties from the optimistic translation (if needed)
+                ...newTranslation, // Spread the properties of the new translation from the server first
+                id: newTranslation.translationId, // Explicitly set the ID to the server-provided translationId, ensuring it is not overwritten
+              }
+
+              return updatedTranslation
+            }
+
+            // If it's not the translation we're replacing, return it unchanged
+            return translation
+          })
+        }
+      }
+
+      // Check if the translation already exists based on the actual translation text
       const existingTranslation = prevTranslations.find(
         t =>
           t.translation.toLowerCase() ===
           newTranslation.translation.toLowerCase(),
       )
+
       if (existingTranslation) {
+        // Correctly update the existing translation with new data and the correct id
         const updatedTranslation = {
-          ...existingTranslation,
-          votes: newTranslation.votes,
+          ...existingTranslation, // Retain any existing properties of the translation
+          ...newTranslation, // Spread the properties of the new translation from the server
+          id: newTranslation.translationId, // Explicitly set the ID to the server-provided translationId, ensuring it is not overwritten
+          votes: newTranslation.votes, // Update the votes from the server response
           translation_submissions: [
-            ...existingTranslation.translation_submissions,
+            ...existingTranslation.translation_submissions, // Retain previous submissions
             {
-              user_id: user.id,
+              user_id: user.id, // Add the current user's submission details
               profiles: {
                 display_name: user.display_name,
                 avatar_url: user.avatar_url,
@@ -52,38 +85,19 @@ export default function TranslationsSection({
             },
           ],
         }
+
+        // Return the updated list of translations, replacing the old one with the updated data
         return prevTranslations.map(translation =>
           translation.id === existingTranslation.id
             ? updatedTranslation
             : translation,
         )
       }
-      if (tempId) {
-        return prevTranslations.map(translation =>
-          translation.id === tempId ? newTranslation : translation,
-        )
-      }
       return [...prevTranslations, newTranslation]
     })
+
     setSubmitted(true)
   }
-
-  // console.log(
-  //   'translations in section',
-  //   translations[0].translation_submissions,
-  // )
-  // logs:
-  // translations in section [
-  //   {
-  //     user_id: '922651f5-bba7-49c7-a104-dca5b1c7320d',
-  //     profiles: {
-  //       avatar_url: 'https://cdn.discordapp.com/avatars/643099918998831144/6be3d8b32a6ca22fe61be6ada89775d3.png',
-  //       display_name: 'joshuaisbuilding'
-  //     }
-  //   }
-  // ]
-
-  console.log('Completion percentage', completionPercentage)
 
   return (
     <div className="grow-1 shrink-1 basis-auto">
@@ -167,8 +181,6 @@ export default function TranslationsSection({
                   submission =>
                     submission.profiles?.display_name || 'Anonymous',
                 )
-
-                console.log('translators when mapping', translators)
 
                 const isUserTranslator = translators.includes(
                   user?.display_name,
