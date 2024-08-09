@@ -153,5 +153,125 @@
         "name": "Igbo",
         "localName": "Igbo",
         "countries": ["Nigeria"]
+    },
+    "hr": {
+      "name": "Croatian",
+      "localName": "Hrvatski",
+      "countries": ["Croatia", "Bosnia and Herzegovina"]
+  },
+  "da": {
+      "name": "Danish",
+      "localName": "Dansk",
+      "countries": ["Denmark", "Greenland", "Faroe Islands"]
+  },
+  "eo": {
+      "name": "Esperanto",
+      "localName": "Esperanto",
+      "countries": ["International"]
+  },
+  "et": {
+      "name": "Estonian",
+      "localName": "Eesti",
+      "countries": ["Estonia"]
+  },
+  "ee": {
+      "name": "Ewe",
+      "localName": "Eʋegbe",
+      "countries": ["Ghana", "Togo"]
+  },
+  "ky": {
+    "name": "Kyrgyz",
+    "localName": "Кыргызча",
+    "countries": ["Kyrgyzstan"]
+},
+  "lv": {
+      "name": "Latvian",
+      "localName": "Latviešu",
+      "countries": ["Latvia"]
+  },
+  "ml": {
+      "name": "Malayalam",
+      "localName": "മലയാളം",
+      "countries": ["India"]
+  },
+  "mr": {
+      "name": "Marathi",
+      "localName": "मराठी",
+      "countries": ["India"]
+  },
+  "pcm": {
+      "name": "Nigerian Pidgin",
+      "localName": "Naijá",
+      "countries": ["Nigeria"]
+  },
+  "no": {
+      "name": "Norwegian",
+      "localName": "Norsk",
+      "countries": ["Norway"]
+  },
+  "or": {
+      "name": "Odia",
+      "localName": "ଓଡ଼ିଆ",
+      "countries": ["India"]
+  },
+    "sr": {
+        "name": "Serbian",
+        "localName": "Српски",
+        "countries": ["Serbia", "Bosnia and Herzegovina", "Montenegro"]
+    },
+    "sk": {
+        "name": "Slovak",
+        "localName": "Slovenčina",
+        "countries": ["Slovakia"]
+    },
+    "so": {
+        "name": "Somali",
+        "localName": "Soomaali",
+        "countries": ["Somalia", "Ethiopia", "Kenya", "Djibouti"]
+    },
+    "sw": {
+        "name": "Swahili",
+        "localName": "Kiswahili",
+        "countries": ["Tanzania", "Kenya", "Uganda", "Democratic Republic of the Congo"]
+    },
+    "tl": {
+        "name": "Tagalog",
+        "localName": "Tagalog",
+        "countries": ["Philippines"]
+    },
+    "ta": {
+        "name": "Tamil",
+        "localName": "தமிழ்",
+        "countries": ["India", "Sri Lanka", "Singapore"]
+    },
+    "te": {
+        "name": "Telugu",
+        "localName": "తెలుగు",
+        "countries": ["India"]
+    },
+    "th": {
+        "name": "Thai",
+        "localName": "ไทย",
+        "countries": ["Thailand"]
+    },
+    "ur-pk": {
+        "name": "Urdu (Pakistan)",
+        "localName": "اردو",
+        "countries": ["Pakistan", "India"]
+    },
+    "uz": {
+        "name": "Uzbek",
+        "localName": "Oʻzbekcha",
+        "countries": ["Uzbekistan"]
+    },
+    "yo": {
+        "name": "Yoruba",
+        "localName": "Yorùbá",
+        "countries": ["Nigeria", "Benin", "Togo"]
+    },
+    "zu": {
+        "name": "Zulu",
+        "localName": "isiZulu",
+        "countries": ["South Africa"]
     }
-  }
+}
