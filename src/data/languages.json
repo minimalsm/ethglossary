@@ -308,5 +308,15 @@
       "name": "Hebrew",
       "localName": "עברית",
       "countries": ["Israel"]
-  }
+  },
+"gu": {
+    "name": "Gujarati",
+    "localName": "ગુજરાતી",
+    "countries": ["India"]
+},
+"ha": {
+    "name": "Hausa",
+    "localName": "Hausa",
+    "countries": ["Nigeria", "Niger", "Ghana", "Chad"]
+}
 }
