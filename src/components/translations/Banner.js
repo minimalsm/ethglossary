@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Close } from '@/components/icons'
 
-const Banner = ({ completionPercentage, initialDismissed }) => {
+const Banner = ({ translatedTerms, initialDismissed }) => {
   const [isDismissed, setIsDismissed] = useState(initialDismissed)
   const router = useRouter()
 
@@ -15,39 +15,44 @@ const Banner = ({ completionPercentage, initialDismissed }) => {
   let bannerTitle = ''
   let bannerClass = ''
 
-  if (completionPercentage >= 0 && completionPercentage < 50) {
-    bannerKey = 'bannerDismissed-0-49'
+  if (translatedTerms >= 0 && translatedTerms < 30) {
+    bannerKey = 'bannerDismissed-0-29'
     bannerTitle = 'How to earn rewards'
     bannerText = (
       <>
-        Translate 50% of terms in a language to earn a{' '}
-        <strong>1.1x multiplier</strong>. Translate 100% to earn a{' '}
-        <strong>1.2x multiplier</strong> 🎉
+        Earn <strong>100 points for every 10 terms</strong> you translate.
+        Translate <strong>all 70 terms for 1000 points</strong> 🎉
       </>
     )
     bannerClass = 'bg-[#E7EDFF]'
-  } else if (completionPercentage >= 50 && completionPercentage < 100) {
-    bannerKey = 'bannerDismissed-50-99'
-    bannerTitle = 'Great Progress!'
+  } else if (translatedTerms >= 30 && translatedTerms < 60) {
+    bannerKey = 'bannerDismissed-30-59'
+    bannerTitle = 'Congratulations!'
     bannerText = (
       <>
-        You’ve earned a <strong>1.1x</strong> multiplier for translating 50% of
-        the terms in this language. Translate 100% to earn a{' '}
-        <strong>1.2x</strong> multiplier 🎉
+        <strong>You've earned 300 points for translating 30 terms</strong>.
+        Translate all 70 terms for <strong>1000 points</strong> 🎉
       </>
     )
     bannerClass = 'bg-[#BFF5DB]'
-  } else if (completionPercentage === 100) {
-    bannerKey = 'bannerDismissed-100'
+  } else if (translatedTerms >= 60 && translatedTerms < 70) {
+    bannerKey = 'bannerDismissed-60-69'
     bannerTitle = 'Congratulations!'
+    bannerText = (
+      <>
+        <strong>You've earned 600 points for translating 60 terms</strong>.
+        Translate the last 10 for <strong>1000 points</strong> 🎉
+      </>
+    )
+    bannerClass = 'bg-[#BFF5DB]'
+  } else if (translatedTerms === 70) {
+    bannerKey = 'bannerDismissed-70'
+    bannerTitle = 'You translated all 70 terms 👏'
     bannerClass = 'bg-[#BFF5DB]'
     bannerText = (
       <>
-        <strong>
-          Thank you for translating 100% of the terms in this language
-        </strong>{' '}
-        ❤️ You’ve earned the maximum reward of a{' '}
-        <strong>1.2x multiplier</strong> towards your total Translatathon score.
+        <strong>Thank you</strong> ❤️ You've earned the maximum of{' '}
+        <strong>1000 points</strong> towards your total Translatathon score!
       </>
     )
   }
@@ -62,7 +67,7 @@ const Banner = ({ completionPercentage, initialDismissed }) => {
 
   return (
     <Alert
-      className={`flex w-full items-center rounded border-none px-4 py-3 text-black ${bannerClass} md:mb-10`}
+      className={`flex w-full items-center justify-between rounded border-none px-4 py-3 text-black ${bannerClass} md:mb-10`}
     >
       <div className="">
         <AlertTitle className="mb-0 text-sm font-bold">

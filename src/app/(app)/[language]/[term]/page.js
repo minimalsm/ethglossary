@@ -108,25 +108,23 @@ export default async function TermPage({ params }) {
   }
 
   const cookieStore = cookies()
-  const completionPercentage = Math.round(
-    (userHasTranslatedCount / totalTerms) * 100,
-  )
+  const translatedTerms = userHasTranslatedCount
   let bannerKey = ''
 
-  if (completionPercentage >= 0 && completionPercentage < 50) {
-    bannerKey = 'bannerDismissed-0-49'
-  } else if (completionPercentage >= 50 && completionPercentage < 100) {
-    bannerKey = 'bannerDismissed-50-99'
-  } else if (completionPercentage === 100) {
-    bannerKey = 'bannerDismissed-100'
+  if (translatedTerms >= 0 && translatedTerms < 30) {
+    bannerKey = 'bannerDismissed-0-29'
+  } else if (translatedTerms >= 30 && translatedTerms < 60) {
+    bannerKey = 'bannerDismissed-30-59'
+  } else if (translatedTerms >= 60 && translatedTerms < 70) {
+    bannerKey = 'bannerDismissed-60-69'
+  } else if (translatedTerms === 70) {
+    bannerKey = 'bannerDismissed-70'
   }
 
   const isDismissedInitially = cookieStore.get(bannerKey)?.value === 'true'
 
   console.log(cookieStore.get(bannerKey))
-
   console.log(isDismissedInitially)
-
   console.log('Banner key:', bannerKey)
 
   return (
@@ -179,7 +177,7 @@ export default async function TermPage({ params }) {
           termsLength={totalTerms}
           hasTranslatedNextTerm={hasTranslatedNextTerm}
           localeLanguageData={localeLanguageData}
-          completionPercentage={completionPercentage}
+          completionPercentage={translatedTerms}
           isDismissedInitially={isDismissedInitially}
           examples={examples}
         />

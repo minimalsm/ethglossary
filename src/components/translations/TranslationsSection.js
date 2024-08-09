@@ -102,7 +102,7 @@ export default function TranslationsSection({
   return (
     <div className="grow-1 shrink-1 basis-auto">
       <Banner
-        completionPercentage={completionPercentage}
+        translatedTerms={completionPercentage}
         initialDismissed={isDismissedInitially}
       />
       <div className="mt-5 bg-background md:mt-0">
