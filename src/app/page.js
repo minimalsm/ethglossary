@@ -14,6 +14,8 @@ import { ArrowUpAndRight } from '@/components/icons'
 import { fetchUserMetadata } from '@/lib/userProfile'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import AuthButton from '@/components/auth/AuthButton'
+import globe from '../../public/images/globe.png'
+import dolphin from '../../public/images/dolphin.png'
 import { isValidDate } from '@/lib/date'
 import { END_DATE, START_DATE, YEAR } from '@/lib/constants'
 
@@ -302,19 +304,12 @@ const WhatIsETHGlossarySection = () => {
       </div>
 
       <div className="flex p-4 md:size-96 md:pl-20">
-        <img
-          src="/images/globe.png"
-          alt="Globe"
-          className="size-72 object-contain md:h-96 md:w-96"
-        />
-        {/* Todo: investigate dynamic sizing w/next image */}
-        {/* <Image
-          src="/images/globe.png"
+        <Image
+          src={globe}
           alt="Globe Image"
-          width={384}
-          height={384}
-          className="object-contain"
-        /> */}
+          sizes="(max-width: 768px) 18rem, 24rem"
+          className="size-72 object-contain md:size-96"
+        />
       </div>
     </section>
   )
@@ -453,7 +448,12 @@ const TranslatathonSection = () => {
       <div className="dark:bg-dark-dolphin-gradient flex w-full items-center justify-center bg-dolphin-gradient px-4">
         <div className="relative flex w-full max-w-[1144px] flex-col items-center text-center">
           <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 transform">
-            <img src="/images/dolphin.png" alt="hero" className="min-w-64" />
+            <Image
+              src={dolphin}
+              alt="hero"
+              sizes="20rem"
+              className="min-w-64"
+            />
           </div>
           <div className="mb-36 mt-40">
             <p className="mb-2 text-[#B3A8C0]">Part of ethereum.org</p>
