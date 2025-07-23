@@ -1,3 +1,7 @@
+import Image from 'next/image'
+
+import icon from '@/app/icon.png'
+
 const LogoLink = ({
   logoWidth = 28,
   textWidth = 110,
@@ -6,10 +10,10 @@ const LogoLink = ({
 }) => {
   return (
     <a href="/" className="flex items-baseline gap-[7px] text-2xl font-bold">
-      <img
-        src="/images/icon.png"
-        width={logoWidth}
+      <Image
+        src={icon}
         alt="Logo"
+        style={{ width: logoWidth }}
         className="object-contain"
       />
       <div>
