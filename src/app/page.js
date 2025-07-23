@@ -347,7 +347,7 @@ const LanguagesSection = ({ languages, className }) => {
         <BubbleSvgTest color="#AA7FFF" />
         <h2 className="flex flex-col text-5xl font-bold md:mt-[-32px]">
           <span className="text-7xl md:text-[156px] md:leading-[162px]">
-            62
+            {languages.length}
           </span>
           <span className="text-2xl md:text-5xl">Translation languages</span>
         </h2>
