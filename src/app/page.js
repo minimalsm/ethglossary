@@ -14,6 +14,8 @@ import { ArrowUpAndRight } from '@/components/icons'
 import { fetchUserMetadata } from '@/lib/userProfile'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import AuthButton from '@/components/auth/AuthButton'
+import { isValidDate } from '@/lib/date'
+import { END_DATE, START_DATE, YEAR } from '@/lib/constants'
 
 export default async function HomePage() {
   const {
@@ -95,13 +97,23 @@ const getStartedCardData = [
   },
 ]
 
+const formattedDateRange = new Intl.DateTimeFormat('en', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).formatRange(
+  new Date(isValidDate(START_DATE) ? START_DATE : END_DATE),
+  new Date(isValidDate(END_DATE) ? END_DATE : START_DATE),
+)
+
 const translatathonCardData = [
   {
     number: 1,
     emoji: '🎉',
     color: '#AA7FFF',
     heading: 'Event begins',
-    text: 'Translate, translate, translate! The event runs from Fri 9 Aug – Sun Aug 18 2024.',
+    text: `Translate, translate, translate! The event runs from ${formattedDateRange}.`,
   },
   {
     number: 2,
@@ -445,7 +457,7 @@ const TranslatathonSection = () => {
           </div>
           <div className="mb-36 mt-40">
             <p className="mb-2 text-[#B3A8C0]">Part of ethereum.org</p>
-            <h2 className="mb-10 text-4xl font-bold">Translatathon 2024</h2>
+            <h2 className="mb-10 text-4xl font-bold">Translatathon {YEAR}</h2>
             <div className="grid w-full max-w-[1144px] grid-cols-1 gap-8 md:grid-cols-3 md:gap-8">
               {translatathonCardData.map((item, index) => (
                 <TranslatathonCard
