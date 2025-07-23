@@ -7,11 +7,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { FaDiscord } from 'react-icons/fa'
-import ThemeSwitch from '@/components/ThemeSwitch'
 import HomepageDesktopNav from '@/components/navigation/homepage/HomepageDesktopNav'
 import { ArrowUpAndRight } from '@/components/icons'
-import { fetchUserMetadata } from '@/lib/userProfile'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import AuthButton from '@/components/auth/AuthButton'
 import globe from '../../public/images/globe.png'
@@ -47,7 +44,13 @@ export default async function HomePage() {
   return (
     <div className="flex min-h-screen flex-col items-center font-sans">
       <HeroSection user={user} />
-      <div className="dark:bg-dark-homepage-gradient relative flex w-full flex-col items-center bg-homepage-gradient px-4">
+      <div
+        className={cn(
+          'relative flex w-full flex-col items-center px-4',
+          'bg-gradient-to-b from-[#E5ECFF] via-[#EBF0FF] to-[#F8FAFF]',
+          'dark:from-[#1C202F] dark:from-[15%] dark:via-[#0E121F] dark:via-[37%] dark:to-[#1C202F] dark:to-[60%]',
+        )}
+      >
         <BackgroundMulticolorTexture />
         <BackgroundYellowTexture />
         <WhatIsETHGlossarySection />
@@ -187,7 +190,7 @@ const howItWorksData = [
           href="https://crowdin.com/profile/ethdotorg"
           target="_blank"
           rel="noreferrer"
-          className="text-text-link font-bold"
+          className="font-bold text-text-link"
         >
           Crowdin
         </a>
@@ -423,7 +426,7 @@ const HowItWorksSection = ({ user = null }) => {
 
 const HowToGetStartedSection = () => {
   return (
-    <section className="bg-light-dotted-gradient flex w-full flex-col items-center bg-[#E7EDFF] bg-[length:16px_16px] px-4 dark:bg-[#0A1126] dark:bg-dotted-gradient">
+    <section className="flex w-full flex-col items-center bg-[#E7EDFF] bg-light-dotted-gradient bg-[length:16px_16px] px-4 dark:bg-[#0A1126] dark:bg-dotted-gradient">
       <div className="mt-32 flex w-full max-w-[960px] flex-col items-center">
         <h2 className="mb-14 text-center text-5xl font-bold">
           How to get started
@@ -447,7 +450,13 @@ const HowToGetStartedSection = () => {
 const TranslatathonSection = () => {
   return (
     <section className="flex w-full flex-col items-center">
-      <div className="dark:bg-dark-dolphin-gradient flex w-full items-center justify-center bg-dolphin-gradient px-4">
+      <div
+        className={cn(
+          'flex w-full items-center justify-center px-4 dark:bg-dark-dolphin-gradient',
+          'bg-background bg-gradient-to-b dark:from-[#2B0758]/50 dark:via-[#1C043A]/50 dark:to-[#110225]/50',
+          'from-[#F8FAFF]/50 via-[#EDE4FF]/50 to-[#D2C3F0]/50',
+        )}
+      >
         <div className="relative flex w-full max-w-[1144px] flex-col items-center text-center">
           <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 transform">
             <Image
