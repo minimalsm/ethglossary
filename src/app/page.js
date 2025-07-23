@@ -16,6 +16,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import AuthButton from '@/components/auth/AuthButton'
 import globe from '../../public/images/globe.png'
 import dolphin from '../../public/images/dolphin.png'
+import hero from '../../public/images/hero.png'
 import { isValidDate } from '@/lib/date'
 import { END_DATE, START_DATE, YEAR } from '@/lib/constants'
 
@@ -243,10 +244,11 @@ const SpeechBubble = ({ number = null, color, className = 'w-16 h-16' }) => {
 const HeroSection = ({ user = null }) => {
   return (
     <section className="relative grid h-screen max-h-[540px] w-full md:max-h-[640px]">
-      <div className="absolute inset-0 z-[-1] h-full w-full object-cover">
-        <img
-          src="/images/hero.png"
-          className="bg-light-dotted-gradient fixed inset-0 z-[-1] h-full w-full bg-blue-400 bg-[length:16px_16px] object-cover md:h-[650px]"
+      <div className="absolute inset-0 -z-[1] h-full w-full object-cover">
+        <Image
+          src={hero}
+          className="fixed inset-0 -z-[1] h-full w-full bg-blue-400 bg-light-dotted-gradient bg-[length:16px_16px] object-cover md:h-[650px]"
+          sizes="100vw"
           alt="hero"
         />
       </div>
