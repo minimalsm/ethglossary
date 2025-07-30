@@ -184,6 +184,7 @@ const howItWorksData = [
     heading: 'Get rewarded',
     text: (
       <>
+        {/* // TODO: Update points */}
         Receive 100 points for every 10 terms translated. Translate all 70 terms
         for 1000 points! Learn more about rewards on{' '}
         <a
@@ -413,10 +414,16 @@ const HowItWorksSection = ({ user = null }) => {
           )}
 
           <Button
+            asChild
             variant="outline"
             className="text-sm font-bold leading-none md:px-6 md:py-5 md:text-base"
           >
-            About the translatathon
+            <Link
+              href="https://ethereum.org/en/contributing/translation-program/translatathon/"
+              target="_blank"
+            >
+              About the translatathon <ArrowUpAndRight className="ml-1" />
+            </Link>
           </Button>
         </div>
       </div>
@@ -452,7 +459,7 @@ const TranslatathonSection = () => {
     <section className="flex w-full flex-col items-center">
       <div
         className={cn(
-          'flex w-full items-center justify-center px-4 dark:bg-dark-dolphin-gradient',
+          'dark:bg-dark-dolphin-gradient flex w-full items-center justify-center px-4',
           'bg-background bg-gradient-to-b dark:from-[#2B0758]/50 dark:via-[#1C043A]/50 dark:to-[#110225]/50',
           'from-[#F8FAFF]/50 via-[#EDE4FF]/50 to-[#D2C3F0]/50',
         )}
