@@ -104,12 +104,13 @@ export default function TranslationsSection({
       <Banner
         translatedTerms={completionPercentage}
         initialDismissed={isDismissedInitially}
+        totalTerms={termsLength}
       />
       <div className="mt-5 bg-background md:mt-0">
         {/* another container to allow for full width separator on mobile */}
         <div className="px-4">
           <TranslationStatus submitted={submitted} />
-          <p className="text-3.5xl mb-[72px] font-serif md:mb-20">{term}</p>
+          <p className="mb-[72px] font-serif text-3.5xl md:mb-20">{term}</p>
           <span className="text"></span>
           <TermExamplesDisplay term={term} examples={examples} />
           {/* <p className="mb-2 text-sm font-semibold md:mb-3 md:text-base">
@@ -287,7 +288,7 @@ const ExampleItem = ({ example, term }) => {
 
 const CalloutBox = () => {
   return (
-    <div className="bg-accent-callout rounded-8px my-4 rounded-[8px] px-8 py-6 md:py-10">
+    <div className="rounded-8px my-4 rounded-[8px] bg-accent-callout px-8 py-6 md:py-10">
       <p className="text-center">
         Translate this term to view other suggested translations
       </p>

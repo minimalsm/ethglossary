@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Close } from '@/components/icons'
 
-const Banner = ({ translatedTerms, initialDismissed }) => {
+const Banner = ({ translatedTerms, initialDismissed, totalTerms }) => {
   const [isDismissed, setIsDismissed] = useState(initialDismissed)
   const router = useRouter()
 
@@ -21,7 +21,7 @@ const Banner = ({ translatedTerms, initialDismissed }) => {
     bannerText = (
       <>
         Earn <strong>100 points for every 10 terms</strong> you translate.
-        Translate <strong>all 70 terms for 1000 points</strong> 🎉
+        Translate <strong>all {totalTerms} terms for 1000 points</strong> 🎉
       </>
     )
     bannerClass = 'bg-[#E7EDFF]'
