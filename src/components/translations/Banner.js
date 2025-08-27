@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Close } from '@/components/icons'
+import { POINTS_PER_TERM } from '@/lib/constants'
 
 const Banner = ({ translatedTerms, initialDismissed, totalTerms }) => {
   const [isDismissed, setIsDismissed] = useState(initialDismissed)
