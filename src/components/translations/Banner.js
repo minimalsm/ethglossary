@@ -20,8 +20,12 @@ const Banner = ({ translatedTerms, initialDismissed, totalTerms }) => {
     bannerTitle = 'How to earn rewards'
     bannerText = (
       <>
-        Earn <strong>100 points for every 10 terms</strong> you translate.
-        Translate <strong>all {totalTerms} terms for 1000 points</strong> 🎉
+        Earn <strong>{POINTS_PER_TERM} points for each translated term</strong>{' '}
+        you translate. Translate{' '}
+        <strong>
+          all {totalTerms} terms for {totalTerms * POINTS_PER_TERM * 2} points
+        </strong>{' '}
+        🎉
       </>
     )
     bannerClass = 'bg-[#E7EDFF]'

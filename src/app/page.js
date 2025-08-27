@@ -16,7 +16,7 @@ import globe from '../../public/images/globe.png'
 import dolphin from '../../public/images/dolphin.png'
 import hero from '../../public/images/hero.png'
 import { isValidDate } from '@/lib/date'
-import { END_DATE, START_DATE, YEAR } from '@/lib/constants'
+import { END_DATE, POINTS_PER_TERM, START_DATE, YEAR } from '@/lib/constants'
 
 export default async function HomePage() {
   const {
@@ -56,7 +56,7 @@ export default async function HomePage() {
       >
         <BackgroundMulticolorTexture />
         <BackgroundYellowTexture />
-        <WhatIsETHGlossarySection />
+        <WhatIsETHGlossarySection languages={languages} />
         <LanguagesSection
           languages={languagesWithLocalAndCountries}
           className="mb-11"
@@ -254,7 +254,12 @@ const HeroSection = ({ user = null }) => {
   )
 }
 
-const WhatIsETHGlossarySection = () => {
+const WhatIsETHGlossarySection = ({ languages }) => {
+  // Calculate number of languages, rounded down to nearest 10
+  const numLanguages =
+    Math.floor((typeof languages !== 'undefined' ? languages.length : 0) / 10) *
+    10
+
   return (
     <section className="relative mt-11 flex w-full max-w-[961px] flex-col items-center md:mt-40 lg:flex-row">
       <div className="flex basis-8/12 flex-col gap-4 md:flex-row md:gap-8">
@@ -266,7 +271,7 @@ const WhatIsETHGlossarySection = () => {
 
           <p className="basis- mb-4 md:text-lg">
             ETHGlossary is an open-source project dedicated to translating a
-            core set of Ethereum terms into more than 60 languages.
+            core set of Ethereum terms into more than {numLanguages}+ languages.
           </p>
           <p className="md:text-lg">
             Whether you&apos;re an aspiring translator looking to gain
@@ -355,18 +360,17 @@ const HowItWorksSection = ({ user = null, totalTerms }) => {
       heading: 'Get rewarded',
       text: (
         <>
-          {/* // TODO: Update points */}
-          Receive 100 points for every 10 terms translated. Translate all{' '}
-          {totalTerms} terms for 1000 points! Learn more about rewards on{' '}
+          Receive {POINTS_PER_TERM} points for each translated term. Translate
+          all {totalTerms} terms and receive double points (
+          {totalTerms * POINTS_PER_TERM * 2})!{' '}
           <a
-            href="https://crowdin.com/profile/ethdotorg"
+            href="https://ethereum.org/en/contributing/translation-program/translatathon/details/"
             target="_blank"
             rel="noreferrer"
             className="font-bold text-text-link"
           >
-            Crowdin
+            Learn more about scoring and rewards.
           </a>
-          .
         </>
       ),
     },
