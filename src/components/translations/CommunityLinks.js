@@ -13,19 +13,19 @@ import { YEAR } from '@/lib/constants'
 const CommunityLinksCard = ({ className }) => {
   const links = [
     {
-      href: '#',
+      href: 'https://crowdin.com/project/ethereum-org',
       src: '/images/icons/crowdin.png',
       alt: 'Crowdin Logo',
       text: 'Crowdin',
     },
     {
-      href: '#',
+      href: 'https://ethereum.org/en/contributing/translation-program/translatathon/',
       src: '/images/icons/delphi.png',
       alt: 'Translatathon Logo',
       text: 'Translatathon',
     },
     {
-      href: '#',
+      href: 'http://discord.gg/ethereum-org',
       src: '/images/icons/discord.png',
       alt: 'Discord Logo',
       text: 'Discord',
