@@ -1,6 +1,7 @@
-import { supabase } from './supabaseClient'
+import { createSupabaseServerComponentClient } from './supabase/server'
 
 export async function fetchTerms() {
+  const supabase = createSupabaseServerComponentClient()
   const { data, error } = await supabase
     .from('strings')
     .select('id, term')
