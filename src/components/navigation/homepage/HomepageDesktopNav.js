@@ -12,12 +12,7 @@ const HomepageDesktopNav = ({ user }) => {
   }
   return (
     <nav className="mx-auto mt-4 flex w-full max-w-[1440px] justify-between self-start px-4">
-      <LogoLink
-        logoWidth={40}
-        textHeight={26}
-        textWidth={140}
-        svgClass="text-primary"
-      />
+      <LogoLink className="[&_img]:w-10 [&_svg]:h-[26px] [&_svg]:w-[140px] [&_svg]:text-primary" />
 
       <div className="flex">
         <AuthButton className="mr-4 justify-self-end px-4 py-3">

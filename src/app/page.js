@@ -7,13 +7,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { FaDiscord } from 'react-icons/fa'
-import ThemeSwitch from '@/components/ThemeSwitch'
 import HomepageDesktopNav from '@/components/navigation/homepage/HomepageDesktopNav'
 import { ArrowUpAndRight } from '@/components/icons'
-import { fetchUserMetadata } from '@/lib/userProfile'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import AuthButton from '@/components/auth/AuthButton'
+import globe from '../../public/images/globe.png'
+import dolphin from '../../public/images/dolphin.png'
+import hero from '../../public/images/hero.png'
+import { isValidDate } from '@/lib/date'
+import { END_DATE, START_DATE, YEAR } from '@/lib/constants'
 
 export default async function HomePage() {
   const {
@@ -42,7 +44,13 @@ export default async function HomePage() {
   return (
     <div className="flex min-h-screen flex-col items-center font-sans">
       <HeroSection user={user} />
-      <div className="dark:bg-dark-homepage-gradient relative flex w-full flex-col items-center bg-homepage-gradient px-4">
+      <div
+        className={cn(
+          'relative flex w-full flex-col items-center px-4',
+          'bg-gradient-to-b from-[#E5ECFF] via-[#EBF0FF] to-[#F8FAFF]',
+          'dark:from-[#1C202F] dark:from-[15%] dark:via-[#0E121F] dark:via-[37%] dark:to-[#1C202F] dark:to-[60%]',
+        )}
+      >
         <BackgroundMulticolorTexture />
         <BackgroundYellowTexture />
         <WhatIsETHGlossarySection />
@@ -95,13 +103,23 @@ const getStartedCardData = [
   },
 ]
 
+const formattedDateRange = new Intl.DateTimeFormat('en', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).formatRange(
+  new Date(isValidDate(START_DATE) ? START_DATE : END_DATE),
+  new Date(isValidDate(END_DATE) ? END_DATE : START_DATE),
+)
+
 const translatathonCardData = [
   {
     number: 1,
     emoji: '🎉',
     color: '#AA7FFF',
     heading: 'Event begins',
-    text: 'Translate, translate, translate! The event runs from Fri 9 Aug – Sun Aug 18 2024.',
+    text: `Translate, translate, translate! The event runs from ${formattedDateRange}.`,
   },
   {
     number: 2,
@@ -166,13 +184,14 @@ const howItWorksData = [
     heading: 'Get rewarded',
     text: (
       <>
+        {/* // TODO: Update points */}
         Receive 100 points for every 10 terms translated. Translate all 70 terms
         for 1000 points! Learn more about rewards on{' '}
         <a
           href="https://crowdin.com/profile/ethdotorg"
           target="_blank"
           rel="noreferrer"
-          className="text-text-link font-bold"
+          className="font-bold text-text-link"
         >
           Crowdin
         </a>
@@ -229,10 +248,11 @@ const SpeechBubble = ({ number = null, color, className = 'w-16 h-16' }) => {
 const HeroSection = ({ user = null }) => {
   return (
     <section className="relative grid h-screen max-h-[540px] w-full md:max-h-[640px]">
-      <div className="absolute inset-0 z-[-1] h-full w-full object-cover">
-        <img
-          src="/images/hero.png"
-          className="bg-light-dotted-gradient fixed inset-0 z-[-1] h-full w-full bg-blue-400 bg-[length:16px_16px] object-cover md:h-[650px]"
+      <div className="absolute inset-0 -z-[1] h-full w-full object-cover">
+        <Image
+          src={hero}
+          className="fixed inset-0 -z-[1] h-full w-full bg-blue-400 bg-light-dotted-gradient bg-[length:16px_16px] object-cover md:h-[650px]"
+          sizes="100vw"
           alt="hero"
         />
       </div>
@@ -290,19 +310,12 @@ const WhatIsETHGlossarySection = () => {
       </div>
 
       <div className="flex p-4 md:size-96 md:pl-20">
-        <img
-          src="/images/globe.png"
-          alt="Globe"
-          className="size-72 object-contain md:h-96 md:w-96"
-        />
-        {/* Todo: investigate dynamic sizing w/next image */}
-        {/* <Image
-          src="/images/globe.png"
+        <Image
+          src={globe}
           alt="Globe Image"
-          width={384}
-          height={384}
-          className="object-contain"
-        /> */}
+          sizes="(max-width: 768px) 18rem, 24rem"
+          className="size-72 object-contain md:size-96"
+        />
       </div>
     </section>
   )
@@ -338,7 +351,7 @@ const LanguagesSection = ({ languages, className }) => {
         <BubbleSvgTest color="#AA7FFF" />
         <h2 className="flex flex-col text-5xl font-bold md:mt-[-32px]">
           <span className="text-7xl md:text-[156px] md:leading-[162px]">
-            62
+            {languages.length}
           </span>
           <span className="text-2xl md:text-5xl">Translation languages</span>
         </h2>
@@ -401,10 +414,16 @@ const HowItWorksSection = ({ user = null }) => {
           )}
 
           <Button
+            asChild
             variant="outline"
             className="text-sm font-bold leading-none md:px-6 md:py-5 md:text-base"
           >
-            About the translatathon
+            <Link
+              href="https://ethereum.org/en/contributing/translation-program/translatathon/"
+              target="_blank"
+            >
+              About the translatathon <ArrowUpAndRight className="ml-1" />
+            </Link>
           </Button>
         </div>
       </div>
@@ -414,7 +433,7 @@ const HowItWorksSection = ({ user = null }) => {
 
 const HowToGetStartedSection = () => {
   return (
-    <section className="bg-light-dotted-gradient flex w-full flex-col items-center bg-[#E7EDFF] bg-[length:16px_16px] px-4 dark:bg-[#0A1126] dark:bg-dotted-gradient">
+    <section className="flex w-full flex-col items-center bg-[#E7EDFF] bg-light-dotted-gradient bg-[length:16px_16px] px-4 dark:bg-[#0A1126] dark:bg-dotted-gradient">
       <div className="mt-32 flex w-full max-w-[960px] flex-col items-center">
         <h2 className="mb-14 text-center text-5xl font-bold">
           How to get started
@@ -438,14 +457,25 @@ const HowToGetStartedSection = () => {
 const TranslatathonSection = () => {
   return (
     <section className="flex w-full flex-col items-center">
-      <div className="dark:bg-dark-dolphin-gradient flex w-full items-center justify-center bg-dolphin-gradient px-4">
+      <div
+        className={cn(
+          'dark:bg-dark-dolphin-gradient flex w-full items-center justify-center px-4',
+          'bg-background bg-gradient-to-b dark:from-[#2B0758]/50 dark:via-[#1C043A]/50 dark:to-[#110225]/50',
+          'from-[#F8FAFF]/50 via-[#EDE4FF]/50 to-[#D2C3F0]/50',
+        )}
+      >
         <div className="relative flex w-full max-w-[1144px] flex-col items-center text-center">
           <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 transform">
-            <img src="/images/dolphin.png" alt="hero" className="min-w-64" />
+            <Image
+              src={dolphin}
+              alt="hero"
+              sizes="20rem"
+              className="min-w-64"
+            />
           </div>
           <div className="mb-36 mt-40">
             <p className="mb-2 text-[#B3A8C0]">Part of ethereum.org</p>
-            <h2 className="mb-10 text-4xl font-bold">Translatathon 2024</h2>
+            <h2 className="mb-10 text-4xl font-bold">Translatathon {YEAR}</h2>
             <div className="grid w-full max-w-[1144px] grid-cols-1 gap-8 md:grid-cols-3 md:gap-8">
               {translatathonCardData.map((item, index) => (
                 <TranslatathonCard

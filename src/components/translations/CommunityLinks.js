@@ -8,6 +8,7 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import { YEAR } from '@/lib/constants'
 
 const CommunityLinksCard = ({ className }) => {
   const links = [
@@ -40,7 +41,7 @@ const CommunityLinksCard = ({ className }) => {
     >
       <CardHeader className="p-0">
         <CardTitle className="font-sans text-xl text-[#222739]">
-          Translatathon 2024: Community links
+          Translatathon {YEAR}: Community links
         </CardTitle>
         <CardDescription className="mt-4 text-[#222739]">
           Connect with fellow translators and access essential resources for the
