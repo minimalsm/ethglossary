@@ -31,23 +31,23 @@ const Banner = ({ translatedTerms, initialDismissed, totalTerms }) => {
     bannerText = (
       <>
         <strong>You&apos;ve earned 300 points for translating 30 terms</strong>.
-        Translate all 70 terms for <strong>1000 points</strong> 🎉
+        Translate all {totalTerms} terms for <strong>1000 points</strong> 🎉
       </>
     )
     bannerClass = 'bg-[#BFF5DB]'
-  } else if (translatedTerms >= 60 && translatedTerms < 70) {
-    bannerKey = 'bannerDismissed-60-69'
+  } else if (translatedTerms >= 60 && translatedTerms < totalTerms) {
+    bannerKey = `bannerDismissed-60-${totalTerms - 1}`
     bannerTitle = 'Congratulations!'
     bannerText = (
       <>
         <strong>You&apos;ve earned 600 points for translating 60 terms</strong>.
-        Translate the last 10 for <strong>1000 points</strong> 🎉
+        Translate the last {totalTerms - 60} for <strong>1000 points</strong> 🎉
       </>
     )
     bannerClass = 'bg-[#BFF5DB]'
-  } else if (translatedTerms === 70) {
-    bannerKey = 'bannerDismissed-70'
-    bannerTitle = 'You translated all 70 terms 👏'
+  } else if (translatedTerms === totalTerms) {
+    bannerKey = `bannerDismissed-${totalTerms}`
+    bannerTitle = `You translated all ${totalTerms} terms 👏`
     bannerClass = 'bg-[#BFF5DB]'
     bannerText = (
       <>

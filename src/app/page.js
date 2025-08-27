@@ -1,6 +1,7 @@
 import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
 import { getURL } from '../utils/getUrl'
 import { fetchLanguages } from '@/lib/fetchLanguages'
+import { getTotalTerms } from '@/lib/getTotalTerms'
 import { getLanguageData } from '@/lib/languageUtils'
 import LanguageList from '@/components/languages/LanguagesList'
 import Image from 'next/image'
@@ -31,6 +32,8 @@ export default async function HomePage() {
     }
   })
 
+  const totalTerms = await getTotalTerms()
+
   const user = session?.user
   if (user) {
     console.log('USER HERE', user)
@@ -42,7 +45,7 @@ export default async function HomePage() {
   return (
     <div className="flex min-h-screen flex-col items-center font-sans">
       <HeroSection user={user} />
-      <div className="dark:bg-dark-homepage-gradient relative flex w-full flex-col items-center bg-homepage-gradient px-4">
+      <div className="relative flex w-full flex-col items-center bg-homepage-gradient px-4 dark:bg-dark-homepage-gradient">
         <BackgroundMulticolorTexture />
         <BackgroundYellowTexture />
         <WhatIsETHGlossarySection />
@@ -50,7 +53,7 @@ export default async function HomePage() {
           languages={languagesWithLocalAndCountries}
           className="mb-11"
         />
-        <HowItWorksSection user={user} />
+        <HowItWorksSection user={user} totalTerms={totalTerms} />
 
         {/* Background textures */}
       </div>
@@ -147,41 +150,6 @@ const BackgroundYellowTexture = () => {
   )
 }
 
-const howItWorksData = [
-  {
-    number: 1,
-    color: '#AA7FFF',
-    heading: 'Suggest translations',
-    text: 'Help us expand our English glossary by suggesting the ideal translation for Ethereum terms in your language.',
-  },
-  {
-    number: 2,
-    color: '#0EAAA0',
-    heading: 'Interact with the community',
-    text: 'Vote and comment on the translations suggested by others, to reach consensus on the best translations.',
-  },
-  {
-    number: 3,
-    color: '#479CEA',
-    heading: 'Get rewarded',
-    text: (
-      <>
-        Receive 100 points for every 10 terms translated. Translate all 70 terms
-        for 1000 points! Learn more about rewards on{' '}
-        <a
-          href="https://crowdin.com/profile/ethdotorg"
-          target="_blank"
-          rel="noreferrer"
-          className="text-text-link font-bold"
-        >
-          Crowdin
-        </a>
-        .
-      </>
-    ),
-  },
-]
-
 const HowItWorksListItem = ({ number, color, heading, text }) => {
   return (
     <li className="flex items-start gap-6">
@@ -232,7 +200,7 @@ const HeroSection = ({ user = null }) => {
       <div className="absolute inset-0 z-[-1] h-full w-full object-cover">
         <img
           src="/images/hero.png"
-          className="bg-light-dotted-gradient fixed inset-0 z-[-1] h-full w-full bg-blue-400 bg-[length:16px_16px] object-cover md:h-[650px]"
+          className="fixed inset-0 z-[-1] h-full w-full bg-blue-400 bg-light-dotted-gradient bg-[length:16px_16px] object-cover md:h-[650px]"
           alt="hero"
         />
       </div>
@@ -355,7 +323,42 @@ const LanguagesSection = ({ languages, className }) => {
   )
 }
 
-const HowItWorksSection = ({ user = null }) => {
+const HowItWorksSection = ({ user = null, totalTerms }) => {
+  const howItWorksData = [
+    {
+      number: 1,
+      color: '#AA7FFF',
+      heading: 'Suggest translations',
+      text: 'Help us expand our English glossary by suggesting the ideal translation for Ethereum terms in your language.',
+    },
+    {
+      number: 2,
+      color: '#0EAAA0',
+      heading: 'Interact with the community',
+      text: 'Vote and comment on the translations suggested by others, to reach consensus on the best translations.',
+    },
+    {
+      number: 3,
+      color: '#479CEA',
+      heading: 'Get rewarded',
+      text: (
+        <>
+          Receive 100 points for every 10 terms translated. Translate all{' '}
+          {totalTerms} terms for 1000 points! Learn more about rewards on{' '}
+          <a
+            href="https://crowdin.com/profile/ethdotorg"
+            target="_blank"
+            rel="noreferrer"
+            className="font-bold text-text-link"
+          >
+            Crowdin
+          </a>
+          .
+        </>
+      ),
+    },
+  ]
+
   return (
     <section className="mb-11 mt-11 flex w-full max-w-[961px] flex-col items-start space-y-8 md:mb-16 md:mt-32 md:flex-row lg:space-x-8 lg:space-y-0">
       <div className="flex flex-col gap-4 md:flex-row md:gap-8">
@@ -414,7 +417,7 @@ const HowItWorksSection = ({ user = null }) => {
 
 const HowToGetStartedSection = () => {
   return (
-    <section className="bg-light-dotted-gradient flex w-full flex-col items-center bg-[#E7EDFF] bg-[length:16px_16px] px-4 dark:bg-[#0A1126] dark:bg-dotted-gradient">
+    <section className="flex w-full flex-col items-center bg-[#E7EDFF] bg-light-dotted-gradient bg-[length:16px_16px] px-4 dark:bg-[#0A1126] dark:bg-dotted-gradient">
       <div className="mt-32 flex w-full max-w-[960px] flex-col items-center">
         <h2 className="mb-14 text-center text-5xl font-bold">
           How to get started
@@ -438,7 +441,7 @@ const HowToGetStartedSection = () => {
 const TranslatathonSection = () => {
   return (
     <section className="flex w-full flex-col items-center">
-      <div className="dark:bg-dark-dolphin-gradient flex w-full items-center justify-center bg-dolphin-gradient px-4">
+      <div className="flex w-full items-center justify-center bg-dolphin-gradient px-4 dark:bg-dark-dolphin-gradient">
         <div className="relative flex w-full max-w-[1144px] flex-col items-center text-center">
           <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 transform">
             <img src="/images/dolphin.png" alt="hero" className="min-w-64" />
