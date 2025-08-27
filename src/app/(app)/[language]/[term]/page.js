@@ -89,7 +89,7 @@ export default async function TermPage({ params }) {
   // Determine the current and next term
   const currentTermIndex = terms.findIndex(t => t.id === termId)
   const nextTerm = terms[currentTermIndex + 1]
-  const totalTerms = getTotalTerms()
+  const totalTerms = await getTotalTerms()
   const userHasTranslatedCount = terms.filter(
     term => term.user_has_translated,
   ).length
