@@ -15,6 +15,7 @@ import { getLanguageData } from '@/lib/languageUtils'
 import { cookies } from 'next/headers'
 import { deslugify } from '@/utils/slugify'
 import { getTermExamples } from '@/lib/termsUtils'
+import { getTotalTerms } from '@/lib/getTotalTerms'
 
 export async function generateMetadata({ params }) {
   const term = deslugify(params.term)
@@ -88,7 +89,7 @@ export default async function TermPage({ params }) {
   // Determine the current and next term
   const currentTermIndex = terms.findIndex(t => t.id === termId)
   const nextTerm = terms[currentTermIndex + 1]
-  const totalTerms = terms.length
+  const totalTerms = getTotalTerms()
   const userHasTranslatedCount = terms.filter(
     term => term.user_has_translated,
   ).length
