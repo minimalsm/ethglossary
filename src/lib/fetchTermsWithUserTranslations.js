@@ -5,6 +5,7 @@ import { supabase } from './supabaseClient'
 //   const { data: terms, error: termsError } = await supabase
 //     .from('strings')
 //     .select('*')
+//     .eq('disabled', false)
 
 //   if (termsError) {
 //     throw new Error(`Error fetching terms: ${termsError.message}`)
@@ -75,6 +76,7 @@ import { supabase } from './supabaseClient'
 //   const { data: terms, error: termsError } = await supabase
 //     .from('strings')
 //     .select('*')
+//     .eq('disabled', false)
 
 //   if (termsError) {
 //     throw new Error(`Error fetching terms: ${termsError.message}`)
@@ -140,10 +142,11 @@ import { supabase } from './supabaseClient'
 
 export async function fetchTermsWithUserTranslations(userId, languageId) {
   if (!userId) {
-    // If no user is logged in, fetch all terms and set user_has_translated to false
+    // If no user is logged in, fetch all terms (not disabled) and set user_has_translated to false
     const { data: terms, error: termsError } = await supabase
       .from('strings')
       .select('*')
+      .eq('disabled', false)
 
     if (termsError) {
       throw new Error(`Error fetching terms: ${termsError.message}`)
