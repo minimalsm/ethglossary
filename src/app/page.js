@@ -1,6 +1,7 @@
 import { createSupabaseServerComponentClient } from '@/lib/supabase/server'
 import { getURL } from '../utils/getUrl'
 import { fetchLanguages } from '@/lib/fetchLanguages'
+import { getTotalTerms } from '@/lib/getTotalTerms'
 import { getLanguageData } from '@/lib/languageUtils'
 import LanguageList from '@/components/languages/LanguagesList'
 import Image from 'next/image'
@@ -15,7 +16,7 @@ import globe from '../../public/images/globe.png'
 import dolphin from '../../public/images/dolphin.png'
 import hero from '../../public/images/hero.png'
 import { isValidDate } from '@/lib/date'
-import { END_DATE, START_DATE, YEAR } from '@/lib/constants'
+import { END_DATE, POINTS_PER_TERM, START_DATE, YEAR } from '@/lib/constants'
 
 export default async function HomePage() {
   const {
@@ -32,6 +33,8 @@ export default async function HomePage() {
       countries: languageData?.countries,
     }
   })
+
+  const totalTerms = await getTotalTerms()
 
   const user = session?.user
   if (user) {
@@ -53,12 +56,12 @@ export default async function HomePage() {
       >
         <BackgroundMulticolorTexture />
         <BackgroundYellowTexture />
-        <WhatIsETHGlossarySection />
+        <WhatIsETHGlossarySection languages={languages} />
         <LanguagesSection
           languages={languagesWithLocalAndCountries}
           className="mb-11"
         />
-        <HowItWorksSection user={user} />
+        <HowItWorksSection user={user} totalTerms={totalTerms} />
 
         {/* Background textures */}
       </div>
@@ -165,42 +168,6 @@ const BackgroundYellowTexture = () => {
   )
 }
 
-const howItWorksData = [
-  {
-    number: 1,
-    color: '#AA7FFF',
-    heading: 'Suggest translations',
-    text: 'Help us expand our English glossary by suggesting the ideal translation for Ethereum terms in your language.',
-  },
-  {
-    number: 2,
-    color: '#0EAAA0',
-    heading: 'Interact with the community',
-    text: 'Vote and comment on the translations suggested by others, to reach consensus on the best translations.',
-  },
-  {
-    number: 3,
-    color: '#479CEA',
-    heading: 'Get rewarded',
-    text: (
-      <>
-        {/* // TODO: Update points */}
-        Receive 100 points for every 10 terms translated. Translate all 70 terms
-        for 1000 points! Learn more about rewards on{' '}
-        <a
-          href="https://crowdin.com/profile/ethdotorg"
-          target="_blank"
-          rel="noreferrer"
-          className="font-bold text-text-link"
-        >
-          Crowdin
-        </a>
-        .
-      </>
-    ),
-  },
-]
-
 const HowItWorksListItem = ({ number, color, heading, text }) => {
   return (
     <li className="flex items-start gap-6">
@@ -287,7 +254,12 @@ const HeroSection = ({ user = null }) => {
   )
 }
 
-const WhatIsETHGlossarySection = () => {
+const WhatIsETHGlossarySection = ({ languages }) => {
+  // Calculate number of languages, rounded down to nearest 10
+  const numLanguages =
+    Math.floor((typeof languages !== 'undefined' ? languages.length : 0) / 10) *
+    10
+
   return (
     <section className="relative mt-11 flex w-full max-w-[961px] flex-col items-center md:mt-40 lg:flex-row">
       <div className="flex basis-8/12 flex-col gap-4 md:flex-row md:gap-8">
@@ -299,7 +271,7 @@ const WhatIsETHGlossarySection = () => {
 
           <p className="basis- mb-4 md:text-lg">
             ETHGlossary is an open-source project dedicated to translating a
-            core set of Ethereum terms into more than 60 languages.
+            core set of Ethereum terms into more than {numLanguages}+ languages.
           </p>
           <p className="md:text-lg">
             Whether you&apos;re an aspiring translator looking to gain
@@ -368,7 +340,42 @@ const LanguagesSection = ({ languages, className }) => {
   )
 }
 
-const HowItWorksSection = ({ user = null }) => {
+const HowItWorksSection = ({ user = null, totalTerms }) => {
+  const howItWorksData = [
+    {
+      number: 1,
+      color: '#AA7FFF',
+      heading: 'Suggest translations',
+      text: 'Help us expand our English glossary by suggesting the ideal translation for Ethereum terms in your language.',
+    },
+    {
+      number: 2,
+      color: '#0EAAA0',
+      heading: 'Interact with the community',
+      text: 'Vote and comment on the translations suggested by others, to reach consensus on the best translations.',
+    },
+    {
+      number: 3,
+      color: '#479CEA',
+      heading: 'Get rewarded',
+      text: (
+        <>
+          Receive {POINTS_PER_TERM} points for each translated term. Translate
+          all {totalTerms} terms and receive double points (
+          {totalTerms * POINTS_PER_TERM * 2})!{' '}
+          <a
+            href="https://ethereum.org/en/contributing/translation-program/translatathon/details/"
+            target="_blank"
+            rel="noreferrer"
+            className="font-bold text-text-link"
+          >
+            Learn more about scoring and rewards.
+          </a>
+        </>
+      ),
+    },
+  ]
+
   return (
     <section className="mb-11 mt-11 flex w-full max-w-[961px] flex-col items-start space-y-8 md:mb-16 md:mt-32 md:flex-row lg:space-x-8 lg:space-y-0">
       <div className="flex flex-col gap-4 md:flex-row md:gap-8">
@@ -459,7 +466,7 @@ const TranslatathonSection = () => {
     <section className="flex w-full flex-col items-center">
       <div
         className={cn(
-          'dark:bg-dark-dolphin-gradient flex w-full items-center justify-center px-4',
+          'flex w-full items-center justify-center px-4 dark:bg-dark-dolphin-gradient',
           'bg-background bg-gradient-to-b dark:from-[#2B0758]/50 dark:via-[#1C043A]/50 dark:to-[#110225]/50',
           'from-[#F8FAFF]/50 via-[#EDE4FF]/50 to-[#D2C3F0]/50',
         )}

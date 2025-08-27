@@ -4,6 +4,7 @@ export async function getData(term, userId) {
   const { data: allTermsData, error: allTermsError } = await supabase
     .from('strings')
     .select('*')
+    .eq('disabled', false)
 
   if (allTermsError) {
     throw new Error(`Error fetching all terms: ${allTermsError.message}`)
@@ -17,6 +18,7 @@ export async function getData(term, userId) {
     .from('strings')
     .select('id')
     .eq('term', term)
+    .eq('disabled', false)
     .single()
 
   if (termError || !termData) {

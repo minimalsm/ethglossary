@@ -115,10 +115,10 @@ export default async function TermPage({ params }) {
     bannerKey = 'bannerDismissed-0-29'
   } else if (translatedTerms >= 30 && translatedTerms < 60) {
     bannerKey = 'bannerDismissed-30-59'
-  } else if (translatedTerms >= 60 && translatedTerms < 70) {
-    bannerKey = 'bannerDismissed-60-69'
-  } else if (translatedTerms === 70) {
-    bannerKey = 'bannerDismissed-70'
+  } else if (translatedTerms >= 60 && translatedTerms < totalTerms) {
+    bannerKey = `bannerDismissed-60-${totalTerms - 1}`
+  } else if (translatedTerms === totalTerms) {
+    bannerKey = `bannerDismissed-${totalTerms}`
   }
 
   const isDismissedInitially = cookieStore.get(bannerKey)?.value === 'true'

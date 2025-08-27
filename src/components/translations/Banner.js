@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Close } from '@/components/icons'
 
-const Banner = ({ translatedTerms, initialDismissed }) => {
+const Banner = ({ translatedTerms, initialDismissed, totalTerms }) => {
   const [isDismissed, setIsDismissed] = useState(initialDismissed)
   const router = useRouter()
 
@@ -20,8 +20,12 @@ const Banner = ({ translatedTerms, initialDismissed }) => {
     bannerTitle = 'How to earn rewards'
     bannerText = (
       <>
-        Earn <strong>100 points for every 10 terms</strong> you translate.
-        Translate <strong>all 70 terms for 1000 points</strong> 🎉
+        Earn <strong>{POINTS_PER_TERM} points for each translated term</strong>{' '}
+        you translate. Translate{' '}
+        <strong>
+          all {totalTerms} terms for {totalTerms * POINTS_PER_TERM * 2} points
+        </strong>{' '}
+        🎉
       </>
     )
     bannerClass = 'bg-[#E7EDFF]'
@@ -31,23 +35,23 @@ const Banner = ({ translatedTerms, initialDismissed }) => {
     bannerText = (
       <>
         <strong>You&apos;ve earned 300 points for translating 30 terms</strong>.
-        Translate all 70 terms for <strong>1000 points</strong> 🎉
+        Translate all {totalTerms} terms for <strong>1000 points</strong> 🎉
       </>
     )
     bannerClass = 'bg-[#BFF5DB]'
-  } else if (translatedTerms >= 60 && translatedTerms < 70) {
-    bannerKey = 'bannerDismissed-60-69'
+  } else if (translatedTerms >= 60 && translatedTerms < totalTerms) {
+    bannerKey = `bannerDismissed-60-${totalTerms - 1}`
     bannerTitle = 'Congratulations!'
     bannerText = (
       <>
         <strong>You&apos;ve earned 600 points for translating 60 terms</strong>.
-        Translate the last 10 for <strong>1000 points</strong> 🎉
+        Translate the last {totalTerms - 60} for <strong>1000 points</strong> 🎉
       </>
     )
     bannerClass = 'bg-[#BFF5DB]'
-  } else if (translatedTerms === 70) {
-    bannerKey = 'bannerDismissed-70'
-    bannerTitle = 'You translated all 70 terms 👏'
+  } else if (translatedTerms === totalTerms) {
+    bannerKey = `bannerDismissed-${totalTerms}`
+    bannerTitle = `You translated all ${totalTerms} terms 👏`
     bannerClass = 'bg-[#BFF5DB]'
     bannerText = (
       <>
