@@ -21,8 +21,9 @@ const Banner = ({ translatedTerms, initialDismissed, totalTerms }) => {
     bannerTitle = 'How to earn rewards'
     bannerText = (
       <>
-        Earn <strong>{POINTS_PER_TERM} points for each translated term</strong>{' '}
-        you translate. Translate{' '}
+        Earn{' '}
+        <strong>{POINTS_PER_TERM} points for each term you translate.</strong>{' '}
+        Translate{' '}
         <strong>
           all {totalTerms} terms for {totalTerms * POINTS_PER_TERM * 2} points
         </strong>{' '}
