@@ -25,7 +25,7 @@ const CommunityLinksCard = ({ className }) => {
       text: 'Translatathon',
     },
     {
-      href: 'http://discord.gg/ethereum-org',
+      href: 'https://discord.gg/ethereum-org',
       src: '/images/icons/discord.png',
       alt: 'Discord Logo',
       text: 'Discord',
